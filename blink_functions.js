@@ -1,3 +1,56 @@
+function add(text,node,funct) {	
+
+	// var d2 = d;
+
+	
+	// iBuffer += '<li><a href="#" onClick="process(\'sdd\',inventoryDescArray[\'' + node + '\']); return false;">' + text + '</a></li>';
+	
+	
+	// iBuffer += '<a href="#" id="' + node + '" onClick="process(null,' + d2 + '>' + node + text + '</a>';
+	
+	// iName.push(node);
+	iName.push(node);
+
+	//store in array
+	inventoryDescArray[node] = [];
+	inventoryDescArray[node]["node"] = node;
+	inventoryDescArray[node]["text"] = text;
+	inventoryDescArray[node]["funct"] = funct;
+	
+   //to save state so that things can be returned to normal afterwards. because the functions inside add() are run, they may change world state 
+    var i_holder = i;
+	var f_holder = f;
+	//This is to fix chrome bug: typeof parent != 'object'
+	if (parent && typeof parent != 'object') {
+		inventoryDescArray[node]["parent"] = parent;
+		parent=0;
+	}
+	funct(); //this is to setup the type
+	
+	
+	if (thought) {
+		inventoryDescArray[node]["type"] = "thought";
+		// i[node]["type"]="thought";
+		// alert(i[node]);
+	
+	} else {
+        	
+		inventoryDescArray[node]["type"] = "object";
+	}
+
+    //restore to original state because the functions inside add() may have changed something
+	i = i_holder;
+	f = f_holder;
+	thought=0;
+    object=0;
+    parent=0;
+    // 
+	// inventoryDescArray[node]["funct2"] = funct2;
+	d = "";
+}
+
+
+
 function clear_timeouts_intervals() {
 //https://github.com/nodejs/help/issues/174
     for (var i = 1; i < 99999; i++) {

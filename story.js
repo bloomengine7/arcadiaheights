@@ -102,25 +102,25 @@ meta_labels = {
 ////////////////////////////////////
 
 
+var config = {};
 
 
+config.gameTitle = "<div id='game_title_glitch' class='glitch glitch_font_off' data-text='Arcadia Heights'>Arcadia Heights</div>";
 
-	config.gameTitle = "<div id='game_title_glitch' class='glitch glitch_font_off' data-text='Arcadia Heights'>Arcadia Heights</div>";
-	
-    config.gameAuthor = "Susan Newbourne | Bloomengine";
-	
-	//goes at menu at top
-	config.metaContent = "{About|about}<a href='http://Bloomengine.com' target='_blank'>bloomengine.com</a>"; 
-	
-	//If you don't need an inventory system, write inventorySystem = 0;
-    config.inventorySystem = 1; 
-	
-	//If you want a "wait" button to allow time to pass, set waitSystem = 1; If the wait system is off, it can be activated on a specific node by writing wait=1 within the node; Alternatively, if the wait system is turned on, it can be deactivated on a specific node by writing wait=0; The option to wait is only available in root nodes.
-	//waitSystem = 1; 
-	
-	config.debugMode = 1; //Change this to 0 before you release your game. These are debug tools that appear on the left side. 
-		
- 
+config.gameAuthor = "Susan Newbourne | Bloomengine";
+
+//goes at menu at top
+config.metaContent = "{About|about}<a href='http://Bloomengine.com' target='_blank'>bloomengine.com</a>"; 
+
+//If you don't need an inventory system, write inventorySystem = 0;
+config.inventorySystem = 1; 
+
+//If you want a "wait" button to allow time to pass, set waitSystem = 1; If the wait system is off, it can be activated on a specific node by writing wait=1 within the node; Alternatively, if the wait system is turned on, it can be deactivated on a specific node by writing wait=0; The option to wait is only available in root nodes.
+//waitSystem = 1; 
+
+config.debugMode = 1; //Change this to 0 before you release your game. These are debug tools that appear on the left side. 
+    
+
 
 
 
