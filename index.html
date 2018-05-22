@@ -15,6 +15,7 @@
         <script src="blink.js"></script>
         <script src="rot13.js"></script>
         <script>
+            config();
             //for handling file to file jumps
             var load_story = getParameterByName("file");
             if (load_story != null) {     
@@ -57,7 +58,6 @@ $(document).ready(function() {
 		
 
 
-	config();
     
 	process(); //initializes most stuff
 	document.title = gameTitle;
