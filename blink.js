@@ -408,7 +408,6 @@ function process(node,giver,receiver,params) {
         
 				
     if (!firstload) {
-        console.log("set " + JSON.stringify(f));
         localStorage.setItem('save_f', JSON.stringify(f));
         localStorage.setItem('save_i',JSON.stringify(i));
 
@@ -630,13 +629,52 @@ function process(node,giver,receiver,params) {
         $('#new').html(createLinks(shortcut_characters(d))).promise().done(function(){
 
             if (!firstload && f.moves > 2) {
-                $("#wrap").scrollTo("#new", 600); //custom animation speed 
+  //setTimeout(function() {            
+    //$("#wrap").scrollTo("#new", 800); //custom animation speed 
+    //},300);
+    //
+    //
+    /*
+                $("#wrap").animate({
+                    scrollTop:  '-=100'
+                }, 100); 		
+    console.log($('#wrap').scrollTop() , $('#new').position().top);
+    extra =  $('#new').position().top - $('#wrap').scrollTop();
+    console.log(extra);
+    if (extra < 1500) {
+                $("#wrap").animate({
+                    scrollTop:  '-=100'
+                }, 10); 		
+        console.log('extra');        
+    }
+     */     
+
+
+                //console.log($('#wrap').scrollTop() , $('#new').position().top);
+                var extra =  $('#new').position().top - $('#wrap').scrollTop();
+                if (extra < 1500) {
+                    $("#wrap").animate({
+                        scrollTop:  '-=500'
+                    }, 10); 		
+                }
+
+                    
+
+                setTimeout(function() { 
+                    $("#wrap").scrollTo("#new", 600); //custom animation speed 
+                },250);
+//setTimeout(function() {$("#wrap").animate({ scrollTop: $('#new').position().top}, 800, 'easeOutCirceaseOutElastic');},300);
+
+
+
+
             } else {
                 $("#wrap").animate({
                     scrollTop:  '+=100'
                 }, 10); 		
             
                 $("#wrap").scrollTo("#content", 600);
+                
             }
         });
 	//update so scrolls properly https://github.com/inuyaksa/jquery.nicescroll/wiki/Nicescroll-with-dynamic-content
@@ -1046,7 +1084,6 @@ function restore() {
 			
 	//	f=syncVariables(state,fname,f);
 
-        console.log("get" + localStorage.getItem('save_f'));
         
         f = JSON.parse(localStorage.getItem('save_f'));
         i = JSON.parse(localStorage.getItem('save_i'));
