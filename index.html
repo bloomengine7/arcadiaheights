@@ -14,6 +14,8 @@
         <script src="blink_functions.js"></script>
         <script src="story_functions.js"></script>
         <script src="blink.js"></script>
+        <script src="story.js"></script>
+        
         <script src="rot13.js"></script>
         <script>
         </script>
@@ -48,14 +50,6 @@ $(document).ready(function() {
 
 
     //for handling file to file jumps
-    var load_story = getParameterByName("file");
-    if (load_story != null) {     
-
-        loadjscssfile(load_story, "js") //dynamically load and add this .js file
-    } else {
-        loadjscssfile("story.js","js")
-    }
-		
 
 
 	config();
