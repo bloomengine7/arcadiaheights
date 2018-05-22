@@ -205,39 +205,61 @@ function daemon() {
                 function(){
 
                      $(".glitch").toggleClass('glitch glitch_off'); 
-                },500,
+                },100,
                 function(){
                          
                          $(".glitch_off").toggleClass('glitch_off glitch'); 
-                        $("#game_title_glitch").attr('data-before','0000000');
-                },
-                300,
-                   function(){
-                    
-                         $(".glitch_off").toggleClass('glitch_off glitch'); 
-                        $("#game_title_glitch").attr('data-before','0000000');
-                            
-                },
-                100,
-                function(){
-
-                     $(".glitch").toggleClass('glitch glitch_off'); 
-                     $(".glitch_font_off").toggleClass('glitch_font_off glitch_font_on');
-                },
-                1000,
-                   function(){
-                    
-                         $(".glitch_off").toggleClass('glitch_off glitch'); 
-                        $("#game_title_glitch").attr('data-before','0000000');
-                         $(".glitch_font_on").toggleClass('glitch_font_on glitch_font_off'); 
-                        
+                        //$("#game_title_glitch").attr('data-before','0000000');
                 },
                 500,
                 function(){
 
                      $(".glitch").toggleClass('glitch glitch_off'); 
+                     $(".glitch_font_off").toggleClass('glitch_font_off glitch_font_on');
                 },
-                3000
+                300,
+                   function(){
+                    
+                         $(".glitch_off").toggleClass('glitch_off glitch'); 
+                        //$("#game_title_glitch").attr('data-before','0000000');
+                         $(".glitch_font_on").toggleClass('glitch_font_on glitch_font_off'); 
+                        
+                },
+                100,
+                function(){
+
+                     $(".glitch").toggleClass('glitch glitch_off'); 
+                },
+                300,
+                function(){
+
+                     $(".glitch").toggleClass('glitch glitch_off'); 
+                },100,
+                function(){
+                         
+                         $(".glitch_off").toggleClass('glitch_off glitch'); 
+                        //$("#game_title_glitch").attr('data-before','0000000');
+                },
+                500,
+                function(){
+
+                     $(".glitch").toggleClass('glitch glitch_off'); 
+                     $(".glitch_font_off").toggleClass('glitch_font_off glitch_font_on');
+                },
+                300,
+                   function(){
+                    
+                         $(".glitch_off").toggleClass('glitch_off glitch'); 
+                        //$("#game_title_glitch").attr('data-before','0000000');
+                         $(".glitch_font_on").toggleClass('glitch_font_on glitch_font_off'); 
+                        
+                },
+                400,
+                function(){
+
+                     $(".glitch").toggleClass('glitch glitch_off'); 
+                },
+                100,
                 
             ];
             timer(items); 
