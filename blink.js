@@ -100,7 +100,7 @@ query = getParameterByName("f");
 ///main click handler//////////////////////
 ////////////////////////////////////////////
 function process(node,giver,receiver,params) {
-
+    alert('heya');
 
 
 
