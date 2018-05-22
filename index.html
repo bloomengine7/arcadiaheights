@@ -15,7 +15,6 @@
         <script src="blink.js"></script>
         <script src="rot13.js"></script>
         <script>
-            config();
             //for handling file to file jumps
             var load_story = getParameterByName("file");
             if (load_story != null) {     
@@ -60,14 +59,14 @@ $(document).ready(function() {
 
     
 	process(); //initializes most stuff
-	document.title = gameTitle;
+	document.title = config.gameTitle;
 	
-	gameTitle="<h1><strong>" + gameTitle + "</strong> <span>by " + gameAuthor + "</span></h1>";
-	$("#name").html(gameTitle);
+	config.gameTitle="<h1><strong>" + config.gameTitle + "</strong> <span>by " + config.gameAuthor + "</span></h1>";
+	$("#name").html(config.gameTitle);
 	
 	
 	
-	if (!debugMode) {
+	if (!config.debugMode) {
 	
 		//calling jPreLoader function with properties
 		var timer;
