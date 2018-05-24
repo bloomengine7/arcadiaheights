@@ -156,7 +156,7 @@ function scene_change(message) {
             function() {
 
             $("#oc").css('opacity','1');
-                $("#owrap").show().removeClass().addClass('fct');
+                $("#owrap").show().removeClass().addClass('click_through');
                $("#owrap").animate({opacity: 1},0);
                 $("#oc").html(message); 
                 
@@ -173,6 +173,7 @@ function scene_change(message) {
             function() {
                $("#owrap").hide();
                 
+                $("#owrap").removeClass('click_through');
          
             }
 

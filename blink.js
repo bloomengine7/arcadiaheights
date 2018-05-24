@@ -662,7 +662,7 @@ function process(node,giver,receiver,params) {
                     
 
                 setTimeout(function() { 
-                    $("#wrap").scrollTo("#new", 600); //custom animation speed 
+                    $("#wrap").scrollTo("#new", 500); //custom animation speed 
                 },150);
 //setTimeout(function() {$("#wrap").animate({ scrollTop: $('#new').position().top}, 800, 'easeOutCirceaseOutElastic');},300);
 

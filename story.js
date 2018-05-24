@@ -119,7 +119,7 @@ config.inventorySystem = 1;
 //If you want a "wait" button to allow time to pass, set waitSystem = 1; If the wait system is off, it can be activated on a specific node by writing wait=1 within the node; Alternatively, if the wait system is turned on, it can be deactivated on a specific node by writing wait=0; The option to wait is only available in root nodes.
 //waitSystem = 1; 
 
-config.debugMode = 1; //Change this to 0 before you release your game. These are debug tools that appear on the left side. 
+config.debugMode = 0; //Change this to 0 before you release your game. These are debug tools that appear on the left side. 
     
 
 
@@ -271,7 +271,7 @@ function daemon() {
         
         
         bursts_glitch();
-        var x = setInterval(bursts_glitch,5000);
+        setInterval(bursts_glitch,5000);
        
        
        
@@ -363,7 +363,7 @@ function nodes(node) { //Do not remove this line
 //
 
 case "about":
-    d+="These are the memories of Susan Newbourne (as collected by Hadrian Lin and Simon M. from <a href='http://bloomengine.com' target='_blank'>bloomengine.com</a>) The game will evolve with new content added weekly. <a href=\"https://feedburner.google.com/fb/a/mailverify?uri=bloomengine&amp;loc=en_US\" target='_blank'>Stay updated</a> as we extract new memories from her brain.\n\nWe live off of goodwill and love feedback of any sort. If you notice typos and bugs or if you are interested in beta-testing future games please send an email to bloomengine (aaaayat) gmail (dot com). Put \"beat the blue beta test\" in the subject line.";
+    d+="These are the memories of Susan Newbourne (as collected by Hadrian Lin and Simon M. from <a href='http://bloomengine.com' target='_blank'>bloomengine.com</a>) \n\nThe game will evolve with new content added weekly. <a href=\"https://feedburner.google.com/fb/a/mailverify?uri=bloomengine&amp;loc=en_US\" target='_blank'>Stay updated</a> as we extract new memories from her brain.\n\nWe live off of goodwill and love feedback of any sort. If you notice typos and bugs or if you are interested in beta-testing future games please send an email to bloomengine (aaaayat) gmail (dot com). Put \"beta test anthill\" in the subject line.";
 
 
 break;
@@ -384,42 +384,35 @@ case "start": //aka caf
             
             $("#owrap").show().removeClass().addClass("std intro");
             $("#oc").css('opacity','0');
-
+            $("#overlay").append("<div id='skip'><a href='#' onClick='stop_intro();   return false;' >Skip</a></div>");
         },
         500,
         function(){
 
-            $("#oc").wrapAll("<div class='glitch' >");
-            $("#overlay").addClass("glitch");
+            $("#oc").append("<div id='intro_text'></div>");
             
-            $("#oc").html("What's your earliest memory?");
+            $("#intro_text").html("What's your earliest memory?");
             $("#oc").animate({opacity: 1},2000).delay(300).animate({opacity:0},1000);
         },3500,
         function(){
             $("#oc").animate({opacity: 1},2000).delay(500).animate({opacity:0},1000);
-            $("#oc").html("Arriving on the bus?"); 
+            $("#intro_text").html("Arriving on the bus?"); 
         },4500,
         function(){
             $("#oc").animate({opacity: 1},300).delay(500).animate({opacity:0},3000);
-            $("#oc").html("We all have that memory."); 
+            $("#intro_text").html("We all have that memory."); 
         },4000,
         function(){
+            $("#owrap").show().removeClass().addClass('click_through');
             $("#oc").animate({opacity: 1},200).delay(100).animate({opacity:0},5000);
-            $("#oc").html("Where were we before<br>we started school?"); 
-        },5000,
+            $("#intro_text").html("Where were we before<br>we started school?"); 
+            
+        },3000,
         function(){
-           $("#owrap").animate({opacity: 0},2000);
-            $("#wrap").animate({
-                    scrollTop:  '+=100'
-            }, 10); 		
-            if($('#owrap').css('display') != 'none') {
-            $("#wrap").scrollTo("#content", 600);
-            }
-        },2000,
+            stop_intro(); 
+            $("#owrap").removeClass('click_through');
+        }
         
-        function(){
-            $("#owrap").hide();
-        }, 1000
 
      
     ];
@@ -668,7 +661,7 @@ case "panopticon_dome":
 break;
 
 case "spotlights":
-    d += "Frozen in position. They wake at night. ";
+    d += "Frozen in position and waiting for the night. ";
 break;
 
 case "dorm_outside_above":
@@ -678,13 +671,15 @@ case "dorm_outside_above":
 
 break;
 case "dorm_outside_domed_ceiling":
-    d+="A geodesic dome. Some of the panels are opaque with blue skies and clouds painted on them, some are transparent, letting shafts of light from {outside|dome_outside} fall into the courtyard.";
+    d+="A geodesic dome. Some of the panels are opaque with blue skies and clouds painted on them, some are made of  {glass|dorm_outside_geodesic_dome_panel}, letting shafts of light from {outside|dome_outside} fall into the courtyard.";
 
 break;
 case "dome_outside":
-    d+="Light passes clearly through the glass, but a luminous fog distorts everything outside. ";
+    d+="A slow-moving swirl. Fog or cloud. Like the plasma you had to make in Science class but pulsating in slow motion. ";
 break;
-
+case "dorm_outside_geodesic_dome_panel":
+    d+="The glass has the texture and appearance of ice, obscuring the outside but still transmitting bright shafts of light into the courtyard. ";
+break;
 
 case "classroom":
     root=1;
@@ -731,7 +726,7 @@ case "classroom_desk_graffiti":
 break;
 
 case "classroom_thomas":
-    d+="You glance over at Thomas. A vacant stare and his thumb is still in his mouth. You didn't find it amusing when they put that on your desk. ";
+    d+="You glance over at Thomas. A vacant stare. Thumb still in his mouth. You didn't find it amusing when they put that on your desk. ";
 break;
 
 
@@ -747,7 +742,7 @@ case "classroom_droning":
 break;
 
 case "classroom_windows":
-d+="The glass distorts the outside. A pulsating milky white. You squint from the brightness. ";
+d+="All you can see of the outside is a pulsating milky white, lacking definition. You squint from the brightness. ";
 
 
 break;
@@ -1158,7 +1153,7 @@ case "washroom_mirror":
 break;
 
 case "washroom_window":
-    d+="The glass has the appearance of ice but is warm to the touch. Inside the glass--or possibly beyond it--is a milky fog. ";
+    d+="The glass has the appearance of ice, with crystalline veins and small bubbles but lukewarm to the touch. Beyond it is the luminous fog. ";
 
 break;
                                            
