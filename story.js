@@ -102,10 +102,11 @@ meta_labels = {
 ////////////////////////////////////
 
 
-var config = {};
 
 
-config.gameTitle = "<div id='game_title_glitch' class='glitch glitch_font_off' data-text='Arcadia Heights'>Arcadia Heights</div>";
+config.startScreen="<h1><div id='game_title_glitch' class='glitch glitch_font_off' data-text='Arcadia Heights'>Arcadia Heights</div></h1>";
+
+config.gameTitle = "Arcadia Heights";
 
 config.gameAuthor = "Susan Newbourne | Bloomengine";
 
@@ -362,7 +363,7 @@ function nodes(node) { //Do not remove this line
 //
 
 case "about":
-    d+="This game is by Hadrian Lin | <a href='http://bloomengine.com'>bloomengine.com</a>.  The game will evolve with new content added on Mondays. \n\nIf you notice typos and bugs or if you are interested in beta-testing future games please send an email to bloomengine (aaaayat) gmail (dot com). Put \"I want to beta-test\" in the subject line.";
+    d+="These are the memories of Susan Newbourne (as collected by Hadrian Lin and Simon M. from <a href='http://bloomengine.com'>bloomengine.com</a>) The game will evolve with new content added weekly. <a href=\"https://feedburner.google.com/fb/a/mailverify?uri=bloomengine&amp;loc=en_US\" target='_blank'>Stay updated</a> as we extract new memories from her brain.\n\nWe live off of goodwill and love feedback of any sort. If you notice typos and bugs or if you are interested in beta-testing future games please send an email to bloomengine (aaaayat) gmail (dot com). Put \"beat the blue beta test\" in the subject line.";
 
 
 break;
@@ -446,14 +447,14 @@ case "start": //aka caf
 
         //as more and more added, remove older state variables and only keep the newest ones. If ppl play for a while they will have already seen the old stuff
         if (f.thread_intro > 1 && f.thread_chess_club > 0) {
-            d+="\n\n<em>You have exhausted your memories.</em> \n<span style='font-size:.75em'>Please check back monday for updates (Save game from the menu).</span>";
+            d+="\n\n<em>You have exhausted your memories.</em> \n<span style='font-size:.75em'>Please check back later for more content. <a href=\"https://feedburner.google.com/fb/a/mailverify?uri=bloomengine&amp;loc=en_US\" target='_blank'>Stay updated</a>.</span>";
         }
 
 break;
 case "dorm":
     root=1;
     f.seen_dorm = 1;
-    if (!i.kasparov) {scene_change("Kasparov");    }
+    if (!i.kasparov && f.back=="start") {scene_change("Kasparov");    }
     
     if (f.back == "stand_on_toilet" && !f.dorm_privacy_mode) {
         d+="<div class='transition'>As you step away from the toilet, another chime sounds and the scene beyond the glass wall resolves to high-resolution. \"Privacy mode disabled,\" appears on the wall. \"Time deducted from your daily quota.\"</div>";
@@ -681,7 +682,7 @@ case "dorm_outside_domed_ceiling":
 
 break;
 case "dome_outside":
-    d+="Light passes clearly through the glass, but a milky swirl distorts everything outside. ";
+    d+="Light passes clearly through the glass, but a luminous fog distorts everything outside. ";
 break;
 
 

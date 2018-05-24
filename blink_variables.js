@@ -1,4 +1,5 @@
 var query_compression=0; // turn querystring obfuscation on or off
+var config = {};
 
 
 

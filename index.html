@@ -71,13 +71,12 @@ $(document).ready(function() {
 	process(); //initializes most stuff
 	document.title = config.gameTitle;
 	
-	config.gameTitle="<h1><strong>" + config.gameTitle + "</strong> <span>by " + config.gameAuthor + "</span></h1>";
 	$("#name").html(config.gameTitle);
 	
 	
 	
 	if (!config.debugMode) {
-	
+        /*	
 		//calling jPreLoader function with properties
 		var timer;
 		
@@ -95,7 +94,7 @@ $(document).ready(function() {
 			clearInterval(timer);
 			
 		});
-	
+        */
 	}
 	
 	

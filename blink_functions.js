@@ -163,13 +163,13 @@ function scene_change(message) {
             },300,
             function() {
                 $("#oc").show();
-            },800,         
+            },100,         
             function() {
-               $("#owrap").animate({opacity: 0},2300);
+               $("#owrap").animate({opacity: 0},2000);
 
 
          
-            },2300,
+            },2000,
             function() {
                $("#owrap").hide();
                 

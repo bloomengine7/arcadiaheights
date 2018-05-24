@@ -1,4 +1,4 @@
-
+query_compression = 1;
 if (typeof external_load_text==="undefined") {
 	external_load_text="<div id='external_load_text'>This game is powered by <a target=\"_blank\" href=\"http://bloomengine.com/blink\">Blink!</a></div>";
 }
@@ -100,7 +100,7 @@ query = getParameterByName("f");
 ///main click handler//////////////////////
 ////////////////////////////////////////////
 function process(node,giver,receiver,params) {
-    alert('heya');
+
 
 
 
@@ -280,7 +280,8 @@ function process(node,giver,receiver,params) {
 		
 		
 	} else if (firstload && !getParameterByName("f") && !getParameterByName("i")) {
-		document.getElementById("startScreenInner").innerHTML="<h1>" + config.gameTitle + "</h1>" + "<h2>by " + config.gameAuthor + "</h2>";
+		document.getElementById("startScreenInner").innerHTML=config.startScreen;
+        //"<h1>" + config.gameTitle + "</h1>" + "<h2>by " + config.gameAuthor + "</h2>";
 		
 		if (readCookie("state")) {//if there's cookie data available, then do this
 			document.getElementById("startScreenInner").innerHTML +="<p>Do you want to <a onClick=\"restore(); return false;\">continue</a> or start a <a onClick=\"newGame(); return false;\">new game</a>?</p>";
@@ -652,9 +653,9 @@ function process(node,giver,receiver,params) {
 
                 //console.log($('#wrap').scrollTop() , $('#new').position().top);
                 var extra =  $('#new').position().top - $('#wrap').scrollTop();
-                if (extra < 1500) {
+                if (extra < 300) {
                     $("#wrap").animate({
-                        scrollTop:  '-=500'
+                        scrollTop:  '+=100'
                     }, 10); 		
                 }
 
@@ -662,7 +663,7 @@ function process(node,giver,receiver,params) {
 
                 setTimeout(function() { 
                     $("#wrap").scrollTo("#new", 600); //custom animation speed 
-                },250);
+                },150);
 //setTimeout(function() {$("#wrap").animate({ scrollTop: $('#new').position().top}, 800, 'easeOutCirceaseOutElastic');},300);
 
 
