@@ -363,7 +363,7 @@ function nodes(node) { //Do not remove this line
 //
 
 case "about":
-    d+="These are the memories of Susan Newbourne (as collected by Hadrian Lin and Simon M. from <a href='http://bloomengine.com'>bloomengine.com</a>) The game will evolve with new content added weekly. <a href=\"https://feedburner.google.com/fb/a/mailverify?uri=bloomengine&amp;loc=en_US\" target='_blank'>Stay updated</a> as we extract new memories from her brain.\n\nWe live off of goodwill and love feedback of any sort. If you notice typos and bugs or if you are interested in beta-testing future games please send an email to bloomengine (aaaayat) gmail (dot com). Put \"beat the blue beta test\" in the subject line.";
+    d+="These are the memories of Susan Newbourne (as collected by Hadrian Lin and Simon M. from <a href='http://bloomengine.com' target='_blank'>bloomengine.com</a>) The game will evolve with new content added weekly. <a href=\"https://feedburner.google.com/fb/a/mailverify?uri=bloomengine&amp;loc=en_US\" target='_blank'>Stay updated</a> as we extract new memories from her brain.\n\nWe live off of goodwill and love feedback of any sort. If you notice typos and bugs or if you are interested in beta-testing future games please send an email to bloomengine (aaaayat) gmail (dot com). Put \"beat the blue beta test\" in the subject line.";
 
 
 break;
