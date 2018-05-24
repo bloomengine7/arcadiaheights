@@ -47,16 +47,6 @@
 .i_out {
 }
 
-@font-face {
-    font-family: "wilder";
-    src: url("fonts/Wilder.otf");
-}
-
-
-@font-face {
-    font-family: "union regular";
-    src: url("fonts/Union-Regular.otf");
-}
 
 
 #startScreen {
@@ -84,7 +74,7 @@
 #startScreenInner h1 .glitch,
 #startScreenInner h1 .glitch_off {
 //    font-family: "wilder" !important;
-    font-family: "Roboto Condensed" !important;
+    font-family: "Roboto Condensed", Sans-serif !important;
     font-weight:400;
     
     font-size:10vw;
@@ -332,7 +322,7 @@ em {
 
 
 html #wrap .metaText h2, #content h2 {
-    font-family: "Roboto Condensed" !important;
+    font-family: "Roboto Condensed", Sans-serif !important;
     font-style: italic;
     font-size:1em;
 
