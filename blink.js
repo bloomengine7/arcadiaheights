@@ -553,7 +553,7 @@ function process(node,giver,receiver,params) {
 		d+="<p class=\"back\">{Return|" + f.root + "}</p>";
     } else if (back !=1 && back !=0) {
         d+="<p class=\"back\">{Return|" + back + "}</p>";
-    }
+    } 
     /*
 	if (back !=0 && back != 1 && root && links) {
         d+="<p class=\"back\">{Return|" + back + "}</p>";

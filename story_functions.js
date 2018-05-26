@@ -1,3 +1,40 @@
+function wipe_memory(args) {
+//makes multiple inventory items flash and then dissapear
+    var c = 0;
+    var argz = [];
+
+
+    for (var x = 0; x < arguments.length; x++) {
+        if (i[arguments[x]] != 0) {
+           argz.push(arguments[x]);
+        }
+
+    }
+    console.log(argz);
+    var x = setInterval(function(){
+
+        if (c == argz.length) {
+            clearInterval(x);
+        }
+        var item_to_remove =  $("#" + argz[c]);
+        var name = argz[c];
+        item_to_remove.effect( "highlight",{color:"yellow"}, 400 );
+        item_to_remove.animate({opacity:0},500);
+        setTimeout(function(){
+            console.log(name);
+            item_to_remove.remove();
+            i[name]=0;
+        },1000);
+        c++;
+        if (c == argz.length || argz.length == 0) {
+            clearInterval(x);
+            $(".back").show();            
+            $(".back").animate({opacity:1},2000);
+
+        }
+    },1000);
+}
+
 function stop_intro() {
 
 
@@ -75,6 +112,8 @@ function interact(funct) {
 function exit_memory() {
 //refers to f.end_memory
 //
+//
+    
     if (back != 0) {
         if (f.end_memory) {
             return "<p class='back exit_memory highlight_exit'>{&#10003;   Finish memory|start}</p>";
@@ -82,7 +121,11 @@ function exit_memory() {
             return "<p class='back exit_memory'>{Exit memory|start}</p>";
         }
     } else {
-        return "";
+        if (f.end_memory) {
+            return "<p class='back exit_memory highlight_exit' style='opacity:0'>{&#10003;   Finish memory|start}</p>";
+        } else {
+            return "<p class='back exit_memory' style='opacity:0'>{Exit memory|start}</p>";
+        }
     }
 
 }

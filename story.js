@@ -119,7 +119,7 @@ config.inventorySystem = 1;
 //If you want a "wait" button to allow time to pass, set waitSystem = 1; If the wait system is off, it can be activated on a specific node by writing wait=1 within the node; Alternatively, if the wait system is turned on, it can be deactivated on a specific node by writing wait=0; The option to wait is only available in root nodes.
 //waitSystem = 1; 
 
-config.debugMode = 0; //Change this to 0 before you release your game. These are debug tools that appear on the left side. 
+config.debugMode = 1; //Change this to 0 before you release your game. These are debug tools that appear on the left side. 
     
 
 
@@ -410,6 +410,8 @@ case "start": //aka caf
         },3000,
         function(){
             stop_intro(); 
+            clear_timeouts_intervals();
+            
             $("#owrap").removeClass('click_through');
         }
         
@@ -423,9 +425,9 @@ case "start": //aka caf
         //$('#overlay').empty().titleSequence(sequence);
     //d+="content triggered manually";
         //initNode('dorm');
-        d+="Your name is Susan Newbourne. \nThese are your high school memories.\n{Dormitory|dorm}\n";
+        d+="Your name is Susan Newbourne. \nThese are your high school memories.\n{Dormitory|dorm}";
         if (f.seen_dorm) {
-            d+="{Classroom|classroom}";
+            d+="\n{Classroom|classroom}";
             d+="\n{Cafeteria|caf}";
         }
         if (i.informer && f.thread_intro < 2) {
@@ -533,7 +535,8 @@ case "poster_corner":
 break;
 
 case "dorm_chalk_writing":
-    d+="The writing is done in some sort of chalk. ";
+    d+="Written in chalk. ";
+    d+=oneoff_text("where_find_chalk","<em>Where did you find chalk?</em>");
 break;
 case "dorm_poster_spiked_bracelets":
     d+="Edgy but within dress code. ";
@@ -675,7 +678,7 @@ case "dorm_outside_domed_ceiling":
 
 break;
 case "dome_outside":
-    d+="A slow-moving swirl. Fog or cloud. Like the plasma you had to make in Science class but pulsating in slow motion. ";
+    d+="A luminous fog obscures the outside. It swirls slowly, like the plasma you had to make in Science class. ";
 break;
 case "dorm_outside_geodesic_dome_panel":
     d+="The glass has the texture and appearance of ice, obscuring the outside but still transmitting bright shafts of light into the courtyard. ";
@@ -877,7 +880,7 @@ case "meeting_washroom_stall":
     }
 
     if (timer_fin("washroom_informer_arrive")) {
-        d="Footsteps. Feet appear beneath the stall door. &ldquo;{Payment first|pay_informer},\" she says with a practiced rasp. They were always for theatrics. ";
+        d="Footsteps. Feet appear beneath the stall door. &ldquo;{Payment first|pay_informer},\" says voice. She speaks with a practiced raspy. They were always for anonymity and strange theatrics. ";
         f.informer_in_washroom = 1; 
         back = 0;
 
@@ -1170,7 +1173,7 @@ case "counseling_booth":
     root=1;
     scene_change("The Truth");
 
-    d+="A closet-sized room. Everything is white except for the {red stool|counseling_booth_stool} you sit on. There is a panel on the wall with a {camera|counseling_booth_camera}, a {speaker|counseling_booth_speaker} and a {slot|counseling_booth_slot}. Overhead, flourescent bulbs stutter.";
+    d+="A small narrow room. Everything is white except for the {red stool|counseling_booth_stool} you sit on. There is a panel on the wall with a {camera|counseling_booth_camera}, a {speaker|counseling_booth_speaker} and a {slot|counseling_booth_slot}. Overhead, flourescent bulbs stutter. ";
 
     if (f.back=="start") {
         f.guidance_counselor_timer=0;
@@ -1237,6 +1240,7 @@ case "outgoing":
     d+="hello";
 break;
 case "guidance_convo":
+    inv=0;
     root=1;
     d+="The counselor waits for you to speak. ";
     if (f.back=="guidance_counselor_the_words") {
@@ -1248,6 +1252,13 @@ case "guidance_convo":
         f.gc_boyfriend = 0;
         f.gc_dating = 0;
         f.gc_fix_dating_problem=0;
+        f.gc_informer = 0;
+        f.gc_kasparov = 0;
+        f.gc_sinatra = 0;
+        f.topic = 0; 
+        f.gc_nothing_to_say = 0;
+        f.gc_who_are_you = 0;
+       
     }
 
     if(f.gc_fix_dating_problem) {
@@ -1309,7 +1320,9 @@ case "guidance_convo":
                 d+="\"I suspected as much. I don't know how you keep finding them. What information did you seek?\"";
                 f.gc_cheat_exam = 1;
                 f.gc_increased_school_security = 1;
-                f.gc_sinatra = 1;
+                if (i.sinatra) {
+                    f.gc_sinatra = 1;
+                }
             }},
         "gc_cheat_exam":
             {l: "How to cheat on exam", d: "\"Don't lie to me, Suzy. Ease your conscience and tell me the truth.\""}, 
@@ -1350,19 +1363,23 @@ break;
 
 case "gc_sinatra":
 
-                d+="\"Excactly as I thought.\" A click. The scanner shuts off and the band of warmth fades. \"Yes, the vandalism of the Library. The news would eventually spread. I won't fault you for knowing about it first. But you should only get your news from official sources. Not the infoclub. We will need to erase the Janitor's name. Straighten your back and {look at me|gc_look_at_him}.\" \n\n";
+                d+="\"As I thought.\" The scanner clicks off and the band of warmth fades. \"Yes, the vandalism of the Library. The news would eventually spread. I won't fault you for knowing about it first. But you should only get your news from official sources. Not the infoclub. We will need to erase the Janitor's name. Straighten your back and {look at me|gc_look_at_him}.\" \n\n";
                 f.gc_discovered_sinatra = 1;
                 f.gc_wipe_sinatra = 1;
                back=0; 
 
 break;
 case "gc_kasparov":
-    d+="\"What is this? Where did you hear that name? Place your hands on your head. Do not attempt to {move|gc_sudden_movements}.\" The lights begin flickering. The sound of cicadas fills the room. A smell of burnt toast."; 
+    d+="\"What is the meaning of this? Why did you say that name? Do not attempt sudden {movements|gc_sudden_movements}. Place your hands on your head.\" \n\nThe lights begin flickering. The sound of cicadas fills the room. A smell of burnt toast."; 
     back=0;
 
     if (f.thread_intro < 3) {
         f.thread_intro=0;
     }
+
+
+
+
 
     f.end_memory=1;
     d+=exit_memory();
@@ -1370,13 +1387,12 @@ case "gc_kasparov":
 break;
 
 case "gc_sudden_movements":
-    d+="Your body has become limp. The door to the booth bursts open. Two School Security guards catch you as you {collapse|start}. ";
-    i.kasparov=0;
-    i.sinatra=0;
-    i.vandalism_library=0;
-    i.informer=0;
-    i.ss=0;
+    d+="You are unable to move. Your body becomes limp. The door to the booth bursts open. Two School Security guards step in and catch you before you slump to the floor. They force you back upright. \"We have some additional questions for you, Suzy\" says the counselor.";
+    wipe_memory('kasparov','sinatra','vandalism_library','informer');
     back=0;
+
+    f.end_memory=1;
+    d+=exit_memory();
     
 break;
             
@@ -1384,63 +1400,30 @@ case "gc_look_at_him":
     //A
     //
     //back = "start";
-    d+="You stare into the orb. The sound of a cicadas fills the room. The lights flicker in a pattern. You've seen the pattern before. A smell of burnt toast. The flickering quickens until it becomes a strobe. The cicadas reach a crescendo. You hold on to what you can...";
+    d+="You stare into the orb. The sound of a cicadas fills the room. The lights flicker in a pattern. You smell burnt toast. The flickering quickens until it becomes a strobe. The cicadas reach a crescendo. You grasp for memories...";
     
     if (f.thread_intro < 3) {
         f.thread_intro=3;
     }
     inv=0;
-    root=1;
-    var items = [
-        0,
-        function() {
-            $(".back").animate({opacity:0},0);
-        },
-        500,
-        function(){
-            
-            $("#ss").effect( "highlight",{color:"yellow"}, 400 );
-        
-            $("li#ss").animate({opacity:0},500);
-            i.ss = 0;
-        },1800,
-        function(){
-            $("li#ss").remove();
-            $("#vandalism_library").effect( "highlight",{color:"yellow"}, 400 );
+    back=0;
+    if (f.gc_discovered_nothing_important) {
 
-            if(f.gc_wipe_sinatra) {
-                $("#sinatra").effect( "highlight",{color:"yellow"}, 400 );
-                $("li#sinatra").delay(500).animate({opacity:0},500);
-                i.sinatra = 0;
-                f.gc_wipe_sinatra = 0;
-            }
-            $("li#vandalism_library").delay(500).animate({opacity:0},500);
-            i.vandalism_library = 0;
-        },1800,
-        function(){
-            $("li#vandalism_library").remove();
-            $("#informer").effect( "highlight",{color:"yellow"}, 400 );
-            $("li#informer").delay(500).animate({opacity:0},500);
-            i.informer = 0;
-        },1800,
-        function() {
-        
-            $("li#informer").remove();
-            $(".back").animate({opacity:1},2000);
-        },1500
-        
+        wipe_memory('ss','vandalism_library','informer');
+    } else {
 
-     
-    ];
-    timer(items);
+        wipe_memory('ss','sinatra','vandalism_library','informer');
+
+    }
+    f.end_memory=1;
+    d+=exit_memory();
+    
 /*
         d+="<li><span class='deadLink'>Kasparov<span></li>";
         d+="<li><span class='deadLink'>Informer<span></li>";
        d+="<li><span class='deadLink'>Sinatra<span></li>"
  */   
 
-    f.end_memory=1;
-    d+=exit_memory();
 break;
 case "counseling_booth_stool":
     d+="A perfect cube. The floor around it has faded scuff marks. ";
@@ -1508,7 +1491,7 @@ case "caf":
             case 4:
                 f.caf_bridge_chess_conflict++;
             
-                d="\"Why'd you come on our turf?\" says the chessboard boy. \"We don't appreciate you smashing up the library.\"\n\n\"We don't smash up libraries.\" says monkey-boy. \"We can smash your face though.\"\n\n\"Try it,\" says the chessboard boy. \n\nThe Bridge Club members circle around the table and stand beside monkey-boy. A  jostle and everyone is in motion. Fists fly and one of the Bridge Club members lands on top of the lunch table. Food spills everywhere.\n\nYou {shuffle over|caf} slightly. Your lunch is still intact. ";
+                d="\"Why'd you come on our turf?\" says the chessboard boy. \"We don't appreciate seeing the Library smashed up.\"\n\n\"Don't know what you're talking about.\" says monkey-boy. \"We can smash your face though.\"\n\n\"Try it,\" says the chessboard boy. \n\nThe Bridge Club members circle around the table and stand beside monkey-boy. A  jostle and everyone is in motion. Fists fly and one of the Bridge Club members lands on top of the lunch table. Food spills everywhere.\n\nYou {shuffle over|caf} slightly. Your lunch is still intact. ";
                 back=0;
             break;
             case 5:
@@ -1516,7 +1499,7 @@ case "caf":
             break;
             case 6:
                 f.caf_bridge_chess_conflict++;
-                d="The brutish bowtie boy takes a swing at the monkey-boy. The monkey-boy ducks and brutish boy's fist catches you in the face. The world {blurs|caf_bc_fight_focus} as you fall backward onto the floor.";
+                d="The brute with the bowtie takes a swing at the monkey-boy. The monkey-boy ducks and brutish boy's fist catches you in the face. The world {blurs|caf_bc_fight_focus} as you fall backward onto the floor.";
                 f.caf_bridge_chess_conflict = "x"
                 back=0;        
             break;
@@ -1582,7 +1565,7 @@ break;
 
 case "caf_bc_fight_focus":
 
-                d+="Your vision focuses. Lunch tray on the floor. Food all over your clothing. Monkey-boy and the brutish boy throw punches at each other. \n\n{School Security Guards|caf_bc_conflict_ss} come down from the ceiling. You judge from the distance there are 45 seconds before they can reach this location. "; 
+                d+="Your vision focuses. Lunch tray on the floor. Food all over your clothing. Monkey-boy and the big brute throw punches at each other. \n\n{School Security Guards|caf_bc_conflict_ss} come down from the ceiling. You judge from the distance there are 45 seconds before they can reach this location. "; 
                 f.caf_bridge_chess_conflict = "x";
                 back=0;
 break;
@@ -1645,7 +1628,7 @@ case "detention_after_caf_fight":
     f.thread_chess_club = 1;
     
     scene_change("Detention");
-    d+="{Officer Wolff|detention_ss_officer} sits straddling a rusty chair, staring at the three of you. Behind him is a large {mirror|detention_after_fight_mirror}. You sit in a {classroom desk|detention_desk}, holding a bag of ice to your cheek. To your left is the {monkey-boy|detention_monkey_boy}. To your right is ";
+    d+="{Officer Wolff|detention_ss_officer} straddles a rusty chair, staring at the three of you. Behind him is a large {mirror|detention_after_fight_mirror}. You sit in a {classroom desk|detention_desk}, holding a bag of ice to your cheek. To your left is the {monkey-boy|detention_monkey_boy}. To your right is ";
     if (i.rook) {
         d+="{Rook|detention_rook} ";
     } else {
@@ -1654,7 +1637,7 @@ case "detention_after_caf_fight":
     d+="and his shorter {friend|detention_boardmaster}.\n\n ";
     
     if(f.detention_after_caf_fight==0) {
-        d+="The Security officer shakes his head, tapping the clipboard with his pen. \"Incorrigible,\" he says. ";
+        d+="The Security officer shakes his head, tapping a clipboard with his pen. \"Incorrigible,\" he says. ";
     }
     f.detention_after_caf_fight++;
     if (f.end_memory) {
