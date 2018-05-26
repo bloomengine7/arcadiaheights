@@ -119,7 +119,7 @@ config.inventorySystem = 1;
 //If you want a "wait" button to allow time to pass, set waitSystem = 1; If the wait system is off, it can be activated on a specific node by writing wait=1 within the node; Alternatively, if the wait system is turned on, it can be deactivated on a specific node by writing wait=0; The option to wait is only available in root nodes.
 //waitSystem = 1; 
 
-config.debugMode = 1; //Change this to 0 before you release your game. These are debug tools that appear on the left side. 
+config.debugMode = 0; //Change this to 0 before you release your game. These are debug tools that appear on the left side. 
     
 
 
@@ -410,8 +410,6 @@ case "start": //aka caf
         },3000,
         function(){
             stop_intro(); 
-            clear_timeouts_intervals();
-            
             $("#owrap").removeClass('click_through');
         }
         
@@ -425,9 +423,9 @@ case "start": //aka caf
         //$('#overlay').empty().titleSequence(sequence);
     //d+="content triggered manually";
         //initNode('dorm');
-        d+="Your name is Susan Newbourne. \nThese are your high school memories.\n{Dormitory|dorm}";
+        d+="Your name is Susan Newbourne. \nThese are your high school memories.\n{Dormitory|dorm}\n";
         if (f.seen_dorm) {
-            d+="\n{Classroom|classroom}";
+            d+="{Classroom|classroom}";
             d+="\n{Cafeteria|caf}";
         }
         if (i.informer && f.thread_intro < 2) {

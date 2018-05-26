@@ -383,6 +383,7 @@ function timer(fn_array) {
         fn_array.shift();
         timer(fn_array);
     }
+jsprettify.prettify();
 }
 
 
