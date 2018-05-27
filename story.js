@@ -423,9 +423,9 @@ case "start": //aka caf
         //$('#overlay').empty().titleSequence(sequence);
     //d+="content triggered manually";
         //initNode('dorm');
-        d+="Your name is Susan Newbourne. \nThese are your high school memories.\n{Dormitory|dorm}\n";
+        d+="Your name is Susan Newbourne. \nThese are your high school memories.\n{Dormitory|dorm}";
         if (f.seen_dorm) {
-            d+="{Classroom|classroom}";
+            d+="\n{Classroom|classroom}";
             d+="\n{Cafeteria|caf}";
         }
         if (i.informer && f.thread_intro < 2) {
@@ -1371,9 +1371,6 @@ case "gc_kasparov":
     d+="\"What is the meaning of this? Why did you say that name? Do not attempt sudden {movements|gc_sudden_movements}. Place your hands on your head.\" \n\nThe lights begin flickering. The sound of cicadas fills the room. A smell of burnt toast."; 
     back=0;
 
-    if (f.thread_intro < 3) {
-        f.thread_intro=0;
-    }
 
 
 
