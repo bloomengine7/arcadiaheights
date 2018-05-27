@@ -503,7 +503,10 @@ box-shadow: -3px 3px 3px #f6f6f6;
             padding-bottom:15px;
 			clear:both;
 		}
+        .old .clicked {
+            color:#000 !important;
 
+        }
         .transition {
             padding-bottom:15px;
 			border-bottom:1px solid #ededed;

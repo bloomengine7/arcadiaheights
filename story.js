@@ -269,10 +269,10 @@ function daemon() {
         }
         
         
-        
-        bursts_glitch();
-        setInterval(bursts_glitch,5000);
-       
+        if(f.moves < 1) { 
+            bursts_glitch();
+            setInterval(bursts_glitch,5000);
+        }
        
        
        function font_swap_glitch() {
@@ -384,7 +384,7 @@ case "start": //aka caf
             
             $("#owrap").show().removeClass().addClass("std intro");
             $("#oc").css('opacity','0');
-            $("#overlay").append("<div id='skip'><a href='#' onClick='stop_intro();   return false;' >Skip</a></div>");
+            $("#overlay").append("<div id='skip'><a href='#' onClick='stop_intro(); $(this).remove();  return false;' >Skip</a></div>");
         },
         500,
         function(){
@@ -1634,10 +1634,11 @@ case "detention_after_caf_fight":
     if(f.detention_after_caf_fight==0) {
         d+="The Security officer shakes his head, tapping a clipboard with his pen. \"Incorrigible,\" he says. ";
     }
-    f.detention_after_caf_fight++;
-    if (f.end_memory) {
+    f.detention_after_caf_fight=1;
+    if (f.end_memory || i.rook) {
         d+=exit_memory();
     }
+    
 break;
 
 case "detention_desk":
@@ -1665,6 +1666,8 @@ case "detention_rook":
         back=0;
    } else {
         d+="He leans back in his chair and smiles. ";
+        f.end_memory = 1;
+        
    }
 break;
 case "detention_sorry_arm":

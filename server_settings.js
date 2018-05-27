@@ -1,1 +1,2 @@
-config.debugMode=0;
+
+config.debugMode=1;
