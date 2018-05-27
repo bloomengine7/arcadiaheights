@@ -269,7 +269,7 @@ function daemon() {
         }
         
         
-        if(f.moves < 1) { 
+        if(!f.moves) { 
             bursts_glitch();
             setInterval(bursts_glitch,5000);
         }
