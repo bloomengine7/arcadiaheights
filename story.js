@@ -272,6 +272,11 @@ function daemon() {
         if(!f.moves) { 
             bursts_glitch();
             setInterval(bursts_glitch,5000);
+
+            setInterval(function(){
+                clear_timeouts_intervals();
+
+            },30000);
         }
        
        
