@@ -1,5 +1,7 @@
 function ga_subscribe_email() {
-    ga('send', 'event', 'subscribe_email', 'clicked', 'arcadia_heights');
+    if (typeof ga !== "undefined") { 
+        ga('send', 'event', 'subscribe_email', 'clicked', 'arcadia_heights');
+    }
 }
 
 function wipe_memory(args) {
