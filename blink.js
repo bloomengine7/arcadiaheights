@@ -104,7 +104,10 @@ query = getParameterByName("f");
 function process(node,giver,receiver,params) {
 
     //track user path through nodes like it is a pageview. Google analytics
-    ga('send', 'pageview', document.location + "?" + node);
+    if (typeof ga !== "undefined") { 
+        ga('send', 'pageview', document.location + "?" + node);
+
+    }
     console.log(document.location + node);
     
 
