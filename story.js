@@ -368,7 +368,7 @@ function nodes(node) { //Do not remove this line
 //
 
 case "about":
-    d+="These are the memories of Susan Newbourne (as collected by Hadrian Lin and Simon M. from <a href='http://bloomengine.com' target='_blank'>bloomengine.com</a>) \n\nThe game will evolve with new content added weekly. <a href=\"https://feedburner.google.com/fb/a/mailverify?uri=bloomengine&amp;loc=en_US\" target='_blank'>Stay updated</a> as we extract new memories from her brain.\n\nWe live off of goodwill and love feedback of any sort. If you notice typos and bugs or if you are interested in beta-testing future games please send an email to bloomengine (aaaayat) gmail (dot com). Put \"beta test anthill\" in the subject line.";
+    d+="These are the memories of Susan Newbourne (as collected by Hadrian Lin and Simon M. from <a href='http://bloomengine.com' target='_blank'>bloomengine.com</a>) \n\nThe game will evolve with new content added weekly. <a href=\"https://feedburner.google.com/fb/a/mailverify?uri=bloomengine&amp;loc=en_US\" target='_blank' onClick='ga_subscribe_email();'>Stay updated</a> as we extract new memories from her brain.\n\nWe live off of goodwill and love feedback of any sort. If you notice typos and bugs or if you are interested in beta-testing future games please send an email to bloomengine (aaaayat) gmail (dot com). Put \"beta test anthill\" in the subject line.";
 
 
 break;
@@ -448,7 +448,7 @@ case "start": //aka caf
 
             ga('send', 'pageview', document.location + "?" + "finished-memories");
         
-            d+="\n\n<em>You have exhausted your memories.</em> \n<span style='font-size:.75em'>Please check back later for more content. <a href=\"https://feedburner.google.com/fb/a/mailverify?uri=bloomengine&amp;loc=en_US\" target='_blank'>Stay updated</a>.</span>";
+            d+="\n\n<em>You have exhausted your memories.</em> \n<span style='font-size:.75em'>Please check back later for more content. <a href=\"https://feedburner.google.com/fb/a/mailverify?uri=bloomengine&amp;loc=en_US\" target='_blank' onClick=\"ga_subscribe_email();\">Stay updated</a>.</span>";
         }
 
 break;
