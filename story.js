@@ -386,33 +386,15 @@ case "start": //aka caf
     }
     var items = [
         function(){
-            
-            $("#owrap").show().removeClass().addClass("std intro");
-            $("#oc").css('opacity','0');
-            $("#overlay").append("<div id='skip'><a href='#' onClick='stop_intro(); $(this).remove();  return false;' >Skip</a></div>");
-        },
-        500,
+
+            $("#oc").animate({opacity: 0},0);
+        },100,
         function(){
 
             $("#oc").append("<div id='intro_text'></div>");
-            
-            $("#intro_text").html("What's your earliest memory?");
-            $("#oc").animate({opacity: 1},2000).delay(300).animate({opacity:0},1000);
-        },3500,
-        function(){
-            $("#oc").animate({opacity: 1},2000).delay(500).animate({opacity:0},1000);
-            $("#intro_text").html("Arriving on the bus?"); 
-        },4500,
-        function(){
-            $("#oc").animate({opacity: 1},300).delay(500).animate({opacity:0},3000);
-            $("#intro_text").html("We all have that memory."); 
-        },4000,
-        function(){
-            $("#owrap").show().removeClass().addClass('click_through');
-            $("#oc").animate({opacity: 1},200).delay(100).animate({opacity:0},5000);
             $("#intro_text").html("Where were we before<br>we started school?"); 
-            
-        },3000,
+            $("#oc").animate({opacity: 1},1000).delay(300).animate({opacity:0},1000);
+        },1500,
         function(){
             stop_intro(); 
             $("#owrap").removeClass('click_through');
@@ -460,7 +442,7 @@ case "dorm":
     if (f.back == "stand_on_toilet" && !f.dorm_privacy_mode) {
         d+="<div class='transition'>As you step away from the toilet, another chime sounds and the scene beyond the glass wall resolves to high-resolution. \"Privacy mode disabled,\" appears on the wall. \"Time deducted from your daily quota.\"</div>";
     }
-    d+="Three {walls|dorm_walls}, a floor and ceiling of concrete. One wall of {glass|dorm_glass}. A {poster|dorm_poster}. Outside, a {large courtyard|dorm_outside}. In the corner is a {bed|dorm_bed} and a {desk|dorm_desk}. In the other corner is a {toilet|dorm_toilet} and sink. ";
+    d+="Three walls, a floor and ceiling of concrete. One wall of {glass|dorm_glass}. A {poster|dorm_poster}. Next to it is a {panel|dorm_closet} and closet door. Outside, a {large courtyard|dorm_outside}. In the corner is a {bed|dorm_bed} and a {desk|dorm_desk}. In the other corner is a {toilet|dorm_toilet} and sink. ";
 
     //d+=seq("test_sq", ["sqfirst","second","third"],1);
     d+=exit_memory();
@@ -494,7 +476,7 @@ case "dorm_bed":
     d+="A futon on a raised slab of concrete.";
 break;
 case "dorm_poster":
-    d+="On the concrete wall is a faded poster of "
+    d+="On wall is a faded poster of "
     back = "dorm_walls"; 
     d+=oneoff_link("April Thursday|dorm_poster_april_oneoff");
     d+=" with her fist raised in the air as if uppercutting an invisible foe. Her other hand holds a microphone. She wears a customized school uniform: flared sleeves, skirt shorter than standard issue. On her wrists are "; 
