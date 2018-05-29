@@ -428,7 +428,7 @@ case "start": //aka caf
         //as more and more added, remove older state variables and only keep the newest ones. If ppl play for a while they will have already seen the old stuff
         if (f.thread_intro > 1 && f.thread_chess_club > 0) {
             if (typeof ga !== "undefined") { 
-                ga('send', 'pageview', document.location + "?" + "finished-memories");
+                ga('send', 'pageview', "?" + "finished-memories");
             } 
             d+="\n\n<em>You have exhausted your memories.</em> \n<span style='font-size:.75em'>Please check back later for more content. <a href=\"https://feedburner.google.com/fb/a/mailverify?uri=bloomengine&amp;loc=en_US\" target='_blank' onClick=\"ga_subscribe_email();\">Stay updated</a>.</span>";
         }
