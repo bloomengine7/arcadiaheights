@@ -12,7 +12,12 @@
     </script>
 
     <script>
-
+if ("ga" in window) {
+console.log('ga in window');
+    tracker = ga.getAll()[0];
+    if (tracker)
+        tracker.send("event", "Test", "Test GA");
+}
    ga('set', 'page', '/new-page.html'); 
     setTimeout(function() {
    ga('send', 'pageview');
