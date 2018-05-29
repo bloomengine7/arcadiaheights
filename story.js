@@ -460,7 +460,7 @@ case "dorm":
     if (f.back == "stand_on_toilet" && !f.dorm_privacy_mode) {
         d+="<div class='transition'>As you step away from the toilet, another chime sounds and the scene beyond the glass wall resolves to high-resolution. \"Privacy mode disabled,\" appears on the wall. \"Time deducted from your daily quota.\"</div>";
     }
-    d+="Three {walls|dorm_walls}, a floor and ceiling of concrete. One wall of {glass|dorm_glass}. Outside, a {large courtyard|dorm_outside}. In the corner is a {bed|dorm_bed} and a {desk|dorm_desk}. In the other corner is a {toilet|dorm_toilet} and sink. ";
+    d+="Three {walls|dorm_walls}, a floor and ceiling of concrete. One wall of {glass|dorm_glass}. A {poster|dorm_poster}. Outside, a {large courtyard|dorm_outside}. In the corner is a {bed|dorm_bed} and a {desk|dorm_desk}. In the other corner is a {toilet|dorm_toilet} and sink. ";
 
     //d+=seq("test_sq", ["sqfirst","second","third"],1);
     d+=exit_memory();
@@ -494,7 +494,7 @@ case "dorm_bed":
     d+="A futon on a raised slab of concrete.";
 break;
 case "dorm_poster":
-    d+="A faded poster of "
+    d+="On the concrete wall is a faded poster of "
     back = "dorm_walls"; 
     d+=oneoff_link("April Thursday|dorm_poster_april_oneoff");
     d+=" with her fist raised in the air as if uppercutting an invisible foe. Her other hand holds a microphone. She wears a customized school uniform: flared sleeves, skirt shorter than standard issue. On her wrists are "; 
