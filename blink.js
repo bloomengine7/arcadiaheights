@@ -105,7 +105,7 @@ function process(node,giver,receiver,params) {
 
     //track user path through nodes like it is a pageview. Google analytics
     if (typeof ga !== "undefined") { 
-        ga('send', 'pageview', "?" + node);
+        //ga('send', 'pageview', "?" + node);
 
     }
     console.log(document.location + node);
