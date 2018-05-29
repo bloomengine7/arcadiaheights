@@ -1476,7 +1476,7 @@ case "caf":
             case 4:
                 f.caf_bridge_chess_conflict++;
             
-                d="\"Why'd you come on our turf?\" says the chessboard boy. \"We don't appreciate seeing the Library smashed up.\"\n\n\"Don't know what you're talking about.\" says monkey-boy. \"We can smash your face though.\"\n\n\"Try it,\" says the chessboard boy. \n\nThe Bridge Club members circle around the table and stand beside monkey-boy. A  jostle and everyone is in motion. Fists fly and one of the Bridge Club members lands on top of the lunch table. Food spills everywhere.\n\nYou {shuffle over|caf} slightly. Your lunch is still intact. ";
+                d="\"Why'd you smash up the library?\" says the chessboard boy.\n\n\"Don't know what you're talking about.\" says monkey-boy. \"We can smash your face though.\"\n\n\"Try it,\" says the chessboard boy. \n\nThe Bridge Club members circle around the table and stand beside monkey-boy. A  jostle and everyone is in motion. Fists fly and one of the Bridge Club members lands on top of the lunch table. Food spills everywhere.\n\nYou {shuffle over|caf} slightly. Your lunch is still intact. ";
                 back=0;
             break;
             case 5:
