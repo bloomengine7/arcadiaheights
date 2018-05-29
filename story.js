@@ -1264,7 +1264,7 @@ case "guidance_convo":
       
         "gc_toilet_time":
             {l: "Toilet time", d: function() {
-                d+="You imagine a clenched-teeth emoticon on his face. \"Thank you for your penitence. If you continue your struggle to not daydream while on the toilet you are forgiven.\" ";
+                d+="You imagine a clenched-teeth emoticon on his face. \"Thank you for your penitence. If you continue your struggle to not waste time on the toilet you are forgiven.\" ";
                 
                 
             },v:1},
@@ -1372,7 +1372,7 @@ case "gc_kasparov":
 break;
 
 case "gc_sudden_movements":
-    d+="You are unable to move. Your body becomes limp. The door to the booth bursts open. Two School Security guards step in and catch you before you slump to the floor. They force you back upright. \"We have some additional questions for you, Suzy\" says the counselor.";
+    d+="Useless. Your body becomes limp. The door to the booth bursts open. Two School Security guards step in and catch you before you slump to the floor. They force you back upright. \"We have some additional questions for you, Suzy\" says the counselor.";
     wipe_memory('kasparov','sinatra','vandalism_library','informer');
     back=0;
 
@@ -1476,7 +1476,7 @@ case "caf":
             case 4:
                 f.caf_bridge_chess_conflict++;
             
-                d="\"Why'd you smash up the library?\" says the chessboard boy.\n\n\"Don't know what you're talking about.\" says monkey-boy. \"We can smash your face though.\"\n\n\"Try it,\" says the chessboard boy. \n\nThe Bridge Club members circle around the table and stand beside monkey-boy. A  jostle and everyone is in motion. Fists fly and one of the Bridge Club members lands on top of the lunch table. Food spills everywhere.\n\nYou {shuffle over|caf} slightly. Your lunch is still intact. ";
+                d="\"Why'd you smash up the library? Faculty's giving us heat for it.\" says the chessboard boy.\n\n\"Don't know what you're talking about.\" says monkey-boy. \"We can smash your face though.\"\n\n\"Try it,\" says the chessboard boy. \n\nThe Bridge Club members circle around the table and stand beside monkey-boy. A  jostle and everyone is in motion. Fists fly and one of the Bridge Club members lands on top of the lunch table. Food spills everywhere.\n\nYou {shuffle over|caf} slightly. Your lunch is still intact. ";
                 back=0;
             break;
             case 5:
