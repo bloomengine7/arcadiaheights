@@ -740,7 +740,7 @@ break;
 
 
 case "classroom_whiteboard":
-d+="A jungle of of notes and equations. Her arm is a blur of motion and the " + oneoff_link("marker|classroom_teacher_pen") + " squeaks like sneakers on a gynasium floor. ";
+d+="A jungle of of notes and equations. Her arm is a blur of motion and the " + oneoff_link("marker|classroom_teacher_pen") + " squeaks like sneakers on a gymasium floor. ";
 break;
 
 case "classroom_teacher_pen":
@@ -1597,7 +1597,7 @@ case "caf_cameras":
 break;
 
 case "caf_lower_floors":
-    d+="The kitchen lies below. Fire, fury and people in white {hasmat|caf_chefs} suits. ";  
+    d+="The kitchen lies below. Fire, fury and people in white {hazmat|caf_chefs} suits. ";  
 break;
 
 case "caf_chefs":
