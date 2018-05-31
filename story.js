@@ -76,7 +76,8 @@ user_variables = [
     "gc_informer",
     "gc_cheat_exam",
     "gc_increased_school_security",
-    "gc_no_face"
+    "gc_no_face",
+    "library_counter"
 
     
 ];//::uservariables
@@ -271,7 +272,7 @@ function daemon() {
         
         if(!f.moves) { 
             bursts_glitch();
-            setInterval(bursts_glitch,5000);
+            bg_int = setInterval(bursts_glitch,5000);
 
             setInterval(function(){
                 clear_timeouts_intervals();
@@ -431,6 +432,11 @@ case "start": //aka caf
                 ga('send', 'pageview', "/arcadiaheights/" + "finished-memories");
             } 
             d+="\n\n<em>You have exhausted your memories.</em> \n<span style='font-size:.75em'>Please check back later for more content. <a href=\"https://feedburner.google.com/fb/a/mailverify?uri=bloomengine&amp;loc=en_US\" target='_blank' onClick=\"ga_subscribe_email();\">Stay updated</a>.</span>";
+        }
+        
+        if (f.thread_intro > 2) {
+
+            //d+="\n{Library|library_start}";
         }
 
 break;
@@ -1676,6 +1682,138 @@ break;
 case "detention_after_fight_mirror":
     d+="It covers the entirety of the wall. They watch from the other side. You have no idea who they are."; 
 break;
+
+
+
+
+
+
+
+
+
+
+
+////////////////////////////library/////////////////////////////////
+case "library_start": 
+    root = 1; 
+    if (f.back=="start") {
+        f.library_counter = 0;
+        scene_change("To the outer edge");
+    }
+        
+    switch(f.library_counter) {
+        case 0:
+            d+="The {moving walkway|library_moving_walkway} carries you through a forest of book {shelves|library_thick_shelves}. ";
+            f.library_counter = 1;
+        break;
+        case 1:
+            d+="Your path zig-zags. You can never see too far ahead without your line of vision meeting a wall of {books|library_books}. {Students|library_walkway_students} drift past you, moving in the opposite direction.";
+            f.library_counter = 2;
+        break;
+            
+        case 2:
+
+            d+="Your path zig-zags again. In the shelves to either side or you are empty spaces which look like window frames. {Decorative objects|library_decoratives} and artwork rest inside them. Ahead of you, the walkway enters a large {opening|library_shelf_opening} in a shelf. ";  
+            f.library_counter = 3;
+        break;
+
+        case 3:
+
+            d+="The walkway tunnels through a series of large shelves and eventually exits into a brightly lit, open area. You {step off|library_crime_scene} the walkway.";
+        break;
+    }
+d+=exit_memory();
+break
+
+case "library_crime_scene":
+    if (f.back=="library_start") {
+        scene_change("Scene of the Incident");
+    }
+    root=1;
+
+    d+="Crime scene descc";
+break;
+    
+
+break;
+
+
+case "library_shelf_opening":
+    d+="Beyond the opening is another shelf with another opening cut into it. The walkway burrows through several layers of shelf like a train traveling through a mountain.  ";
+break;
+
+/*
+ You turn your head to the sides and see the aisles flicker past. Each time a glimpse students reaching for books, climbing ladders or standing on plaforms or inter-shelf bridges overhead.*
+ * */
+
+case "library_walkway_students":
+    d+="They carry armfuls of books. A blank expression. Moving in silence according to Library regulations. ";
+break;
+
+// The dome and its outer edges are visible now. The shelves show greater variance in size and form a landscape of {hills and valleys|library_shelf_variance}. The dome is fully visible now. ";
+//
+//
+case "library_shelf_variance":
+    d+="Some shelves are shoulder-height. Some are several dormitories high, complete with ladders and connecting walkways higher up. Shelves next to each other become incrementally larger and smaller giving an undulating hill and mountain effect."; 
+break;
+//area 1
+//
+case "library_decoratives":
+    d+="Some malformed clay {sculptures|library_sculptures}. Some potted {plants|library_plants}. Some oil paintings of early {Faculty|library_early_faculty} members. Some toy vehicles. Dramatically lit by a pot-light. ";
+break;
+
+case "library_early_faculty":
+    d+="<em>Before your time. Or was it?</em>";
+break;
+
+case "library_sculptures":
+    d+="Randomly selected student work from Art class.";
+break;
+
+case "library_plants":
+    d+="Mostly cactii or bonsai trees. You catch glimpse of a pepper plant. They reserved the bigger, leafier plants for the planters on the tops of the shelves.";
+break;
+case "library_thick_shelves":
+    d+="They are thick and tall in this area, crammed with {books|library_books}. Only if you look straight up can you see the {sky|library_sky}. Walkways and movable ladders travel up and between the shelves. ";
+break;
+
+case "library_books":
+    d+="<em>How many have you read and forgotten?</em>";
+
+
+break;
+
+case "library_moving_walkway":
+    d+="You stand on one of the main traffic arteries traveling to and from the {outer edges|library_outer_edges}. A system of conveyor belts. ";
+    
+    //Your path gently zig-zags through the shelves. {Students|library_walkway_students} drift past you, moving in the opposite direction.";
+
+break;
+
+case "library_outer_edges":
+    d+="You'll reach your destination soon. Hopefully School Security hasn't sealed off too wide an area. ";
+break;
+
+
+case "library_sky":
+    d+="Partially obstructed by the leaves of the planters at the top of the shelves are the glass panels of a geodesic dome. few shafts of light reach this far down. ";
+
+break;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ///////In case you link to a nonexistent node, then this error message will appear
 default:
 

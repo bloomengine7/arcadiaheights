@@ -384,7 +384,6 @@ function timer(fn_array) {
         timer(fn_array);
     }
 jsprettify.prettify();
-console.log("thing");
 }
 
 

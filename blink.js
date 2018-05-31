@@ -111,7 +111,10 @@ function process(node,giver,receiver,params) {
     console.log(document.location + node);
     
 
+    if (f.moves > 0) {
+        clearInterval(bg_int);
 
+    }
 
 
     if(typeof daemon == 'function') {
