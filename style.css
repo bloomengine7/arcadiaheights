@@ -56,6 +56,7 @@ color:#575757;
 
 body {
 font-size: 62.5%;
+overflow:hidden;
 }
 
 strong {
@@ -155,8 +156,7 @@ height:100px;
 			height:1px;
 		}
 		#content {
-			
-			background-color:#fff;
+		  
 			
 		overflow:hidden;
 			font-size:2.5em;
@@ -326,7 +326,10 @@ height:100px;
 			
 			clear:both;
 		}
-		
+	    .hidden a {
+            opacity:0;
+            
+        }
 		.back a:hover {
 			border:1px solid #BFBFBF;
 			background-color:#EDEDED;
@@ -376,7 +379,21 @@ height:100px;
 		width:198px;
 			
 		}
-		
+	    #show_hide_inv {
+            z-index:20;
+            position:absolute;
+            bottom: 0;
+            left:0;
+            width:195px;
+            height:20px;
+            display:block;
+            font-size:20px;
+            z-index:20;
+            padding-left:10px;
+            background-color:#fff;
+            border:1px solid silver;
+            border-bottom:0;
+        }
 		#inventory h2 {
 			font-weight:bold;
 			font-size:13px !important;
@@ -393,7 +410,6 @@ height:100px;
 		
 
 		}
-		
 		.use h2 {
 			/* background-color: #302c2c;*/
 		border:0;
@@ -405,7 +421,14 @@ height:100px;
 		padding-top:0px;
 		
 		}
-
+        .inv_close {
+            float:right;
+            position:absolute;
+            top:0;
+            left:0;
+           width: 190px;
+           text-align:right;
+        }
 		#content, #name {
 			background-color:#fff;
 

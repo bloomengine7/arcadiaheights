@@ -77,7 +77,8 @@ user_variables = [
     "gc_cheat_exam",
     "gc_increased_school_security",
     "gc_no_face",
-    "library_counter"
+    "library_counter",
+    "seen_vandalism"
 
     
 ];//::uservariables
@@ -195,6 +196,11 @@ function daemon() {
 //refers to global f array and global variable reward
 //runs of every process()
 //
+   
+
+
+    //keep knowledge up to date\
+    //
    
 
     if (f.moves > 2 && f.node=="start") {
@@ -385,6 +391,8 @@ case "start": //aka caf
     if (f.moves > 3) {
         //home_memories("Memories");    
     }
+
+
     var items = [
         function(){
 
@@ -397,7 +405,7 @@ case "start": //aka caf
             $("#oc").animate({opacity: 1},1000).delay(300).animate({opacity:0},1000);
         },1500,
         function(){
-            stop_intro(); 
+            let_the_show_begin(); 
             $("#owrap").removeClass('click_through');
         }
         
@@ -427,18 +435,19 @@ case "start": //aka caf
 
 
         //as more and more added, remove older state variables and only keep the newest ones. If ppl play for a while they will have already seen the old stuff
-        if (f.thread_intro > 1 && f.thread_chess_club > 0) {
+        if (f.thread_intro > 1 && f.thread_chess_club > 0 && f.seen_vandalism) {
             if (typeof ga !== "undefined") { 
                 ga('send', 'pageview', "/arcadiaheights/" + "finished-memories");
-            } 
+            }
+
             d+="\n\n<em>You have exhausted your memories.</em> \n<span style='font-size:.75em'>Please check back later for more content. <a href=\"https://feedburner.google.com/fb/a/mailverify?uri=bloomengine&amp;loc=en_US\" target='_blank' onClick=\"ga_subscribe_email();\">Stay updated</a>.</span>";
         }
         
-        if (f.thread_intro > 2) {
+        if (f.thread_intro > 2 && !f.seen_vandalism) {
 
-            //d+="\n{Library|library_start}";
+            d+="\n{Library|library_start}";
         }
-
+//::base
 break;
 case "dorm":
     root=1;
@@ -691,7 +700,7 @@ case "classroom":
     d+="{Ms. Heinrich|classroom_teacher} stands in front of a {whiteboard|classroom_whiteboard}, voice {droning|classroom_droning} hypnotically. {Students|classroom_students} sit at their {desks|classroom_desks}.";
     if (f.classroom_note_kas==3 && i.kasparov) {
         d="Someone taps your shoulder. You turn and the girl behind you passes a small folded {note|classroom_note_kas_passed} with your name on it. ";
-        back=0;
+        lockdown=1;
     }
     d+=exit_memory();
 break;
@@ -708,7 +717,9 @@ case "classroom_read_note":
     if (f.thread_intro < 1) {
         f.thread_intro = 1;
     }
+    back=0;
     f.end_memory = 1;
+    d+=exit_memory();
 break;
 case "classroom_desks":
     d+="Undersized one-piece affairs. Clean angles of metal and glass. Chair and desk fused together. ";
@@ -1369,19 +1380,17 @@ case "gc_kasparov":
 
 
 
+    wipe_memory('kasparov','sinatra','vandalism_library','informer');
 
 
 
-    f.end_memory=1;
-    d+=exit_memory();
 
 break;
 
 case "gc_sudden_movements":
-    d+="Useless. Your body becomes limp. The door to the booth bursts open. Two School Security guards step in and catch you before you slump to the floor. They force you back upright. \"We have some additional questions for you, Suzy\" says the counselor.";
-    wipe_memory('kasparov','sinatra','vandalism_library','informer');
-    back=0;
-
+    d+="Your body becomes limp. The door to the booth bursts open. Two School Security guards step in and catch you before you slump to the floor. They force you back upright. \"We have some additional questions for you, Suzy\" says the counselor.";
+   root=1; 
+    
     f.end_memory=1;
     d+=exit_memory();
     
@@ -1619,7 +1628,8 @@ case "detention_after_caf_fight":
     f.thread_chess_club = 1;
     
     scene_change("Detention");
-    d+="{Officer Wolff|detention_ss_officer} straddles a rusty chair, staring at the three of you. Behind him is a large {mirror|detention_after_fight_mirror}. You sit in a {classroom desk|detention_desk}, holding a bag of ice to your cheek. To your left is the {monkey-boy|detention_monkey_boy}. To your right is ";
+    i.wolff = 1;
+    d+="{Officer Wolff|detention_ss_officer} straddles a small foldable chair, staring at the three of you. Behind him is a large {mirror|detention_after_fight_mirror}. You sit in a {classroom desk|detention_desk}, holding a bag of ice to your cheek. To your left is the {monkey-boy|detention_monkey_boy}. To your right is ";
     if (i.rook) {
         d+="{Rook|detention_rook} ";
     } else {
@@ -1648,7 +1658,7 @@ break;
 
 
 case "detention_ss_officer":
-    d+="He wears a black School Security uniform with a red armband. On the armband are two interlocking S shapes. His {badge|wolff_badge} has the name 'Wolff' inscribed on it. An eyepatch hangs over one side of his monitor-face, covering the eye of his angryface emoticon. "; 
+    d+="He wears a black School Security uniform with a red armband. On the armband are two interlocking S shapes. His {badge|wolff_badge} has the name 'Wolff' inscribed on it. An physical eyepatch covers the eye of his angryface emoticon. His monitor is cracked and the lines spiderweb out from the eyepatch. "; 
 
 break;
 case "detention_rook":
@@ -1698,7 +1708,11 @@ case "library_start":
     root = 1; 
     if (f.back=="start") {
         f.library_counter = 0;
-        scene_change("To the outer edge");
+
+        if (!f.seen_vandalism) {
+            scene_change("Cracks in the Firmament");
+        }
+        
     }
         
     switch(f.library_counter) {
@@ -1707,35 +1721,23 @@ case "library_start":
             f.library_counter = 1;
         break;
         case 1:
-            d+="Your path zig-zags. You can never see too far ahead without your line of vision meeting a wall of {books|library_books}. {Students|library_walkway_students} drift past you, moving in the opposite direction.";
+            d+="Your path zig-zags. Even when you look down the aisles, you cannot see too far ahead without your line of vision eventually meeting a wall of {books|library_books}. {Students|library_walkway_students} drift past you, moving in the opposite direction.";
             f.library_counter = 2;
         break;
             
         case 2:
 
-            d+="Your path zig-zags again. In the shelves to either side or you are empty spaces which look like window frames. {Decorative objects|library_decoratives} and artwork rest inside them. Ahead of you, the walkway enters a large {opening|library_shelf_opening} in a shelf. ";  
+            d+="Your path twists again. The adjacent shelves have spaces like window frames. {Decorative objects|library_decoratives} rest inside them. Ahead of you, the walkway passes through a large {opening|library_shelf_opening} in a shelf. ";  
             f.library_counter = 3;
         break;
 
         case 3:
 
-            d+="The walkway tunnels through a series of large shelves and eventually exits into a brightly lit, open area. You {step off|library_crime_scene} the walkway.";
+            d+="The walkway tunnels through a series of large shelves and eventually exits into an open vista. You {step off|library_study_area} the walkway.";
         break;
     }
 d+=exit_memory();
 break
-
-case "library_crime_scene":
-    if (f.back=="library_start") {
-        scene_change("Scene of the Incident");
-    }
-    root=1;
-
-    d+="Crime scene descc";
-break;
-    
-
-break;
 
 
 case "library_shelf_opening":
@@ -1747,23 +1749,23 @@ break;
  * */
 
 case "library_walkway_students":
-    d+="They carry armfuls of books. A blank expression. Moving in silence according to Library regulations. ";
+    d+="They carry armfuls of books and wear blank expressions, traveling in silence. As according to regulation and etiquitte. ";
 break;
 
 // The dome and its outer edges are visible now. The shelves show greater variance in size and form a landscape of {hills and valleys|library_shelf_variance}. The dome is fully visible now. ";
 //
 //
 case "library_shelf_variance":
-    d+="Some shelves are shoulder-height. Some are several dormitories high, complete with ladders and connecting walkways higher up. Shelves next to each other become incrementally larger and smaller giving an undulating hill and mountain effect."; 
+    d+="Some shelves are shoulder-height. Some are several dormitories high, complete with ladders and connecting walkways higher up. Shelves become incrementally larger and smaller giving an undulating hill and mountain effect."; 
 break;
 //area 1
 //
 case "library_decoratives":
-    d+="Some malformed clay {sculptures|library_sculptures}. Some potted {plants|library_plants}. Some oil paintings of early {Faculty|library_early_faculty} members. Some toy vehicles. Dramatically lit by a pot-light. ";
+    d+="There are some malformed clay {sculptures|library_sculptures}, some potted {plants|library_plants}, oil paintings of early {Faculty|library_early_faculty} members and antique toy vehicles. ";
 break;
 
 case "library_early_faculty":
-    d+="<em>Before your time. Or was it?</em>";
+    d+="<em>Was it before your time?</em> Their clothing looks antiquated, as they do in all the old paintings.";
 break;
 
 case "library_sculptures":
@@ -1774,7 +1776,7 @@ case "library_plants":
     d+="Mostly cactii or bonsai trees. You catch glimpse of a pepper plant. They reserved the bigger, leafier plants for the planters on the tops of the shelves.";
 break;
 case "library_thick_shelves":
-    d+="They are thick and tall in this area, crammed with {books|library_books}. Only if you look straight up can you see the {sky|library_sky}. Walkways and movable ladders travel up and between the shelves. ";
+    d+="They are thick and tall in this area, crammed with {books|library_books}. Only if you look straight up can you see the {glass dome|library_sky}. Walkways and movable ladders travel up and between the shelves. ";
 break;
 
 case "library_books":
@@ -1784,14 +1786,14 @@ case "library_books":
 break;
 
 case "library_moving_walkway":
-    d+="You stand on one of the main traffic arteries traveling to and from the {outer edges|library_outer_edges}. A system of conveyor belts. ";
+    d+="You stand on one of the main traffic arteries traveling to and from the {outer edges|library_outer_edges}. ";
     
     //Your path gently zig-zags through the shelves. {Students|library_walkway_students} drift past you, moving in the opposite direction.";
 
 break;
 
 case "library_outer_edges":
-    d+="You'll reach your destination soon. Hopefully School Security hasn't sealed off too wide an area. ";
+    d+="You'll reach the terminus soon. Hopefully School Security hasn't sealed off too wide an area. ";
 break;
 
 
@@ -1802,12 +1804,124 @@ break;
 
 
 
+/////////////////////////////////////////////
+case "library_study_area":
+    if (f.back=="library_start") {
+        //scene_change("Cracks in the Firmament");
+    } else if(f.back=="library_crime_scene") {
+        d+="<div class='transition'>You retrace your steps and follow the path of the stream.</div>";
+    }
+    root=1;
+
+    d+="You stand in an area of low shelves, sparsely used {couches|library_couches} and study {cubicles|library_cubicles}. The domed {ceiling|library_dome} arches overhead. Behind you is the {terminus|library_terminus} of the moving walkway. Ahead of you, the bookshelves form {undulating|library_hills} hills and valleys. \n\n{Streams|library_streams} of water zig-zag through them and cascade downwards in measured increments toward the {edge|library_dome_edge} of the dome. ";
+    if (f.seen_vandalism) {
+        f.end_memory = 1;
+
+    }
+    d+=exit_memory();
+break;
+
+case "library_couches":
+    d+="Cement blocks with thin cushions placed on top of them. Repositionable reading lamps extend out of their backs. ";
+
+break;
+
+case  "library_cubicles":
+    d+="Glass cubicles. The students inside them are pixellated.";
+break;
+
+case "library_streams":
+    d+="Caculated paths and 90 degree turns. From a distance, the water appears placid and motionless. Closer up, you see a gentle current. ";
+break;
+
+case "library_hills":
+    d+="The shelves show greater variance in size in this area of the library. Shelves adjacent to each other become successively wider and larger or smaller and narrower, giving the appearance of hills and valleys. Some shelves start at shoulder height and end several dormitories high. {Leaves|library_planters} sprout from the tops of the book shelves. ";
+
+break;
+
+case "library_planters":
+    d+="The tops of the shelves are filled with planters. You run your fingers through the plastic leaves on the low-lying shelves. You always found it soothing to be near plants. "; 
+break;
+
+case "library_terminus":
+    d+="Some students step off the walkway and make their way to the couches or desks. Other students step onto the walkway traveling back toward the tunnel in the shelves. ";
+
+break;
 
 
 
 
+case "library_crime_scene":
+    root=1;
+    if (f.back=="library_dome_edge") {
+       d+="<div class='transition'>After a period of walking, you arrive at the scene of the incident.</div> "; 
+
+    }
+    d+="A series of {shelves|library_shelves_knocked_over} lie knocked over like " + oneoff_link("dominoes|library_dominoes") + ". The last shelf leans against the side of the {dome|library_dome}. Books, smashed pottery and plastic plants lie scattered everywhere. The area is cordoned off with police tape and {School Security|library_ss} officers crawl through the debris like ants.  {Students|library_crime_scene_students} jostle with each other trying to get a better view.\n\nThe stream ends here by feeds into a trench and moat beside the edge of the dome. In the other direction is the {study area|library_study_area}.";
+
+    f.seen_vandalism = 1;
+    f.end_memory = 1;
+
+break;
+
+case "library_crime_scene_students":
+    d+="Some whisper to each other. Most stare at the scene in silence. ";
+break;
+case "library_dominoes":
+    d+="If the Domino club had more power and clout, the Faculty would have blamed them for this incident. But the Dominoes are not troublemakers and this is more than simple vandalism.\n\n <em>How was Kasparov able to do this?</em>";
+
+break;
+
+case "library_dome_edge":
+    d+="You follow the {path|library_crime_scene} of one of the streams and forge your way into the shelves. ";
+    back=0;
+
+break;
+
+case "library_dome":
+    d+="A geodesic dome with triangular panels. The glass panels have the texture and appearance of ice, obscuring the outside but still transmitting bright shafts of light into the library. ";
+    if(f.root=="library_crime_scene") {
+        d+="\n\nThe edge of the dome meets the floor here. Next to the edge of the dome is a {trench|library_dome_trench} about two dormitories deep. At the bottom of the trench is a moat. A massive shelf has {leans|library_shelf_leans} against the dome at a 45 degree angle. ";
+    }
 
 
+break;
+case "library_shelf_leans":
+    d+="The part of the shelf touching the glass is bruised and bent. The dome appears undamaged. ";
+
+break;
+case "library_dome_trench":
+    d+="Railings line the edge of it. ";
+break;
+case "library_shelves_knocked_over":
+    d+="The starting smallest shelf is slightly higher than you are. The next few shelves become successively larger. The largest one at the end of the sequence is at least three dormitories high and leans against the edge of the {dome|library_shelf_impact}. ";
+
+break;
+case "library_ss":
+   d+="They examine everything with oversized magnifying glasses. Others carry metal rods with a flat disc at the end, listening carefully to the crackle of their scanning equipment. \n\n"; 
+   if (i.wolff) {
+       d+="Officer Wolff stands apart from the rest. ";
+       } else {
+           d+= "One officer stands apart from the rest. "; 
+       }
+       d+="He carries a pair of " + oneoff_link("binoculars|library_wolff_binoculars") + " and examines the point of impact between shelf and glass. His back is turned to you. ";  
+
+
+break;
+
+case "library_wolff_binoculars":
+    d+="He lowers his binoculars and turns around to look directly at you. On his monitor is an angryface emoticon. ";
+    if (!i.wolff) {
+        d+="A physical eyepatch hangs over his cracked monitor and covers one of his eyes. ";
+    } 
+    d+="His unflinching one-eyed stare bores into you. Without looking away, he brushes lint off the shoulder of his black uniform.\n\n Eventually another officer approaches and salutes him. They exchange words, salute and he returns to examining the shelf with his binoculars. ";
+
+break;
+
+case "library_shelf_impact":
+    d+="The glass panel seems undamaged. The edge of the shelf touching the glass is bent and bruised. ";
+
+break;
 
 
 
@@ -1959,3 +2073,9 @@ add("Rook", "rook", function() {
     d+="<em>Ryan Hook. The big, brutish-looking Chess club member. Maybe he can help you. </em>";
 
 });
+
+add("Wolff", "wolff", function() {
+    d+="<em>Chief of School Security. Emotionally volatile. Has an eyepatch. What happened to his eye?</em>";
+    thought=1;
+});
+

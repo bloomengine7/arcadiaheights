@@ -108,7 +108,6 @@ function process(node,giver,receiver,params) {
         ga('send', 'pageview', '/arcadiaheights/' + node);
 
     }
-    console.log(document.location + node);
     
 
     if (f.moves > 0) {
@@ -213,7 +212,7 @@ function process(node,giver,receiver,params) {
 		if (config.debugMode) {
 			$('#wrap').append('<div id="debug"><a id="debugShowHide" href="javascript:debugShowHide()">Hide Debug</a><div id="debugContent"></div></div><!--debug-->');
 		}
-		
+	    	
 		
 		resize();
 		metaVisible = 1;
@@ -414,12 +413,25 @@ function process(node,giver,receiver,params) {
         }
         
 		saveLink="<a href=\"?" + save_link_compressed  + "\">Save Game</a> ";
-	
-        
-        
-        setCookie("state", z,360);
-        setCookie("inv",zz,360);
-        
+
+
+
+        last_uncorrupted_save.push(saveLink);
+        if (last_uncorrupted_save.length > 5 ) {
+            last_uncorrupted_save.splice(0, 1);
+        } 
+        //not needed. populates browser back history with matching url save links
+        /*
+        (function(){ 
+            var url = [location.protocol, '//', location.host, location.pathname].join('');
+           
+
+           var stateObj = { foo: "bar" };
+            history.pushState(stateObj, "",  "?" + save_link_compressed);
+            console.log(url);
+
+        })(); 
+        */ 
 				
     if (!firstload) {
         localStorage.setItem('save_f', JSON.stringify(f));
@@ -444,7 +456,13 @@ function process(node,giver,receiver,params) {
 		nodes(f.node); 
 		
 	}
-
+    if (d=="" || d == 'undefined' || d == 'null') {
+       
+        d="<div class='metaText'>Sorry, you've hit a show stopping bug! Please report it to the game author. ";
+        d+="<a href='" + window.location.href.split('?')[0] + "?" + last_uncorrupted_save[0] + "'>Rewind a few steps back...</a></div>"; 
+        //<p class='back'>{Return|start}</p>";
+        lockdown=1;
+    }
 	
 	highlight_items = (function() {
 		var items = [];
@@ -531,7 +549,9 @@ function process(node,giver,receiver,params) {
 		$("#wrap").css("display","block");
 		$("#startScreen").css("display","none");
 
-	    if (getParameterByName("f")) {	
+	    if (getParameterByName("f")) {
+            clear_timeouts_intervals();
+        
 			$('#content').append("<div class=\"old\">" +  "<div class='metaText'><h2>Save/Restore Point</h2><p>Bookmark this URL to return to this point. The game also automatically saves your progress and you can choose 'continue' from the start screen. (Uses browser cache) </p></div></div>" + external_load_text);
 	    }	
 		if(typeof new_game_external_code == 'function') {
@@ -562,9 +582,9 @@ function process(node,giver,receiver,params) {
     //
 
 
-    if (back == 1 && !root && links) {
+    if (back == 1 && !root && links && !lockdown) {
 		d+="<p class=\"back\">{Return|" + f.root + "}</p>";
-    } else if (back !=1 && back !=0) {
+    } else if (back !=1 && back !=0 && !lockdown) {
         d+="<p class=\"back\">{Return|" + back + "}</p>";
     } 
     /*
@@ -637,9 +657,12 @@ function process(node,giver,receiver,params) {
     //d=(d).replace(/\\/g, '[slash]');
     //d=(d).replace(/\\n/g, '<br>');
    //d=(d).replace(/\\p/g, '\\\\');
-    //d=(d).replace(/\\p/g, '<br><br>');	//d=(d).replace(/<br><br>/g, '</p><p>');
+    //d=(d).replace(/\\p/g, '<br><br>');	//d=(d).replace(/<br><br>/g, '</p><p>')
     //
-    //
+    
+    
+        //$("#wrap").css( 'overflow-y', 'hidden');
+    
         $('#new').html(createLinks(shortcut_characters(d))).promise().done(function(){
 
 
@@ -666,15 +689,9 @@ function process(node,giver,receiver,params) {
 
 
                 //console.log($('#wrap').scrollTop() , $('#new').position().top);
-                var extra =  $('#new').position().top - $('#wrap').scrollTop();
-                if (extra < 300) {
-                    $("#wrap").animate({
-                        scrollTop:  '+=100'
-                    }, 10); 		
-                }
 
                     
-
+                
                 setTimeout(function() { 
                     $("#wrap").scrollTo("#new", 500); //custom animation speed 
                 },150);
@@ -718,6 +735,8 @@ function process(node,giver,receiver,params) {
             d+=outputInventory();
 	    } else {
             d+=createDeadLinks(outputInventory());
+
+            setTimeout(function(){$("#show_hide_inv").remove();   console.log('innnnna');},50);
         }
 		
 	
@@ -832,6 +851,7 @@ function process(node,giver,receiver,params) {
 			return $("<span />", {html: $(this).html()});
 			});
 			$(".node ul .node span").addClass("deadLink");
+            $("#show_hide_inv").hide();
 		}
 		
 		//hide all inventory items
@@ -911,21 +931,31 @@ function process(node,giver,receiver,params) {
 //	//build("<a href=\"javascript:inventory('invApple','") + build(node) + build ("', '") + build(f['isRoot']) + build("')\">Apple</a>");
 	
 
-
+    
 	
 	
 	//create save button
 	$("#metaContent").html("<a href=\"?\">Restart</a>" + saveLink + createLinks(config.metaContent));
 	// "<a href=\"?\">Restart</a> " + saveLink + createLinks(metaContent) + "<span class='fine'>Powered by <a href='http://bloomengine.com/blink' target='_blank'>Blink!</a></span>";
 	
-	//reset defaults
-	f.giver=0;
-	f.receiver=0;
-    f["talk"]=0;
+   if (inventory_items_exist()) {
+       $("#rail").show();
+       $("#show_hide_inv").show();
 
-	back=1;
-	links=1;
-	use=0;
+    } else {
+       $("#rail").hide(); 
+       $("#show_hide_inv").hide();
+    }
+	
+    
+    //reset defaults
+	f.giver = 0;
+	f.receiver = 0;
+    f["talk"] = 0;
+    lockdown = 0;
+	back = 1;
+	links = 1;
+	use = 0;
 	
 
 
@@ -942,7 +972,6 @@ function process(node,giver,receiver,params) {
 	//end reset defaults
 	
 	
-			
 	
 
 	
@@ -984,9 +1013,6 @@ function process(node,giver,receiver,params) {
 		});
 		
 	}
-
-
-		
 
 
 		
@@ -1067,10 +1093,9 @@ function buildSaveLink(items,names) {
 window.onresize = resize;
 
 function restore() {
-
     $("#owrap").hide();	
 	$("#content").html("<div id='new'><h2>Restored game</h2>" + "</div>" + external_load_text);
-	
+    let_the_show_begin();	
 	
 	
 	
@@ -1087,18 +1112,6 @@ function restore() {
 	
 		
 		
-		var invz=readCookie("inv");
-		invz = invz.substring(0, invz.length-1);	
-		
-		
-		
-		//i=syncVariables(invz,iName,i);
-		
-		var state=readCookie("state");
-			state = state.substring(0, state.length-1);
-			
-	//	f=syncVariables(state,fname,f);
-
         
         f = JSON.parse(localStorage.getItem('save_f'));
         i = JSON.parse(localStorage.getItem('save_i'));
@@ -1252,7 +1265,7 @@ function resize() {
 
 	*/
 	
-
+    responsive();
 	
 }
 
@@ -1508,7 +1521,6 @@ function debug() {
 
 	resize();
 
-	
 
 }
 
