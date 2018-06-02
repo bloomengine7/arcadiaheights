@@ -1,0 +1,27 @@
+   <html>
+    <head>
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-22524818-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-22524818-1');
+    </script>
+
+    <script>
+console.log('ga in window');
+    tracker = ga.getAll()[0];
+    if (tracker)
+        tracker.send("event", "Test", "Test GA");
+   ga('set', 'page', '/new-page.html'); 
+    setTimeout(function() {
+   ga('send', 'pageview');
+    },3000);
+
+    </script>
+
+    </head>
+    </html>
