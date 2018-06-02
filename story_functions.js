@@ -9,7 +9,6 @@ function wipe_memory(args) {
     var c = 0;
     var argz = [];
 
-
     for (var x = 0; x < arguments.length; x++) {
         if (i[arguments[x]] != 0) {
            argz.push(arguments[x]);
@@ -34,14 +33,13 @@ function wipe_memory(args) {
         c++;
         if (c == argz.length || argz.length == 0) {
             clearInterval(x);
-            $(".back").show();            
             $(".back").animate({opacity:1},2000);
 
         }
     },1000);
 }
 
-function stop_intro() {
+function let_the_show_begin() {
 
 
     var items = [
@@ -118,20 +116,23 @@ function interact(funct) {
 function exit_memory() {
 //refers to f.end_memory
 //
-//
     
-    if (back != 0) {
+    if (!lockdown) {
         if (f.end_memory) {
             return "<p class='back exit_memory highlight_exit'>{&#10003;   Finish memory|start}</p>";
         } else {
             return "<p class='back exit_memory'>{Exit memory|start}</p>";
         }
-    } else {
+
+    } else { 
+        /*
         if (f.end_memory) {
-            return "<p class='back exit_memory highlight_exit' style='opacity:0'>{&#10003;   Finish memory|start}</p>";
+            return "<p class='back exit_memory highlight_exit hidden'>{&#10003;   Finish memory|start}</p>";
         } else {
-            return "<p class='back exit_memory' style='opacity:0'>{Exit memory|start}</p>";
+            return "<p class='back exit_memory hidden'>{Exit memory|start}</p>";
         }
+        */
+      return ""; 
     }
 
 }

@@ -328,7 +328,7 @@ html #wrap .metaText h2, #content h2 {
 
 }
 
-.metaText p {
+.metaText, .metaText p {
     font-size: .9em;
     font-family: "Roboto Condensed" !important;
 }
@@ -350,4 +350,10 @@ html #wrap .metaText h2, #content h2 {
 
 #overlay #skip a {
     font-size: 2em !important;
+}
+
+#show_hide_inv {
+    font-family: "Roboto Condensed" !important;
+    font-weight:300;
+    font-size:18px;
 }

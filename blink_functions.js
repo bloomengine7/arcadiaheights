@@ -1,3 +1,22 @@
+
+
+function inventory_items_exist(){
+    var visible_item = 0; 
+    for (var c = 0; c < iName.length; c++) {
+        if(i[iName[c]]) {
+            visible_item = 1;
+        }
+
+    } 
+    if (visible_item) {
+        return true;
+        
+    } else {
+        return false;
+    }
+ 
+}
+
 function add(text,node,funct) {	
 
 	// var d2 = d;
@@ -152,11 +171,11 @@ function scene_change(message) {
     if (f.back=="start" || !exist(scene_change[f.node])) {
         scene_change[f.node]=1;
         items = [
-            700,
+            400,
             function() {
 
             $("#oc").css('opacity','1');
-                $("#owrap").show().removeClass().addClass('click_through');
+                //$("#owrap").show().removeClass().addClass('click_through');
                $("#owrap").animate({opacity: 1},0);
                 $("#oc").html(message); 
                 
