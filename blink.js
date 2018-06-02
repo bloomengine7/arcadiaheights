@@ -551,8 +551,18 @@ function process(node,giver,receiver,params) {
 
 	    if (getParameterByName("f")) {
             clear_timeouts_intervals();
-        
-			$('#content').append("<div class=\"old\">" +  "<div class='metaText'><h2>Save/Restore Point</h2><p>Bookmark this URL to return to this point. The game also automatically saves your progress and you can choose 'continue' from the start screen. (Uses browser cache) </p></div></div>" + external_load_text);
+       
+            
+            if (window!=window.top) { /* I'm in a frame! */ 
+                    $('#content').append("<div class=\"old\">" +  "<div class='metaText'><h2>Save/Restore Point</h2><p><a href='" + window.location.href + "' target='_blank'>Click this link</a> and bookmark the page to return to this point. The game also automatically saves your progress and you can choose 'continue' from the start screen. (Uses browser cache) </p></div></div>" + external_load_text);      
+            
+            } else {
+                $('#content').append("<div class=\"old\">" +  "<div class='metaText'><h2>Save/Restore Point</h2><p>Bookmark this URL to return to this point. The game also automatically saves your progress and you can choose 'continue' from the start screen. (Uses browser cache) </p></div></div>" + external_load_text);
+
+
+            }
+
+
 	    }	
 		if(typeof new_game_external_code == 'function') {
 

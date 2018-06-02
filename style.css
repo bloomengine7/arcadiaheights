@@ -310,6 +310,11 @@ height:100px;
 			font-family:sans-serif;
 			color:#BEBEBE;
 		}
+        #content .metaText a {
+            color: #383838 !important;
+            border-bottom: 1px dotted #383838;
+
+        }
 		.back {
 			clear:both;
 			margin:0;
