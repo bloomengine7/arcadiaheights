@@ -36,6 +36,7 @@ var deadX = "";
 var deadEvent ="";
 var links = 1;
 var back = 1;
+var lockdown = 0;
 var scrollPosition;
 var invText="";
 var inv=1;
@@ -47,6 +48,7 @@ var config = {};
 config.debugMode=0;
 var iBuffer = "";
 var inventoryDescArray = [];
+var last_uncorrupted_save = []; //for allowing user to jump back a few steps in case hit a game stopping bug
 var metaVisible=0;
 var restored=0;
 var parent;
