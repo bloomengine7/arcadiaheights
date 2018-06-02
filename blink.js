@@ -104,8 +104,10 @@ query = getParameterByName("f");
 function process(node,giver,receiver,params) {
 
     //track user path through nodes like it is a pageview. Google analytics
+    //
+    var my_ga_url = [location.protocol, '//', location.host, location.pathname].join('');
     if (typeof ga !== "undefined") { 
-        ga('send', 'pageview', '/arcadiaheights/' + node);
+        ga('send', 'pageview', 'my_ga_url' + node);
 
     }
     
