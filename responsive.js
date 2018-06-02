@@ -37,7 +37,6 @@ function responsive() {
 
         $("#content #show_hide_inv").hide();
         leftpos = $("#content_wrap").offset().left;
-        console.log("leftpos" + leftpos); 
         $("#content").css('margin-left','199px');
         $("#inventory").show();
         $(".inv_close").remove();

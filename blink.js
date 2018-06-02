@@ -106,15 +106,15 @@ function process(node,giver,receiver,params) {
     //track user path through nodes like it is a pageview. Google analytics
     //
     //var my_ga_url = [location.protocol, '//', location.host, location.pathname].join('');
-
-
-    var my_ga_url = (window.location != window.parent.location)
-            ? document.referrer
-            : document.location.href;
+    var my_ga_url = ""
+    if (window!=window.top) { /* I'm in a frame! */ 
+    
+        my_ga_url = getParameterByName("source") + "/";
+    }
 
 
     if (typeof ga !== "undefined") { 
-        ga('send', 'pageview', my_ga_url + node);
+        ga('send', 'pageview', '/arcadiaheights/' + my_ga_url + node);
 
     }
     
@@ -755,7 +755,7 @@ function process(node,giver,receiver,params) {
 	    } else {
             d+=createDeadLinks(outputInventory());
 
-            setTimeout(function(){$("#show_hide_inv").remove();   console.log('innnnna');},50);
+            setTimeout(function(){$("#show_hide_inv").remove(); },50);
         }
 		
 	
