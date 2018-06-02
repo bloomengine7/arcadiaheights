@@ -280,7 +280,7 @@ function daemon() {
             bursts_glitch();
             bg_int = setInterval(bursts_glitch,5000);
 
-            setInterval(function(){
+            setTimeout(function(){
                 clear_timeouts_intervals();
 
             },30000);

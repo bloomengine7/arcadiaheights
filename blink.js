@@ -549,8 +549,8 @@ function process(node,giver,receiver,params) {
 		$("#wrap").css("display","block");
 		$("#startScreen").css("display","none");
 
-	    if (getParameterByName("f")) {
-            clear_timeouts_intervals();
+	    if (getParameterByName("f") && firstload) {
+            //clear_timeouts_intervals();
        
             
             if (window!=window.top) { /* I'm in a frame! */ 

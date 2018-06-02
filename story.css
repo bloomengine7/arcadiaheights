@@ -25,7 +25,7 @@
 }
 #overlay #oc {
     //display:none;
-    font-size:1vw;
+    font-size:1.5vw;
 }
 #overlay .q {
     font-size:5vw;
@@ -295,7 +295,7 @@ html .glitch {
 }
 html #overlay #oc {
     font-family: "Roboto Condensed" !important;
-    font-size:6vw;
+    font-size:10vw;
     letter-spacing:-.02vw;
     //font-family: "union regular" !important;
     //letter-spacing:-.05em;
