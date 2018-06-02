@@ -107,7 +107,7 @@ function process(node,giver,receiver,params) {
     //
     var my_ga_url = [location.protocol, '//', location.host, location.pathname].join('');
     if (typeof ga !== "undefined") { 
-        ga('send', 'pageview', 'my_ga_url' + node);
+        ga('send', 'pageview', my_ga_url + node);
 
     }
     
