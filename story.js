@@ -392,7 +392,7 @@ case "start": //aka caf
         //home_memories("Memories");    
     }
 
-
+/*
     var items = [
         function(){
 
@@ -415,7 +415,7 @@ case "start": //aka caf
     if (f.moves == 1) {
         timer(items);
     }
-
+*/
         //$('#overlay').empty().titleSequence(sequence);
     //d+="content triggered manually";
         //initNode('dorm');
@@ -446,6 +446,11 @@ case "start": //aka caf
         if (f.thread_intro > 2 && !f.seen_vandalism) {
 
             d+="\n{Library|library_start}";
+        }
+
+        if (f.moves==1) {
+            d="";
+            nodes('dorm');
         }
 //::base
 break;
