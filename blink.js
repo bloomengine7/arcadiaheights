@@ -1683,7 +1683,7 @@ function showHideMeta(forceHide) {
 		}, 150, function() {
 			metaVisible = 1;
 
-           if (config.game_url != 'undefined') {
+           if (config.game_url) {
            
                 $("#metaButton").html('Menu <img src="' + config.game_url + '/arrow-up.gif">');
            }  else {
