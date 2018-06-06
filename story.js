@@ -501,7 +501,6 @@ case "dorm_bed":
 break;
 case "dorm_poster":
     d+="On wall is a faded poster of "
-    back = "dorm_walls"; 
     d+=oneoff_link("April Thursday|dorm_poster_april_oneoff");
     d+=" with her fist raised in the air as if uppercutting an invisible foe. Her other hand holds a microphone. She wears a customized school uniform: flared sleeves, skirt shorter than standard issue. On her wrists are "; 
    
@@ -598,7 +597,6 @@ case "stand_on_toilet":
                 f.dorm_closet_open = 1;
                 f.dorm_privacy_mode = 1;
             }
-            back="dorm_walls";
         break;
         case "close_dorm_closet":
                  d+="You close the closet. A chime sounds and words appear on the wall: \"Privacy mode disabled. Time deducted from your daily quota.\" \n\nThe {world outside|dorm_outside} resolves to a higher resolution.";
