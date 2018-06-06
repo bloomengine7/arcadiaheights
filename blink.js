@@ -420,8 +420,12 @@ function process(node,giver,receiver,params) {
             save_link_compressed += "&file=" + getParameterByName("file");
 
         }
+
+        if (!exist(config.game_url)) {
+            config.game_url = window.location.href;
+        }
         
-		saveLink="<a href=\"?" + save_link_compressed  + "\">Save Game</a> ";
+		saveLink="<a href=" + config.game_url + "/?" + save_link_compressed  + "\">Save Game</a> ";
 
 
 
@@ -563,7 +567,12 @@ function process(node,giver,receiver,params) {
        
             
             if (window!=window.top) { /* I'm in a frame! */ 
-                    $('#content').append("<div class=\"old\">" +  "<div class='metaText'><h2>Save/Restore Point</h2><p><a href='" + window.location.href + "' target='_blank'>Click this link</a> and bookmark the page to return to this point. The game also automatically saves your progress and you can choose 'continue' from the start screen. (Uses browser cache) </p></div></div>" + external_load_text);      
+                   // window.location.href is the detected url of game 
+                   //
+                   if (!exist(config.game_url)) {
+                        config.game_url = window.location.href;
+                   }
+                    $('#content').append("<div class=\"old\">" +  "<div class='metaText'><h2>Save/Restore Point</h2><p><a href='" +  saveLink + "' target='_blank'>Click this link</a> and bookmark the page at bloomengine.com to return to this point. The game also automatically saves your progress and you can choose 'continue' from the start screen. (Uses browser cache) </p></div></div>" + external_load_text);      
             
             } else {
                 $('#content').append("<div class=\"old\">" +  "<div class='metaText'><h2>Save/Restore Point</h2><p>Bookmark this URL to return to this point. The game also automatically saves your progress and you can choose 'continue' from the start screen. (Uses browser cache) </p></div></div>" + external_load_text);
