@@ -106,23 +106,36 @@ function process(node,giver,receiver,params) {
     //track user path through nodes like it is a pageview. Google analytics
     //
     //var my_ga_url = [location.protocol, '//', location.host, location.pathname].join('');
+    //
+    //
+    //
+    /*
     var my_ga_url = ""
-    if (window!=window.top) { /* I'm in a frame! */ 
+    if (window!=window.top) { // I'm in a frame!  
         if (getParameterByName("source")) {
 
-            my_ga_url = getParameterByName("source") + "/";
+            my_ga_id = getParameterByName("source") + "/";
 
         } else if (exists(config.ga_source)) {
-            my_ga_url = config.ga_source + "/";
+            my_ga_id = config.ga_source + "/";
         }
     }
+    */
+   
 
+    //stuff for google analytics
+    if (!exist(config.ga_id) || !config.ga_id) {
+        config.ga_id = "/";
+    } 
+
+    if (getParameterByName("source")) {
+        config.ga_id = getParameterByName("source");
+    }
 
     if (typeof ga !== "undefined") { 
-        ga('send', 'pageview', '/arcadiaheights/' + my_ga_url + node);
+        ga('send', 'pageview', '/' + config.ga_id + '/' + node);
 
     }
-    
 
     if (f.moves > 0) {
         clearInterval(bg_int);
@@ -426,14 +439,22 @@ function process(node,giver,receiver,params) {
 
         }
 
-        if (!exist(config.game_url)) {
-            config.game_url = window.location.href;
+        if (exist(config.game_url)) {
+            saveFullUrl = config.game_url + "?" + save_link_compressed;  
+        } else {
+            //for kong - pop out iframe 
+            saveFullUrl = "?" + save_link_compressed;  
         }
         
-		saveLink="<a href=" + config.game_url + "/?" + save_link_compressed  + "\">Save Game</a> ";
+        
+        if (window!=window.top) { /* I'm in a frame! */ 
 
+            saveLink="<a href=" + saveFullUrl  + "\" target='_blank'>Save Game</a> ";
+        } else {
 
+            saveLink="<a href=" + saveFullUrl  + "\">Save Game</a> ";
 
+        }
         last_uncorrupted_save.push(saveLink);
         if (last_uncorrupted_save.length > 5 ) {
             last_uncorrupted_save.splice(0, 1);
@@ -574,10 +595,7 @@ function process(node,giver,receiver,params) {
             if (window!=window.top) { /* I'm in a frame! */ 
                    // window.location.href is the detected url of game 
                    //
-                   if (!exist(config.game_url)) {
-                        config.game_url = window.location.href;
-                   }
-                    $('#content').append("<div class=\"old\">" +  "<div class='metaText'><h2>Save/Restore Point</h2><p><a href='" +  saveLink + "' target='_blank'>Click this link</a> and bookmark the page at bloomengine.com to return to this point. The game also automatically saves your progress and you can choose 'continue' from the start screen. (Uses browser cache) </p></div></div>" + external_load_text);      
+                    $('#content').append("<div class=\"old\">" +  "<div class='metaText'><h2>Save/Restore Point</h2><p><a href='" +  saveFullUrl+ "' target='_blank'>Click this link</a> and bookmark the page at bloomengine.com to return to this point. The game also automatically saves your progress and you can choose 'continue' from the start screen. (Uses browser cache) </p></div></div>" + external_load_text);      
             
             } else {
                 $('#content').append("<div class=\"old\">" +  "<div class='metaText'><h2>Save/Restore Point</h2><p>Bookmark this URL to return to this point. The game also automatically saves your progress and you can choose 'continue' from the start screen. (Uses browser cache) </p></div></div>" + external_load_text);
@@ -1649,7 +1667,16 @@ function showHideMeta(forceHide) {
 		}, 1000, function() {
 		// Animation complete.
 			metaVisible = 0;
-			$("#metaButton").html('Menu <img src="arrow-down.gif">');
+
+            if (exist(config.game_url)) {
+                $("#metaButton").html('Menu <img src="' + config.game_url + '/arrow-down.gif">');
+           }  else {
+           
+                $("#metaButton").html('Menu <img src="arrow-down.gif">');
+               ///config.game_url = window.location.href;
+
+           }
+            
 			// $("#metaButton").css("background-image","url(arrow-down.gif)");
 		});
 		
