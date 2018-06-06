@@ -109,18 +109,6 @@ function process(node,giver,receiver,params) {
     //
     //
     //
-    /*
-    var my_ga_url = ""
-    if (window!=window.top) { // I'm in a frame!  
-        if (getParameterByName("source")) {
-
-            my_ga_id = getParameterByName("source") + "/";
-
-        } else if (exists(config.ga_source)) {
-            my_ga_id = config.ga_source + "/";
-        }
-    }
-    */
    
 
     //stuff for google analytics
