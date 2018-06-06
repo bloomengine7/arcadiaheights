@@ -1694,6 +1694,7 @@ function showHideMeta(forceHide) {
            }
 
 
+			//$("#metaButton").html('Menu <img src="arrow-up.gif">');
 			
 			// $("#metaButton").css("background-image","url(arrow-up.gif)");
 			
