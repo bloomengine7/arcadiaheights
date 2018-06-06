@@ -1682,7 +1682,18 @@ function showHideMeta(forceHide) {
 	
 		}, 150, function() {
 			metaVisible = 1;
-			$("#metaButton").html('Menu <img src="arrow-up.gif">');
+
+           if (config.game_url != 'undefined') {
+           
+                $("#metaButton").html('Menu <img src="' + config.game_url + '/arrow-up.gif">');
+           }  else {
+           
+                $("#metaButton").html('Menu <img src="arrow-up.gif">');
+               ///config.game_url = window.location.href;
+
+           }
+
+
 			
 			// $("#metaButton").css("background-image","url(arrow-up.gif)");
 			
