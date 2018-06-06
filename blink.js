@@ -108,8 +108,13 @@ function process(node,giver,receiver,params) {
     //var my_ga_url = [location.protocol, '//', location.host, location.pathname].join('');
     var my_ga_url = ""
     if (window!=window.top) { /* I'm in a frame! */ 
-    
-        my_ga_url = getParameterByName("source") + "/";
+        if (getParameterByName("source")) {
+
+            my_ga_url = getParameterByName("source") + "/";
+
+        } else if (exists(config.ga_source)) {
+            my_ga_url = config.ga_source + "/";
+        }
     }
 
 
