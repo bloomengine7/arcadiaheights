@@ -892,7 +892,7 @@ case "meeting_washroom_stall":
     }
 
     if (timer_fin("washroom_informer_arrive")) {
-        d="Footsteps. Feet appear beneath the stall door. &ldquo;{Payment first|pay_informer},\" says voice. She speaks with a practiced raspy. They were always for anonymity and strange theatrics. ";
+        d="Footsteps. Feet appear beneath the stall door. &ldquo;{Payment first|pay_informer},\" says voice. She speaks with a practiced rasp. They were always for anonymity and strange theatrics. ";
         f.informer_in_washroom = 1; 
         back = 0;
 
