@@ -12,8 +12,8 @@ function responsive() {
         return lx;
     }
     //alert($(document).width());
-    var w = $("#wrap").width();
-
+    var w = $("body").width();
+    console.log("bleh" + w);
     if (w < 735 ) {
         $("#content").css('margin-left','1px');
         $("#inventory").hide(); 

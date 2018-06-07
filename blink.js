@@ -1303,7 +1303,7 @@ function resize() {
 	document.getElementById('content').style.minHeight = viewportheight - 60 + 'px';
 
 	*/
-	
+    	
     responsive();
 	
 }
