@@ -1405,7 +1405,9 @@ break;
 case "gc_kasparov":
     d+="\"What is the meaning of this? Why did you say that name? Do not attempt sudden {movements|gc_sudden_movements}. Place your hands on your head.\" \n\nThe lights begin flickering. The sound of cicadas fills the room. A smell of burnt toast."; 
     back=0;
-
+       if (f.thread_intro < 3) {
+            f.thread_intro=3;
+        }
 
 
     wipe_memory('kasparov','sinatra','vandalism_library','informer');
