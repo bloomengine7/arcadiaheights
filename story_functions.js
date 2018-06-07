@@ -39,7 +39,7 @@ function wipe_memory(args) {
     },1000);
 }
 
-function let_the_show_begin() {
+function stop_intro() {
 
 
     var items = [
