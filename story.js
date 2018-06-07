@@ -396,30 +396,53 @@ case "start": //aka caf
         //home_memories("Memories");    
     }
 
-/*
-    var items = [
+  var items = [
+        function(){
+            
+            $("#owrap").show().removeClass().addClass("std intro");
+            $("#oc").css('opacity','0');
+
+        },
+        500,
         function(){
 
-            $("#oc").animate({opacity: 0},0);
-        },100,
+            $("#oc").wrapAll("<div class='glitch' >");
+            $("#overlay").addClass("glitch");
+            
+            $("#oc").html("What's your<br>earliest memory?");
+            $("#oc").animate({opacity: 1},2000).delay(300).animate({opacity:0},1000);
+        },3500,
         function(){
-
-            $("#oc").append("<div id='intro_text'></div>");
-            $("#intro_text").html("Where were we before<br>we started school?"); 
-            $("#oc").animate({opacity: 1},1000).delay(300).animate({opacity:0},1000);
-        },1500,
+            $("#oc").animate({opacity: 1},2000).delay(500).animate({opacity:0},1000);
+            $("#oc").html("Arriving on the bus?"); 
+        },4500,
         function(){
-            let_the_show_begin(); 
-            $("#owrap").removeClass('click_through');
-        }
+            $("#oc").animate({opacity: 1},300).delay(500).animate({opacity:0},3000);
+            $("#oc").html("We all have that memory."); 
+        },4000,
+        function(){
+            $("#oc").animate({opacity: 1},200).delay(100).animate({opacity:0},5000);
+            $("#oc").html("Where were we before<br>we started school?"); 
+        },5000,
+        function(){
+           $("#owrap").animate({opacity: 0},2000);
+            $("#wrap").animate({
+                    scrollTop:  '+=100'
+            }, 10); 		
+            if($('#owrap').css('display') != 'none') {
+            $("#wrap").scrollTo("#content", 600);
+            }
+        },2000,
         
+        function(){
+            $("#owrap").hide();
+        }, 1000
 
      
     ];
     if (f.moves == 1) {
         timer(items);
-    }
-*/
+    } 
         //$('#overlay').empty().titleSequence(sequence);
     //d+="content triggered manually";
         //initNode('dorm');
@@ -452,10 +475,8 @@ case "start": //aka caf
             d+="\n{Library|library_start}";
         }
 
-        if (f.moves==1) {
-            d="";
-            nodes('dorm');
-        }
+        d+="\n{Under Stairs|under_stairs}";
+
 //::base
 break;
 case "dorm":
@@ -500,7 +521,7 @@ case "dorm_bed":
     d+="A futon on a raised slab of concrete.";
 break;
 case "dorm_poster":
-    d+="On wall is a faded poster of "
+    d+="On the wall is a faded poster of "
     d+=oneoff_link("April Thursday|dorm_poster_april_oneoff");
     d+=" with her fist raised in the air as if uppercutting an invisible foe. Her other hand holds a microphone. She wears a customized school uniform: flared sleeves, skirt shorter than standard issue. On her wrists are "; 
    
@@ -1463,6 +1484,7 @@ if (f.counseling_booth_paper=="x") {
 
 break;
 
+
 case "counseling_booth_camera":
     d+="A black orb encasing an unseen pupil.";
 break;
@@ -1596,6 +1618,8 @@ break;
 case "caf_bridge_club":
     d+="Back slapping and laughter. One of them squats on the bench like a monkey, doing little hops and rocking the table. They wear red scarves. A {playing card|caf_bridge_playing_card} peeks from the breast pocket of their uniforms. The boys leave one side of their shirts untucked. The girls have the sides of their heads shaved. They are members of the Bridge Club. ";
 break;
+
+case "bridge_playing_card":
 case "caf_bridge_playing_card":
     d+="Always the Queen of diamonds. ";
 break;
@@ -1932,8 +1956,61 @@ break;
 
 
 
+case "under_stairs":
+root=1;
+    d+="A small " + oneoff_link("crowd|under_stairs_crowd") + " has formed in the niche underneath the " + oneoff_link("stairs|under_stairs_stairs") + ". They encircle {two students|under_stairs_2_students} playing " + oneoff_link("Pog|under_stairs_pog_game") + ", cheering them on.  One {student|under_stairs_pogwatch} stands near the edge of the flight of stairs where the school corridor starts, back turned to the game. Immediately next two him two students press their faces together, {kissing|under_stairs_kissing}. ";  
+    d+=exit_memory();
+break;
+
+case "under_stairs_pog_game":
+    d+="Rare and expensive pieces hang in the balance. Monkey-boy's eyes glint with greed. ";
+    d+=oneoff_text("under_stairs_money_boy_grunt_squeak", "He grunts when he throws his slammer.");
+break;
+    case "under_stairs_stairs":
+        d+="It rises from the ground, twisting and curving upwards. There is a continuous patter of footsteps. In between the cracks you see glimpses of feet and socks. ";
+    break;
+
+    case "under_stairs_pogwatch":
+        d+="A short stocky boy. A playing card peeks from the breast pocket of his uniform. He keeps turning his head looking down either end of the corridors. ";
+        d+=oneoff_text("pogwatch_irritated_kissing", "The kissing couple bump into him. He scowls and nudges them and they move further away from him. ");
+        
+    break;
+    case "under_stairs_2_students":
+        d+="A {lanky student|under_stairs_monkey_boy}, hunched over does little monkey hops before and after throwing down his slammer. His opponent is a {tall girl|under_stairs_giraffe_girl} wearing a gym uniform. ";
+
+    break;
+
+case "under_stairs_kissing":
+    d+="He has his hands in her hair and she has her hands around his waist. His feet shuffle and make little up-and-down motions, like a clockwork soldier. She stands balanced precariously on one leg.  ";
+    if (!f.under_stairs_kissing_lips) {
+        d+="Their faces appear pressed close together but when the angle is correct you see their ";
+        d+=oneoff_link("lips|under_stairs_kissing_lips") + " do not touch.  They intermittently glance around at the crowd or upward at the {cameras|under_stairs_cameras} on the ceiling. ";
+        
+    } else {
+        d+="He has his back turned toward you. You cannot see their faces. ";
+    }
+
+break;
+
+case "under_stairs_cameras":
+    d+="You can't see them from your position. They are placed at intermittent intervals on the ceiling in the corridor. You stand in one of the few niches outside of their gaze. ";
+break;
+
+case "under_stairs_kissing_lips":
+    d+="They notice you looking at them and press their faces even closer. Their noses touch and her back stiffens. He scratches his head.  They shuffle, turning so his back faces you. ";
+break;
+   
 
 
+    case "under_stairs_monkey_boy":
+        d+="He wears a red scarf and a {playing card|bridge_playing_card} peeks from the breast pocket of his school uniform.";
+
+    break;
+
+    case "under_stairs_giraffe_girl":
+        d+="She towers above the other students. She has a long giraffe-like neck. She holds a plastic bag full of Pogs and eyes the game with cool resolve. ";
+
+    break;
 
 ///////In case you link to a nonexistent node, then this error message will appear
 default:
