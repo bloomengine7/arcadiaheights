@@ -475,7 +475,7 @@ case "start": //aka caf
             d+="\n{Library|library_start}";
         }
 
-        d+="\n{Under Stairs|under_stairs}";
+        //d+="\n{Under Stairs|under_stairs}";
 
 //::base
 break;
