@@ -1656,7 +1656,7 @@ function showHideMeta(forceHide) {
 		// Animation complete.
 			metaVisible = 0;
 
-            if (config.game_url != 'undefined') {
+            if (exist(config.game_url)) {
            
                 $("#metaButton").html('Menu <img src="' + config.game_url + '/arrow-down.gif">');
            }  else {
