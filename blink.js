@@ -1134,7 +1134,7 @@ window.onresize = resize;
 function restore() {
     $("#owrap").hide();	
 	$("#content").html("<div id='new'><h2>Restored game</h2>" + "</div>" + external_load_text);
-    let_the_show_begin();	
+    start_game();	
 	
 	
 	

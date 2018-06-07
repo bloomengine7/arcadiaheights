@@ -39,7 +39,7 @@ function wipe_memory(args) {
     },1000);
 }
 
-function stop_intro() {
+function start_game() {
 
 
     var items = [

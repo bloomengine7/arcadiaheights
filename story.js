@@ -401,7 +401,7 @@ case "start": //aka caf
             
             $("#owrap").show().removeClass().addClass("std intro");
             $("#oc").css('opacity','0');
-            $("#overlay").append("<div id='skip'><a href='#' onClick='stop_intro(); $(this).remove();  return false;' >Skip</a></div>");
+            $("#overlay").append("<div id='skip'><a href='#' onClick='start_game(); $(this).remove();  return false;' >Skip</a></div>");
         },
         500,
         function(){
