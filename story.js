@@ -376,6 +376,7 @@ function nodes(node) { //Do not remove this line
 
 case "about":
     d+="These are the memories of Susan Newbourne (as collected by Hadrian Lin and Simon M. from <a href='http://bloomengine.com' target='_blank'>bloomengine.com</a>) \n\nThe game will evolve with new content added weekly. {Stay updated|stay_updated} as we extract new memories from her brain.\n\nWe live off of goodwill and love feedback of any sort. If you notice typos and bugs or if you are interested in beta-testing future games please send an email to bloomengine (aaaayat) gmail (dot com). Put \"beta test anthill\" in the subject line.";
+    d+="\n\n<strong>Please check out these other games:</strong>\n\n<a href='https://bloomengine.com/binary/' target='_blank' style='border:0;'><img  src='https://bloomengine.com/binary/theBinaryTitle.gif'></a><p style='margin-bottom:3em;'><em><a href='https://bloomengine.com/binary/' target='_blank'>The Binary</a></em>. A game about an agent stuck in a time loop, repeating the same events over and over again until an assassination is stopped.</p><a style='border:0;' href='https://bloomengine.com/boy-electronic/' target='_blank'><img src='https://bloomengine.com/boy-electronic/i/atticus_boy_e_start.gif'></a><p><em><a href='https://bloomengine.com/boy-electronic/' target='_blank'>Atticus and Boy Electronic</a></em>. A game about a robot boy in search of his humanity and his companion dog, wise beyond his years.</p>";
 
 
 break;
@@ -467,7 +468,7 @@ case "start": //aka caf
                 ga('send', 'pageview', "/arcadiaheights/" + "finished-memories");
             }
 
-            d+="\n\n<em>You have exhausted your memories.</em> \n<span style='font-size:.75em'>Please check back Saturdays for more content. {Stay updated|stay_updated}.</span>";
+            d+="\n\n<em>You have exhausted your memories.</em> \n<span style='font-size:.75em'>Please check back Saturdays for more content. {Stay updated|stay_updated} or check out some {other games|meta_other_games}.</span>";
         }
         
         if (f.thread_intro > 2 && !f.seen_vandalism) {
@@ -477,8 +478,12 @@ case "start": //aka caf
 
         //d+="\n{Under Stairs|under_stairs}";
 
-//::base
 break;
+case "meta_other_games":
+    d+="<a href='https://bloomengine.com/binary/' target='_blank' style='border:0;'><img  src='https://bloomengine.com/binary/theBinaryTitle.gif'></a><p style='margin-bottom:3em;'><em><a href='https://bloomengine.com/binary/' target='_blank'>The Binary</a></em>. A game about an agent stuck in a time loop, repeating the same events over and over again until an assassination is stopped.</p><a style='border:0;' href='https://bloomengine.com/boy-electronic/' target='_blank'><img src='https://bloomengine.com/boy-electronic/i/atticus_boy_e_start.gif'></a><p><em><a href='https://bloomengine.com/boy-electronic/' target='_blank'>Atticus and Boy Electronic</a></em>. A game about a robot boy in search of his humanity and his companion dog, wise beyond his years.</p>";
+
+break;
+//::base
 case "dorm":
     root=1;
     f.seen_dorm = 1;
