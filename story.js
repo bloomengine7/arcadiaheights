@@ -467,7 +467,7 @@ case "start": //aka caf
                 ga('send', 'pageview', "/arcadiaheights/" + "finished-memories");
             }
 
-            d+="\n\n<em>You have exhausted your memories.</em> \n<span style='font-size:.75em'>Please check back later for more content. {Stay updated|stay_updated}.</span>";
+            d+="\n\n<em>You have exhausted your memories.</em> \n<span style='font-size:.75em'>Please check back Saturdays for more content. {Stay updated|stay_updated}.</span>";
         }
         
         if (f.thread_intro > 2 && !f.seen_vandalism) {
