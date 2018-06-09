@@ -69,6 +69,35 @@ function add(text,node,funct) {
 }
 
 
+function start_game() {
+
+
+    var items = [
+        function(){
+        clear_timeouts_intervals();
+              $("#wrap").animate({
+                scrollTop:  '+=100'
+            }, 10);  
+            $("#owrap").animate({opacity: 0},2000);
+        },
+        200,
+        function(){
+           $("#wrap").scrollTo("#content", 600);
+        },
+        1800,
+        function() {
+            $("#owrap").hide();
+            $("#overlay #intro_text").remove();
+            $("#overlay #skip").remove();
+            clear_timeouts_intervals();
+        }
+    ];
+
+    timer(items);
+
+
+}
+
 
 function clear_timeouts_intervals() {
 //https://github.com/nodejs/help/issues/174
