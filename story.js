@@ -433,9 +433,11 @@ case "start": //aka caf
             if($('#owrap').css('display') != 'none') {
             $("#wrap").scrollTo("#content", 600);
             }
+            $("#owrap").css('pointer-events','none');
         },2000,
         
         function(){
+              
             $("#owrap").hide();
         }, 1000
 
