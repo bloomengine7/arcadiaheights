@@ -78,7 +78,10 @@ user_variables = [
     "gc_increased_school_security",
     "gc_no_face",
     "library_counter",
-    "seen_vandalism"
+    "seen_vandalism",
+    "seen_pog_game",
+    "pog_finished",
+    "under_stairs_arcadia_youth_timer"
 
     
 ];//::uservariables
@@ -460,12 +463,20 @@ case "start": //aka caf
         if (i.sinatra && !f.gc_discovered_sinatra && !f.gc_discovered_nothing_important) {//if player has already seen success and failure of holding back information. Learned the concept of how to conceal important information
             d+="\n{Guidance Counselor|counseling_booth}"; 
         }
-
+//::start
         //d+="\n{Jump Test|story2.js|dorm}";
 
+        if (f.thread_intro > 2 && !f.seen_vandalism) {
+
+            d+="\n{Library|library_start}";
+        }
+
+        if (f.thread_intro > 2) {
+            d+="\n{Pog|under_stairs}";
+        }
 
         //as more and more added, remove older state variables and only keep the newest ones. If ppl play for a while they will have already seen the old stuff
-        if (f.thread_intro > 1 && f.thread_chess_club > 0 && f.seen_vandalism) {
+        if (f.thread_intro > 2 && f.thread_chess_club > 0 && f.seen_vandalism && f.pog_finished) {
             if (typeof ga !== "undefined") { 
                 ga('send', 'pageview', "/arcadiaheights/" + "finished-memories");
             }
@@ -473,13 +484,6 @@ case "start": //aka caf
             d+="\n\n<em>You have exhausted your memories.</em> \n<span style='font-size:.75em'>Please check back Saturdays for more content. {Stay updated|stay_updated} or check out some {other games|meta_other_games}.</span>";
         }
         
-        if (f.thread_intro > 2 && !f.seen_vandalism) {
-
-            d+="\n{Library|library_start}";
-        }
-
-        //d+="\n{Under Stairs|under_stairs}";
-
 break;
 case "meta_other_games":
     d+="<a href='https://bloomengine.com/binary/' target='_blank' style='border:0;'><img  src='https://bloomengine.com/binary/theBinaryTitle.gif'></a><p style='margin-bottom:3em;'><em><a href='https://bloomengine.com/binary/' target='_blank'>The Binary</a></em>. A game about an agent stuck in a time loop, repeating the same events over and over again until an assassination is stopped.</p><a style='border:0;' href='https://bloomengine.com/boy-electronic/' target='_blank'><img src='https://bloomengine.com/boy-electronic/i/atticus_boy_e_start.gif'></a><p><em><a href='https://bloomengine.com/boy-electronic/' target='_blank'>Atticus and Boy Electronic</a></em>. A game about a robot boy in search of his humanity and his companion dog, wise beyond his years.</p>";
@@ -1966,43 +1970,113 @@ break;
 
 
 case "under_stairs":
-root=1;
-    d+="A small " + oneoff_link("crowd|under_stairs_crowd") + " has formed in the niche underneath the " + oneoff_link("stairs|under_stairs_stairs") + ". They encircle {two students|under_stairs_2_students} playing " + oneoff_link("Pog|under_stairs_pog_game") + ", cheering them on.  One {student|under_stairs_pogwatch} stands near the edge of the flight of stairs where the school corridor starts, back turned to the game. Immediately next two him two students press their faces together, {kissing|under_stairs_kissing}. ";  
-    d+=exit_memory();
+    root=1;
+    if (f.back=="start" && !f.seen_pog_game) {
+        f.under_stairs_arcadia_youth_timer=0;
+
+    }
+
+    if (f.pog_finished) {
+        d+="You stand in a niche under a large set of stairs. The set of stairs ends at a corridor. Students drift to and from class. ";
+        if (!f.under_stairs_kissers_gone) {
+            d+="Near the corridor, two students press their faces together, {kissing|under_stairs_kissing}. ";
+            }
+    } else {
+    d+="A small " + oneoff_link("crowd|under_stairs_crowd") + " has formed in the niche underneath a large flight of " + oneoff_link("stairs|under_stairs_stairs") + ". They encircle {two students|under_stairs_2_students} playing " + oneoff_link("pogs|under_stairs_pog_game") + ", cheering them on.  A {student|under_stairs_pogwatch} stands near the edge of the flight of stairs, watching the corridor. Immediately next two him two students press their faces together, {kissing|under_stairs_kissing}. ";  
+    }
+
+    switch(f.under_stairs_arcadia_youth_timer) {
+        case 5:
+            d="The boy standing by the corrider whistles. \"Teacher's pets,\" he shouts. \n\n\"How many?\" says monkey-boy. \n\n\"Three.\" \n\n\"Ignore them.\" He throws his slammer. Pieces flip.";
+        root=0; 
+        break;
+
+        case 6:
+            d="\"They're coming this way,\" says the boy at the corridor. \n\nThe monkey-boy and the tall girl continue playing their game.";
+        root=0;
+        break;
+
+        case 7:
+            d="Three students with red {armbands|arcadia_youth_armbands} arrive at entrance to the niche. Two boys with undercut {hair|arcadia_youth_boys_hair} combed to the side. A blond girl with her hair in a tight {ponytail|arcadia_youth_girls_hair}. \n\nShe surveys the crowd and pushes past you to the center of the game. \"What's going on here?\" she says. \n\n\"What does it look like?\" says monkey-boy.";
+        root=0;
+        break;
+
+        case 8:
+            d="\"Do you have permission?\" \n\nHe {ignores|under_stairs_monkey_ignore} her. ";
+        break;
+
+        case 9:
+            d="The players begin gathering their pogs. The boy standing by the corridor comes over and slaps monkey-boy on the back. The crowd disperses.";
+            root=0;
+        break;
+
+
+
+
+        case 14:
+            d+="\n\nTwo {School Security|under_stairs_after_pog_ss} officers stand by the corridor. ";
+        break;
+    }
+    f.under_stairs_arcadia_youth_timer++;
+
+
+    if (f.under_stairs_arcadia_youth_timer > 10) {
+        d+=exit_memory();
+    }
 break;
 
+case "under_stairs_monkey_ignore":
+d+="Playing pog between class. The faculty will hear of this.\" She turns her gaze toward everyone else and gives a stiff salute. \"Glory to Arcadia,\" she says. \n\n\"Glory to Arcadia,\" everyone mumbles. She marches away with her companions in tow. \n\n\"Go and call for your teeth!\" he shouts at them. \"You've got none of your own!\" \n\nHe watches them disappear into the corridor. He throws his slammer. The crowd flinches. A piece lands at your {feet|under_stairs_pog_feet}.\n\n\"Let's finish this,\" says monkey-boy. \"We have a few minutes before Security arrives. Throw.\" "; 
+        f.end_memory=1;
+        f.pog_finished=1;
+        f.seen_pog_game=1;
+break;
+
+case "under_stairs_pog_feet":
+    d+="It has a cartoon of a moon face wearing a monocle on it. ";
+break;
+case "under_stairs_after_pog_ss":
+    d+="On their monitors: neutral-face emoticons with a straight horizontal line for mouth. They glance at you, straighten their black uniforms then move on. ";
+break;
+case "arcadia_youth_armbands":
+    d+="A red strip of cloth, slightly frayed. The words <em>Arcadia Youth</em> is crookedly stitched on it. ";
+break;
+
+case "under_stairs_money_ignore":
+    d+="He nods at the tall girl, motioning her to continue. She throws down her slammer. They crouch and peer at the results.";
+break;
 case "under_stairs_pog_game":
-    d+="Rare and expensive pieces hang in the balance. Monkey-boy's eyes glint with greed. ";
-    d+=oneoff_text("under_stairs_money_boy_grunt_squeak", "He grunts when he throws his slammer.");
+    d+="Rare and valuable pieces hang in the balance. Monkey-boy eyes the pogs hungrily. ";
+    d+=oneoff_text("under_stairs_money_boy_grunt_squeak", "He grunts and throws his slammer. The pieces scatter and flip. ");
 break;
     case "under_stairs_stairs":
         d+="It rises from the ground, twisting and curving upwards. There is a continuous patter of footsteps. In between the cracks you see glimpses of feet and socks. ";
     break;
 
     case "under_stairs_pogwatch":
-        d+="A short stocky boy. A playing card peeks from the breast pocket of his uniform. He keeps turning his head looking down either end of the corridors. ";
-        d+=oneoff_text("pogwatch_irritated_kissing", "The kissing couple bump into him. He scowls and nudges them and they move further away from him. ");
+        d+="He nonchalantly chews gum as he scans the corridor. A {playing card|bridge_playing_card} peeks from the breast pocket of his uniform. ";
+        d+=oneoff_text("pogwatch_irritated_kissing", "The kissing couple bump into him. He scowls and nudges them away. ");
         
     break;
     case "under_stairs_2_students":
-        d+="A {lanky student|under_stairs_monkey_boy}, hunched over does little monkey hops before and after throwing down his slammer. His opponent is a {tall girl|under_stairs_giraffe_girl} wearing a gym uniform. ";
+        d+="A {lanky student|under_stairs_monkey_boy}, does little monkey hops when throwing his slammer. His opponent is a {tall girl|under_stairs_giraffe_girl} wearing a gym uniform. ";
 
     break;
 
 case "under_stairs_kissing":
-    d+="He has his hands in her hair and she has her hands around his waist. His feet shuffle and make little up-and-down motions, like a clockwork soldier. She stands balanced precariously on one leg.  ";
+    d+="He has his hands in her hair and she has her hands around his waist. He makes little shuffling motions like penguin. She stands balanced on one leg.  ";
     if (!f.under_stairs_kissing_lips) {
-        d+="Their faces appear pressed close together but when the angle is correct you see their ";
-        d+=oneoff_link("lips|under_stairs_kissing_lips") + " do not touch.  They intermittently glance around at the crowd or upward at the {cameras|under_stairs_cameras} on the ceiling. ";
+        d+="Their faces press close together but you see their ";
+        d+=oneoff_link("lips|under_stairs_kissing_lips") + " do not touch.  They intermittently glance around at the crowd or {upwards|under_stairs_cameras} toward the corridor ceiling. ";
         
     } else {
-        d+="He has his back turned toward you. You cannot see their faces. ";
+        d="He has his back turned toward you. They have their fingers in each other's hair. ";
     }
 
 break;
 
 case "under_stairs_cameras":
-    d+="You can't see them from your position. They are placed at intermittent intervals on the ceiling in the corridor. You stand in one of the few niches outside of their gaze. ";
+    d+="There is a camera just out of your line of sight, but not out of theirs. You stand in one of the few niches outside of their gaze. ";
 break;
 
 case "under_stairs_kissing_lips":
@@ -2017,7 +2091,7 @@ break;
     break;
 
     case "under_stairs_giraffe_girl":
-        d+="She towers above the other students. She has a long giraffe-like neck. She holds a plastic bag full of Pogs and eyes the game with cool resolve. ";
+        d+="She towers above the other students. A long giraffe-like neck. She holds a plastic bag full of Pogs and watches the game with a cool detachment. ";
 
     break;
 

@@ -39,33 +39,7 @@ function wipe_memory(args) {
     },1000);
 }
 
-function start_game() {
 
-
-    var items = [
-        function(){
-              $("#wrap").animate({
-                scrollTop:  '+=100'
-            }, 10);  
-            $("#owrap").animate({opacity: 0},2000);
-        },
-        200,
-        function(){
-           $("#wrap").scrollTo("#content", 600);
-        },
-        1800,
-        function() {
-            $("#owrap").hide();
-            $("#overlay #intro_text").remove();
-            $("#overlay #skip").remove();
-            clear_timeouts_intervals();
-        }
-    ];
-
-    timer(items);
-
-
-}
 
 done_talking = function(obj) {
     var c;
@@ -117,7 +91,7 @@ function exit_memory() {
 //refers to f.end_memory
 //
     
-    if (!lockdown) {
+    if (!lockdown && !f.hide_exit) {
         if (f.end_memory) {
             return "<p class='back exit_memory highlight_exit'>{&#10003;   Finish memory|start}</p>";
         } else {
