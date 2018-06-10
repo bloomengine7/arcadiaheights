@@ -378,10 +378,14 @@ function nodes(node) { //Do not remove this line
 //
 
 case "about":
-    d+="These are the memories of Susan Newbourne (as collected by Hadrian Lin and Simon M. from <a href='http://bloomengine.com' target='_blank'>bloomengine.com</a>) \n\nThe game will evolve with new content added weekly. {Stay updated|stay_updated} as we extract new memories from her brain.\n\nWe live off of goodwill and love feedback of any sort. If you notice typos and bugs or if you are interested in beta-testing future games please send an email to bloomengine (aaaayat) gmail (dot com). Put \"beta test anthill\" in the subject line.";
+    d+="These are the memories of Susan Newbourne (as collected by Hadrian Lin and Simon M. from <a href='http://bloomengine.com' target='_blank'>bloomengine.com</a>) \n\nThe game will evolve with new content on weekends. {Stay updated|stay_updated} as we extract new memories from her brain.\n\nWe live off of goodwill and love feedback of any sort. If you notice typos and bugs or if you are interested in beta-testing future games please send an email to bloomengine (aaaayat) gmail (dot com). Put \"beta test anthill\" in the subject line. Please <a href=\"https://feedburner.google.com/fb/a/mailverify?uri=bloomengine&amp;loc=en_US\" target='_blank' onClick='ga_subscribe_email();'>add yourself here</a> too.";
+
+
+    d+='\n\nIf you feel like it, you\'re welcome to drop something in the tip jar and get blockified:\n\n<a href="http://bloomengine.com/boy-electronic/adopt"><img src="http://bloomengine.com/boy-electronic/adopt/i/collage_sm.jpg"></a>\n\n<form action="https://www.paypal.com/cgi-bin/webscr" method="post"><input name="hosted_button_id" value="Z7J7HN5XE5X28" type="hidden">j<input src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" name="submit" alt="PayPal - The safer, easier way to pay online!" border="0" type="image"><img alt="" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" border="0" height="1" width="1"></form>';
+    
     d+="\n\n<strong>Please check out these other games:</strong>\n\n<a href='https://bloomengine.com/binary/' target='_blank' style='border:0;'><img  src='https://bloomengine.com/binary/theBinaryTitle.gif'></a><p style='margin-bottom:3em;'><em><a href='https://bloomengine.com/binary/' target='_blank'>The Binary</a></em>. A game about an agent stuck in a time loop, repeating the same events over and over again until an assassination is stopped.</p><a style='border:0;' href='https://bloomengine.com/boy-electronic/' target='_blank'><img src='https://bloomengine.com/boy-electronic/i/atticus_boy_e_start.gif'></a><p><em><a href='https://bloomengine.com/boy-electronic/' target='_blank'>Atticus and Boy Electronic</a></em>. A game about a robot boy in search of his humanity and his companion dog, wise beyond his years.</p>";
 
-
+    
 break;
 
 case "stay_updated":
@@ -498,7 +502,7 @@ case "dorm":
     if (f.back == "stand_on_toilet" && !f.dorm_privacy_mode) {
         d+="<div class='transition'>As you step away from the toilet, another chime sounds and the scene beyond the glass wall resolves to high-resolution. \"Privacy mode disabled,\" appears on the wall. \"Time deducted from your daily quota.\"</div>";
     }
-    d+="Three walls, a floor and ceiling of concrete. One wall of {glass|dorm_glass}. A {poster|dorm_poster}. Next to it is a {panel|dorm_closet} and closet door. Outside, a {large courtyard|dorm_outside}. In the corner is a {bed|dorm_bed} and a {desk|dorm_desk}. In the other corner is a {toilet|dorm_toilet} and sink. ";
+    d+="Three walls, a floor and ceiling of concrete. One wall of {glass|dorm_glass}. A {poster|dorm_poster}. Next to it is a {panel|dorm_closet} and closet door. Outside, the {tower|dorm_outside} of the panopticon. In the corner is a {bed|dorm_bed} and a {desk|dorm_desk}. In the other corner is a {toilet|dorm_toilet} and sink. ";
 
     //d+=seq("test_sq", ["sqfirst","second","third"],1);
     d+=exit_memory();
