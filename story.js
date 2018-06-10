@@ -470,14 +470,14 @@ case "start": //aka caf
 //::start
         //d+="\n{Jump Test|story2.js|dorm}";
 
-        if (f.thread_intro > 2 && !f.seen_vandalism) {
+        if (!f.seen_vandalism) {
 
             d+="\n{Library|library_start}";
         }
 
-        if (f.thread_intro > 2) {
+        //if (f.thread_intro > 2) {
             d+="\n{Pog|under_stairs}";
-        }
+        //}
 
         //as more and more added, remove older state variables and only keep the newest ones. If ppl play for a while they will have already seen the old stuff
         if (f.thread_intro > 2 && f.thread_chess_club > 0 && f.seen_vandalism && f.pog_finished) {
