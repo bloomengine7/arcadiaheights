@@ -430,7 +430,7 @@ case "start": //aka caf
         },4500,
         function(){
             $("#oc").animate({opacity: 1},300).delay(500).animate({opacity:0},3000);
-            $("#oc").html("We all have that memory."); 
+            $("#oc").html("We all have<br>that memory."); 
         },4000,
         function(){
             $("#oc").animate({opacity: 1},200).delay(100).animate({opacity:0},5000);
