@@ -93,9 +93,9 @@ function exit_memory() {
     
     if (!lockdown && !f.hide_exit) {
         if (f.end_memory) {
-            return "<p class='back exit_memory highlight_exit'>{&#10003;   Finish memory|start}</p>";
+            return "<p class='back exit_memory highlight_exit'>{&#10003;  &nbsp; Complete memory|start}</p>";
         } else {
-            return "<p class='back exit_memory'>{Exit memory|start}</p>";
+            return "<p class='back exit_memory'>{Exit  memory  |start}</p>";
         }
 
     } else { 

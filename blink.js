@@ -103,13 +103,6 @@ query = getParameterByName("f");
 ////////////////////////////////////////////
 function process(node,giver,receiver,params) {
 
-    //track user path through nodes like it is a pageview. Google analytics
-    //
-    //var my_ga_url = [location.protocol, '//', location.host, location.pathname].join('');
-    //
-    //
-    //
-   
 
     //stuff for google analytics
     if (!exist(config.ga_id) || !config.ga_id) {
@@ -466,26 +459,39 @@ function process(node,giver,receiver,params) {
 
     }
 	/////////////////inventory handler
-	if (f.receiver) { //use object on object condition
-		giver_type=inventoryDescArray[f.giver]["type"];
-		use=0;
-		
-		nodes(f.node);
-	
-	} else if (f.giver) { //examine one item only
-        //!!!problem area. f.giver not passed to save link here after the function
-		
-        d+="<div class='i_out'>"; 
-        inventoryDescArray[node].funct();
-        d+="</div>";
-			
-	} else if (f.node) { // pass through to general node handler if no inventory use
-		nodes(f.node); 
+    //
+    if (node) {
+        if (f.receiver) { //use object on object condition
+            giver_type=inventoryDescArray[f.giver]["type"];
+            use=0;
+            
+            nodes(f.node);
+        
+        } else if (f.giver) { //examine one item only
+            //!!!problem area. f.giver not passed to save link here after the function
+            
+            d+="<div class='i_out'>"; 
+            inventoryDescArray[node].funct();
+            d+="</div>";
+                
+        } else if (f.node) { // pass through to general node handler if no inventory use
+            nodes(f.node); 
+            
+        }
+    }
+
+	if(root) {
+		f.root=f.node;
 		
 	}
-    if (d=="" || d == 'undefined' || d == 'null') {
-       
-        d="<div class='metaText'>Sorry, you've hit a show stopping bug! Please report it to the game author. ";
+    
+
+    if (typeof daemon_after != 'undefined') {
+        daemon_after();
+    }
+    
+    if (f.moves !=0 && d=="" || d == 'undefined' || d == 'null') {
+        d="<div class='metaText'>Sorry you've hit a show stopping bug! Please report it to the game author. ";
         d+="<a href='" + window.location.href.split('?')[0] + "?" + last_uncorrupted_save[0] + "'>Rewind a few steps back...</a></div>"; 
         //<p class='back'>{Return|start}</p>";
         lockdown=1;
@@ -603,10 +609,6 @@ function process(node,giver,receiver,params) {
 	}		
 	
 	
-	if(root) {
-		f.root=node;
-		
-	}
 	
 	deadX = d;
 	
@@ -730,10 +732,13 @@ function process(node,giver,receiver,params) {
                 //console.log($('#wrap').scrollTop() , $('#new').position().top);
 
                     
-                
-                setTimeout(function() { 
-                    $("#wrap").scrollTo("#new", 500); //custom animation speed 
-                },150);
+                if (!firstload && !restored) { 
+                    setTimeout(function() { 
+                        $("#wrap").scrollTo("#new", 500); //custom animation speed 
+                    },250);
+                } 
+
+                restored = 0;
 //setTimeout(function() {$("#wrap").animate({ scrollTop: $('#new').position().top}, 800, 'easeOutCirceaseOutElastic');},300);
 
 
@@ -995,12 +1000,12 @@ function process(node,giver,receiver,params) {
 	back = 1;
 	links = 1;
 	use = 0;
-	
+    	
 
 
 	inv=1;
 
-	if (waitSystem) {
+	if (config.waitSystem) {
 		wait = 1;
 	} else {
 		wait = 0;
@@ -1134,7 +1139,10 @@ window.onresize = resize;
 function restore() {
     $("#owrap").hide();	
 	$("#content").html("<div id='new'><h2>Restored game</h2>" + "</div>" + external_load_text);
+
+    restored = 1;
     start_game();	
+
 	
 	
 	
@@ -1238,7 +1246,7 @@ function newGame() {
 	
 	//	alert($("content").html());
 	// restored=1;
-	$("#content").html("<div id='new'><h2>New game</h2>" + "</div>" + external_load_text);
+	$("#content").prepend("<div class='old'><h2>New game</h2>" + "</div>" + external_load_text);
 		process('start');	
 // output+="<div class=\"old\"><h2>New Game</h2></div>" + external_load_text + document.getElementById('content').innerHTML;
 
@@ -1256,7 +1264,6 @@ function newGame() {
 	resize();
 	metaVisible = 1;
 //('start');
-
 
 }
 
@@ -1709,6 +1716,8 @@ function showHideMeta(forceHide) {
 
 
 function hideStartScreen() {
+        $("#owrap").hide()
+
 		startScreenHeight = "-=" + $("#startScreen").height();
 		$( "#startScreen" ).animate({
 			

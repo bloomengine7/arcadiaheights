@@ -42,6 +42,7 @@ var invText="";
 var inv=1;
 var metaNode=0;
 var wait;
+var no_exit_memory=0;
 var dCount=1;
 var thought;
 var config = {};

@@ -1,3 +1,13 @@
+
+by default all roots have the exit memory button.
+no_exit_memory = 1;
+deactivates it
+
+
+        f.end_memory=1;
+
+
+
 ////////////////////////////////////
 //Timers
     timer_init("classroom_note_kas", 3);
