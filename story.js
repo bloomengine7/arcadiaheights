@@ -2472,7 +2472,7 @@ break;
 case "showers_towel_in_cubbyhole":
 
     d+="You find the cubbyhole with your number and ease your towel inside. You sidestep past several students to find your place between a {blonde boy|showers_blonde_boy_showering} and a {girl|showers_girl} with long hair. You spurt some shampoo from the dispenser and turn on the shower. ";
-
+    f.showers_towel_in_cubbyhole = 1;
 
 break;
 
