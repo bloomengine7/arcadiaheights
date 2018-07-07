@@ -141,7 +141,7 @@ height:100px;
 	
 	a {
         white-space:nowrap;
-		color:#ff3500;
+		color:#ed0b70;
 		text-decoration:none;
 		border-bottom:1px dotted #F9B4A6;
 		cursor: pointer;
@@ -868,4 +868,9 @@ padding-bottom:20px;
 
 .std {
     background-color:#fff !important;
+}
+
+
+#owrap {
+    display:none;
 }
