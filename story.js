@@ -841,7 +841,7 @@ break;
 
 case "classroom":
     root=1;
-    if(i.kasparov && f.back=="start" && f.thread_intro < 1) {
+    if(f.back=="start" && f.thread_intro < 1) {
         f.classroom_note_kas=0;
         scene_change("The Message"); 
         
