@@ -2382,7 +2382,7 @@ case "showers":
         
         scene_change("An Exchange");
     }
-    d+="A forest of {columns|showers_columns} shrouded in vapor. Pipes, faucets and shower heads branch out the sides of the columns. Other columns are lined with {cubbyholes|showers_towel_in_cubbyhole}. Water pattering on tile. The smell of sulfur. Naked {students|showers_students} sit on " + oneoff_link("stools|showers_stools") + ", lathering and scrubbing. ";
+    d+="A forest of {columns|showers_columns} shrouded in vapor. Pipes, faucets and shower heads branch out the sides of the columns. Other columns are lined with " + oneoff_link("cubbyholes|showers_towel_in_cubbyhole") + ". Water pattering on tile. The smell of sulfur. Naked {students|showers_students} sit on " + oneoff_link("stools|showers_stools") + ", lathering and scrubbing. ";
 
     if (f.showers_towel_in_cubbyhole) { //if towel already put in cubbyhole
 
