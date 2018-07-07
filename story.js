@@ -559,7 +559,7 @@ f.seen_showdown_intro=1;
         break;
 
         case 3:
-            d+="The guards charge at him. He leaps backward over the railing and falls into the shadows. There is a splash in the moat below. The guards lean over the railing, sweeping the water with light. \n\n\"Drain this section. Post men at every exit including the pumping stations. {Find him|dorm}.\"";
+            d+="The guards charge at him. He leaps backward over the railing and falls into the shadows. There is a splash in the moat below. The guards lean over the railing, sweeping the water with light. \n\n\"Drain this section. Post men at every exit including the pumping stations. {Find him|start}.\"";
             lockdown=1;
             break;
 
