@@ -549,10 +549,12 @@ f.showdown_intro_c++;
 f.seen_showdown_intro=1;
     switch (f.showdown_intro_c) {
         case 1:
+            lockdown=1;
             d+="\"I know you are here to kill me. Do it, cowards. You are only going to kill a man. You cannot stop the revolution.\" \n\nHe wears a {fox mask|showdown_intro_mask} and a student uniform. His back presses against a railing. Behind the railing is a {trench|showdown_intro_trench} and moat. \n\n{Emoticons|showdown_intro_emoticons} hover in the shadows of the bookshelves and cast him in a sickly yellow hue.  ";
             
         break;
         case 2: 
+            lockdown = 1;
             d+="The P.A. system crackles from {above|showdown_intro_heavens}: \"We don't kill our students, Kasparov. Come quietly. We already have the others. Don't force our hand.\"\n\nThe {security|showdown_intro_ss} guards inch closer to him and their bodies take shape. They have monitors for heads and angry emoticons for faces. Their {nightsticks|showdown_intro_nightsticks} bristle with electricity. ";
         break;
 
@@ -2380,7 +2382,7 @@ case "showers":
         
         scene_change("An Exchange");
     }
-    d+="A forest of {columns|showers_columns} shrouded in vapor. Pipes, faucets and shower heads branch out the sides of the columns. Water pattering on tile. The smell of sulfur. Naked {students|showers_students} sit on " + oneoff_link("stools|showers_stools") + ", lathering and scrubbing. ";
+    d+="A forest of {columns|showers_columns} shrouded in vapor. Pipes, faucets and shower heads branch out the sides of the columns. Other columns are lined with {cubbyholes|showers_towel_in_cubbyhole}. Water pattering on tile. The smell of sulfur. Naked {students|showers_students} sit on " + oneoff_link("stools|showers_stools") + ", lathering and scrubbing. ";
 
     if (f.showers_towel_in_cubbyhole) { //if towel already put in cubbyhole
 
@@ -2415,7 +2417,7 @@ case "showers":
 break;
 
 case "showers_bracelet":
-    d+="A number is engraved on the key. ";
+    d+="A number is engraved on the key. It matches a corresponding {cubbyhole|showers_towel_in_cubbyhole}. ";
 
 break;
 case "showers_your_body":
