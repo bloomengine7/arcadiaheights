@@ -850,7 +850,7 @@ case "classroom":
     f.classroom_note_kas++;
     
     d+="{Ms. Heinrich|classroom_teacher} stands in front of a {whiteboard|classroom_whiteboard}, voice {droning|classroom_droning} hypnotically. {Students|classroom_students} sit at their {desks|classroom_desks}.";
-    if (f.classroom_note_kas==3 && i.kasparov) {
+    if (f.classroom_note_kas==3) {
         d="Someone taps your shoulder. You turn and the girl behind you passes a small folded {note|classroom_note_kas_passed} with your name on it. ";
         lockdown=1;
     }
