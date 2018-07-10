@@ -550,16 +550,16 @@ f.seen_showdown_intro=1;
     switch (f.showdown_intro_c) {
         case 1:
             lockdown=1;
-            d+="\"I know you are here to kill me. Do it, cowards. You are only going to kill a man. You cannot stop the revolution.\" \n\nHe wears a {fox mask|showdown_intro_mask} and a student uniform. His back presses against a railing. Behind the railing is a {trench|showdown_intro_trench} and moat. \n\n{Emoticons|showdown_intro_emoticons} hover in the shadows of the bookshelves and cast him in a sickly yellow hue.  ";
+            d+="\"I know you are here to kill me. Do it, cowards. You are only going to kill a man. You cannot stop the revolution.\" \n\nHe wears a {fox mask|showdown_intro_mask} and a student uniform. His back presses against a railing. Behind it is a {trench|showdown_intro_trench} drops into darkness. \n\n{Emoticons|showdown_intro_emoticons} hover in the shadows of the bookshelves and cast him in a sickly yellow hue.  ";
             
         break;
         case 2: 
             lockdown = 1;
-            d+="The P.A. system crackles from {above|showdown_intro_heavens}: \"We don't kill our students, Kasparov. Come quietly. We already have the others. Don't force our hand.\"\n\nThe {security|showdown_intro_ss} guards inch closer to him and their bodies take shape. They have monitors for heads and angry emoticons for faces. Their {nightsticks|showdown_intro_nightsticks} bristle with electricity. ";
+            d+="The P.A. system crackles from {above|showdown_intro_heavens}: \"We don't kill our students, Kasparov. Come quietly. We already have the others.\"\n\nThe {security|showdown_intro_ss} guards inch closer to him and their bodies take shape. They have monitors for heads and angry emoticons for faces. Their {nightsticks|showdown_intro_nightsticks} bristle with electricity. ";
         break;
 
         case 3:
-            d+="The guards charge at him. He leaps backward over the railing and falls into the shadows. There is a splash in the moat below. The guards lean over the railing, sweeping the water with light. \n\n\"Drain this section. Post men at every exit including the pumping stations. {Find him|start}.\"";
+            d+="The guards charge at him. He leaps backward over the railing and falls into the shadows. There is a splash in the moat below. The guards lean over the railing, sweeping the water with light. \n\n\"Drain it. Post men at every exit, including the pumping stations. {Find him|start}.\"";
             lockdown=1;
             break;
 
@@ -580,10 +580,10 @@ case "showdown_intro_heavens":
 break;
 
 case "showdown_intro_ss":
-    d+="Their black uniforms blend into the darkness and make their monitor heads appear disembodied. On their shoulders are reflective red armbands with two interlocking S shapes.";
+    d+="Their black uniforms melt with the darkness and make their heads appear to float disembodied. Reflective red armbands with two interlocking S shapes glint.";
 break;
 case "showdown_intro_mask":
-    d+="The light from the {emoticons|showdown_intro_emoticons} make the shadows on the mask dance.";
+    d+="The shadows on the mask shift as the emoticons hover closer.";
 
 break;
 
@@ -1490,7 +1490,7 @@ case "guidance_convo":
             }},
         "gc_no_face":
             {l: "No face. Vandalism of library", d: function() {
-                d+="\"As I suspected.\" A click. The scanner shuts off and the band of warmth fades. \"The news would eventually spread. I won't fault you for knowing about what will soon become public. But you need to be open with us. And you should only get news from official sources. Now hold still, straighten your back and {look at me|gc_look_at_him}. That's it. Good posture is important, my child.\" From inside the panel, there is a screetch of dot-matrix printer. A paper comes out of the slot.\" \n\n";
+                d+="\"As I suspected.\" A click. The scanner shuts off and the band of warmth fades. \"The news would eventually spread. I won't fault you for knowing about what will become public. But you need to be open with us. And you should only get news from official sources. Now hold still, straighten your back and {look at me|gc_look_at_him}. That's it. Good posture is important, my child.\" From inside the panel, there is a screetch of dot-matrix printer. A paper comes out of the slot.\" \n\n";
                 talk=0;
                 f.gc_discovered_nothing_important = 1;
 
@@ -1581,7 +1581,7 @@ case "counseling_booth_stool":
 break;
 
 case "counseling_booth_speaker":
-    d+="A pattern of tiny holes radiating outwards to form a circle. Fibonacci spirals. You had to calculate and draw this pattern in Math class. ";
+    d+="A pattern of tiny holes radiating outwards to form a circle. Fibonacci spirals. You had to plot this pattern in Math class. ";
     if (!f.guidance_counselor_arrived) {
         d+="It emits a buzz. ";
 
@@ -1643,7 +1643,7 @@ case "caf":
             case 4:
                 f.caf_bridge_chess_conflict++;
             
-                d="\"Why'd you smash up the library? Faculty's giving us heat for it.\" says the chessboard boy.\n\n\"We don't smash libraries,\" says monkey-boy. \"We can do your face though.\"\n\n\"Try it,\" says the chessboard boy. \n\nThe Bridge Club members circle around the table and stand beside monkey-boy. A  jostle then fists fly and one of the Bridge Club members lands on top of the table. Food and platters and utensils careens everywhere.\n\nYou {shuffle over|caf} slightly. Your lunch is still intact. ";
+                d="\"Why'd you smash up the library? Faculty's giving us heat for it.\" says the chessboard boy.\n\n\"We don't smash libraries,\" says monkey-boy. \"We can do your face though.\"\n\n\"Try it,\" says the chessboard boy. \n\nThe Bridge Club members circle around the table and stand beside monkey-boy. A  jostle then fists fly and one of the Bridge Club members lands on top of the table. Food platters and utensils careen everywhere.\n\nYou {shuffle over|caf} and continue eating. ";
                 back=0;
             break;
             case 5:
@@ -1651,7 +1651,7 @@ case "caf":
             break;
             case 6:
                 f.caf_bridge_chess_conflict++;
-                d="The brute swing his wrecking ball fist at the monkey-boy. The monkey-boy ducks and the fist meets you in the face. The world {spins|caf_bc_fight_focus} and you fall backward onto the floor.";
+                d="The brute spins like a disqus thrower, fist outstretched. Monkey-boy hops backward, dodging each revolution. Finally he ducks and the brute's fist meets you in the face. The world {spins|caf_bc_fight_focus}.";
                 f.caf_bridge_chess_conflict = "x"
                 back=0;        
             break;
@@ -1716,7 +1716,7 @@ break;
 
 case "caf_bc_fight_focus":
 
-                d+="Your vision focuses. Lunch tray on the floor. Food all over your clothing. Monkey-boy and the brute throw kicks and punches at each other. \n\n{School Security Guards|caf_bc_conflict_ss} rain from the ceiling. You judge 45 seconds before they reach this location. "; 
+                d+="The world focuses. Lunch tray on the floor. Food in your hair and clothes. Monkey-boy grapples with the brute, hanging off his neck and kicking him. \n\n{School Security Guards|caf_bc_conflict_ss} rain from the ceiling. 45 seconds before they reach this location. "; 
                 f.caf_bridge_chess_conflict = "x";
                 back=0;
 break;
@@ -1726,11 +1726,11 @@ case "caf_bc_fight_chessboard":
 break;
 case "caf_bc_conflict_ss":
     lockdown=1;
-    d="They slide down on spider cables. Black uniforms and riot gear. Angry-face emoticons on their monitor-heads. 30 seconds before they arrive on location. \n\nYou {stand up|detention_after_caf_fight}. ";
+    d="Sliding down on spider cables. Armored uniforms and riot gear. Angry emoticons on their monitor-heads. 30 seconds before they arrive on location. \n\nYou {stand up|detention_after_caf_fight}. ";
     f.caf_bridge_chess_conflict = "x";
 break;
 case "caf_bc_conflict_boy":
-    d+="A small boy with close-shaved hair, high-waisted {pants|caf_bc_conflict_boardmaster_pants} swaggers toward them. His jacket is turned inside out and he has a large chessboard strapped to his back. \n\nA brick wall of a {brute|caf_bc_conflict_large_boy}  walks several steps behind him. \n\nThe small chessboard boy locks eyes on each of them in turn. \n\nMonkey-boy meets his gaze. \"Got a problem?\" \n\n\"No problem. But why are you gentlemen giving us problems? We don't appreciate problems.\"  ";  
+    d+="A small boy with close-shaved hair, high-waisted {pants|caf_bc_conflict_boardmaster_pants} swaggers toward them. His jacket is turned inside out and he has a large chessboard strapped to his back. \n\nA brick wall of a {brute|caf_bc_conflict_large_boy}  walks several steps behind him. \n\nThe chessboard boy surveys each of them in turn. \n\nMonkey-boy meets his gaze. \"Got a problem?\" \n\n\"No problem. But why are you gentlemen giving us problems? We don't appreciate problems.\"  ";  
 
     back=0;
 break;
@@ -1790,7 +1790,7 @@ case "detention_after_caf_fight":
     if (i.rook) {
         d+="{Rook|detention_rook} ";
     } else {
-        d+= "the {brutish fellow|detention_rook} ";
+        d+= "the {brute|detention_rook} ";
     } 
     d+="and his shorter {friend|detention_boardmaster}.\n\n ";
     
@@ -1810,7 +1810,7 @@ break;
 
 
 case "detention_3_of_you":
-    d+="To your left is the {monkey-boy|detention_monkey_boy}. To your right is the {Brutish fellow|detention_rook} and his shorter {friend|detention_boardmaster}. ";
+    d+="To your left is the {monkey-boy|detention_monkey_boy}. To your right is the {brute|detention_rook} and his shorter {friend|detention_boardmaster}. ";
 break;
 
 
@@ -1834,7 +1834,7 @@ case "detention_rook":
    }
 break;
 case "detention_sorry_arm":
-    d+="\"Silence!\" shouts Officer Wolff. \"There is to be no conversation!\" ";
+    d+="\"There is to be no conversation!\" shouts Wolff. ";
 break;
 case "detention_monkey_boy":
     d+="He looks away nervously. His leg is in a cast. Crutches lay on the floor next to his desk. ";
@@ -1995,7 +1995,7 @@ case "library_hills":
 break;
 
 case "library_planters":
-    d+="The tops of the shelves are filled with planters. You run your fingers through the plastic leaves on the low-lying shelves. <em>Why do they soothe?</em>"; 
+    d+="The tops of the shelves are filled with planters. You run your fingers through the plastic leaves on the low-lying shelves. <em>Soothing.</em>"; 
 break;
 
 case "library_terminus":
@@ -2012,7 +2012,7 @@ case "library_crime_scene":
        d+="<div class='transition'>After some walking, you arrive at the scene of the incident.</div> "; 
 
     }
-    d+="A series of {shelves|library_shelves_knocked_over} lie knocked over like " + oneoff_link("dominoes|library_dominoes") + ". The last shelf leans against the side of the {dome|library_dome}. Books, smashed pottery and plastic plants lie scattered everywhere. The area is cordoned off with police tape and {School Security|library_ss} officers crawl through the debris like ants.  {Students|library_crime_scene_students} jostle with each other trying to get a better view.\n\nThe stream ends here by feeds into a trench and moat beside the edge of the dome. In the other direction is the {study area|library_study_area}.";
+    d+="A series of {shelves|library_shelves_knocked_over} lie knocked over like " + oneoff_link("dominoes|library_dominoes") + ". The last shelf leans against the side of the {dome|library_dome}. Books, smashed pottery and plastic plants lie scattered everywhere. The area is cordoned off with police tape and {School Security|library_ss} officers crawl through the debris like ants. A few {students|library_crime_scene_students} loiter behind the police tape, watching the proceedings.\n\nThe stream ends here by feeds into a trench and moat beside the edge of the dome. In the other direction is the {study area|library_study_area}.";
 
     f.end_memory = 1;
 
@@ -2101,15 +2101,15 @@ case "under_stairs":
 
     switch(f.under_stairs_arcadia_youth_timer) {
         case 3:
-            d="The boy standing by the corrider whistles. \"Teacher's pets,\" he shouts. \n\n\"How many?\" says monkey-boy. \n\n\"Three.\" He throws his slammer and pieces scatter.";
+            d="The boy standing by the corrider whistles. \"Teacher's pet,\" he shouts. \n\n\"How many?\" says monkey-boy. \n\n\"Three.\" He throws his slammer and pieces scatter.";
         break;
 
         case 4:
-            d="\"Here they come,\" says the boy at the corridor. \n\nThe monkey-boy and the tall girl continue playing their game.";
+            d="\"Almost on us,\" says the boy at the corridor. \n\nThe monkey-boy and the tall girl continue playing their game.";
         break;
 
         case 5:
-            d="Three students with red {armbands|arcadia_youth_armbands} arrive at entrance of the niche. Two boys with undercut {hair|arcadia_youth_boys_hair} combed to the side. A blond girl with her hair in a tight {ponytail|arcadia_youth_girls_hair}. \n\nShe surveys the scene and pushes past you to the center of the crowd. \"What's going on here?\" she says. \n\n\"Doing homework,\" says monkey-boy.";
+            d="Three students with red {armbands|arcadia_youth_armbands} arrive at entrance of the niche. Two boys with undercut {hair|arcadia_youth_boys_hair} combed to the side. A blond girl with hair in a tight {ponytail|arcadia_youth_girls_hair}. Her hair seems to stretch her features backwards. \n\nShe surveys the scene and pushes past you to the center of the crowd. \"Care to explain?\" she says. \n\n\"Homework,\" says monkey-boy.";
         break;
 
         case 6:
@@ -2142,7 +2142,7 @@ case "under_stairs_nightstick":
     d+="A telescoping rod with perpendicular handle. Uncharged. ";
 break;
 case "pog_battle_winnings":
-    d+="A respectable pile. Not just a Bridge player. He stuffs the pieces into his bulging pockets. ";
+    d+="A respectable pile. He stuffs the pieces into his bulging pockets. ";
 break;
 case "arcadia_youth_boys_hair":
     d+="Sides close-shaved. Tops long, slicked with wax and combed to one side.";
@@ -2152,7 +2152,7 @@ case "arcadia_youth_girls_hair":
 
 break;
 case "under_stairs_monkey_ignore":
-d+="\"The faculty will hear of this.\" She swivels her head, imprinting everyone's faces in her mind. \"Glory to Arcadia,\" she says, casting knives with her eyes. \n\n\"Glory to Arcadia,\" a few in the crowd mumble. She and her companions march and disappear down the corridor. \n\nHe screams and drives his slammer into the pile. People flinch. A piece lands at your {feet|under_stairs_pog_feet}.\n\n\"Finish it,\" he says to the girl. \"We have some time before the Heat arrives.\" "; 
+d+="\"School security will hear of this.\" She swivels her head. Her eyes cast knives as she imprint everyones face in her mind. \"Glory to Arcadia,\" she says. \n\n\"Glory to Arcadia,\" a few in the crowd mumble. She and her companions march and disappear down the corridor. \n\nMonkey boy drives his slammer into the pile. People flinch. A piece lands at your {feet|under_stairs_pog_feet}.\n\n\"Well, finish the game,\" he says to the tall girl. \"We have some time before they call for their teeth.\" "; 
         f.end_memory=1;
         f.pog_finished=1;
         f.seen_pog_game=1;
@@ -2217,7 +2217,7 @@ break;
     break;
 
     case "under_stairs_giraffe_girl":
-        d+="She towers above the other students. A long giraffe-like neck. She holds a plastic bag full of Pogs and watches the game with a cool detachment. ";
+        d+="She towers above the other students. A long giraffe-like neck. She holds a plastic bag full of Pogs and plays with a cool detachment. ";
 
     break;
 
@@ -2246,13 +2246,13 @@ case "asm":
     } else if (f.asm_c == 4) {
         d+="\n\nThe School Security officers lead and position the captive students into a {circular|asm_circular} formation around the tower. ";
     } else if (f.asm_c == 5) {
-        d="The anthem finishes. The screens flicker and display a blue smiling emoticon: they become the disembodied face of the Headmaster. \n\nHe taps on the microphone and clears his throat.  \"Friends, students, sons and daughters of Arcadia. Most of you have paid attention in class. Most of you do your homework.  Most of you show extraordinary school spirit. You are to be commended!\" \n\nA smattering of {applause|asm_applause}, mostly from the {Arcadia Youth|asm_arcadia_youth}. Someone beside you {yawns|asm_yawn}.";         
+        d="The anthem finishes. The screens flicker and display a blue smiling emoticon: they become the disembodied face of the Headmaster. \n\nHe taps on the microphone and clears his throat.  \"Students. Friends. Sons and daughters of Arcadia. Most of you have paid attention in class. Most of you do your homework.  Most of you show extraordinary school spirit. You are to be commended!\" \n\nA smattering of {applause|asm_applause}, mostly from the {Arcadia Youth|asm_arcadia_youth}. Someone beside you {yawns|asm_yawn}.";         
 
     } else if (f.asm_c == 6) {
 
-        d="His emoticon glitches and changes to a frown. \"A few of you, however, threaten the peace and public safety of our school.\" The screens show closeups of the {gym-bagged|asm_gym_bagged_heads} students' heads. \"You all read the {school paper|asm_school_paper}. I speak of the library incident. Delinquency will not be tolerated!\" ";
+        d="His emoticon glitches and changes to a frown. \"A few of you, however, threaten the peace and public safety of our school.\" The screens zoom into the {gym-bagged|asm_gym_bagged_heads} students' heads. \"You all read the {school paper|asm_school_paper}. I speak of the library incident. Delinquency will not be tolerated!\" ";
     } else if (f.asm_c == 7) {
-        d="The headmaster clears his {digital throat|asm_electronic_throat}. \"As stated in chapter five paragraph six of the student handbook, we reserve the right to engage delinquency with kinetic force. Those we capture face solitary detention and {reprogramming|asm_reprogramming}.\" His emoticon changes to a sad face with a {tear|asm_headmaster_tear}. \"This pains me. Sons and daughters, know that the Faculty loves you. I love you. But we have a zero-tolerance policy! Do your duty and report delinquency today. Make Mother Arcadia proud!\"  \n\nMore applause from the Arcadia Youth. Some clutch their hearts and nod."; 
+        d="The headmaster clears his {digital throat|asm_electronic_throat}. \"As stated in chapter five paragraph six of the student handbook, we reserve the right to meet delinquency with kinetic force. Those we capture face solitary detention and reprogramming.\" His emoticon changes to a sad face with a {tear|asm_headmaster_tear}. \"This pains me. Sons and daughters, know that the Faculty loves you. I love you. But we have a zero-tolerance policy! Do your duty and report delinquency today. Make Mother Arcadia proud!\"  \n\nMore applause from the Arcadia Youth. Some clutch their hearts and nod."; 
     } else if (f.asm_c == 8) {
         d="\"It is time for our morning exercises. We will begin with stretches.\" Cheerful music erupts over the loudspeakers. \n\nA student beside you takes the gum out of his mouth and puts it behind his ear. Students shake and loosen their bodies.";
        f.end_memory=1; 
@@ -2269,10 +2269,10 @@ case "asm_thousands_students":
 
 break;
 case "asm_headmaster_tear":
-    d+="It hangs motionless and frozen in time. The emoticon and screen glitches slightly.";
+    d+="It hangs motionless in mid-drop. The screen glitches.";
 break;
 case "asm_anthem":
-    d+="An infectious melody performed on theremin and composed by the Head Music teacher. ";
+    d+="Rousing and infectious. Performed on theremin and composed by the Head Music teacher. ";
 break;
 case "asm_courtyard":
     d+="A wall of " + oneoff_link("empty dormitories|asm_empty_dorms") + " stacked and open like the rooms of a dollhouse forms a ring around the panopticon tower. ";
@@ -2285,22 +2285,22 @@ case "asm_shock_rifles":
     d+="You once saw a student get shot. His body tensed up straight as a ruler then he collapsed to the floor in spasms. He was still twitching even after they dragged him to the nurses office. ";
 break;
 case "asm_empty_dorms":
-    d+="Currently emptied and drained of students. It takes some time, but you locate your dormitory. You rub your eyes and blink. <em>Someone stands inside your {room|asm_someone_inside_room}.</em>  "; 
+    d+="Emptied of students. Everyone is in the courtyard. It takes some time, but you locate your dormitory. <em>A student stands inside your {room|asm_someone_inside_room}.</em>  You rub your eyes and blink.  "; 
 
 break;
 
 case "asm_someone_inside_room":
-    d+="Light glints against the glass. Then your room is empty. ";
+    d+="You look again and your room is empty. ";
 break;
 case "asm_reprogramming":
-    d+="<em>What would you remember? What would you become after reprogramming?</em>";
+    d+="<em>What would you become after reprogramming?</em>";
 break;
 
 case "asm_electronic_throat":
     d+="A rumble of thunder. He made the innocuous threatening. ";
 break;
 case "asm_school_paper":
-    d+="They didn't officially lay blame to any group but the Chess Club took the blame. <em>Was it them?</em>";
+    d+="They didn't officially name any group. The Chess Club took the blame. <em>Was it them?</em>";
 break;
 case "asm_gym_bagged_heads":
     d+="They sloutch and kneel on the floor. A guard jabs one of the students and he straightens his back.";
@@ -2323,7 +2323,7 @@ case "asm_groups_students":
 break;
 
 case "asm_arcadia_youth":
-    d+="Standing with good posture, chests puffed outwards. School uniforms starched and pressed. They wear red armbands with the letters \"AY\" hand-stitched on them.";
+    d+="Always standing with good posture. School uniforms starched and pressed. Red armbands with the letters \"AY\" hand-stitched on them.";
 break;
 case "asm_blimps":
     
@@ -2336,7 +2336,7 @@ case "asm_blimps":
 
             default:
                 if (f.asm_c < 4) {
-                    d+="Like bedsheets hanging on a line. Held aloft by drones. They display different perspectives of the {procession|asm_procession_students} and assembly. Some aerials, some closeups and {crowd shots|asm_crowd_shots}. ";
+                    d+="Like bedsheets hanging on a line and held aloft by drones. They display different perspectives of the {procession|asm_procession_students} ocassionally broken by some aerial, some closeups and {crowd shots|asm_crowd_shots}. ";
             //        d+="Five students wearing flourescent orange gym uniforms trudge toward the tower, guided by School Security Officers. Their straightjacket uniforms have buckles and extra long sleeves tied around the back. Their heads are covered with gym bags, drawstrings tightened against their necks. Hung around their necks are signs which read \"delinquent\". ";
 
                 } else if (f.asm_c > 6) {
@@ -2382,7 +2382,7 @@ case "showers":
         
         scene_change("An Exchange");
     }
-    d+="A forest of {columns|showers_columns} shrouded in vapor. Pipes, faucets and shower heads branch out the sides of the columns. Other columns are lined with " + oneoff_link("cubbyholes|showers_towel_in_cubbyhole") + ". Water pattering on tile. The smell of sulfur. Naked {students|showers_students} sit on " + oneoff_link("stools|showers_stools") + ", lathering and scrubbing. ";
+    d+="A forest of {columns|showers_columns} shrouded in vapor. Pipes, faucets and shower heads branch out the sides of the columns. Other columns lined with " + oneoff_link("cubbyholes|showers_towel_in_cubbyhole") + ". Water pattering on tile. The smell of sulfur. Naked {students|showers_students} sit on " + oneoff_link("stools|showers_stools") + ", lathering and scrubbing. ";
 
     if (f.showers_towel_in_cubbyhole) { //if towel already put in cubbyhole
 
@@ -2421,7 +2421,7 @@ case "showers_bracelet":
 
 break;
 case "showers_your_body":
-    d+="Supple, pristine skin, except for the moisture wrinkled tips of your fingers. ";
+    d+="Supple, pristine skin, except for the tips of your fingers wrinkled from moisture. ";
     
 break;
 
@@ -2501,7 +2501,7 @@ case "showers_lockers":
 
     if (f.showers_timer==7) {
  
-        d="A janitor carrying a broom steps through the gates. Students {scramble|showers_lockers_scramble} to get dressed and cover their private parts. He displays a {grumpy-face|showers_lockers_janitor_grumpy} emoticon on his screen. ";
+        d="A janitor carrying a broom steps through the gates. Students {scramble|showers_lockers_scramble} to get dressed and cover themselves. He displays a {grumpy-face|showers_lockers_janitor_grumpy} emoticon on his screen. ";
 
     } else if (f.showers_timer==8) {
         d="You nudge your {locker|showers_locker_nudge} shut and wrap the towel around your body. \n\nThe janitor trudges past you, {muttering|showers_lockers_mutter} until he reaches one of the towel chutes. He sticks his broom handle-end into the chute and begins stabbing. He shakes his head and extends his {torso|showers_lockers} into the chute.  ";
@@ -2613,7 +2613,7 @@ break;
 
 
 case "showers_lockers_chalk":
-    d+="{Antiquated|showers_lockers_antiquated} but worth a small fortune in Pogs. Most would consider the exchange foolish. But you need something that won't disappear so quickly. ";
+    d+="{Antiquated|showers_lockers_antiquated} but worth a small fortune in Pogs. Most would consider the exchange foolish. But you need it. You need short-term memory. ";
 break;
 
 case "showers_lockers_antiquated": 
@@ -2778,12 +2778,12 @@ add("Boyfriend", "boyfriend", function() {
 
 add("Rook", "rook", function() {
     thought=1;
-    d+="<em>Ryan Hook. The big, brutish-looking Chess club member. Maybe he can help you. </em>";
+    d+="<em>Ryan Hook. The chess-playing brute. Maybe he can help you. </em>";
 
 });
 
 add("Wolff", "wolff", function() {
-    d+="<em>Chief of School Security. Volatile. How did he lose his eye?</em>";
+    d+="<em>Chief of Security. His eye. You feel a wave of nausea.</em>";
     thought=1;
 });
 
