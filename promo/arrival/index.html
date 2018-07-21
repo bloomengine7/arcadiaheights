@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 STRICT //EN">
+<html>
+
+	<head>
+		<title>Arcadia Heights | bloomengine.com</title>
+		
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta property="og:image" content="https://bloomengine.com/arcadiaheights/wordmark.jpg" />		
+
+
+
+        <script src="https://bloomengine.com/arcadiaheights/jquery-3.3.1.min.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="style.css" />
+
+        <link rel="stylesheet" href="story.css" />
+
+	    <style>
+            body {
+                text-align: center;
+                font-family: sans-serif, Arial;
+                padding-bottom:4em;
+                
+            }
+
+            img.responsive {
+                max-width: 100%;
+                height: auto
+                min-width: 800px;
+            }
+
+            a {
+
+                color:#ed0b70;
+            }
+            .goto_game {
+                position:relative;
+                top:-100px;
+                margin-bottom:-50px;
+            }
+            .goto_game a {
+                white-space:nowrap;
+                background-color:#ed0b70;
+                color: #fff;
+                text-decoration:none;
+                cursor: pointer;
+                font-size:2em;
+                display:block;
+                width:100%;
+                padding:.25em;
+            }
+
+            .goto_game a:hover {
+                background-color: black;
+
+            }
+            
+        </style>
+
+	
+
+        <!-- Google Analytics --> <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-22524818-1', 'auto');
+        //ga('send', 'pageview');
+           ga('set', 'page', '/arcadiaheights'); 
+
+           //ga('set', 'page', '/'); 
+
+        </script>
+        <!-- End Google Analytics -->
+
+
+
+        <script>
+
+            //querystring handling 
+            // query string: ?foo=lorem&bar=&baz
+            /// query string: ?foo=lorem&bar=&baz
+            /*
+            var foo = getParameterByName('foo'); // "lorem"
+            var bar = getParameterByName('bar'); // "" (present with empty value)
+            var baz = getParameterByName('baz'); // "" (present with no value)
+            var qux = getParameterByName('qux'); // null (absent)/
+            */
+            function getParameterByName(name, url) {
+                if (!url) url = window.location.href;
+                name = name.replace(/[\[\]]/g, "\\$&");
+                var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                    results = regex.exec(url);
+                if (!results) return null;
+                if (!results[2]) return '';
+                return decodeURIComponent(results[2].replace(/\+/g, " "));
+            }
+
+
+        </script>
+
+	</head>
+	<body id="title">
+        <img class="responsive" src="arcadia_arrival.png" />
+
+        <div class="goto_game">
+            <a  href="https://bloomengine.com/arcadiaheights/">Play Arcadia Heights</a>
+        </div>
+
+        <div class="promo">
+            <p>
+                Or click <a href="https://feedburner.google.com/fb/a/mailverify?uri=bloomengine&amp;loc=en_US" target='_blank' onClick='ga_subscribe_email();'>here</a> to receive early access to new or exclusive content like this comic.
+            </p>
+        </div>
+
+        <script>
+            var my_gid = '?source=' + getParameterByName('source');
+            var link_output = '<a href="https://bloomengine.com/arcadiaheights/' + my_gid + '">Play Arcadia Heights</a>';
+            $(".goto_game").html(link_output);
+        </script>
+	</body>
+</html>
+
