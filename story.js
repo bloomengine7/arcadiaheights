@@ -88,7 +88,8 @@ user_variables = [
     "showers_towel_in_cubbyhole",
     "showers_timer",
     "showers_lockers_find_yours",
-    "showers_lockers_seen_chalk"
+    "showers_lockers_seen_chalk",
+    "seen_arrival_comic"
 
     
 ];//::uservariables
@@ -529,14 +530,22 @@ case "start": //aka caf
             d+="\n\n<em>You have exhausted your memories.</em> \n<div style='font-size:.75em; line-height:1.5em;'>Please check back on weekends for more content. {Stay updated|stay_updated} or check out some {other games|meta_other_games}.</div>";
         }
 
+
+        d+="<hr>";
+        if (!f.seen_arrival_comic) {
+            d+="<a class='out' href='https://bloomengine.com/arcadiaheights/promo/arrival' target='_blank'>Arrival</a>";
+        }
+
+
+        //always keep this last
         if (!f.seen_showdown_intro) {
             d="";
             f.showdown_intro_c=0;
             f.node="showdown_intro";
             nodes("showdown_intro");
         }
-
-
+        
+        
         
 break;
 
@@ -550,7 +559,7 @@ f.seen_showdown_intro=1;
     switch (f.showdown_intro_c) {
         case 1:
             lockdown=1;
-            d+="\"I know you are here to kill me. Do it, cowards. You are only going to kill a man. You cannot stop the revolution.\" \n\nHe wears a {fox mask|showdown_intro_mask} and a student uniform. His back presses against a railing. Behind it is a {trench|showdown_intro_trench} drops into darkness. \n\n{Emoticons|showdown_intro_emoticons} hover in the shadows of the bookshelves and cast him in a sickly yellow hue.  ";
+            d+="\"I know you are here to kill me. Do it, cowards. You are only going to kill a man. You cannot stop the revolution.\" \n\nHe wears a {fox mask|showdown_intro_mask} and a student uniform. His back presses against a railing. Behind it a {trench|showdown_intro_trench} drops into darkness. \n\n{Emoticons|showdown_intro_emoticons} hover in the shadows of the bookshelves and cast him in a sickly yellow hue.  ";
             
         break;
         case 2: 
@@ -2396,7 +2405,7 @@ case "showers":
     
     } else if (f.showers_timer < 3) {
     
-        d+="\n\nYou sit on a stool. Your {hair|showers_your_hair} is in a lather and rivulets of water and suds run down your {body|showers_your_body}. You keep your back to the shower so the cubbyhole is within view. ";
+        d+="\n\nYou sit on a stool. Sudes and rivulets of water run down your  {hair|showers_your_hair} and {body|showers_your_body}. You keep your back to the shower so the cubbyhole is within view. ";
     } 
      else if (f.showers_timer==3) {
         d+="\n\nThe blonde {boy|showers_delivery_boy}, turns off his shower. Dripping wet, he ambles toward the cubbyholes, footsteps spattering on tile.  ";
@@ -2574,7 +2583,7 @@ break;
 
 
 case "showers_lockers_towel":
-    d+="<em>Not until you reach your locker. Too many eyes here.</em> ";
+    d+="<em>Not until you reach your locker. Too many eyes.</em> ";
 break;
 
 

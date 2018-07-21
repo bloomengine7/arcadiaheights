@@ -151,6 +151,20 @@ height:100px;
 		color:#000;
 		border-bottom:1px dotted #000;
 	}
+
+    a.out {
+        color: gray;
+        border-bottom:1px dotted silver;
+    }
+    a.out .out_icon {
+        font-size:.5em;
+    }
+    hr {
+        margin-top:1em;
+        margin-bottom:.5em;
+        border:0;
+        border-bottom: 1px solid #ededed
+    }
 		.spacer {
 			clear:both;
 			height:1px;

@@ -430,10 +430,10 @@ function process(node,giver,receiver,params) {
         
         if (window!=window.top) { /* I'm in a frame! */ 
 
-            saveLink="<a href=" + saveFullUrl  + "\" target='_blank'>Save Game</a> ";
+            saveLink="<a href=\"" + saveFullUrl  + "\" target='_blank'>Save Game</a> ";
         } else {
 
-            saveLink="<a href=" + saveFullUrl  + "\">Save Game</a> ";
+            saveLink="<a href=\"" + saveFullUrl  + "\">Save Game</a> ";
 
         }
         last_uncorrupted_save.push(saveLink);
