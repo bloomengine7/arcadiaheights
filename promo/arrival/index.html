@@ -116,7 +116,11 @@
         </div>
 
         <script>
-            var my_gid = '?source=' + getParameterByName('source');
+            var my_gid = "";
+            if (getParameterByName('source')) {
+                my_gid = '?source=' + getParameterByName('source');
+            } 
+            alert('sdsfdfsd');
             var link_output = '<a href="https://bloomengine.com/arcadiaheights/' + my_gid + '">Play Arcadia Heights</a>';
             $(".goto_game").html(link_output);
         </script>
