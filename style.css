@@ -766,7 +766,8 @@ z-index:100;
 }
 
 #startScreenInner{
-padding:50px;
+   min-width:500px;
+   padding:50px;
 font-size:2em;}
 
 	#startScreen h2 {

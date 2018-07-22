@@ -117,7 +117,7 @@ meta_labels = {
 
 
 
-config.startScreen="<h1><div id='game_title_glitch' class='glitch glitch_font_off' data-text='Arcadia Heights'>Arcadia Heights</div></h1>";
+config.startScreen="<img src='i/ah_logo.png' style='margin-top:20px; margin-bottom:10px; margin-left:5em; width:400px; height:auto;'/><h1><div id='game_title_glitch' class='glitch glitch_font_off' data-text='Arcadia Heights'>Arcadia Heights</div></h1>";
 
 config.gameTitle = "Arcadia Heights";
 
