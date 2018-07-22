@@ -564,11 +564,11 @@ f.seen_showdown_intro=1;
         break;
         case 2: 
             lockdown = 1;
-            d+="The P.A. system crackles from {above|showdown_intro_heavens}: \"We don't kill our students, Kasparov. Come quietly. We already have the others.\"\n\nThe {security|showdown_intro_ss} guards inch closer to him and their bodies take shape. They have monitors for heads and angry emoticons for faces. Their {nightsticks|showdown_intro_nightsticks} bristle with electricity. ";
+            d+="The P.A. system crackles from {above|showdown_intro_heavens}: \"We don't kill our students, Kasparov. Come quietly. We already have the others.\"\n\nThe {security|showdown_intro_ss} guards inch closer to him and their bodies take shape. They have monitors for heads and emoticons for faces. Their {nightsticks|showdown_intro_nightsticks} bristle with electricity. ";
         break;
 
         case 3:
-            d+="The guards charge at him. He leaps backward over the railing and falls into the shadows. There is a splash in the moat below. The guards lean over the railing, sweeping the water with light. \n\n\"Drain it. Post men at every exit, including the pumping stations. {Find him|start}.\"";
+            d+="The guards burst forward. He leaps backward over the railing and falls into the shadows. A faint splash in the moat below. The guards lean over the railing, sweeping the water with light. \n\n\"Drain it. Post men at every exit, including the pumping stations. {Find him|start}.\"";
             lockdown=1;
             break;
 
