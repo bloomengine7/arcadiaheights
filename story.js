@@ -615,7 +615,7 @@ case "dorm":
     if (f.back == "stand_on_toilet" && !f.dorm_privacy_mode) {
         d+="<div class='transition'>As you step away from the toilet, another chime sounds and the scene beyond the glass wall resolves to high-resolution. \"Privacy mode disabled,\" appears on the wall. \"Time deducted from your daily quota.\"</div>";
     }
-    d+="Three walls, a floor and ceiling of concrete. One wall of {glass|dorm_glass}. A {poster|dorm_poster}. Next to it a {panel|dorm_closet} and closet door. In the corner is a {bed|dorm_bed} and a {desk|dorm_desk}. In the other corner is a {toilet|dorm_toilet} and sink. Outside, the {tower|dorm_outside} of the panopticon. ";
+    d+="You stand inside the concrete cube of your dormitory. Light blooms through a a wall of {glass|dorm_glass}. A faded {poster|dorm_poster} hangs crooked on the wall. Next to it is a {panel|dorm_closet} and closet door. In the corner is a {bed|dorm_bed} and a {desk|dorm_desk}. In the other corner is a {toilet|dorm_toilet} and sink. Outside, the {tower|dorm_outside} of the panopticon. ";
 
     //d+=seq("test_sq", ["sqfirst","second","third"],1);
     //d+=oneoff("oneoff","","oneoff");

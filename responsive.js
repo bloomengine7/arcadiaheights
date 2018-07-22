@@ -13,9 +13,9 @@ function responsive() {
     }
     //alert($(document).width());
     var w = $("body").width();
-    console.log("bleh" + w);
     if (w < 735 ) {
         $("#content").css('margin-left','1px');
+        $("#startScreenInner h1 *").css('font-size','2.3em');
         $("#inventory").hide(); 
 
         if (inventory_items_exist()) {
@@ -34,6 +34,7 @@ function responsive() {
             mobile_click_inventory();
         });
     } else {
+        $("#startScreenInner h1 *").css('font-size','3em');
 
         $("#content #show_hide_inv").hide();
         leftpos = $("#content_wrap").offset().left;
