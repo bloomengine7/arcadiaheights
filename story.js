@@ -1735,7 +1735,7 @@ case "caf_bc_fight_chessboard":
 break;
 case "caf_bc_conflict_ss":
     lockdown=1;
-    d="Sliding down on spider cables. Armored uniforms and riot gear. Angry emoticons on their monitor-heads. 30 seconds before they arrive on location. \n\nYou {stand up|detention_after_caf_fight}. ";
+    d="Sliding down on spider cables. Armored uniforms and riot gear. Angryface emoticons. 30 seconds before they arrive on location. \n\nYou {stand up|detention_after_caf_fight}. ";
     f.caf_bridge_chess_conflict = "x";
 break;
 case "caf_bc_conflict_boy":
