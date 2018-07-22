@@ -15,6 +15,12 @@
         <link rel="stylesheet" href="story.css" />
 
 	    <style>
+        body,div,dl,dt,dd,ul,ol,li,pre,form,/*fieldset,*/input,textarea,p,blockquote,th,td {margin:0;padding:0;}
+table {border-collapse:collapse;border-spacing:0;}
+fieldset,img {border:0;}
+address,caption,cite,code,dfn,em,strong,th,var {font-style:normal;font-weight:normal;}
+ol,ul {list-style:none;}
+
             body {
                 text-align: center;
                 font-family: sans-serif, Arial;
@@ -22,6 +28,9 @@
                 
             }
 
+p {
+    margin-bottom:1em;
+}
 
             img.responsive {
                 max-width: 100%;
@@ -55,7 +64,15 @@
                 background-color: black;
 
             }
-            
+           
+           .text_content {
+                max-width:800px;
+                margin:auto;
+                text-align:left;
+                margin-bottom:150px;
+           }
+
+       
         </style>
 
 	
@@ -111,24 +128,51 @@
             <a  href="https://bloomengine.com/arcadiaheights/">Play Arcadia Heights text adventure</a>
         </div>
 
-        <div class="promo">
-            <p>
-                Or click <a href="https://feedburner.google.com/fb/a/mailverify?uri=bloomengine&amp;loc=en_US" target='_blank' onClick='ga_subscribe_email();'>here</a> to receive early access to new or exclusive content like this comic.
-            </p>
+  
+        <img class="responsive" src="ss_3.png" />
+        <div class='text_content'>
+            <p>Arcadia Heights is a high school city-state populated with robot faculty and ageless students without memory of where they came from.</p>
+
+            <p>Daily student life consists of going to classes, doing homework, participating in extacurricular clubs and having memory wipes.  Tensions boil and gang violence erupts between some of the clubs.</p>
+
+            <p>Guidance counselors absolve students of their daily transgressions. School security wield shock weapons and perform random ID checks to keep students protected and safe. Headmaster Blue reigns as supreme leader. He selflessly and tirelessly gives of his time, energy and leadership experience to maintain peace, order and a healthy learning environment. </p>
+
+            <p>In spite of radio-silence from the Board of Education, Headmaster Blue is a hardliner and maintains loyalty to the original curriculum, tolerating no dissent from other teachers. He awaits and prepares students for the great day of Graduation. </p>
+
+            <p>Rumors fly of a shadow movement led by a student named Kasparov.</p>
+
+
+
+        
         </div>
 
+
+
+        <div class="goto_game">
+            <a  href="https://bloomengine.com/arcadiaheights/">Play Arcadia Heights text adventure</a>
+        </div>
         <script>
             var my_gid = "";
             if (getParameterByName('source')) {
                 my_gid = '?source=' + getParameterByName('source');
             } 
-            var link_output = '<a href="https://bloomengine.com/arcadiaheights/' + my_gid + '">Play Arcadia Heights &nbsp; &nbsp;&nbsp; &nbsp;</a>';
+            var link_output = '<a href="https://bloomengine.com/arcadiaheights/' + my_gid + '">Play Arcadia Heights Interactive Fiction &nbsp; &nbsp;&nbsp; &nbsp;</a>';
             $(".goto_game").html(link_output);
         </script>
         
+
+        <br><br>
+        
+        <div class="promo">
+            <p>
+                Or click <a href="https://feedburner.google.com/fb/a/mailverify?uri=bloomengine&amp;loc=en_US" target='_blank' onClick='ga_subscribe_email();'>here</a> to receive early access to new or exclusive content like this comic.
+            </p>
+        </div>
+        
+        <br><br>
         <br><br><br><br>
         <br><br><br><br>
-        <br><br><br><br>
+        <!--
        <p>If you feel like dropping a donation, money will go toward making more stuff. <br><br> <strong>Donate more than $7 and become blockified and be put into the school yearbook</strong>:</p>
 
 <br>
@@ -145,7 +189,7 @@
 <br>
 
 
-
+-->
 
 
 	</body>
