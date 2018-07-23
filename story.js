@@ -2111,36 +2111,45 @@ case "under_stairs":
     switch(f.under_stairs_arcadia_youth_timer) {
         case 3:
             d="The boy standing by the corrider whistles. \"Teacher's pet,\" he shouts. \n\n\"How many?\" says monkey-boy. \n\n\"Three.\" He throws his slammer and pieces scatter.";
+                f.under_stairs_arcadia_youth_timer++;
         break;
 
         case 4:
             d="\"Almost on us,\" says the boy at the corridor. \n\nThe monkey-boy and the tall girl continue playing their game.";
+                f.under_stairs_arcadia_youth_timer++;
         break;
 
         case 5:
-            d="Three students with red {armbands|arcadia_youth_armbands} arrive at entrance of the niche. Two boys with undercut {hair|arcadia_youth_boys_hair} combed to the side. A blond girl with hair in a tight {ponytail|arcadia_youth_girls_hair}. Her hair seems to stretch her features backwards. \n\nShe surveys the scene and pushes past you to the center of the crowd. \"Care to explain?\" she says. \n\n\"Homework,\" says monkey-boy.";
+            d="Three students with red {armbands|arcadia_youth_armbands} arrive at entrance of the niche. Two boys with undercut {hair|arcadia_youth_boys_hair} combed to the side. A blond girl with hair in a tight {ponytail|arcadia_youth_girls_hair}. Her hair stretches her features backwards. \n\nShe surveys the scene and pushes past you to the center of the crowd. \"Care to explain?\" she says. \n\n\"Homework. Study group,\" says monkey-boy.";
+                f.under_stairs_arcadia_youth_timer++;
         break;
 
         case 6:
             d="\"You should all be heading for class,\" she says. \n\nHe {throws his slammer|under_stairs_monkey_ignore} and the pieces scatter and flip. ";
+                f.under_stairs_arcadia_youth_timer++;
         break;
 
         case 7:
             d="The players finish their game and gather their {winnings|pog_battle_winnings}. The boy standing by the corridor comes over and slaps monkey-boy on the back. The crowd disperses.";
+                f.under_stairs_arcadia_youth_timer++;
         break;
 
 
-
+        case 8:
+            f.under_stairs_arcadia_youth_timer++;
+            break;
 
         case 9:
             d+="\n\nTwo {School Security|under_stairs_after_pog_ss} officers stand by the corridor. One of them has his arms crossed. The other lazily taps a {nightstick|under_stairs_nightstick} on his shoulder. ";
+            f.under_stairs_arcadia_youth_timer++;
         break;
 
         case 10:
             d+="\n\nThe guards walk away.";
+            f.under_stairs_arcadia_youth_timer++;
         break;
     }
-    f.under_stairs_arcadia_youth_timer++;
+;
     if (f.under_stairs_arcadia_youth_timer > 2 && f.under_stairs_arcadia_youth_timer < 7 ) {
         root = 0;
     } 
@@ -2161,10 +2170,11 @@ case "arcadia_youth_girls_hair":
 
 break;
 case "under_stairs_monkey_ignore":
-d+="\"School security will hear of this.\" She swivels her head. Her eyes cast knives as she imprint everyones face in her mind. \"Glory to Arcadia,\" she says. \n\n\"Glory to Arcadia,\" a few in the crowd mumble. She and her companions march and disappear down the corridor. \n\nMonkey boy drives his slammer into the pile. People flinch. A piece lands at your {feet|under_stairs_pog_feet}.\n\n\"Well, finish the game,\" he says to the tall girl. \"We have some time before they call for their teeth.\" "; 
+d+="\"Security will hear of this.\" She swivels her head. Her eyes cast knives as she imprint everyones face in her mind. \"Glory to Arcadia,\" she says. \n\n\"Glory to Arcadia,\" a few in the crowd mumble. She and her companions march and disappear down the corridor. \n\nMonkey boy drives his slammer into the pile. People flinch. A piece lands at your {feet|under_stairs_pog_feet}.\n\n\"Well, finish the game,\" he says to the tall girl. \"We have time before they find their teeth.\" "; 
         f.end_memory=1;
         f.pog_finished=1;
         f.seen_pog_game=1;
+         
 break;
 
 case "under_stairs_pog_feet":
@@ -2199,7 +2209,7 @@ break;
     break;
 
 case "under_stairs_kissing":
-    d+="He runs his fingers through her hair. She stands flamingo-balanced on one leg.  ";
+    d+="He runs his fingers through her hair. She stands bird-balanced on one leg.  ";
     if (!f.under_stairs_kissing_lips) {
         d+="Their faces press close together but their ";
         d+=oneoff_link("lips|under_stairs_kissing_lips") + " do not touch.  They intermittently glance around at the crowd or {upwards|under_stairs_cameras} toward the corridor ceiling. ";
