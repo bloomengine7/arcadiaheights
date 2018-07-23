@@ -124,7 +124,7 @@ config.gameTitle = "Arcadia Heights";
 config.gameAuthor = "Susan Newbourne | Bloomengine";
 
 //goes at menu at top
-config.metaContent = "{About|about}<a href='http://Bloomengine.com' target='_blank'>bloomengine.com</a>"; 
+config.metaContent = "{About|about} <a href='https://bloomengine.com/arcadiaheights/promo/arrival/' target='_blank'>Comic</a> <a href='https://bloomengine.com' target='_blank'>bloomengine.com</a>"; 
 
 //If you don't need an inventory system, write inventorySystem = 0;
 config.inventorySystem = 1; 
@@ -398,7 +398,6 @@ function nodes(node) { //Do not remove this line
 ////
 //
 //
-
 case "about":
     d+="These are the memories of Susan Newbourne (as collected by Hadrian Lin and Simon M. from <a href='http://bloomengine.com' target='_blank'>bloomengine.com</a>) \n\nThe game will continue to have new content added. {Stay updated|stay_updated} as we extract new memories from her brain.\n\nIf you notice typos and bugs or if you are interested in beta-testing future games please send an email to bloomengine (aaaayat) gmail (dot com). Put \"beta test anthill\" in the subject line."; 
     
