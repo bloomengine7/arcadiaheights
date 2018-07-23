@@ -1625,28 +1625,29 @@ break;
 
 case "caf":
 
-    if (f.caf_bridge_chess_conflict != "x" && f.back=="start") {
+    if (f.back=="start") {
 
         scene_change("Rivalries");    
         f.caf_bridge_chess_conflict=0;
     }
 
-    if (i.boyfriend && f.caf_bridge_chess_conflice != "x" && f.caf_bridge_chess_conflict < 3) {
-        f.caf_bridge_chess_conflict++;
-    }
 
 
     root=1;
     d+="Lunch tables overflow with {students|caf_students} and extend into the horizon. Light blooms through a series of massive {windows|caf_windows}. Food control {carousels|caf_carousels} clatter as lunch trays move up and down from below. ";
-    if (i.boyfriend && f.caf_bridge_chess_conflict < 4 && f.caf_bridge_chess_conflict != "x") {
+    if (f.caf_bridge_chess_conflict != "x") {
         d+="\n\nThe  {group|caf_bridge_club} seated next to you is noisy. ";
     }
         switch(f.caf_bridge_chess_conflict) {
-
+            case 1:
+            case 2:
+                f.caf_bridge_chess_conflict++;
+                break;                
             case 3: 
                 f.caf_bridge_chess_conflict=4;
                 d="The group next to you fall silent. They death-stare at a {boy|caf_bc_conflict_boy} walking down the aisle toward them. ";
                 back=0;
+                f.caf_bridge_chess_conflict++;
             break;
 
             case 4:
@@ -1752,6 +1753,8 @@ case "caf_bc_conflict_large_boy":
 break;
 case "caf_bridge_club":
     d+="Bridge club members. Back slapping and laughter. One of them squats on the bench like a monkey, doing little hops and rocking the table. They wear red scarves. A {playing card|caf_bridge_playing_card} peeks from the breast pocket of their uniforms. The boys leave one side of their shirts untucked. The girls have the sides of their heads shaved. ";
+                 f.caf_bridge_chess_conflict++
+    
 break;
 
 case "bridge_playing_card":
@@ -1795,13 +1798,13 @@ case "detention_after_caf_fight":
     
     scene_change("Detention");
     i.wolff = 1;
-    d+="{Officer Wolff|detention_ss_officer} straddles a small foldable chair, staring at the three of you. Behind him is a large {mirror|detention_after_fight_mirror}. You sit in a {classroom desk|detention_desk}, holding a bag of ice to your cheek. To your left is the {monkey-boy|detention_monkey_boy}. To your right is ";
+    d+=oneoff_link("Officer Wolff|detention_ss_officer") + " straddles a small foldable chair, staring at the three of you. Behind him is a large " + oneoff_link("mirror|detention_after_fight_mirror") + ". You sit in a " + oneoff_link("classroom desk|detention_desk") + ", holding a bag of ice to your cheek. To your left is the " + oneoff_link("monkey-boy|detention_monkey_boy") + ". To your right is ";
     if (i.rook) {
         d+="{Rook|detention_rook} ";
     } else {
         d+= "the {brute|detention_rook} ";
     } 
-    d+="and his shorter {friend|detention_boardmaster}.\n\n ";
+    d+="and his shorter " + oneoff_link("friend|detention_boardmaster") + ".\n\n ";
     
     if(f.detention_after_caf_fight==0) {
         d+="The Security officer shakes his head, tapping a clipboard with his pen. \"Incorrigible,\" he says. ";
