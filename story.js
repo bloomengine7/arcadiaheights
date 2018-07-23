@@ -530,12 +530,12 @@ case "start": //aka caf
             d+="\n\n<em>You have exhausted your memories.</em> \n<div style='font-size:.75em; line-height:1.5em;'>Please check back on weekends for more content. {Stay updated|stay_updated} or check out some {other games|meta_other_games}.</div>";
         }
 
-
+/*
         d+="<hr>";
         if (!f.seen_arrival_comic) {
             d+="<a class='out' href='https://bloomengine.com/arcadiaheights/promo/arrival' target='_blank'>Arrival</a>";
         }
-
+*/
 
         //always keep this last
         if (!f.seen_showdown_intro) {
