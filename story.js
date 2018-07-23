@@ -2259,9 +2259,9 @@ case "asm":
 
     } else if (f.asm_c == 6) {
 
-        d="His emoticon glitches and changes to a frown. \"A few of you, however, threaten the peace and public safety of our school.\" The screens zoom into the {gym-bagged|asm_gym_bagged_heads} students' heads. \"You all read the {school paper|asm_school_paper}. I speak of the library incident. Delinquency will not be tolerated!\" ";
+        d="His emoticon glitches to a frown. \"However, a few of you threaten the peace and public safety of our school!\" The screens zoom into the {gym-bagged|asm_gym_bagged_heads} students' heads. \"You all read the {school paper|asm_school_paper}. I speak of the library incident. Delinquency will not be tolerated!\" ";
     } else if (f.asm_c == 7) {
-        d="The headmaster clears his {digital throat|asm_electronic_throat}. \"As stated in chapter five paragraph six of the student handbook, we reserve the right to meet delinquency with kinetic force. Those we capture face solitary detention and reprogramming.\" His emoticon changes to a sad face with a {tear|asm_headmaster_tear}. \"This pains me. Sons and daughters, know that the Faculty loves you. I love you. But we have a zero-tolerance policy! Do your duty and report delinquency today. Make Mother Arcadia proud!\"  \n\nMore applause from the Arcadia Youth. Some clutch their hearts and nod."; 
+        d="The headmaster clears his {digital throat|asm_electronic_throat}. \"As stated in chapter five paragraph six of the student handbook, we reserve the right to meet delinquency with kinetic force. Those we capture face solitary detention and reprogramming.\" His emoticon changes to a sad face with a {tear|asm_headmaster_tear}. \"This pains me. Sons and daughters, know that the Faculty loves you. I love you. But we have a zero-tolerance policy! Do your duty and report delinquency today. Make Mother Arcadia proud!\"  \n\nMore applause from the Arcadia Youth."; 
     } else if (f.asm_c == 8) {
         d="\"It is time for our morning exercises. We will begin with stretches.\" Cheerful music erupts over the loudspeakers. \n\nA student beside you takes the gum out of his mouth and puts it behind his ear. Students shake and loosen their bodies.";
        f.end_memory=1; 
@@ -2291,7 +2291,7 @@ case "asm_dome":
 break;
 
 case "asm_shock_rifles":
-    d+="You once saw a student get shot. His body tensed up straight as a ruler then he collapsed to the floor in spasms. He was still twitching even after they dragged him to the nurses office. ";
+    d+="You've seen the effects of being shot. Body tensing up straight as a ruler then collapsing to the floor in spasms. Dragged twitching all the way to the nurses office. ";
 break;
 case "asm_empty_dorms":
     d+="Emptied of students. Everyone is in the courtyard. It takes some time, but you locate your dormitory. <em>A student stands inside your {room|asm_someone_inside_room}.</em>  You rub your eyes and blink.  "; 
@@ -2306,7 +2306,7 @@ case "asm_reprogramming":
 break;
 
 case "asm_electronic_throat":
-    d+="A rumble of thunder. He made the innocuous threatening. ";
+    d+="They all had their idiosyncracies, even the Headmaster. ";
 break;
 case "asm_school_paper":
     d+="They didn't officially name any group. The Chess Club took the blame. <em>Was it them?</em>";
@@ -2332,7 +2332,7 @@ case "asm_groups_students":
 break;
 
 case "asm_arcadia_youth":
-    d+="Always standing with good posture. School uniforms starched and pressed. Red armbands with the letters \"AY\" hand-stitched on them.";
+    d+="Backs straight. School uniforms starched and pressed. Red armbands with the letters \"AY\" hand-stitched on them.";
 break;
 case "asm_blimps":
     
@@ -2439,7 +2439,7 @@ case "showers_your_hair":
 
 break;
 case "showers_delivery_boy":
-    d+="He stares upward into the mist with half-asleep cat eyes and drifts toward the cubbyholes. <em>Is it him?</em> \n\nYou tilt your head to rinse your hair and scan your other neighbor. The girl struggles with a strand of hair caught in her scrub brush. "; 
+    d+="He drifts through the mist as if sleepwalking until he arrives at the cubbyholes. <em>Is it him?</em> \n\nYou tilt your head to rinse your hair and scan your other neighbor. The girl struggles with a strand of hair caught in her scrub brush. "; 
     
 break;
 
@@ -2571,7 +2571,7 @@ case "showers_lockers_students":
     if (f.showers_timer > 8 && f.showers < 13) {
         d+="Some have returned to dressing or undressing. Others stare at the janitor's legs protruding from the chute. ";
     } else {
-        d+="Some undress. Some dry themselves with a towel. Some rummage through their lockers. ";
+        d+="Some dry themselves with a towel. Some rummage through their lockers. ";
         if (f.showers > 12) {
             d+="Some stand by the chute, peering down into it at the disappeared janitor. ";
         }
@@ -2601,7 +2601,7 @@ case "showers_lockers_find_yours":
 break;
 
 case "showers_lockers_curtain":
-    d+="Long flaps hang from the top of the doorway to keep the heat and vapor confined to the shower hall. Steam puffs through the cracks as students enter and exit. ";
+    d+="Transparent flaps hang over the doorway and keep the heat and vapor confined to the shower hall. Steam puffs through the cracks as students enter and exit. ";
 
 break;
 
@@ -2622,7 +2622,7 @@ break;
 
 
 case "showers_lockers_chalk":
-    d+="{Antiquated|showers_lockers_antiquated} but worth a small fortune in Pogs. Most would consider the exchange foolish. But you need it. You need short-term memory. ";
+    d+="{Antiquated|showers_lockers_antiquated} but worth a small fortune in Pogs. Most would consider the exchange foolish. But you need it. Anything for more memory. ";
 break;
 
 case "showers_lockers_antiquated": 
