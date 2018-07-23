@@ -2405,7 +2405,7 @@ case "showers":
     
     } else if (f.showers_timer < 3) {
     
-        d+="\n\nYou sit on a stool. Sudes and rivulets of water run down your  {hair|showers_your_hair} and {body|showers_your_body}. You keep your back to the shower so the cubbyhole is within view. ";
+        d+="\n\nYou sit on a stool. Suds and rivulets of water run down your  {hair|showers_your_hair} and {body|showers_your_body}. You keep your back to the shower so the cubbyhole is within view. ";
     } 
      else if (f.showers_timer==3) {
         d+="\n\nThe blonde {boy|showers_delivery_boy}, turns off his shower. Dripping wet, he ambles toward the cubbyholes, footsteps spattering on tile.  ";
