@@ -1752,7 +1752,9 @@ case "caf_bc_conflict_large_boy":
 break;
 case "caf_bridge_club":
     d+="Bridge club members. Back slapping and laughter. One of them squats on the bench like a monkey, doing little hops and rocking the table. They wear red scarves. A {playing card|caf_bridge_playing_card} peeks from the breast pocket of their uniforms. The boys leave one side of their shirts untucked. The girls have the sides of their heads shaved. ";
-                 f.caf_bridge_chess_conflict++
+                 
+                 
+        if (!f.caf_bridge_chess_conflict) {f.caf_bridge_chess_conflict++;}
     
 break;
 
@@ -2109,12 +2111,16 @@ case "under_stairs":
             }
     } else {
     d+="A small " + oneoff_link("crowd|under_stairs_crowd") + " has formed in the space underneath a large flight of " + oneoff_link("stairs|under_stairs_stairs") + ". They encircle and cheer on {two students|under_stairs_2_students} playing " + oneoff_link("Pogs|under_stairs_pog_game") + ". \n\nA {student|under_stairs_pogwatch} stands near the edge of the flight of stairs, watching the corridor. Next to him, two students press their faces together {kissing|under_stairs_kissing}. ";  
-                f.under_stairs_arcadia_youth_timer++;
     
     }
 
 
     switch(f.under_stairs_arcadia_youth_timer) {
+        case 0:
+        case 1:
+        case 2:
+                f.under_stairs_arcadia_youth_timer++;
+            break; 
         case 3:
             d="The boy standing by the corrider whistles. \"Teacher's pets,\" he shouts. \n\n\"How many?\" says monkey-boy. \n\n\"Three.\" He throws his slammer and pieces scatter.";
                 f.under_stairs_arcadia_youth_timer++;
@@ -2132,7 +2138,6 @@ case "under_stairs":
 
         case 6:
             d="\"You should all be heading for class,\" she says. \n\nHe {throws his slammer|under_stairs_monkey_ignore} and the pieces scatter and flip. ";
-                f.under_stairs_arcadia_youth_timer++;
         break;
 
         case 7:
@@ -2144,13 +2149,16 @@ case "under_stairs":
         case 8:
             f.under_stairs_arcadia_youth_timer++;
             break;
-
         case 9:
+
+            f.under_stairs_arcadia_youth_timer++;
+            break;
+        case 10:
             d+="\n\nTwo {School Security|under_stairs_after_pog_ss} officers stand by the corridor. One of them has his arms crossed. The other lazily taps a {nightstick|under_stairs_nightstick} on his shoulder. ";
             f.under_stairs_arcadia_youth_timer++;
         break;
 
-        case 10:
+        case 11:
             d+="\n\nThe guards walk away.";
             f.under_stairs_arcadia_youth_timer++;
         break;
