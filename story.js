@@ -1634,7 +1634,7 @@ case "caf":
 
     root=1;
     d+="Lunch tables overflow with {students|caf_students} and extend into the horizon. Light blooms through a series of massive {windows|caf_windows}. Food control {carousels|caf_carousels} clatter as lunch trays move up and down from below. ";
-    if (f.caf_bridge_chess_conflict != "x") {
+    if (f.caf_bridge_chess_conflict != "x" && f.caf_bridge_chess_conflict < 3) {
         d+="\n\nThe  {group|caf_bridge_club} seated next to you is noisy. ";
     }
         switch(f.caf_bridge_chess_conflict) {
@@ -2401,6 +2401,7 @@ case "showers":
     root=1;
     if (f.back=="start") {
         f.showers_timer=0;
+        f.showers_lockers_lockers=0;
         f.showers_lockers_seen_chalk=0;
         f.showers_towel_in_cubbyhole=0;
         f.showers_lockers_find_yours=0;
