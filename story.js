@@ -2104,15 +2104,19 @@ case "under_stairs":
         d+="You stand in the space under a large set of stairs. The set of stairs ends at a corridor. Students drift to and from class. ";
         if (!f.under_stairs_kissers_gone) {
             d+="Near the corridor, two students press their faces together, {kissing|under_stairs_kissing}. ";
+                f.under_stairs_arcadia_youth_timer++;
+            
             }
     } else {
     d+="A small " + oneoff_link("crowd|under_stairs_crowd") + " has formed in the space underneath a large flight of " + oneoff_link("stairs|under_stairs_stairs") + ". They encircle and cheer on {two students|under_stairs_2_students} playing " + oneoff_link("Pogs|under_stairs_pog_game") + ". \n\nA {student|under_stairs_pogwatch} stands near the edge of the flight of stairs, watching the corridor. Next to him, two students press their faces together {kissing|under_stairs_kissing}. ";  
+                f.under_stairs_arcadia_youth_timer++;
+    
     }
 
 
     switch(f.under_stairs_arcadia_youth_timer) {
         case 3:
-            d="The boy standing by the corrider whistles. \"Teacher's pet,\" he shouts. \n\n\"How many?\" says monkey-boy. \n\n\"Three.\" He throws his slammer and pieces scatter.";
+            d="The boy standing by the corrider whistles. \"Teacher's pets,\" he shouts. \n\n\"How many?\" says monkey-boy. \n\n\"Three.\" He throws his slammer and pieces scatter.";
                 f.under_stairs_arcadia_youth_timer++;
         break;
 
