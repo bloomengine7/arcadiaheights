@@ -2106,7 +2106,6 @@ case "under_stairs":
         d+="You stand in the space under a large set of stairs. The set of stairs ends at a corridor. Students drift to and from class. ";
         if (!f.under_stairs_kissers_gone) {
             d+="Near the corridor, two students press their faces together, {kissing|under_stairs_kissing}. ";
-                f.under_stairs_arcadia_youth_timer++;
             
             }
     } else {
