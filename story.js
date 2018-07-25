@@ -2163,7 +2163,6 @@ case "under_stairs":
             f.under_stairs_arcadia_youth_timer++;
         break;
     }
-;
     if (f.under_stairs_arcadia_youth_timer > 2 && f.under_stairs_arcadia_youth_timer < 7 ) {
         root = 0;
     } 
