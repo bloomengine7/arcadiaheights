@@ -2137,6 +2137,7 @@ case "under_stairs":
 
         case 6:
             d="\"You should all be heading for class,\" she says. \n\nHe {throws his slammer|under_stairs_monkey_ignore} and the pieces scatter and flip. ";
+                f.under_stairs_arcadia_youth_timer++;
         break;
 
         case 7:
@@ -2165,7 +2166,6 @@ case "under_stairs":
     if (f.under_stairs_arcadia_youth_timer > 2 && f.under_stairs_arcadia_youth_timer < 7 ) {
         root = 0;
     } 
-
 
 break;
 case "under_stairs_nightstick":
