@@ -874,9 +874,7 @@ case "classroom_read_note":
     d+="\"I have info about K. Meet at lunch. Washroom near cafeteria, third stall. Destroy this note.\" \n\nYou crumple the note. Feigning a yawn, you put it in your mouth and eat it. ";
     i.informer = 1;
 
-    if (f.thread_intro < 1) {
         f.thread_intro = 1;
-    }
     back=0;
     f.end_memory = 1;
 break;
