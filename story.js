@@ -496,7 +496,7 @@ case "start": //aka caf
             d+="\n{Washroom|meeting_washroom_stall}";
             
         }
-        if (i.sinatra && !f.gc_discovered_sinatra && !f.gc_discovered_nothing_important) {//if player has already seen success and failure of holding back information. Learned the concept of how to conceal important information
+        if (i.sinatra) {//if player has already seen success and failure of holding back information. Learned the concept of how to conceal important information
             d+="\n{Guidance Counselor|counseling_booth}"; 
         }
 
@@ -1526,7 +1526,6 @@ break;
 case "gc_sinatra":
 
                 d+="\"As I thought.\" The scanner clicks off and the band of warmth fades. \"Yes, the vandalism of the Library. The news would eventually spread. I won't fault you for knowing about it first. But you should only get your news from official sources, not from the Informers Club. We will need to erase the Janitor's name. Straighten your back and {look at me|gc_look_at_him}.\" \n\n";
-                f.gc_discovered_sinatra = 1;
                 f.gc_wipe_sinatra = 1;
                back=0; 
 
