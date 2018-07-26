@@ -2406,11 +2406,18 @@ case "showers":
     if (f.back=="start") {
         f.showers_timer=0;
         f.showers_lockers_lockers=0;
+        f.showers_lockers_students=0;
+        f.showers_lockers_curtain=0;
+        f.showers_lockers_chute=0;
         f.showers_lockers_seen_chalk=0;
         f.showers_towel_in_cubbyhole=0;
         f.showers_lockers_find_yours=0;
         
         scene_change("An Exchange");
+
+
+
+        
     }
     d+="A forest of {columns|showers_columns} shrouded in vapor. Pipes, faucets and shower heads branch out the sides of the columns. Other columns lined with " + oneoff_link("cubbyholes|showers_towel_in_cubbyhole") + ". Water pattering on tile. The smell of sulfur. Naked {students|showers_students} sit on " + oneoff_link("stools|showers_stools") + ", lathering and scrubbing. ";
 
