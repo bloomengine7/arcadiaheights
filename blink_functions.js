@@ -257,26 +257,52 @@ function location_message(message) {
 
 
 function talk(obj) {
+    replies(obj);
+    topics(obj);
+
+}
+
+function replies(obj) {
+    if(f.topic && done_talking(obj)) {
+
+        f.topic=0;
+    } /* else if (f.topic) { //uncomment this to disable return/back when inside topic
+        back = 0;
+    } */
 //dependencies: d, f[]
     var c;
     var text, variable, output_if_clicked;
     var output="";
     var choices="";
     var visible = 0;
-    if (f["talk"]) {
+    if (f["talk"]) { //if click item
+    
         d="";
 //consoleconsole.log("in talk function");
+        f[f["talk"]] = "x";
+
         output_if_clicked = obj[f["talk"]].d;
         if (typeof output_if_clicked == 'function') {
             output_if_clicked();
         } else {
-           output=output_if_clicked;
+           d+=output_if_clicked;
         }
-        f[f["talk"]]="x"; //hide it
 
 //        f["talk"]=0;
+//
+//       
+//
+
     }
     //console.log(obj[0]);
+
+}
+function topics(obj) {
+    var c;
+    var text, variable, output_if_clicked;
+    var output="";
+    var choices="";
+    var visible = 0;
 
 
     //builds choices list
@@ -284,33 +310,33 @@ function talk(obj) {
         variable = c;
         text = obj[c].l;
         output_if_clicked = obj[c].d;
-
-        if (exist(obj[c].v)) {//v is visible
-            visible = 1; 
-        } 
         
-        if (f[variable] == "x") {
-            visible = 0;
-        } 
-        
-        if (f[variable] == 1) {
-            visible = 1;
-        }
 
-        if (!talk) {
+        function set_visibility() {
+            if (f[variable] == 1) {
+                visible = 1;
+            } else if(f[variable]=="x") {
+                visible = 0;
+            } else if (exist(obj[c].v)) {//v is visible
+                visible = 1; 
+            } else {
+                visible = 0;
+            }
+        } 
+
+        set_visibility();
+        if (exist(obj[c].topic) && f.topic != obj[c].topic) {
             visible = 0;
         }
 
         if (f.topic) {
-        //console.log("in fftopic");
-            visible = 0;
-            if (f.topic == obj[c].topic) {
-                visible = 1;
+            if (!exist(obj[c].topic) || f.topic != obj[c].topic) {
+                visible = 0;
             }
-
         }
+
         //check if this is the one that has been clicked on
-        if (obj[c].d=="{jump}" && f[variable] != "x" && visible) {
+        if (obj[c].d=="{jump}" && visible) {
             choices+='<li><a onclick="f[\'' + variable + '\']=\'x\'; f.talk=\'' + variable + '\'; debug(); process(\'' + variable + '\'); return false;">' + text + "</a></li>";
         } else if (visible) {//show link if hasn't been clicked on yet
             choices+='<li><a onclick="f.talk=\'' +  variable +'\';  debug(); process(\'' +  f.node + '\'); return false;">' + text + "</a></li>"; 
@@ -319,8 +345,8 @@ function talk(obj) {
             
         
     }   
-    d+= output;
     d += "<div class='convo'>" + choices + "</div>";
+    
     debug();
 }
 function talk_item(text,variable,output_if_clicked) {
@@ -385,8 +411,7 @@ function reset_inventory() {
 
 function bk(node) {
     var output = "<p class='back'>{Return|" + node + "}</p>";
-
-    root=1;
+    lockdown = 1;
     return output;
 }
 
@@ -465,3 +490,9 @@ loadjscssfile("mystyle.css", "css") ////dynamically load and add this .css file
 
 */
 
+
+function add_class_on_click(item) {
+    item.addClassName('clicked');
+
+
+}

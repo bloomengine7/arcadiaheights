@@ -357,16 +357,28 @@ height:100px;
         .exit_memory a {
             color: #E3E3E3;
             background-color: #696969;
+            border:0;
         }
 
-        .highlight_exit a {
-            
-        }
+ 
         .exit_memory a:hover {
             color: #fff;
             background-image:none;
-            background-color:gray;
+            background-color: #272727;
+            border:0;
+           
         }
+
+               .highlight_exit a {
+           background-color: #ed0b70;
+           color:#fff;
+        }
+
+        .highlight_exit a:hover {
+           background-color: #272727;
+           color:#fff;
+        } 
+
 		#inventory {
 			
 			overflow:visible !important;
@@ -546,7 +558,7 @@ box-shadow: -3px 3px 3px #f6f6f6;
 			clear:both;
 		}
         .old .clicked {
-            color:#000 !important;
+            color:#969696  !important;
 
         }
         .transition {
@@ -558,9 +570,10 @@ box-shadow: -3px 3px 3px #f6f6f6;
 			color:gray;
 		}
 		
-		.deadLink {
+		.deadLink, .deadLink:hover {
 			color: #AFAFAF;
 			border-bottom:1px dotted #D1D1D1;
+            cursor:text;
 		}
 		
 		.inventory_type {

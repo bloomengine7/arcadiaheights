@@ -14,6 +14,8 @@
         <script src="responsive.js"></script>
 
 
+        <script type="text/javascript" src="pxloader/PxLoader.js"></script>
+        <script type="text/javascript" src="pxloader/PxLoaderImage.js"></script>
 
        
 
@@ -53,8 +55,9 @@
 
 	
 <script>
-
-
+function animateBar(percentage){
+    $('#loading_bar').width(percentage+'%');
+}
 
 <!-- jPreLoader script -->
 $(document).ready(function() {
@@ -71,35 +74,114 @@ $(document).ready(function() {
 	
 	
 	
-	if (!config.debugMode) {
-        /*	
-		//calling jPreLoader function with properties
-		var timer;
-		
-		$('body').jpreLoader({
-			splashID: "#jSplash",
-			splashFunction: function() {  //passing Splash Screen script to jPreLoader
-				$('#jSplash').children('section').not('.selected').hide();
-				$('#jSplash').hide().fadeIn(800);
-				resize();
-				timer = setInterval(function() {
-					splashRotator();
-				}, 3000);
-			}
-		}, function() {	//jPreLoader callback function
-			clearInterval(timer);
-			
-		});
-        */
-	}
-	
-	
-});
-<!-- End of jPreLoader script -->	
+	if (config.debugMode) {
 
-	
+        //$("#startScreen p").hide();
+        // Create the loader and queue our 3 images. Images will not 
+        // begin downloading until we tell the loader to start. 
+
+
+
+
+        var w;
+
+        // delay each image and append the timestamp to prevent caching 
+        '/slowImage.php?delay=1&time=' + new Date, 
+        $progress = $('#sample2-progress').text('0 / 100'), 
+        loader = new PxLoader(); 
+         
+        // add 100 images to the queue 
+        for(var i=0; i < preload_images.length; i++) { 
+            // this time we'll create a PxLoaderImage instance instead of just 
+            // giving the loader the image url 
+            var pxImage = new PxLoaderImage(i); 
+         
+            // we can add our own properties for later use 
+            pxImage.imageNumber = i + 1; 
+         
+            loader.add(pxImage); 
+        } 
+        
+
+        var ceiling = 0;
+        // callback that runs every time an image loads 
+        loader.addProgressListener(function(e) { 
+         
+            // log which image completed 
+           // $log.val($log.val() + 'Image ' + e.resource.imageNumber + ' Loaded\r'); 
+         
+            // scroll to the bottom of the log 
+            //$log.scrollTop($log[0].scrollHeight); 
+         
+            // the event provides stats on the number of completed items 
+           // $progress.text(e.completedCount + ' / ' + e.totalCount);
+
+
+     w = $("body").width();
+          console.log(w); 
+           console.log(e.resource.imageNumber);
+          // my_width = e.resource.imageNumber + "%";
+            
+           my_width = (e.resource.imageNumber * 100)/preload_images.length;
+           my_width = Math.ceil(my_width);
+
+
+
+
+           //$("#loading_bar").text("loading assets " + my_width);
+
+
+
+           //
+           if (my_width > ceiling) {
+               ceiling = my_width;
+               my_width += "%";
+                
+               $("#loading_bar").css('width',my_width);
+           }
+           //
+            //animateBar(my_width);
+           $("#loading_bar").animate({width: my_width},10);
+        });
+
+
+
+
+
+
+        //callback that will be run once images are ready 
+        loader.addCompletionListener(function() { 
+            //$("#startScreen p").fadeIn();
+            $("#loading_bar").fadeOut(2000);
+ //           setTimeout(function(){$("#loading_bar").fadeOut(2000);},500);
+        }); 
+         
+        loader.start(); 
+             
+            
+            
+    }
+
+});     
 </script>
+<style>
+#loading_bar{transition: 500ms linear; font-size:1em;
+font-family: sans-serif;
+color:#a9a9a9;
+border-top:3px solid #ed0b70; 
+width:1%; position:absolute; z-index:5000;
+padding:2px 0 0 4px;
+}
 
+#loading_bar .txt {
+background-color:#fff;
+display:inline;
+}
+#loading_bar #percentage {
+text-align:right;
+
+}
+</style>
 
 <!--[if lt IE 9]>
 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -173,30 +255,11 @@ ga('create', 'UA-22524818-1', 'auto');
 
 
 
-<!-- preloader images go here-->
-	<ul id=img-p class="holder current" style="display:none">
-        <!--
-		<li><img src="preloader/images/stripe.gif" /></li>
-		<li><img src="i/boy.gif" /></li>
-	
-	    -->	
-		
-		<div class=clearfix></div>
-	</ul>
-	
-
-
-
 
 	
 
 
-
-
-<!-- This section is for Splash Screen -->
-<div id="jSplash">
-</div>
-<!-- End of Splash Screen -->
+<div id="loading_bar" style=""><div class='txt'></div></div>
 
 
 
@@ -222,7 +285,7 @@ ga('create', 'UA-22524818-1', 'auto');
 		</div><!--meta-->
 	</div><!--wrap2-->
 </div><!--wrap-->
-	<div id="txtHint">Sorry, but you need Javascript and Klingon for this game to run.</div>
+	<div id="txtHint">Sorry but you need Javascript for this game to run.</div>
 <div id="startScreen"><div id="startScreenInner"></div></div>
 
 

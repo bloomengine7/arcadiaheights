@@ -50,6 +50,8 @@
 
 
 #startScreen {
+    overflow-y:scroll;
+    overflow-x:hidden;
 }
 
 #startScreenInner div {

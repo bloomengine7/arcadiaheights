@@ -4,6 +4,51 @@ function ga_subscribe_email() {
     }
 }
 
+function caf_desc() {
+    var d = "Lunch tables overflow with {students|caf_students} and extend into the horizon. Light blooms through a series of massive {windows|caf_windows}. Food control {carousels|caf_carousels} clatter as lunch trays move up and down from below. ";
+    return d;
+}
+
+function dorm_desc(f){
+    if (f.back == "stand_on_toilet" && !f.dorm_privacy_mode) {
+        d+="<div class='transition'>As you step away from the toilet, another chime sounds and the scene beyond the glass wall resolves to high-resolution. \"Privacy mode disabled,\" appears on the wall. \"Time deducted from your daily quota.\"";
+        if (f.root=="rkdrm") {
+            d+=sq("rkdrm_rook_toilet", ["\n\n\"Focus on the game, Suzy,\" says Rook. ", "\n\n\"Stop fooling around,\" says Rook. ", "\n\nHe gestures for you to sit back down. "]);
+        }
+       d+="</div>";
+    }
+    d+="The inside of a concrete cube. Light blooms through a wall of {glass|dorm_glass}. A faded {poster|dorm_poster} hangs crooked on the wall. Next to it is a {panel|dorm_closet} and closet door. In the corner is a {bed|dorm_bed} and a {desk|dorm_desk}. In the other corner is a {toilet|dorm_toilet} and sink. Outside, the {tower|dorm_outside} of the panopticon. ";
+    
+}
+
+function rkdrm_dont_wanna_talk() {
+
+
+}
+
+
+function rkdrm_change_topic(counter) {
+
+    var d = "";
+    switch(counter) {
+        case 0:
+            d+="\"Your pawns are not in a chain. They're weak when isolated.\"";
+        break;
+
+        case 1:
+            d+="His voice becomes deeper. He breathes quicker. \"If you can maintain center pawns, you have more options to organize attacks.\"";
+       
+       break;
+       case 2:
+            d+="\"You need to avoid getting the bishops trapped behind the chains. You see what I did on my side?\" A quiver in his voice. "; 
+        break;
+
+        default:
+            d+="x";
+        break;
+    }
+    return d;
+}
 function wipe_memory(args) {
 //makes multiple inventory items flash and then dissapear
     var c = 0;
@@ -23,7 +68,7 @@ function wipe_memory(args) {
         }
         var item_to_remove =  $("#" + argz[c]);
         var name = argz[c];
-        item_to_remove.effect( "highlight",{color:"yellow"}, 400 );
+        item_to_remove.effect( "highlight",{color:"gray"}, 400 );
         item_to_remove.animate({opacity:0},500);
         setTimeout(function(){
             console.log(name);
@@ -40,19 +85,58 @@ function wipe_memory(args) {
 }
 
 
-
-done_talking = function(obj) {
+/*
+done_talking_topic = function(obj) {
     var c;
-    var done_talking = true;
-    console.log('in convo_fin'); 
+    var done_talking = 0;
     for (c in obj) {
-        console.log('testingtopics: ' + c);    
-        if (f[c] != "x") {
-            done_talking = false;
-        }  
+
+        if(exist(obj[c].topic)) {
+            if (obj[c].topic == f.topic) {
+                if (f[c] != "x") {
+                    done_talking++;
+                }
+            }
+
+        }
     }
-    console.log(done_talking);   
-    return done_talking; 
+
+    //console.log("done_talking_topic: " + done_talking);
+    //
+    if(done_talking > 1) {
+        return false;
+    } else {
+        return true;
+    }
+
+}
+*/
+
+
+done_talking = function(obj,topic) {
+    var topic = topic || f.topic;
+    console.log('testing tpic' + topic);
+    var c;
+    var done_talking = 0;
+    for (c in obj) {
+        if(!exist(obj[c].topic || !obj[c].topic)) { //test only if it is a root topic
+            if (f[c] != "x") {
+                done_talking++;
+            }  
+        }
+
+        else if (obj[c].topic == topic) {
+            if (f[c] != "x") {
+                done_talking++;
+            }
+        }
+        
+    }
+    if(done_talking > 0) {
+        return false;
+    } else {
+        return true;
+    }
     /*
      *
      * washroom_informer_kasparov    

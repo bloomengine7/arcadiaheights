@@ -156,12 +156,20 @@ function process(node,giver,receiver,params) {
 	if(!firstload) {
 	
         if (!params.manual) {
+
+            $('#new img').css('opacity','0.3');
+       
+            setTimeout(function(){$('.old a').attr('onclick', '').addClass('deadLink').unbind('click');},1);
+       /*
             $('#new a').replaceWith(function() {
-                return '<span class="deadLink">' + $(this).text() + '</span>'
+                return '<span class="deadLink">' + $(this).html() + '</span>'
             });
-            
+
+        */    
         }
 
+
+        //::output
         $('#new .back').remove();   
         //change #new div to .old class, but only if it has text
         if ($('#new').text()) {
@@ -580,7 +588,8 @@ function process(node,giver,receiver,params) {
     if (getParameterByName("f") && firstload || getParameterByName("i") && firstload) {
         $("#owrap").hide();
 		$("#wrap").css("display","block");
-		$("#startScreen").css("display","none");
+		hideStartScreen();
+        
 
 	    if (getParameterByName("f") && firstload) {
             //clear_timeouts_intervals();
@@ -624,9 +633,16 @@ function process(node,giver,receiver,params) {
 
 
     if (back == 1 && !root && links && !lockdown) {
-		d+="<p class=\"back\">{Return|" + f.root + "}</p>";
+        if (f.topic) {
+            d+='<p class="back"><a onclick="f.topic=0; debug(); process(\'' + f.back + '\'); return false;">' + "Return" + "</a></li>";
+
+            //d+="<p class=\"back\">{Return|" + f.back + "}</p>";
+        } else {
+        
+            d+="<p class=\"back\">{Return|" + f.root + "}</p>";
+        }
     } else if (back !=1 && back !=0 && !lockdown) {
-        d+="<p class=\"back\">{Return|" + back + "}</p>";
+        d+="<p class=\"back\">{Return|" + f.back + "}</p>";
     } 
     /*
 	if (back !=0 && back != 1 && root && links) {
@@ -703,10 +719,21 @@ function process(node,giver,receiver,params) {
     
     
         //$("#wrap").css( 'overflow-y', 'hidden');
-    
+        //
+        //
+
+        /////////////////////////////////////////////////////::output 
+        /////////////////////////////////////////////////////::output 
+        /////////////////////////////////////////////////////::output 
+        /////////////////////////////////////////////////////::output 
+        /////////////////////////////////////////////////////::output 
         $('#new').html(createLinks(shortcut_characters(d))).promise().done(function(){
 
+            $('#new a').on('click',function() {
+                $(this).addClass('clicked');
 
+            });
+        
             if (!firstload && f.moves > 2) {
   //setTimeout(function() {            
     //$("#wrap").scrollTo("#new", 800); //custom animation speed 
@@ -734,8 +761,8 @@ function process(node,giver,receiver,params) {
                     
                 if (!firstload && !restored) { 
                     setTimeout(function() { 
-                        $("#wrap").scrollTo("#new", 500); //custom animation speed 
-                    },250);
+                        $("#wrap").scrollTo("#new", 300); //custom animation speed 
+                    },50);
                 } 
 
                 restored = 0;
@@ -923,7 +950,7 @@ function process(node,giver,receiver,params) {
 					var x = "#" + highlight_items[c];
 				 $(x).each(function() {
 					if ($(this).is(':visible')) {
-					$(this).effect( "highlight",{color:"yellow"}, 1500 );
+					$(this).effect( "highlight",{color:"gray"}, 1500 );
 					}
 				})
 			}
@@ -1716,6 +1743,8 @@ function showHideMeta(forceHide) {
 
 
 function hideStartScreen() {
+        clear_timeouts_intervals();
+
         $("#owrap").hide()
 
 		startScreenHeight = "-=" + $("#startScreen").height();

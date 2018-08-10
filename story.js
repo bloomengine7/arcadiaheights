@@ -89,10 +89,37 @@ user_variables = [
     "showers_timer",
     "showers_lockers_find_yours",
     "showers_lockers_seen_chalk",
-    "seen_arrival_comic"
+    "seen_arrival_comic",
+    "topic", //do not erase
+    "rook_angry",
+    "_rkdrm_change_topic_counter",
+    "_rkdrm_ethan_counter",
+    "_chess_thrown",
+    "_rkdrm_rook_agitated",
+    "counseling_booth",
+    "_detention_sorry_face",
+    "_cafv2_timer",
+    "hrdcr_timer",
+    "dorm_state", 
+    "know_kas_excommunicated",
+    "rook_boyfriend",
+    "grandmaster_memory_wiped",
+    "caf_state",
+    "caf",
+    "under_stairs",
+    "seen_ghosts",
+    "intro_gradual_reveal"
 
     
 ];//::uservariables
+
+
+
+var preload_images = [
+    "https://bloomengine.com/boy-electronic/adopt/i/collage_sm.jpg",
+    "https://bloomengine.com/boy-electronic/i/atticus_boy_e_start.gif",
+    "https://bloomengine.com/boy-electronic/i/atticus_boy_e_start.gif"
+];
 
 inventoryTypes = [
 	//["object", "Objects"],
@@ -214,12 +241,10 @@ function daemon() {
     //
     no_exit_memory = 0; 
 
-    if (f.moves > 2 && f.node=="start") {
-        clear_timeouts_intervals();
-    } else if (!f.moves) {
+     if (!f.moves) {
 
              $(".glitch").toggleClass('glitch glitch_off'); 
-        function bursts_glitch() {
+            function bursts_glitch() {
              var items = [
                 function(){
 
@@ -291,10 +316,6 @@ function daemon() {
             bursts_glitch();
             bg_int = setInterval(bursts_glitch,5000);
 
-            setTimeout(function(){
-                clear_timeouts_intervals();
-
-            },30000);
         }
        
        
@@ -399,7 +420,7 @@ function nodes(node) { //Do not remove this line
 //
 //
 case "about":
-    d+="These are the memories of Susan Newbourne (as collected by Hadrian Lin and Simon M. from <a href='http://bloomengine.com' target='_blank'>bloomengine.com</a>) \n\nThe game will continue to have new content added. {Stay updated|stay_updated} as we extract new memories from her brain.\n\nIf you notice typos and bugs or if you are interested in beta-testing future games please send an email to bloomengine (aaaayat) gmail (dot com). Put \"beta test anthill\" in the subject line."; 
+    d+="These are the memories of Susan Newbourne (as collected by Hadrian Lin and Simon M. from <a href='http://bloomengine.com' target='_blank'>bloomengine.com</a>) \n\nThe game will continuously evolve and grow. Stay <a href=\"https://feedburner.google.com/fb/a/mailverify?uri=bloomengine&amp;loc=en_US\" target='_blank' onClick='ga_subscribe_email();'>updated</a>, receive early access to new or extra content as we extract new memories from her brain. \n\nFeedback welcome. If you notice typos and bugs or if you are interested in beta-testing future games please send an email to bloomengine (aaaayat) gmail (dot com). Put \"beta test anthill\" in the subject line."; 
     
     
     //Please <a href=\"https://feedburner.google.com/fb/a/mailverify?uri=bloomengine&amp;loc=en_US\" target='_blank' onClick='ga_subscribe_email();'>add yourself here</a> too.";
@@ -408,7 +429,7 @@ case "about":
 
 
 
-    d+='\n\nIf you feel like it, you\'re welcome to drop something in the tip jar and get blockified:\n\n<a href="http://bloomengine.com/boy-electronic/adopt"><img src="http://bloomengine.com/boy-electronic/adopt/i/collage_sm.jpg"></a>';
+    d+='\n\nIf you feel like it, you\'re welcome to drop something in the tip jar and get blockified:\n\n<a href="http://bloomengine.com/boy-electronic/adopt" style="border:0;"><img src="https://bloomengine.com/boy-electronic/adopt/i/collage_sm.jpg"></a>';
     
 d+='<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top"><input type="hidden" name="cmd" value="_s-xclick"><input type="hidden" name="hosted_button_id" value="QT6GWDRJSQ4FE"><input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"><img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1"></form>';
     //\n\n<form action="https://www.paypal.com/cgi-bin/webscr" method="post"><input name="hosted_button_id" value="Z7J7HN5XE5X28" type="hidden"><input src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" name="submit" alt="PayPal - The safer, easier way to pay online!" border="0" type="image"><img alt="" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" border="0" height="1" width="1"></form>';
@@ -433,7 +454,8 @@ case "start": //aka caf
         //home_memories("Memories");    
     }
 
-  var items = [
+
+    var items = [
         function(){
             
             $("#owrap").show().removeClass().addClass("std intro");
@@ -482,69 +504,161 @@ case "start": //aka caf
     if (f.moves == 1) {
         //timer(items);
     } 
-        //$('#overlay').empty().titleSequence(sequence);
+
+
+    //$('#overlay').empty().titleSequence(sequence);
     //d+="content triggered manually";
         //initNode('dorm');
         //
-        clear_timeouts_intervals();
-        //
-        d+="Your name is Susan Newbourne. \nThese are your high school memories.\n{Dormitory|dorm}";
+    clear_timeouts_intervals();
+    //
+    d+="Your name is Susan Newbourne. Student number C-37182.";
+  
 
-        d+="\n{Classroom|classroom}";
+///////////////////////////////////////
+    //2 requirements: had guidance counselor tell you you need boyfriend and seen first gang battle and met rook
+    if (i.kasparov && f.thread_intro > 2 && f.dorm_state == "rkdrm") { 
+        d+="\n{Dormitory (Chess)|rkdrm}";
+    } else {     
+        d+="\n{Dormitory|dorm}";
+    }
 
-        if (i.informer && f.thread_intro < 2) {
-            d+="\n{Washroom|meeting_washroom_stall}";
+
+//////////////////////////////////////
+    d+="\n{Classroom|classroom}";
+
+
+
+
+///////////////////////
+    if (i.informer && f.thread_intro < 2) {
+        d+="\n{Washroom|meeting_washroom_stall}";
+        
+    }
+
+
+
+///////////////////////
+    if (f.counseling_booth) {//if player has already seen success and failure of holding back information. Learned the concept of how to conceal important information
+        switch(f.counseling_booth) {
+            case "x":
+            break;
+
+            case "v2":
+                d+="\n{Guidance Counselor|counseling_booth}"; 
+            break;
+            default:
+                d+="\n{Guidance Counselor|counseling_booth}"; 
             
         }
-        if (i.sinatra) {//if player has already seen success and failure of holding back information. Learned the concept of how to conceal important information
-            d+="\n{Guidance Counselor|counseling_booth}"; 
-        }
-
-        d+="\n{Cafeteria|caf}";
         
-
-        //d+="\n{Jump Test|story2.js|dorm}";
-
+    }
 
 
-        if (!f.seen_vandalism) {
+//////////////////////    
+    switch(f.caf) {
+        case "x":
+        break;
 
-            d+="\n{Library|library_start}";
-        }
+        case "cafv2":
+            d+="\n{Cafeteria (Confrontaton)|cafv2}";
+        break;
 
-        //if (f.thread_intro > 2) {
-            d+="\n{Under the Stairs|under_stairs}";
-        //}
-        d+="\n{Assembly|asm}";
-
-
-       d+="\n{Public Showers|showers}"; 
-    //::start
-        //as more and more added, remove older state variables and only keep the newest ones. If ppl play for a while they will have already seen the old stuff
-        if (f.thread_intro > 2 && f.thread_chess_club > 0 && f.seen_vandalism && f.pog_finished) {
-            if (typeof ga !== "undefined") { 
-                ga('send', 'pageview', "/arcadiaheights/" + "finished-memories");
+        default:
+            if (f.intro_gradual_reveal > 4) {
+                d+="\n{Cafeteria|caf}";
             }
 
-            d+="\n\n<em>You have exhausted your memories.</em> \n<div style='font-size:.75em; line-height:1.5em;'>Please check back on weekends for more content. {Stay updated|stay_updated} or check out some {other games|meta_other_games}.</div>";
+
+
+    }
+ 
+
+    
+
+
+    //d+="\n{Jump Test|story2.js|dorm}";
+
+
+//////////////////////
+    if (f.intro_gradual_reveal > 1) {
+
+        d+="\n{Library|library_start}";
+    }
+
+
+
+/////////////////
+    //if (f.thread_intro > 2) {
+    if (f.intro_gradual_reveal > 4) {
+        d+="\n{Under the Stairs|under_stairs}";
+    }
+
+
+ ////////////////////
+    //
+    if(f.intro_gradual_reveal > 6) {
+        d+="\n{Assembly|asm}";
+    }
+
+
+
+/////////////////// 
+    d+="\n{Public Showers|showers}"; 
+
+
+    if (f.hrdcr && f.hrdcr != "x") {
+        d+="\n{Hardcore|hrdcr}";
+    }
+
+
+
+    for (var c in f) {
+            //console.log(c + " " + f[c]);
+    
+        if(c.charAt(0) == "_") {
+            f[c]=0;
         }
+    }
+
+
+
+
+
+
+//::start
+
+//::EXHAUSTED
+
+    //as more and more added, remove older state variables and only keep the newest ones. If ppl play for a while they will have already seen the old stuff
+    if (f.thread_intro > 2 && f.thread_chess_club > 0 && f.seen_ghosts) {
+        if (typeof ga !== "undefined") { 
+            ga('send', 'pageview', "/arcadiaheights/" + "finished-memories");
+        }
+
+        d+="\n\n<em>You have exhausted your memories.</em> \n<div style='font-size:.75em; line-height:1.5em;'>Thank you for playing. This game will continuously evolve and grow. <a href=\"https://feedburner.google.com/fb/a/mailverify?uri=bloomengine&amp;loc=en_US\" target='_blank' onClick='ga_subscribe_email();'>Stay updated</a> and receive early access to new/extra content or check out some {other games|meta_other_games}.</div>";
+    }
 
 /*
-        d+="<hr>";
-        if (!f.seen_arrival_comic) {
-            d+="<a class='out' href='https://bloomengine.com/arcadiaheights/promo/arrival' target='_blank'>Arrival</a>";
-        }
+    d+="<hr>";
+    if (!f.seen_arrival_comic) {
+        d+="<a class='out' href='https://bloomengine.com/arcadiaheights/promo/arrival' target='_blank'>Arrival</a>";
+    }
 */
 
-        //always keep this last
-        if (!f.seen_showdown_intro) {
-            d="";
-            f.showdown_intro_c=0;
-            f.node="showdown_intro";
-            nodes("showdown_intro");
-        }
-        
-        
+    //always keep this last
+    if (!f.seen_showdown_intro) {
+        d="";
+        f.showdown_intro_c=0;
+        f.node="showdown_intro";
+        nodes("showdown_intro");
+    }
+    
+
+    //don't overload player with choices in beginning
+    if (f.intro_gradual_reveal < 10) {
+        f.intro_gradual_reveal++;
+    }       
         
 break;
 
@@ -553,7 +667,7 @@ case "showdown_intro":
     f.root = "showdown_intro";
     console.log("f.root" + f.root);
 f.showdown_intro_c++;
-//scene_change("Bloodhounds");
+scene_change("Bloodhounds");
 f.seen_showdown_intro=1;
     switch (f.showdown_intro_c) {
         case 1:
@@ -563,7 +677,7 @@ f.seen_showdown_intro=1;
         break;
         case 2: 
             lockdown = 1;
-            d+="The P.A. system crackles from {above|showdown_intro_heavens}: \"We don't kill our students, Kasparov. Come quietly. We already have the others.\"\n\nThe {security|showdown_intro_ss} guards inch closer to him and their bodies take shape. They have monitors for heads and emoticons for faces. Their {nightsticks|showdown_intro_nightsticks} bristle with electricity. ";
+            d+="The P.A. system crackles from {above|showdown_intro_heavens}: \"We don't kill our students, Kasparov. Come quietly. We already have the others.\"\n\nThe {security|showdown_intro_ss} guards inch closer to him and their bodies take form. They have monitors for heads and emoticons for faces. Their {nightsticks|showdown_intro_nightsticks} bristle with electricity. ";
         break;
 
         case 3:
@@ -588,7 +702,7 @@ case "showdown_intro_heavens":
 break;
 
 case "showdown_intro_ss":
-    d+="Their black uniforms melt with the darkness and make their heads appear to float disembodied. Reflective red armbands with two interlocking S shapes glint.";
+    d+="Black uniforms melt into the shadows and make their heads appear disembodied. Reflective red armbands with two interlocking S shapes glint.";
 break;
 case "showdown_intro_mask":
     d+="The shadows on the mask shift as the emoticons hover closer.";
@@ -607,14 +721,12 @@ case "meta_other_games":
 break;
 //::base
 case "dorm":
+    if (!i.kasparov && f.back=="start" || f.back=="showdown_intro") {scene_change("Kasparov");    }
     root=1;
     f.seen_dorm = 1;
-    if (!i.kasparov && f.back=="start" || f.back=="showdown_intro") {scene_change("Kasparov");    }
-    
-    if (f.back == "stand_on_toilet" && !f.dorm_privacy_mode) {
-        d+="<div class='transition'>As you step away from the toilet, another chime sounds and the scene beyond the glass wall resolves to high-resolution. \"Privacy mode disabled,\" appears on the wall. \"Time deducted from your daily quota.\"</div>";
-    }
-    d+="You stand inside the concrete cube of your dormitory. Light blooms through a a wall of {glass|dorm_glass}. A faded {poster|dorm_poster} hangs crooked on the wall. Next to it is a {panel|dorm_closet} and closet door. In the corner is a {bed|dorm_bed} and a {desk|dorm_desk}. In the other corner is a {toilet|dorm_toilet} and sink. Outside, the {tower|dorm_outside} of the panopticon. ";
+
+
+    dorm_desc(f);
 
     //d+=seq("test_sq", ["sqfirst","second","third"],1);
     //d+=oneoff("oneoff","","oneoff");
@@ -624,7 +736,18 @@ break;
 
 
 case "dorm_desk":
-    d+="A metal slab extending out of the wall. On it is a {notebook|dorm_notebook} and {pen|dorm_pen}. A cube-shaped stool lies tucked underneath the desk.";
+    d+="A metal slab extending out of the wall. ";
+
+    if (f.root=="rkdrm") {
+        d+="On it are a few pieces of {Origami|rkdrm_origami}.";
+    } else {
+
+        d+="On it is a {notebook|dorm_notebook} and {pen|dorm_pen}. A cube-shaped stool lies tucked underneath the desk.";
+    }
+break;
+
+case "rkdrm_origami":
+    d+="Made from pages of the school newspaper and folded into chess pieces. There is a Queen, Rook and bishop. It's hard to imagine Rook folding them with his gorilla hands. ";
 break;
 case "dorm_notebook":
     d+="The pages are plastic and slippery to the touch. At the bottom outer corner of each page is a watermark of the " + oneoff_link("Ephemera logo|eph_logo") + ". Printed on the pages are {questions|dorm_notebook_questions} and a space to write answers.";  
@@ -644,10 +767,10 @@ case "dorm_pen":
     d+="Cartoonishly large and heavy, embossed with the {Ephemera logo|eph_logo}. ";
 break;
 case "dorm_bed":
-    d+="A futon on a raised slab of concrete.";
+    d+="A " + oneoff_link("futon|_dorm_futon") + " on a raised slab of concrete.";
 break;
 case "dorm_poster":
-    d+="On the wall is a faded poster of "
+    d+="A faded poster of "
     d+=oneoff_link("April Thursday|dorm_poster_april_oneoff");
     d+=" with her fist raised in the air as if uppercutting an invisible foe. Her other hand holds a microphone. She wears a customized school uniform: flared sleeves, skirt shorter than standard issue. On her wrists are "; 
    
@@ -669,8 +792,18 @@ break;
 case "dorm_poster_april_oneoff":
     d+="You can't stand the sight of her. ";
 break;
+
+case "_dorm_futon":
+    d+="<em>The bed is not important.</em> You feel a wave of Nausea. ";
+
+break;
 case "poster_corner":
 
+    if(f.root=="rkdrm") {
+
+        d+="You glance at Rook. <em>He doesn't need to know your secrets.</em> ";
+        break;
+    }
     if (f.seen_behind_poster && f.seen_poster_fail || f.direct_poster) {
         d+="You first touch the panel to open the closet. The words \"Privacy mode enabled\" form on the glass wall. \n\n";
         f.direct_poster = 1;
@@ -681,11 +814,22 @@ case "poster_corner":
     }
     if (f.dorm_privacy_mode) {
         f.seen_behind_poster = 1; 
-        d+="You lift up the poster. Written on the wall behind it are the words: \"Find Kasparov.\" ";
+        d+="You lift up the poster. ";
+        
+        d+="Scratched on the wall behind it are the words: \"Find Kasparov\". ";
         i.kasparov=1;
         f.end_memory=1;
+
+        if (f.poster_sinatra || f.know_kas_excommunicated) {
+        
+            d+="Written in smaller {letters|dorm_chalk_writing} underneath are the words: ";
+
+        }
+        if (f.know_kas_excommunicated) {
+            d+="<li>He was excommunicated from Chess club</li>";
+        }
         if (f.poster_sinatra) {
-            d+="In smaller {letters|dorm_chalk_writing}: \"Talk to Sinatra. Janitor.\"";
+            d+="<li>Find Sinatra (Janitor in east wing)</li>";
             i.sinatra = 1;
         }
     } 
@@ -695,7 +839,7 @@ break;
 case "dorm_chalk_writing":
     d+="Written in chalk. ";
     if (!f.showers_lockers_seen_chalk) {
-        d+=oneoff_text("where_find_chalk","<em>Where did you find chalk?</em>");
+        d+="<em>Where did you find chalk?</em>";
     }
 break;
 case "dorm_poster_spiked_bracelets":
@@ -721,7 +865,7 @@ case "dorm_toilet":
 
             d+="{footprint symbols|stand_on_toilet}";
         }
-        d+=" to indicate where to place your feet. The toilet attaches to a taller block which serves as a sink. ";
+        d+=" to indicate where to place your feet. The toilet attaches to a taller block serving as a sink. ";
     break;
 
 case "stand_on_toilet":
@@ -742,7 +886,7 @@ case "stand_on_toilet":
                     d+="<li>{Close closet|close_dorm_closet}</li>";
                     
             } else {
-                d+="You touch the panel and the closet door slides open. Inside, school uniforms hang on a rack. Other clothes and articles are placed in shelves. \n\nA chime sounds and the words: \"Privacy mode activated,\" form on glass wall behind you. A digital counter appears, with minutes and seconds counting down. The landscape outside the window {pixellates|dorm_glass_pixellate} to low resolution.\n\n";
+                d+="You touch the panel and the closet door slides open. Inside, school uniforms hang on a rack. Other clothes and articles are placed in shelves. \n\nA chime sounds and the words: \"Privacy mode activated,\" form on glass wall behind you. A digital counter appears, with minutes and seconds counting down. The landscape outside the window {pixellates|dorm_glass_pixellate} to low resolution. ";
                 f.dorm_closet_open = 1;
                 f.dorm_privacy_mode = 1;
             }
@@ -795,7 +939,6 @@ case "stand_on_toilet":
                 
             }
             no_exit_memory=1; 
-            d+=bk('dorm');
            //d+="<p class='back'>{Return|dorm}</p>"; 
 
         break;
@@ -870,12 +1013,10 @@ case "classroom_note_kas_passed":
     break;
 
 case "classroom_read_note":
-    root=1;
     d+="\"I have info about K. Meet at lunch. Washroom near cafeteria, third stall. Destroy this note.\" \n\nYou crumple the note. Feigning a yawn, you put it in your mouth and eat it. ";
     i.informer = 1;
 
-        f.thread_intro = 1;
-    back=0;
+    f.thread_intro = 1;
     f.end_memory = 1;
 break;
 case "classroom_desks":
@@ -941,7 +1082,7 @@ case "classroom_skirts_bunched":
     d+="Rolled several times at the waist to show more leg. Still within dress code. ";
     break;
 case "classroom_turncoat":
-    d+="A member of the Chess Club. Hair clipped extremely short. Blue scarf. Socks pulled over his pants. ";
+    d+="A member of the Chess Club. Hair clipped extremely short. Bowtie. Socks pulled over his pants. ";
 break;
 
 case "classroom_notes":
@@ -1007,8 +1148,8 @@ break;
 case "meeting_washroom_stall":
     root=1;
     no_exit_memory=1;
-    scene_change("The Informer");    
     if (f.back=="start") {
+        scene_change("The Informer");    
         //f.washroom_informer_arrive = "0";
        i.washroom_informer_pogs = 1;
        f.washroom_informer_paid = 0;
@@ -1067,9 +1208,10 @@ case "washroom_informer_desc":
 
     //conversation example
     //
+    f.counseling_booth = "v1";
 
-    
     var tmp = {
+
 
         "washroom_informer_kasparov":
             {l:"Kasparov", d:function() {
@@ -1258,7 +1400,7 @@ break;
 
 
     case "meeting_washroom_stall_graffiti":
-        d+=sq("meeting_washroom_stall_graffiti", ["Layer upon layer of fading graffiti. At least you have something to read to pass the time. ", "There are some comics. One is a five panel story about a dog lost in a forest. ", "There are some algebraic functions. ", "There's a heart with 'Karen + Horatio' inscribed in it.", "The back wall is tagged with a huge overlapping T and C of the Turncoat gang."]);
+        d+=sq("meeting_washroom_stall_graffiti", ["Layer upon layer of fading graffiti. At least you have something to read to pass the time. ", "There are some comics. One is a five panel story about a dog lost in a forest. ", "There are some algebraic functions. ", "There's a heart with 'Karen + Horatio' inscribed in it.", "The back wall is tagged with the crown symbol of the Chess Club."]);
     break;
 	///                                    
 	case "counter":                        
@@ -1305,7 +1447,7 @@ break;
 case "washroom_main":
     root = 1;
     d+="The stalls are empty. A row of sinks and {mirrors|washroom_mirror} line the wall. One of the mirrors is smashed with its shards scattered across the floor. Light pours in from a {narrow window|washroom_window} near the ceiling. A doorway leads {outside|washroom_back_out}.";
-
+    lockdown = 1;
 
 
 
@@ -1315,7 +1457,7 @@ break;
 		                                   
 		                                   
 case "washroom_mirror":
-    d+="Your reflection stares back at you through the shards and cracks. Obsidian hair. Supple and pristine skin. Primordial eyes. ";
+    d+="Through shards and cracks your reflection stares back at you. Obsidian hair. Supple and pristine skin. Primordial eyes. ";
 break;
 
 case "washroom_window":
@@ -1334,7 +1476,15 @@ break;
 case "counseling_booth":
     root=1;
     
-    scene_change("The Truth");
+    switch(f.counseling_booth) {
+        case "v2":
+            f.rook_boyfriend = 1; 
+            scene_change("Matters of the Heart");
+        break;
+        default:
+            scene_change("The Truth");
+        
+    }
 
     d+="A small narrow room. Everything is white except for the {red stool|counseling_booth_stool} you sit on. There is a panel on the wall with a {camera|counseling_booth_camera}, a {speaker|counseling_booth_speaker} and a {slot|counseling_booth_slot}. Overhead, flourescent bulbs stutter. ";
 
@@ -1361,7 +1511,7 @@ case "counseling_booth":
 
         break;
         case 6:
-
+            
             d="A chime. \"Operator connected,\" says a voice. The buzz of the speaker resolves to high-fidelity silence.\n\n\"Welcome, my child. Prepare to recite the words. Please hold still for the scan.\" A band of warmth passes over your face. \"Arcadia,\" he says. \n\n{Minds free|guidance_counselor_the_words}";
             back=0;
             f.guidance_counselor_the_words_count=0;
@@ -1419,7 +1569,7 @@ case "guidance_convo":
         f.gc_sinatra = 0;
         f.topic = 0; 
         f.gc_nothing_to_say = 0;
-        f.gc_who_are_you = 0;
+        f.gc_who_are_you = 1;
        
     }
 
@@ -1450,9 +1600,16 @@ case "guidance_convo":
 
         "gc_boyfriend":
             {l:"Boyfriend", d:function() {
-                d+="\"Yes, the delicate matter of a boyfriend. Our records indicate you have not dated for two semesters.\"";
-                f.gc_semester=1; 
-                f.gc_dating=1;
+                if (!f.rook_boyfriend) {
+                    d+="\"Yes, the delicate matter of a boyfriend. Our records indicate you have not dated for two semesters.\"";
+                    f.gc_semester=1; 
+                    f.gc_dating=1;
+                    f.topic = 0;
+                } else {
+                    //v2
+                    d+="\"Yes, the delicate matter of the boyfriend. Ryan Hook, I believe it is? You are to be commended for applying our suggestions. According to the records, you have been spending an appropriate amount of time with him.\" ";
+                   f.topic = "rook_boyfriend";
+                }
             }},
         "gc_semester":
             {l:"Semester", d:"\"It does not belong to you to know how long a semester is.\""},
@@ -1471,6 +1628,10 @@ case "guidance_convo":
                 i.boyfriend = 1;
                 f.topic=0;    
                 f.gc_informer = 1;
+                if (f.kasparov_excommunicated) {
+                    f.topic = "what_else";
+                    f.gc_sinatra = "x"; 
+                }
                 f.gc_kasparov = 1;
             }, topic:"dating"},
         "gc_kasparov":
@@ -1497,10 +1658,92 @@ case "guidance_convo":
         "gc_no_face":
             {l: "No face. Vandalism of library", d: function() {
                 d+="\"As I suspected.\" A click. The scanner shuts off and the band of warmth fades. \"The news would eventually spread. I won't fault you for knowing about what will become public. But you need to be open with us. And you should only get news from official sources. Now hold still, straighten your back and {look at me|gc_look_at_him}. That's it. Good posture is important, my child.\" From inside the panel, there is a screetch of dot-matrix printer. A paper comes out of the slot.\" \n\n";
+                f.topic = "fin";
                 talk=0;
                 f.gc_discovered_nothing_important = 1;
 
             }},
+        "_gcv2_rook_boyfriend":
+            {l: "Rook is a wonderful person", d: "\"I am sure he is.\" ", v:1, topic:"rook_boyfriend"},
+        "_gcv2_whats_the_problem":
+            {l: "What is the problem", d: function() {
+                d+="\"It has been noticed that you spend much time playing Chess. Have you thought about varying your activities?\" ";
+                f._gcv2_rook_boyfriend = "x";
+                f._gcv2_activities = 1;
+                f._gcv2_he_just_care_chess = 1;
+            },v:1, topic: "rook_boyfriend"},
+        "_gcv2_he_just_care_chess":
+            {l: "He likes chess", d: function() {
+
+                d+="\"Indeed. But romantic life should not be a one note melody.\" ";
+            },topic: "rook_boyfriend"},
+        "_gcv2_activities":
+            {l: "Activities", d: function() {
+                d+="\"Many students find it beneficial to spend time holding hands or kissing. Remember, child, dating is not only about the quantity, but the quality of the time spent together.\" ";
+                    f._gcv2_fix_problem = 1; 
+                
+                }, topic:"rook_boyfriend"
+            },
+        "_gcv2_fix_problem":
+            {l: "I will fix the problem", d: function() {
+                d+="\"Excellent. I think we have accomplished much today.\" The band of warmth continues moving over your face. He sighs. \"There is more. What are you hiding?\"";
+                
+                f.topic = "what_else";
+            }, topic:"rook_boyfriend"},
+
+
+        "_gcv2_sinatra":
+            {l: "Sinatra", d: function() {
+                d+="\"Ah, the Janitor.\" The scanner clicks off and the band of warmth fades. \"You have discovered he witnessed the incident in the library. We will need to fix that. Straighten your back and {look at me|gc_look_at_him}.\" \n\n";
+                f.gc_wipe_sinatra = 1;
+               back=0; 
+               
+            }, v:1, topic:"what_else"},
+            
+                
+        "_gcv2_kasparov":
+            {l: "Kasparov excommunicated", d: function() {
+                d+="\"Place your hands above you head! Do not move.\" \n\nThe lights begin to flicker. Your body becomes limp. Guards burst into the room and catch you before you collapse. They force you upright and position your head to face the camera. \n\n\"How do you know this information?\" says the Counselor.";
+
+                f.topic = "how_know";
+
+               
+            }, v:1, topic:"what_else"},
+            
+        "_gcv2_grandmaster":
+            {l: "Grandmaster", d: function() {
+                d+="\"Interesting... Guards,\" he says. One of the guards nods and exits the room. The lights strobe faster and the sound of Cicadas reaches a crescendo. The smell of burnt toast wafts through the air. ";
+                f.topic = "fin";
+       f.counseling_booth = "x"; 
+                
+        f.grandmaster_memory_wiped = 1;
+        f.hrdcr = "ghosts";
+        f.know_kas_excommunicated = 0;
+
+        f.end_memory = 1;
+        root = 1;
+
+        wipe_memory('kasparov');
+               
+            }, v:1, topic:"how_know"},
+            
+        "_gcv2_how_know_rook":
+            {l: "Rook", d: function() {
+                d+="The band of warmth sweeps your face. \"Tell me the truth,\" he says. ";
+                if (f._gcv2_how_know_ethan) {
+                    d="\"Don't waste time, Suzy.\" ";
+                }
+
+               
+            }, v:1, topic:"how_know"},
+        "_gcv2_how_know_ethan":
+            {l: "Ethan", d: function() {
+                d+="The band of warmth sweeps your face. \"Tell me the truth,\" he says. ";
+                if (f._gcv2_how_know_rook) {
+                    d="\"Don't waste time, Suzy.\" ";
+                }
+               
+            }, v:1, topic:"how_know"},
 
     };
     //d+=tmp.gc_who_are_you.o;
@@ -1514,11 +1757,17 @@ case "guidance_convo":
    } 
     
     if (!f.topic && !f.gc_kasparov) {   
-        d+="<li><span class='deadLink'>Kasparov<span></li>";
-        if (!f.gc_informer) {
-            d+="<li><span class='deadLink'>Informer<span></li>";
-        }
+        if(f.know_kas_excommunicated) {
+
+            d+="<li><span class='deadLink'>Kasparov excommunicated<span></li>";
+        } else {
+            d+="<li><span class='deadLink'>Kasparov<span></li>";
+           
+            if (!f.gc_informer) {
+                d+="<li><span class='deadLink'>Informer<span></li>";
+            }
            d+="<li><span class='deadLink'>Sinatra<span></li>"
+        }
     }
 break;
 
@@ -1527,8 +1776,9 @@ case "gc_sinatra":
 
                 d+="\"As I thought.\" The scanner clicks off and the band of warmth fades. \"Yes, the vandalism of the Library. The news would eventually spread. I won't fault you for knowing about it first. But you should only get your news from official sources, not from the Informers Club. We will need to erase the Janitor's name. Straighten your back and {look at me|gc_look_at_him}.\" \n\n";
                 f.gc_wipe_sinatra = 1;
+                f.topic = "fin";
                back=0; 
-
+               
 break;
 case "gc_kasparov":
     d+="\"What is the meaning of this? Why did you say that name? Do not attempt sudden {movements|gc_sudden_movements}. Place your hands on your head.\" \n\nThe lights begin flickering. The sound of cicadas fills the room. A smell of burnt toast."; 
@@ -1538,7 +1788,6 @@ case "gc_kasparov":
         }
 
 
-    wipe_memory('kasparov','sinatra','vandalism_library','informer');
 
 
 
@@ -1548,7 +1797,8 @@ break;
 case "gc_sudden_movements":
     d+="Your body becomes limp. The door to the booth bursts open. Two School Security guards step in and catch you before you slump to the floor. They force you back upright. \"We have some auxiliary questions for you, Suzy\" says the counselor.";
    root=1; 
-    
+   f.counseling_booth = "x"; 
+    wipe_memory('kasparov','sinatra','vandalism_library','informer');
     f.end_memory=1;
     
 break;
@@ -1574,6 +1824,8 @@ case "gc_look_at_him":
 
     }
     f.end_memory=1;
+   f.counseling_booth = "x"; 
+    
 /*
         d+="<li><span class='deadLink'>Kasparov<span></li>";
         d+="<li><span class='deadLink'>Informer<span></li>";
@@ -1630,7 +1882,7 @@ case "caf":
 
 
     root=1;
-    d+="Lunch tables overflow with {students|caf_students} and extend into the horizon. Light blooms through a series of massive {windows|caf_windows}. Food control {carousels|caf_carousels} clatter as lunch trays move up and down from below. ";
+    d+=caf_desc();
     if (f.caf_bridge_chess_conflict != "x" && f.caf_bridge_chess_conflict < 3) {
         d+="\n\nThe  {group|caf_bridge_club} seated next to you is noisy. ";
     }
@@ -1649,7 +1901,7 @@ case "caf":
             case 4:
                 f.caf_bridge_chess_conflict++;
             
-                d="\"Why'd you smash up the library? Faculty's giving us heat for it.\" says the chessboard boy.\n\n\"We don't smash libraries,\" says monkey-boy. \"We can do your face though.\"\n\n\"Try it,\" says the chessboard boy. \n\nThe Bridge Club members circle around the table and stand beside monkey-boy. A  jostle then fists fly and one of the Bridge Club members lands on top of the table. Food platters and utensils careen everywhere.\n\nYou {shuffle over|caf} and continue eating. ";
+                d="\"Why'd you smash up the library? Faculty's giving us heat for it.\" says the chessboard boy.\n\n\"We don't smash libraries,\" says monkey-boy. \"We can smash your face though.\"\n\n\"Try it,\" says the chessboard boy. \n\nThe Bridge Club members circle around the table and stand beside monkey-boy. A  jostle and fists fly. One of the Bridge Club members lands on top of the table. Food platters and utensils careen everywhere.\n\nYou {shuffle over|caf} and continue eating. ";
                 back=0;
             break;
             case 5:
@@ -1657,7 +1909,7 @@ case "caf":
             break;
             case 6:
                 f.caf_bridge_chess_conflict++;
-                d="The brute spins like a disqus thrower, fist outstretched. Monkey-boy hops backward, dodging each revolution. Finally he ducks and the brute's fist meets you in the face. The world {spins|caf_bc_fight_focus}.";
+                d="The brute throws his wrecking ball of a fist at Monkey-boy. Monkey-boy ducks and the brute's fist meets you in the face. Everything {spins|caf_bc_fight_focus}.";
                 f.caf_bridge_chess_conflict = "x"
                 back=0;        
             break;
@@ -1722,7 +1974,7 @@ break;
 
 case "caf_bc_fight_focus":
 
-                d+="The world focuses. Lunch tray on the floor. Food in your hair and clothes. Monkey-boy grapples with the brute, hanging off his neck and kicking him. \n\n{School Security Guards|caf_bc_conflict_ss} rain from the ceiling. 45 seconds before they reach this location. "; 
+                d+="The world refocuses. Lunch tray on the floor. Food in your hair and clothes. Monkey-boy grapples with the brute, hanging off his neck and kicking him. \n\n{School Security Guards|caf_bc_conflict_ss} rain from the ceiling.  "; 
                 f.caf_bridge_chess_conflict = "x";
                 back=0;
 break;
@@ -1732,7 +1984,7 @@ case "caf_bc_fight_chessboard":
 break;
 case "caf_bc_conflict_ss":
     lockdown=1;
-    d="Sliding down on spider cables. Armored uniforms and riot gear. Angryface emoticons. 30 seconds before they arrive on location. \n\nYou {stand up|detention_after_caf_fight}. ";
+    d="They slide down on spider cables. Armored uniforms and riot gear. \n\nYou {stand up|detention_after_caf_fight}. ";
     f.caf_bridge_chess_conflict = "x";
 break;
 case "caf_bc_conflict_boy":
@@ -1744,7 +1996,7 @@ case "caf_bc_conflict_boardmaster_pants":
     d+="His socks extend up over the legs of his pants. ";
 break;
 case "caf_bc_conflict_large_boy":
-    d+="Wireframe glasses and a checkered bowtie. His jacket is turned inside out and his socks are pulled over his pant legs. He crosses his arms. "; 
+    d+="Wireframe glasses and a bowtie. His jacket is turned inside out and his socks are pulled over his pant legs. He crosses his arms. "; 
     f.caf_bridge_chess_conflict=4;
 break;
 case "caf_bridge_club":
@@ -1796,16 +2048,15 @@ case "detention_after_caf_fight":
     
     scene_change("Detention");
     i.wolff = 1;
-    d+=oneoff_link("Officer Wolff|detention_ss_officer") + " straddles a small foldable chair, staring at the three of you. Behind him is a large " + oneoff_link("mirror|detention_after_fight_mirror") + ". You sit in a " + oneoff_link("classroom desk|detention_desk") + ", holding a bag of ice to your cheek. To your left is the " + oneoff_link("monkey-boy|detention_monkey_boy") + ". To your right is ";
+    d+=oneoff_link("Officer Wolff|_detention_ss_officer") + " straddles a small foldable chair, staring at the three of you. Behind him is a large " + oneoff_link("mirror|_detention_after_fight_mirror") + ". \n\nYou sit in a " + oneoff_link("classroom desk|_detention_desk") + ", holding a bag of ice to your cheek. To your left is the " + oneoff_link("monkey-boy|_detention_monkey_boy") + ". To your right is ";
     if (i.rook) {
-        d+="{Rook|detention_rook} ";
+        d+="{Rook|_detention_rook} and " + oneoff_link("Ethan|_detention_boardmaster") + ".";
     } else {
-        d+= "the {brute|detention_rook} ";
+        d+= "the {brute|_detention_rook} and his shorter " + oneoff_link("friend|_detention_boardmaster") + "."; 
     } 
-    d+="and his shorter " + oneoff_link("friend|detention_boardmaster") + ".\n\n ";
     
     if(f.detention_after_caf_fight==0) {
-        d+="The Security officer shakes his head, tapping a clipboard with his pen. \"Incorrigible,\" he says. ";
+        d+="\n\nWolff shakes his head. \"Incorrigible,\" he says. ";
     }
     f.detention_after_caf_fight=1;
     if (!f.end_memory || !i.rook) {
@@ -1814,49 +2065,47 @@ case "detention_after_caf_fight":
     
 break;
 
-case "detention_desk":
+case "_detention_desk":
     d+="Your legs are cramping. They purposefully made them even smaller for the detention rooms. ";
 break;
 
 
-case "detention_3_of_you":
-    d+="To your left is the {monkey-boy|detention_monkey_boy}. To your right is the {brute|detention_rook} and his shorter {friend|detention_boardmaster}. ";
-break;
 
-
-case "detention_ss_officer":
-    d+="He wears a black School Security uniform with a red armband. On the armband are two interlocking S shapes. His {badge|wolff_badge} has the name 'Wolff' inscribed on it. An physical eyepatch covers the eye of his angryface emoticon. His monitor is cracked and the lines spiderweb out from the eyepatch. "; 
+case "_detention_ss_officer":
+    d+="He wears a black School Security uniform with a red armband. On the armband are two interlocking S shapes. His {badge|wolff_badge} has the name 'Wolff' inscribed on it. A physical eyepatch covers the eye of his angryface emoticon. His monitor is cracked and the lines spiderweb out from the eyepatch. "; 
 
 break;
-case "detention_rook":
+case "_detention_rook":
     d+="His arm is bandaged and in a sling.  ";
-    if(f.detention_sorry_face && !i.rook) {
-        d="\"Nice to meet you, Suzy. My name is Hook. Ryan Hook. But you can call me Rook,\" he says. \n\nWolff stands up and strikes him on the cheek. \"Silence!\"";
+    if(f._detention_sorry_face && !i.rook) {
+        d="\"Nice to meet you, Suzy. My name is Hook. Ryan Hook. But you can call me Rook. That's my friend Ethan,\" he says.  \n\nWolff stands up and strikes him on the cheek. \"Silence!\"";
         i.rook=1;
+        f.dorm_state="rkdrm";
+        f.caf = "x";
         f.end_memory = 1;
     } else if (!i.rook) {
-        d+=oneoff_text("detention_sorry_face", "\"Sorry about your face,\" he says. \n<li>{Sorry about your arm|detention_sorry_arm}");
+        d+=oneoff_text("_detention_sorry_face", "\"Sorry about your face,\" he says. \n<li>{Sorry about your arm|_detention_sorry_arm}");
         back=0;
    } else {
-        d+="He leans back in his chair and smiles. ";
+        d+="He leans back in his chair and smiles at you. ";
         f.end_memory = 1;
         
    }
 break;
-case "detention_sorry_arm":
+case "_detention_sorry_arm":
     d+="\"There is to be no conversation!\" shouts Wolff. ";
 break;
-case "detention_monkey_boy":
+case "_detention_monkey_boy":
     d+="He looks away nervously. His leg is in a cast. Crutches lay on the floor next to his desk. ";
 break;
-case "detention_boardmaster":
-    d+="He slouches in his chair, eyes closed. A few bruises on his face. ";
+case "_detention_boardmaster":
+    d+="He slouches in his chair, eyes closed. There are bruises on his face. A large metal chessboard leans against his chair. ";
 break;
 case "wolff_badge":
     d+="His name and underneath it an insignia of a golden eagle with four chevrons below it. ";
 break;
 
-case "detention_after_fight_mirror":
+case "_detention_after_fight_mirror":
     d+="It covers the entirety of the wall. They watch from the other side. "; 
 break;
 
@@ -1877,7 +2126,7 @@ case "library_start":
         f.library_counter = 0;
 
         if (!f.seen_vandalism) {
-            scene_change("Cracks in the<br>Firmament");
+            scene_change("Firmament");
         }
         
     }
@@ -1996,7 +2245,7 @@ case  "library_cubicles":
 break;
 
 case "library_streams":
-    d+="Caculated paths and 90 degree turns. From a distance, the water appears placid and motionless. Closer up, you see a gentle current. ";
+    d+="Caculated paths and ninety degree turns. From a distance, the water appears placid and motionless. Closer up, you see a gentle current. ";
 break;
 
 case "library_hills":
@@ -2023,8 +2272,8 @@ case "library_crime_scene":
 
     }
     d+="A series of {shelves|library_shelves_knocked_over} lie knocked over like " + oneoff_link("dominoes|library_dominoes") + ". The last shelf leans against the side of the {dome|library_dome}. Books, smashed pottery and plastic plants lie scattered everywhere. The area is cordoned off with police tape and {School Security|library_ss} officers crawl through the debris like ants. A few {students|library_crime_scene_students} loiter behind the police tape, watching the proceedings.\n\nThe stream ends here by feeds into a trench and moat beside the edge of the dome. In the other direction is the {study area|library_study_area}.";
+    f.seen_vandalism = 1;
 
-    f.end_memory = 1;
 
 break;
 
@@ -2063,7 +2312,6 @@ case "library_shelves_knocked_over":
 break;
 case "library_ss":
    d+="They examine everything with oversized magnifying glasses. Others carry metal rods with a flat disc at the end, listening carefully to the crackle of their scanning equipment. \n\n"; 
-    f.seen_vandalism = 1;
    
    if (i.wolff) {
        d+="Officer Wolff stands apart from the rest. ";
@@ -2078,9 +2326,10 @@ break;
 case "library_wolff_binoculars":
     d+="He lowers his binoculars and turns around. On his monitor is an angryface emoticon. ";
     if (!i.wolff) {
-        d+="A physical eyepatch hangs over his cracked monitor and covers one of his eyes. ";
+        d+="His face is cracked. A physical eyepatch hangs over one of his digital eyes. ";
     } 
-    d+="His unflinching one-eyed stare bores into you. He straightens his black uniform.\n\n Another officer approaches and salutes him. They exchange words and he returns to examining the shelf with his binoculars. ";
+    d+="His one-eyed stare bores into you. \n\n Another officer approaches and salutes him. They exchange words and he returns to examining the shelf. ";
+    f.end_memory = 1;
 
 break;
 
@@ -2179,7 +2428,7 @@ case "arcadia_youth_girls_hair":
 
 break;
 case "under_stairs_monkey_ignore":
-d+="\"Security will hear of this.\" She swivels her head. Her eyes cast knives as she imprint everyones face in her mind. \"Glory to Arcadia,\" she says. \n\n\"Glory to Arcadia,\" a few in the crowd mumble. She and her companions march and disappear down the corridor. \n\nMonkey boy drives his slammer into the pile. People flinch. A piece lands at your {feet|under_stairs_pog_feet}.\n\n\"Well, finish the game,\" he says to the tall girl. \"We have time before they find their teeth.\" "; 
+d+="\"Security will hear of this.\" She swivels around to look at the crowd. \"Glory to Arcadia,\" she says. \n\n\"Glory to Arcadia,\" a few mumble. She and her companions march away into the corridor. \n\nMonkey boy drives his slammer into the pile. People flinch. A piece lands at your {feet|under_stairs_pog_feet}. \"Let's finish this. We have time before their teeth arrive.\" "; 
         f.end_memory=1;
         f.pog_finished=1;
         f.seen_pog_game=1;
@@ -2218,7 +2467,7 @@ break;
     break;
 
 case "under_stairs_kissing":
-    d+="He runs his fingers through her hair. She stands bird-balanced on one leg.  ";
+    d+="He runs his fingers through her hair. She stands on one leg like a flamingo.  ";
     if (!f.under_stairs_kissing_lips) {
         d+="Their faces press close together but their ";
         d+=oneoff_link("lips|under_stairs_kissing_lips") + " do not touch.  They intermittently glance around at the crowd or {upwards|under_stairs_cameras} toward the corridor ceiling. ";
@@ -2234,7 +2483,7 @@ case "under_stairs_cameras":
 break;
 
 case "under_stairs_kissing_lips":
-    d+="They notice you looking at them and press their faces closer. Their noses touch and she stiffens.  They penguin-shuffle, turning so his back faces you. ";
+    d+="They see you looking and press their faces closer. Their noses touch and they stiffen.  They shuffle like penguins, turning so his back faces you. ";
 break;
    
 
@@ -2274,13 +2523,13 @@ case "asm":
     } else if (f.asm_c == 4) {
         d+="\n\nThe School Security officers lead and position the captive students into a {circular|asm_circular} formation around the tower. ";
     } else if (f.asm_c == 5) {
-        d="The anthem finishes. The screens flicker and display a blue smiling emoticon: they become the disembodied face of the Headmaster. \n\nHe taps on the microphone and clears his throat.  \"Students. Friends. Sons and daughters of Arcadia. Most of you have paid attention in class. Most of you do your homework.  Most of you show extraordinary school spirit. You are to be commended!\" \n\nA smattering of {applause|asm_applause}, mostly from the {Arcadia Youth|asm_arcadia_youth}. Someone beside you {yawns|asm_yawn}.";         
+        d="The anthem finishes. The screens flicker and become the disembodied emoticon face of the Headmaster. \n\nHe taps on the microphone and clears his throat.  \"Students. Friends. Sons and daughters of Arcadia. Most of you have paid attention in class. Most of you have done your homework.  Most of you have shown extraordinary school spirit. You are to be commended!\" \n\nA smattering of {applause|asm_applause}, mostly from the {Arcadia Youth|asm_arcadia_youth}. Someone beside you {yawns|asm_yawn}.";         
 
     } else if (f.asm_c == 6) {
 
-        d="His emoticon glitches to a frown. \"However, a few of you threaten the peace and public safety of our school!\" The screens zoom into the {gym-bagged|asm_gym_bagged_heads} students' heads. \"You all read the {school paper|asm_school_paper}. I speak of the library incident. Delinquency will not be tolerated!\" ";
+        d="His emoticon glitches to a frown. \"However, a few of you threaten the peace and public safety of our school.\" The screens zoom into the {gym-bagged|asm_gym_bagged_heads} students' heads. \"You all read the {school paper|asm_school_paper}. I speak of the library incident. Delinquency will not be tolerated!\" ";
     } else if (f.asm_c == 7) {
-        d="The headmaster clears his {digital throat|asm_electronic_throat}. \"As stated in chapter five paragraph six of the student handbook, we reserve the right to meet delinquency with kinetic force. Those we capture face solitary detention and reprogramming.\" His emoticon changes to a sad face with a {tear|asm_headmaster_tear}. \"This pains me. Sons and daughters, know that the Faculty loves you. I love you. But we have a zero-tolerance policy! Do your duty and report delinquency today. Make Mother Arcadia proud!\"  \n\nMore applause from the Arcadia Youth."; 
+        d="The headmaster clears his {digital throat|asm_electronic_throat}. \"As stated in chapter five paragraph six of the student handbook, we reserve the right to meet delinquency with kinetic force. Those we capture face solitary detention and reprogramming.\" His emoticon changes to a sad face with a {tear|asm_headmaster_tear}. \"This pains me. Sons and daughters, know that we love you. But we have a zero-tolerance policy! Do your duty and report delinquency today. Make Mother Arcadia proud!\"  \n\nMore applause from the Arcadia Youth."; 
     } else if (f.asm_c == 8) {
         d="\"It is time for our morning exercises. We will begin with stretches.\" Cheerful music erupts over the loudspeakers. \n\nA student beside you takes the gum out of his mouth and puts it behind his ear. Students shake and loosen their bodies.";
        f.end_memory=1; 
@@ -2310,7 +2559,7 @@ case "asm_dome":
 break;
 
 case "asm_shock_rifles":
-    d+="You've seen the effects of being shot. Body tensing up straight as a ruler then collapsing to the floor in spasms. Dragged twitching all the way to the nurses office. ";
+    d+="You saw someone get shot once. His body tensed up straight as a ruler then he collapsed to the floor in spasms. They said he was dragged twitching all the way to the nurses office. ";
 break;
 case "asm_empty_dorms":
     d+="Emptied of students. Everyone is in the courtyard. It takes some time, but you locate your dormitory. <em>A student stands inside your {room|asm_someone_inside_room}.</em>  You rub your eyes and blink.  "; 
@@ -2318,7 +2567,7 @@ case "asm_empty_dorms":
 break;
 
 case "asm_someone_inside_room":
-    d+="You look again and your room is empty. ";
+    d+="Light glints off the glass and the figure is gone.";
 break;
 case "asm_reprogramming":
     d+="<em>What would you become after reprogramming?</em>";
@@ -2418,7 +2667,7 @@ case "showers":
 
         
     }
-    d+="A forest of {columns|showers_columns} shrouded in vapor. Pipes, faucets and shower heads branch out the sides of the columns. Other columns lined with " + oneoff_link("cubbyholes|showers_towel_in_cubbyhole") + ". Water pattering on tile. The smell of sulfur. Naked {students|showers_students} sit on " + oneoff_link("stools|showers_stools") + ", lathering and scrubbing. ";
+    d+="A forest of {columns|showers_columns} shrouded in vapor. Pipes, faucets and shower heads branch out the sides of the columns. Other columns are lined with " + oneoff_link("cubbyholes|showers_towel_in_cubbyhole") + ". Water patters on tile. {Boys and girls|showers_students} sit on " + oneoff_link("stools|showers_stools") + ", lathering and scrubbing. ";
 
     if (f.showers_towel_in_cubbyhole) { //if towel already put in cubbyhole
 
@@ -2462,7 +2711,7 @@ case "showers_your_body":
 break;
 
 case "showers_your_hair":
-    d+="Thick, baby-fine strands and perpetually shoulder-length. Perhaps if you joined a club it would change.";
+    d+="Limp dark strands perpetually at shoulder-length. Perhaps if you joined a club it would change.";
 
 break;
 case "showers_delivery_boy":
@@ -2523,7 +2772,7 @@ case "showers_lockers":
     }
     scene_change("Contraband");
 
-    d+=oneoff_link("Lockers|showers_lockers_lockers") + " and benches. " + oneoff_link("Students|showers_lockers_students") + " in various states of undress. A doorway in the distance covered with a transparent " + oneoff_link("curtain|showers_lockers_curtain") + ". Entry and exit {gates|showers_lockers_gates} near this end of the room. Towel {chutes|showers_lockers_chute}. ";
+    d+=oneoff_link("Lockers|showers_lockers_lockers") + ", benches and " + oneoff_link("students|showers_lockers_students") + " in various states of undress. On the far wall is a doorway covered with a transparent " + oneoff_link("curtain|showers_lockers_curtain") + ". Entry and exit {gates|showers_lockers_gates} stand near this end of the room. Towel {chutes|showers_lockers_chute} rise out of the floor at regular intervals. ";
 
 
 
@@ -2569,13 +2818,13 @@ case "showers_lockers":
     }
 break;
 case "showers_lockers_crashes":
-    d+="The students continue drying themselves and getting dressed and undressed. ";
+    d+="A series of sucessively softer thuds. The students continue drying themselves and getting dressed. ";
 break;
 case "showers_lockers_janitor_fall":
     d+="He wiggles further into the chute, spearing the blockage of towels with his broom. "; 
 break;
 case "showers_lockers_chute":
-    d+="A large box rising from the floor with flaps that open to swallow used towels. ";
+    d+="Boxes rising from the floor, designed to swallow used towels. ";
 break;
 case "showers_lockers_jam":
     d+="Another towel jam. ";
@@ -2616,19 +2865,19 @@ break;
 
 case "showers_lockers_lockers":
     lockdown=1;
-    d+="Unused lockers have key and bracelet dangling from them. Others are locked and closed. Each locker is {numbered|showers_lockers_find_yours}.";
+    d+="Some have key and bracelet dangling from them. Others are locked and closed. Each locker is {numbered|showers_lockers_find_yours}.";
 
     
 break;
 case "showers_lockers_find_yours":
     lockdown=1;
     f.showers_lockers_seen_chalk=1;
-    d+="You find the locker matching the number on your key and open it. Your school uniform lies folded neatly inside. \n\nYou huddle close to the locker and unroll the towel. Hidden inside are a few pieces of {chalk|showers_lockers_chalk} in a ziplock bag. You place the bag in your locker."; 
+    d+="You find the locker matching the number on your key and open it. Your school uniform lies folded neatly inside. \n\nYou huddle close to the locker and unroll the towel. Hidden inside is a ziplock bag with a few pieces of {chalk|showers_lockers_chalk}. You place the bag in your locker."; 
 
 break;
 
 case "showers_lockers_curtain":
-    d+="Transparent flaps hang over the doorway and keep the heat and vapor confined to the shower hall. Steam puffs through the cracks as students enter and exit. ";
+    d+="Transparent flaps hang over the doorway. Steam puffs through the cracks as students enter and exit. ";
 
 break;
 
@@ -2671,6 +2920,601 @@ Something about overtime.
 Janitor
 He pays no attention to the students and displays a grumpy-face emoticon on his screen. 
 */
+
+
+
+
+case "rkdrm":
+    root=1;
+    if (f.back=="start") {
+        f._rkdrm_change_topic_counter=0;
+        f._rkdrm_memory = 0;
+        f._rkdrm_memory_2 = 0;
+        f._rkdrm_rook_agitated = 0;
+        f._rkdrm_ethan_counter = 0;
+        f._rkdrm_kasparov = 0;
+        f._rkdrm_b4_school = 0;
+        f.topic=0;
+        f._rkdrm_graduation = 1;
+        scene_change("Strategies");
+    }
+    
+    dorm_desc(f);
+    wipe_memory('boyfriend');
+
+    f.rook_boyfriend = 1;
+    if (!f._rkdrm_rook_agitated) {
+        d+="\n\nYou and {Rook|rooks_dorm_rook} sit on the floor playing " + oneoff_link("chess|_rooks_dorm_chess") + ". ";
+
+    } else {
+
+        switch(f._rkdrm_ethan_counter) {
+            case 0:
+
+                d+="\n\n{Rook|rkdrm_rook_back} has his massive back turned to you, blocking your view of the chessboard. He leans forward. \"Knight takes queen.\" He places the queen at his side. ";
+                f._rkdrm_ethan_counter++;
+            break;
+
+            case 1:
+                d="{Ethan|rkdrm_ethan} appears behind the glass wall and yanks the door open. \"Bridge goons are making moves in the cafeteria. Six of them at our table. Let's mess them up. They owe us for the library.\" ";
+                if (!f._chess_thrown) {
+                    d+="\n\nRook moves one of your pieces. \"Bishop takes pawn,\" he says. ";
+                } 
+                f.caf = "cafv2";
+                f._rkdrm_ethan_counter++;
+            break;
+
+            case 2:
+                d="Ethan steps foward. \"What is the matter with you? This isn't a drink at the water fountain, Rook. This is the Chess club. We go now.\" He bends down picks up the board. Pieces clatter to the floor. He straps the board to his back.\n\n\"It would have been checkmate in three moves,\" says Rook. He reaches for his jacket and follows Ethan toward the door. He turns to you. \"I'm sorry I got mad. You coming?\" \n\nYou put on your jacket. ";
+                    f.caf = "cafv2";
+                    f.end_memory = 1;
+            break;
+        }
+        
+        
+    }
+break;
+
+
+case "rkdrm_dorm_glass":
+    d+="The light enters the room at a sharper angle than yours. His dorm is quite a distance from yours. "; 
+break;
+
+case "rkdrm_sorry":
+case "rkdrm_rook_back":
+    d+="You  move to his side and gently place your hand on his shoulder. He keeps his gaze on the pieces. \"Knights are most effective in the center of the board,\" he says. ";
+                f._rkdrm_ethan_counter++;
+break;
+case "rkdrm_ethan":
+    d+="A small boy with high-waisted pants and uniform jacket flipped inside out. He is out of breath and sweat runs down his face. He has an empty chessboard harness strapped to his back. "; 
+
+    
+    if (f._chess_thrown) {
+        d+= "\n\nHe picks up the board from the floor and straps it to his back.  \"Ladies and gentlemen, afternoon tea is over. Let the real games begin.\" \n\nRook pushes him aside and storms out of your dormitory. ";
+        f.end_memory = 1;
+        root = 1;
+    } else {
+        d+= "He glares at Rook. ";
+    }
+break;
+case "rooks_dorm_bed":
+    d+="Covered with a chess-themed blanket. Two uniform {jackets|rkdrm_jackets} rest on the bed. ";
+break;
+
+case "rkdrm_jackets":
+    d+="Flipped inside out with the inner stitching visible. A large jacket belonging to Rook and a small one belonging to you. ";
+break;
+case "_rooks_dorm_chess":
+    d+="He has taken several pawns, a knight, rook and bishop. You have one of his knights and several pawns.  ";
+break;
+
+case "rooks_dorm_rook":
+    if (f._rkdrm_rook_agitated) {
+        d+="He has his back turned to you. Labored breathing. You watch the rise and fall of his shoulders. ";
+
+        
+    } else {
+        d+="Wireframe glasses hang low on his nose. He hulks over  the board, whispering to himself as he calculates his moves. "; 
+
+    }
+
+    var rkdrm_convo = {
+            "_rkdrm_chess":
+           {l:"Chess", d:function() {
+                    d="\"We all play, but nobody cares about strategy anymore. I'm starved for challenge.\"";
+               // f.topic="finish_school";
+               //
+              f.topic="chess";
+           },v:1},
+
+           /*
+        "_jump":
+            {l:"jump test", d: "{jump}", v:1},
+        "_rkdrm_topic":
+           {l:"topic test", d:function() {
+                d+="A test topic";
+                f.topic = "test_topic";
+           },v:1},
+        "_rkdrm_test_topic":
+           {l:"inside topic test", d:function() {
+                d+="inside a topic response then back out";
+           },topic:"test_topic", v:1},
+       "_rkdrm_test_topic_2":
+           {l:"inside topic test 2", d:function() {
+                d+="inside a topic response 2 then back out";
+           },topic:"test_topic", v:1},
+
+      "_rkdrm_test_topic_3":
+           {l:"inside topic test 3", d:function() {
+                d+="inside a topic response 2 then back out";
+           },topic:"test_topic", v:1},
+
+
+
+           */
+        "_rkdrm_kasparov":
+           {l:"Kasparov", d:function() {
+                    d="\"Why do you keep asking about that name? It doesn't mean anything to me.\"";
+           },v:1},
+        "_rkdrm_graduation":
+           {l:"Graduation", d:function() {
+                    d="\"Nobody knows the day it will come. We will know its true nature when it arrives. It's pointless to think too much now.\"";
+               // f.topic="finish_school";
+           },v:1},
+        /*
+        "rkdrm_finish_school":
+           {l:"Questions", d:function() {
+                    d="\"Only the Faculty know the answers to these questions.\"";
+                    f.topic=0;
+           },topic:"finish_school"},
+        */
+
+        "_rkdrm_rk_players":
+           {l:"Nobody cares", d:function() {
+                    d="\"It's become like homework. It wasn't like this before.\"";
+               // f.topic="finish_school";
+               f._rkdrm_rk_before = 1;
+           },v:1 ,topic:"chess"},
+
+        "_rkdrm_rk_before":
+            {l:"Before", d:"\"The Chess club used to be different. We fought less and played with strategy. Too many wipe cycles have made us forget.\"", topic:"chess"}, 
+        "_rkdrm_rk_strategy":
+           {l:"Strategy", d:function() {
+                    d="He raises his head to look at you with wide eyes. \"I keep replaying the stragegies in my head so they don't fade. When I put them all together I can almost touch the fringes of something bigger than all of us. A structure. Do you know what I mean?\"";
+                    f.topic = "gestalt";
+               // f.topic="finish_school";
+           },v:1 ,topic:"chess"},
+
+
+        "_rkdrm_rk_gestalt_yes":
+            {l:"Yes",d:function(){
+               d+= "\"I'm glad you get it. Ethan doesn't get it. Nobody does.\""; 
+               f.topic = 0;
+           },v:1,topic:"gestalt"},
+
+        "_rkdrm_rk_gestalt_no":
+            {l:"No",d:function(){
+               d+= "He sighs and returns to the game. ";
+               f.topic = 0;
+           },v:1,topic:"gestalt"},
+
+
+        "_rkdrm_rk_challenge":
+           {l:"Challenge", d:function() {
+                    d="\"At least you can hold your own... usually.\" He looks the captured pieces by his side.";
+               // f.topic="finish_school";
+           },v:1 ,topic:"chess"},
+           
+
+        "_rkdrm_memory":
+            {l:"Your earliest memory", d: function() {
+                //rkdrm_dont_wanna_talk(); 
+
+
+
+                if(rkdrm_change_topic(f._rkdrm_change_topic_counter)=="x") {
+                    d="\"Don't do this. I've already told you everything I can remember.\"";
+                    f._rkdrm_memory = "x";
+                    f._rkdrm_memory_2 = 1;
+                    
+                } else {
+                    d+=rkdrm_change_topic(f._rkdrm_change_topic_counter);
+                    f._rkdrm_memory = 1;
+                    f._rkdrm_change_topic_counter++;
+
+                }
+            },v:1},
+        "_rkdrm_pawns":
+            {l:"Pawns", d: "\"Pawns are the soul of the game. Don't underestimate them.\" "},
+        "_rkdrm_memory_2":
+            {l:"Your earliest memory", d: function() {
+                d+="His head snaps up.  \"I woke in a bus. It was dark. There were wires and tubes on me. Then I saw a pinprick of light that grew blinding as we drove into it. Is that what you want to hear?\" \n\nHe picks up the board, turns his back to you and sets it down again.  His large back blocks your view of the game. \"I can't tell what's mine and what you've put into my head with all your stupid questions.\" He leans forward. \"Knight takes Queen.\" He puts the queen at his side. \n<li>{Sorry|rkdrm_sorry}</li><li>{Your earliest memory|rkdrm_answers}</li>";
+                f._rkdrm_memory_2 = "x";
+                f._rkdrm_rook_agitated = 1;
+                lockdown=1;
+            }},
+     
+        
+
+    };
+
+
+
+    replies(rkdrm_convo);
+    if(!f._rkdrm_rook_agitated) {
+
+        topics(rkdrm_convo); 
+    }
+   //   d+="<li>{Kasparov|rkdrm_kasparov}</li>";
+   
+    
+break;
+
+case "rkdrm_answers":
+    //root = 1;
+    d+="He picks up the board and hurls it at the wall. Chess pieces scatter across the floor. He takes his jacket and walks to the door.";
+    f.rook_angry = 1;
+    f._rkdrm_rook_agitated=1;
+    f._chess_thrown = 1;
+    f._rkdrm_ethan_counter=1;
+    //f._rkdrm_rook_gone = 1;
+    //f.end_memory = 1;
+    
+break;
+case "_jump":
+    var tmp2 = {
+        "_jump":
+            {l:"zzBoyfriend", d:function() {
+                d+="\"Yes, the delicate matter of a boyfriend. Our records indicate you have not dated for two semesters.\"";
+                f.gc_semester=1; 
+                f.gc_dating=1;
+            },v:1},
+        "zzzgc_semester":
+            {l:"zzzSemester", d:"\"It does not belong to you to know how long a semester is.\"", v:1},
+        "zzzgc_kasparov":
+            {l: "zzzkasparov", d: "{jump}", v:1}
+
+    }
+    talk(tmp2);
+    f.back = "rooks_dorm_rook";
+break;
+case "rkdrm_kasparov":
+    d+=rkdrm_change_topic(f._rkdrm_change_topic_counter);
+    if(d=="x") {
+        d="\"I don't know who Kasparov is. That name doesn't mean anything to me. Why do you keep asking about it?\"";
+    } 
+
+
+;
+
+   
+   talk(rkdrm_convo);
+         d+="<li>{Kasparov|rkdrm_kasparov}</li>"
+
+break;
+
+
+
+case "cafv2":
+    root=1;
+    if (f.back == "start") {
+        scene_change("Instinct");
+        f.cafv2_timer = 0;
+    }
+    d+=caf_desc();
+
+    if (f.cafv2_timer==0) {
+        d+="\n\nYou stand next to Ethan and Rook. In the distance, a group of {Bridge Club members|cafv2_bridge_club} sit at your table. ";
+        f.cafv2_timer = "tuck";
+        break;
+    }
+
+    switch(f.cafv2_timer) {
+
+        case "tuck":
+            d="\"Tuck in your shirts and pull up your socks,\" says Ethan. \"It's time to show these kids good form.\" He loosens the harness straps of the chessboard. The board bobs up and down as he swaggers toward the group of Bridge Club members. You and Rook follows several steps behind him.";
+            f.cafv2_timer = "problem";
+            root = 0;
+        break;
+
+        case "problem":
+            f.cafv2_timer="smash"; 
+            d="A silence overtakes the {Bridge Club members|cafv2_bridge_asking4} as {Ethan|cafv2_ethan_approach} approaches. He surveys each of them in turn and his eyes lock onto monkey-boy's. \n\n\"Got a problem?\" says monkey-boy.\n\n\"No problem. But why are you gentlemen giving us problems? We don't appreciate problems.\"  ";
+            root = 0;
+        break;
+
+        case "smash":
+            f.cafv2_timer="jostle"; 
+            d="\"Why'd you smash up the {library|cafv2_library_smash}? Faculty's giving us heat for it.\" says Ethan.\n\n\"We don't smash libraries,\" says monkey-boy. \"We can smash your face though.\"\n\n\"Try it,\" says Ethan. You and Rook step closer to him. Rook takes a case out of his pocket and puts his glasses into it. \n\nThe Bridge Club members circle around the table and stand beside monkey-boy. ";
+           root=0; 
+       break; 
+
+       case "jostle":
+            d="A jostle and fists fly. Ethan brandishes the chessboard above his head, clubbing people with it. Rook has a student in a headlock while another hangs off his neck. One of the Bridge boys {lunges|cafv2_lunge} at you."; 
+            lockdown=1;
+       break;    
+   
+        case "guards":
+            d="Security guards rain down from the ceiling. Boots thud on the floor. Cables snap off and whistle as they retract upward. \n\nA guard lands several steps from you. His nightstick clicks on and emits a high-pitched whine as it charges. He {swings|cafv2_guard_swings} at you. ";
+            lockdown = 1;
+        break;
+
+    }
+
+break;
+
+case "cafv2_lunge":
+
+    d+="Your body reacts. You twist him and send him crashing on top of a table. Lunch trays and utensils careen everywhere. Other students back away. You move toward the next member of the Bridge Club.\n\nYour head throbs and the sound of Cicadas return. Boots {clatter|cafv2} on the catwalks above. ";
+    lockdown=1;
+    
+    f.cafv2_timer="guards"; 
+break;
+case "cafv2_guard_swings":
+    d+="You catch his arm, wrap your leg around it and twist. Sparks fly as the arm pops off. Gears and screws spill to the ground. ";
+        f.scene_change = 0;
+        lockdown = 1;
+        f.back = "start";
+        d+=bk("hrdcr");
+
+break;
+case "cafv2_library_smash":
+    d+="<em>When was it?</em> Fog envelops your mind. ";
+break;
+case "cafv2_bridge_asking4":
+    d+="Frozen, as if posed for a strange group photo. They stare death at Ethan. ";
+break;
+
+case "cafv2_ethan_approach":
+    d+="He straightens his posture and stands with his chest puffed out to make himself look taller. He is eye level with most of the seated Bridge players. ";
+break;
+case "cafv2_clattering_boots":
+    d="Security guards mobilize on the catwalks.";
+break;
+
+case "cafv2_bridge_club":
+    d+="A group of six students. Back-slapping and laughter. One of the {boys|cafv2_monkey_boy} squats on the bench like a monkey, doing small hops and rocking the table. \n\nYour head throbs and you hear the sound of Cicadas.";
+break;
+
+case "cafv2_monkey_boy":
+    d+="He wears a red scarf and a {playing card|bridge_playing_card} peeks from the breast pocket of his school uniform.";
+break;
+
+
+case "hrdcr":
+    root=1;
+    if(f.back=="cafv2" || f.back == "cafv2_guard_swings" || f.back=="start") {
+        f.hrdcr_timer = 0;
+        f.scene_change = 0;
+
+
+    }
+        if (f.grandmaster_memory_wiped) {
+            scene_change("Ghosts");
+        } else {
+            scene_change("The Hardcore");
+        }
+
+    f.hrdcr_timer++;
+
+
+    d+="{Rook|hrdcr_rook}, {Ethan|hrdcr_ethan} and you kneel in front of the {Hardcore|hrdcr_hardcore}. The " + oneoff_link("Grandmaster|_hrdcr_grandmaster") + " sits on a tall stack of textbooks peeling an apple with a {knife|hrdcr_knife}. A ceremonial {chessboard|hrdcr_chessboard} rests on a smaller stack of books in front of her. {Bookshelves|hrdcr_bookshelves} surround everyone. ";
+
+    if (f.hrdcr_timer > 2) {
+        d+="\n\n";
+    }
+    switch(f.hrdcr_timer) {
+        case 3:
+            d="\"Suzy, Rook and Boardmaster Ethan. The three of you caused quite a disturbance in the Cafeteria,\" says the " + oneoff_link("Grandmaster|_hrdcr_grandmaster") + ". \"It was bold, what you did. The Bridge kids never knew what hit them.\" \n\nThe other members of the Hardcore smile. The grandmaster holds an icy expression.";
+           root = 0; 
+        break;
+
+        case 4:
+            d="\"I want a word with Suzy alone,\" says the Grandmaster. \n\nEveryone falls silent. The Hardcore {stare|hrdcr_stare} at each other. Rook and Ethan stand up and shuffle away. The Hardcore members give you a {fistbump|hrdcr_fistbump} and place their fist over their heart as they walk past.  ";
+            root = 0;
+            f.root = "hrdcr_gm";
+
+        break;
+        
+    }
+break;
+
+case "hrdcr_knife":
+   d+="Simple, elegant and two-handbreadths long. She surgically peels the apple with it. Paper-thin skins fall neatly on top of a paper towel on the floor"; 
+break;
+
+case "hrdcr_fistbump":
+    d+="Careful and controlled, like their game. The knuckles give a soft crack when they meet. ";
+break;
+
+case "hrdcr_stare":
+    d+="A touch of surprise, a flicker of anger. ";
+break;
+case "_hrdcr_grandmaster":
+    d+="A tall, pale girl with white hair and dainty {hands|hrdcr_grandmaster_fingers}. Her eyes cut sharper than the {knife|hrdcr_knife} she carries. ";
+break;
+case "hrdcr_grandmaster_fingers":
+    d+="Perfect for playing chess. One hand has black sharpened fingernails, the other has white.";
+break;
+case "hrdcr_bookshelves":
+    d+="Few would attempt to come to this spot in the library without the express permission of the Chess Hardcore. ";
+
+break;
+case "hrdcr_hardcore":
+    d+="The seven members of the inner Chess circle. Each member sits on a stack of textbooks, at a height slightly lower than the Grandmaster. Their hair is white as a freshly wiped whiteboard."; 
+break;
+case "hrdcr_rook":
+    d+="He wears an expressionless but respectful face. His eyes betray him. You can tell his mind is elsewhere. Probably thinking about chess moves. His arm is in a sling. ";
+
+break;
+case "hrdcr_chessboard":
+    d+="A translucent board with game pieces permanently fixed in  position. ";
+break;
+case "hrdcr_ethan": 
+    d+="He beams, basking in the moment. There are several bruises on his face. ";
+break;
+
+case "hrdcr_gm":
+    root = 1;
+    d+="You kneel in front of the Grandmaster. ";
+
+    if(!f._gm_starter) {
+        f._gm_starter = 1;
+        d="Everyone disperses into the aisles and bookshelves. You remain kneeling in front of the Grandmaster watching her peel her apple. \n\n\"It's come to the attention of the Hardcore that you have a lot of fight in you,\" she says. She takes a bite of the apple. \"Three students and a security guard put into the Nurse's office. Most people would call that respectable.\"";
+    }
+
+
+    var gm = {
+            "_gm_thanks":
+           {l:"Thank you", d:function() {
+                    d="\"I'm not most people. Why are you in the Chess Club, Suzy? You dress the dress. You fight the fights. But I've been around long enough to recognize chessfakery when I see it. What do you want here?";
+                    f._gm_age=1;
+                    f._gm_nothing=1;
+               // f.topic="finish_school";
+               //
+              f.topic="search";
+           },v:1},
+           "_gm_it_was_nothing":
+           {l:"It was nothing", d:function() {
+                    d="\"Yes, it was nothing. You hide it, but I know you're not even trying. Why are you in the Chess Club, Suzy? You dress the dress. You fight the fights. But I've been around long enough to recognize chessfakery when I see it. What do you want here?";
+                    f._gm_age=1;
+               // f.topic="finish_school";
+               //
+              f.topic="search";
+           },v:1},
+
+        "_gm_nothing":
+           {l:"Nothing", d:function() {
+                    d="\"Don't kriegspiel me. Lay it out. What do you want?\"";
+                    f._gm_age=1;
+           },topic: "search", v:1},
+        "_gm_answers":
+           {l:"Answers", d:function() { 
+                    d="\"There are no answers. There is only class, chess and holding our turf. No more, no less. If you can't see the beauty in that--if you think you're better than the rest of us--I pity you. You're not to fit to flip the jacket you're wearing.\"";
+                   f._gm_nothing="x"; 
+           },topic: "search", v:1},
+
+           ////////////////START life's questions
+            "_gm_how_get_here":
+            {l:"How did we get here",d:function(){
+                d+="\"We were dropped off by a black bus. We all have the same memory.\" ";
+
+            f._gm_where_we_come_from = 1;
+                
+            },topic:"lifes_questions", v:1},
+           //
+            "_gm_where_we_come_from":
+            {l:"Where were we before school started",d:function(){
+
+            },topic:"lifes_questions"},
+        "_gm_after_grad":
+            {l:"Where will we go after Graduation",d:function(){
+                d+="";
+            },topic:"lifes_questions", v:1},
+           ////////////////END life's questions
+            
+        "_gm_age":
+           {l:"How old are you", d:function() {
+                    d="\"I didn't start school yesterday."
+                    if(f._gm_kasparov != "x" || !f._gm_answers != "x") {
+                        d+=" Now tell me what you want.";
+
+                    }
+                    d+="\"";
+                   f._gm_nothing="x"; 
+           },topic: "search"},
+
+        "_gm_kasparov":
+           {l:"Kasparov", d:function() {
+
+                if(f.grandmaster_memory_wiped) {
+                    d="\"We're the Chess club. Is that name supposed to mean something?\" ";
+                    f.topic = "gimme";
+                } else {
+                    d="Her eyes narrow. She stops eating and lowers the apple. \"You're not going to find him here.\"";
+                    f.topic = "kas";
+                }
+                   f._gm_nothing="x"; 
+           },topic: "search",v:1},
+          
+        "_gm_kas_whoishe":
+            {l:"Who is he", d: function(){
+                d+= "\"Nobody you should concern yourself with. He was excommunicated long ago.\"";
+                f.know_kas_excommunicated=1;
+                f._gm_kas_excommunicated = 1;
+            }, topic: "kas", v:1},
+
+        "_gm_kas_excommunicated":
+            {l:"Excommunicated", d: function() {
+                d+="She rests the apple on the ground and sticks the knife into it. \"He was one of us once. He had no use for the Club and we had no use for him. You don't need to know any more.\"";
+            }, topic: "kas"},
+          
+            
+        "_gm_kas_howfind":
+            {l:"How can I find him", d: function() {
+                d+="\"You think I have his dorm number? You think I can tell you what classes he's attending? If it was that easy the Faculty would already have him. He is dangerous. Too extreme, even for the Chess Club.\"";
+            }, topic: "kas", v:1},
+          
+        "_gm_give_me_answers":
+            {l:"Give me answers", d: function() {
+                if (f.grandmaster_memory_wiped) {
+                    d+="Her eyes scan your face. She shakes her head and places the apple core on top of the pile of peelings. \"I can see I'm wasting my time. For the sake of the Hardcore I'll let you play with your little delusions. You won't find anything here.\" "; 
+                    f.hrdcr = "x";
+                    f.seen_ghosts = 1;
+                    f.end_memory = 1;
+                } else {
+                    d+="A flicker of movement. Before you can react she has her {fingers|hrdcr_gm_choke} locked around your throat. ";
+                
+                    d+="\"You forget who you're speaking to,\" she hisses. \"And you don't understand the game you're playing. I've had enough of your questions.\" ";
+                    f.topic = "fin"; 
+                    lockdown = 1;
+
+                    d+=bk("hrdcr_gm_finished");
+                    
+                }
+            }, topic: "gimme", v:1},
+
+
+
+
+
+    };
+
+
+
+    replies(gm);
+
+    if (done_talking(gm,"kas")) {  
+        f.topic = "gimme";
+       console.log("kas topic done");
+    }
+    topics(gm); 
+    
+   f._gm_nothing="x"; 
+break;
+case "hrdcr_gm_choke":
+    d+="Her nails bite into your skin. You struggle to breathe.";
+    d+= bk("hrdcr_gm_finished");
+    lockdown = 1;
+break;
+
+
+case "hrdcr_gm_finished":
+ d+= "She leans in, breathing into your ear. \"I can read you like a textbook, Suzy. You're not one of us. You have the same blood in you as that fool, Kasparov.\" She releases your neck. \"But for the sake of the Hardcore, I'm going to let you play your little game. I'll be watching you.\"";
+    f.counseling_booth = "v2";
+    root = 1;
+    f.end_memory = 1;
+break;
+
+case "hrdcr_gm_face":
+    d+="An expressionless, calm face. Her voice hisses with venom. ";
+break;
+
+
+
+
+
+
 //::end
 ///////In case you link to a nonexistent node, then this error message will appear
 default:
@@ -2783,6 +3627,9 @@ add("School Security", "ss", function() {
 add("Kasparov", "kasparov", function() {
     thought=1;
     d+="<em>Who is he? He will have answers.</em>";
+    if (f.know_kas_excommunicated) {
+        d="<em>He was excommunicated from the Chess Club. The Grandmaster refuses to give any more information.</em>";
+    }
 });
 
 add("Vandalism of library", "vandalism_library", function() {
