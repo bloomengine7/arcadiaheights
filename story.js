@@ -548,7 +548,7 @@ case "start": //aka caf
             break;
 
             case "v2":
-                d+="\n{Guidance Counselor|counseling_booth}"; 
+                d+="\n{Guidance Counselor (Matters of the Mind)|counseling_booth}"; 
             break;
             default:
                 d+="\n{Guidance Counselor|counseling_booth}"; 
