@@ -454,7 +454,6 @@ case "start": //aka caf
         //home_memories("Memories");    
     }
 
-
     var items = [
         function(){
             
@@ -517,11 +516,15 @@ case "start": //aka caf
 
 ///////////////////////////////////////
     //2 requirements: had guidance counselor tell you you need boyfriend and seen first gang battle and met rook
-    if (i.kasparov && f.thread_intro > 2 && f.dorm_state == "rkdrm") { 
+    //
+    if (f.back == "gc_sudden_movements") {
+        d+="\n{Dormitory (A Seed)|dorm}";
+    } else if (i.kasparov && f.thread_intro > 2 && f.dorm_state == "rkdrm") { 
         d+="\n{Dormitory (Chess)|rkdrm}";
     } else {     
         d+="\n{Dormitory|dorm}";
     }
+
 
 
 //////////////////////////////////////
