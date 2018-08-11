@@ -3320,7 +3320,7 @@ case "hrdcr":
 break;
 
 case "hrdcr_knife":
-   d+="Simple, elegant and two-handbreadths long. She surgically peels the apple with it. Paper-thin skins fall neatly on top of a paper towel on the floor"; 
+   d+="Simple, elegant and two-handbreadths long. She surgically peels the apple and a one long paper-thin strip of skin dangles from the apple."; 
 break;
 
 case "hrdcr_fistbump":
