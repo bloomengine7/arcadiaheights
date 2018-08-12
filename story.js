@@ -49,7 +49,7 @@ user_variables = [
     "washroom_informer_arrive",
     "washroom_informer_paid",
     "meeting_washroom_stall_sitting_toilet",
-    "washroom_infomer_network",
+    "washroom_infomer_network", //unused
     "washroom_informer_ss",
     "washroom_informer_sinatra",
     "washroom_informer_kasparov",
@@ -108,13 +108,59 @@ user_variables = [
     "caf",
     "under_stairs",
     "seen_ghosts",
-    "intro_gradual_reveal"
+    "intro_gradual_reveal",
+    "seen_informer_note",
+    "seen_washroom_informer",
+    "seen_counselor",
+    "seen_poster_bonus",
+    "seen_rook",
+    "seen_assembly",
+    "seen_rook_chess_game",
+    "seen_instinct",
+    "classroom", //location
+    "asm", //location
+    "seen_kas_excommunicated" //for progress meter
 
     
 ];//::uservariables
 
 
+var progress_meter = [
+    //sinatra thread
+    "seen_behind_poster",
+    "seen_informer_note",
+    "seen_washroom_informer",
+    "seen_counselor",
 
+
+    //chess thread 
+    "seen_rook",
+    "seen_rook_chess_game", 
+    "seen_instinct",
+    "seen_kas_excommunicated",
+    "grandmaster_memory_wiped",
+    "rook_boyfriend",
+    "grandmaster_memory_wiped",
+    "seen_ghosts",
+    
+
+    //timeless
+    "seen_vandalism",
+    "seen_pog_game",
+    "showers_lockers_seen_chalk",
+    "seen_assembly",
+
+
+];
+
+var easter_eggs = [
+
+    "seen_poster_bonus"
+]
+/*
+Easter eggs 
+ 
+ */
 var preload_images = [
     "https://bloomengine.com/boy-electronic/adopt/i/collage_sm.jpg",
     "https://bloomengine.com/boy-electronic/i/atticus_boy_e_start.gif",
@@ -528,8 +574,12 @@ case "start": //aka caf
 
 
 //////////////////////////////////////
-    d+="\n{Classroom|classroom}";
-
+    switch (f.classroom) {
+        case "x":
+        break;
+        default:
+            d+="\n{Classroom|classroom}";
+    }
 
 
 
@@ -564,7 +614,7 @@ case "start": //aka caf
         break;
 
         case "cafv2":
-            d+="\n{Cafeteria (Confrontaton)|cafv2}";
+            d+="\n{Cafeteria (Confrontation)|cafv2}";
         break;
 
         default:
@@ -594,28 +644,49 @@ case "start": //aka caf
 /////////////////
     //if (f.thread_intro > 2) {
     if (f.intro_gradual_reveal > 4) {
-        d+="\n{Under the Stairs|under_stairs}";
+        switch (f.under_stairs) {
+            case "x":
+            break;
+            default:
+            d+="\n{Under the Stairs|under_stairs}";
+        }
     }
 
 
  ////////////////////
     //
     if(f.intro_gradual_reveal > 6) {
-        d+="\n{Assembly|asm}";
+        switch(f.asm) {
+            case "x":
+            break;
+            default:
+            d+="\n{Assembly|asm}";
+        }
     }
 
 
 
 /////////////////// 
-    d+="\n{Public Showers|showers}"; 
+    switch (f.showers) {
 
+        case "x":
+        break;
+        default:
+        d+="\n{Public Showers|showers}"; 
+    }
 
     if (f.hrdcr && f.hrdcr != "x") {
-        d+="\n{Hardcore|hrdcr}";
+        d+="\n{Hardcore (Afterimage wiped)|hrdcr}";
     }
 
 
 
+
+
+//::start
+
+
+///reset any memories that are temporary (if variables start with _ it will reset
     for (var c in f) {
             //console.log(c + " " + f[c]);
     
@@ -624,12 +695,21 @@ case "start": //aka caf
         }
     }
 
+//::progress_meter
+    (function() {
+        var progress_state = 0;
+        for (var i = 0; i < progress_meter.length; i++) {
+            if (f[progress_meter[i]]) {
+            console.log(progress_meter[i] + f[progress_meter[i]]);
+                progress_state++;
+            }
+        }
+
+        d+="\n\n<div style='font-size:.75em; line-height:1.5em;'>" + progress_state + " of " + (progress_meter.length-1) + " fragments reconstructed.</div>";
+    })(); 
 
 
 
-
-
-//::start
 
 //::EXHAUSTED
 
@@ -639,7 +719,7 @@ case "start": //aka caf
             ga('send', 'pageview', "/arcadiaheights/" + "finished-memories");
         }
 
-        d+="\n\n<em>You have exhausted your memories.</em> \n<div style='font-size:.75em; line-height:1.5em;'>Thank you for playing. This game will continuously evolve and grow. <a href=\"https://feedburner.google.com/fb/a/mailverify?uri=bloomengine&amp;loc=en_US\" target='_blank' onClick='ga_subscribe_email();'>Stay updated</a> and receive early access to new/extra content or check out some {other games|meta_other_games}.</div>";
+        d+="\n<em>You have exhausted your memories.</em> \n<div style='font-size:.75em; line-height:1.5em;'>Thank you for playing. This game will continuously evolve and grow. <a href=\"https://feedburner.google.com/fb/a/mailverify?uri=bloomengine&amp;loc=en_US\" target='_blank' onClick='ga_subscribe_email();'>Stay updated</a> and receive early access to new/extra content or check out some {other games|meta_other_games}.</div>";
     }
 
 /*
@@ -834,6 +914,7 @@ case "poster_corner":
         if (f.poster_sinatra) {
             d+="<li>Find Sinatra (Janitor in east wing)</li>";
             i.sinatra = 1;
+            f.seen_poster_bonus = 1;
         }
     } 
     
@@ -1018,7 +1099,7 @@ case "classroom_note_kas_passed":
 case "classroom_read_note":
     d+="\"I have info about K. Meet at lunch. Washroom near cafeteria, third stall. Destroy this note.\" \n\nYou crumple the note. Feigning a yawn, you put it in your mouth and eat it. ";
     i.informer = 1;
-
+    f.seen_informer_note = 1;
     f.thread_intro = 1;
     f.end_memory = 1;
 break;
@@ -1340,10 +1421,6 @@ case "convo_sub_branch":
     talk(tmp2);
     d+="</div>";
 break;
-case "washroom_informer_network":
-    d+="\"We provide information about anything, except ourselves. Do not ask anymore.\"";
-    f.washroom_informer_network = 1;
-break;
 case "washroom_informer_kasparov":
     d+="\"That's all we know. He keeps his activities well beneath the radar. Even to us.\"";
     f.washroom_informer_kasparov = 1;
@@ -1471,6 +1548,7 @@ break;
 case "washroom_back_out":
     root=1;
     d+="You step past a mop and bucket blocking the entrance. There is yellow caution tape and a sign which reads: \"Washroom out of order. Do Not Enter\". ";
+    f.seen_washroom_informer = 1;
     f.end_memory=1;
 break;
                                            
@@ -1790,7 +1868,7 @@ case "gc_kasparov":
             f.thread_intro=3;
         }
 
-
+   f.seen_counselor = 1; 
 
 
 
@@ -1812,6 +1890,7 @@ case "gc_look_at_him":
     //
     //back = "start";
     d+="You stare into the orb. The sound of a cicadas fills the room. The lights flicker in a pattern. You smell burnt toast. The flickering quickens until it becomes a strobe. The cicadas reach a crescendo. ";
+   f.seen_counselor = 1; 
     
     if (f.thread_intro < 3) {
         f.thread_intro=3;
@@ -2086,6 +2165,7 @@ case "_detention_rook":
         f.dorm_state="rkdrm";
         f.caf = "x";
         f.end_memory = 1;
+        f.seen_rook = 1;
     } else if (!i.rook) {
         d+=oneoff_text("_detention_sorry_face", "\"Sorry about your face,\" he says. \n<li>{Sorry about your arm|_detention_sorry_arm}");
         back=0;
@@ -2435,6 +2515,7 @@ d+="\"Security will hear of this.\" She swivels around to look at the crowd. \"G
         f.end_memory=1;
         f.pog_finished=1;
         f.seen_pog_game=1;
+        f.under_stairs = "x";
          
 break;
 
@@ -2535,6 +2616,9 @@ case "asm":
         d="The headmaster clears his {digital throat|asm_electronic_throat}. \"As stated in chapter five paragraph six of the student handbook, we reserve the right to meet delinquency with kinetic force. Those we capture face solitary detention and reprogramming.\" His emoticon changes to a sad face with a {tear|asm_headmaster_tear}. \"This pains me. Sons and daughters, know that we love you. But we have a zero-tolerance policy! Do your duty and report delinquency today. Make Mother Arcadia proud!\"  \n\nMore applause from the Arcadia Youth."; 
     } else if (f.asm_c == 8) {
         d="\"It is time for our morning exercises. We will begin with stretches.\" Cheerful music erupts over the loudspeakers. \n\nA student beside you takes the gum out of his mouth and puts it behind his ear. Students shake and loosen their bodies.";
+
+        f.seen_assembly = 1;
+        f.asm = "x";
        f.end_memory=1; 
     }
 
@@ -2896,6 +2980,7 @@ case "showers_lockers_gates":
         wait =  0;
         d="You walk to the gates and put your thumb on the scanner. Words display on the screen next to it: \"Privacy time spent: 16:02:49. Time deducted from your daily quota. Thank you for not loitering.\" The turnstile clicks and beeps as it unlocks. "; 
                 f.end_memory=1;
+                f.showers = "x";
     }
 break;
 
@@ -2964,12 +3049,14 @@ case "rkdrm":
                     d+="\n\nRook moves one of your pieces. \"Bishop takes pawn,\" he says. ";
                 } 
                 f.caf = "cafv2";
+                f.seen_rook_chess_game = 1;
                 f._rkdrm_ethan_counter++;
             break;
 
             case 2:
                 d="Ethan steps foward. \"What is the matter with you? This isn't a drink at the water fountain, Rook. This is the Chess club. We go now.\" He bends down picks up the board. Pieces clatter to the floor. He straps the board to his back.\n\n\"It would have been checkmate in three moves,\" says Rook. He reaches for his jacket and follows Ethan toward the door. He turns to you. \"I'm sorry I got mad. You coming?\" \n\nYou put on your jacket. ";
                     f.caf = "cafv2";
+                    f.seen_rook_chess_game = 1;
                     f.end_memory = 1;
             break;
         }
@@ -3257,6 +3344,7 @@ case "cafv2_guard_swings":
     d+="You catch his arm, wrap your leg around it and twist. Sparks fly as the arm pops off. Gears and screws spill to the ground. ";
         f.scene_change = 0;
         lockdown = 1;
+        f.seen_instinct = 1;
         f.back = "start";
         d+=bk("hrdcr");
 
@@ -3295,7 +3383,7 @@ case "hrdcr":
         if (f.grandmaster_memory_wiped) {
             scene_change("Ghosts");
         } else {
-            scene_change("The Hardcore");
+            scene_change("Hardcore");
         }
 
     f.hrdcr_timer++;
@@ -3303,6 +3391,9 @@ case "hrdcr":
 
     d+="{Rook|hrdcr_rook}, {Ethan|hrdcr_ethan} and you kneel in front of the {Hardcore|hrdcr_hardcore}. The " + oneoff_link("Grandmaster|_hrdcr_grandmaster") + " sits on a tall stack of textbooks peeling an apple with a {knife|hrdcr_knife}. A ceremonial {chessboard|hrdcr_chessboard} rests on a smaller stack of books in front of her. {Bookshelves|hrdcr_bookshelves} surround everyone. ";
 
+    if (f.grandmaster_memory_wiped) {
+        d+="\nYour head throbs. You hear the faint buzzing of cicadas. ";
+    }
     if (f.hrdcr_timer > 2) {
         d+="\n\n";
     }
@@ -3443,6 +3534,7 @@ case "hrdcr_gm":
         "_gm_kas_whoishe":
             {l:"Who is he", d: function(){
                 d+= "\"Nobody you should concern yourself with. He was excommunicated long ago.\"";
+                f.seen_kas_excommunicated=1;
                 f.know_kas_excommunicated=1;
                 f._gm_kas_excommunicated = 1;
             }, topic: "kas", v:1},
@@ -3506,6 +3598,7 @@ case "hrdcr_gm_finished":
  d+= "She leans in, breathing into your ear. \"I can read you like a textbook, Suzy. You're not one of us. You have the same blood in you as that fool, Kasparov.\" She releases your neck. \"But for the sake of the Hardcore, I'm going to let you play your little game. I'll be watching you.\"";
     f.counseling_booth = "v2";
     root = 1;
+
     f.end_memory = 1;
 break;
 
