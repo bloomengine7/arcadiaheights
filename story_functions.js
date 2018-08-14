@@ -36,7 +36,7 @@ function rkdrm_change_topic(counter) {
         break;
 
         case 1:
-            d+="His voice becomes deeper. He breathes quicker. \"If you can maintain center pawns, you have more options to organize attacks.\"";
+            d+="His breath quickens. \"If you can maintain center pawns, you have more options to organize attacks.\"";
        
        break;
        case 2:

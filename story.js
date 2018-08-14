@@ -3175,7 +3175,7 @@ case "rooks_dorm_rook":
            },v:1 ,topic:"chess"},
 
         "_rkdrm_rk_before":
-            {l:"Before", d:"\"The Chess club used to be different. We fought less and played with strategy. Too many wipe cycles have made us forget.\"", topic:"chess"}, 
+            {l:"Before", d:"\"We fought less and played with strategy. Too many wipe cycles have made us forget.\"", topic:"chess"}, 
         "_rkdrm_rk_strategy":
            {l:"Strategy", d:function() {
                     d="He raises his head to look at you with wide eyes. \"I keep replaying the stragegies in my head so they don't fade. When I put them all together I can almost touch the fringes of something bigger than all of us. A structure. Do you know what I mean?\"";
@@ -3343,7 +3343,7 @@ break;
 
 case "cafv2_lunge":
 
-    d+="Your body reacts. You twist him and send him crashing on top of a table. Lunch trays and utensils careen everywhere. Other students back away. You move toward the next member of the Bridge Club.\n\nYour head throbs and the sound of Cicadas return. Boots {clatter|cafv2} on the catwalks above. ";
+    d+="Your body reacts. You twist him and send him crashing on top of a table. Lunch trays and utensils careen everywhere. Other students back away. You close in on the next member of the Bridge Club.\n\nYour head throbs and the sound of Cicadas return. Boots {clatter|cafv2} on the catwalks above. ";
     lockdown=1;
     
     f.cafv2_timer="guards"; 
