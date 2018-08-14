@@ -565,7 +565,7 @@ case "start": //aka caf
     //
     if (f.back == "gc_sudden_movements") {
         d+="\n{Dormitory (A Seed)|dorm}";
-    } else if (i.kasparov && f.thread_intro > 2 && f.dorm_state == "rkdrm") { 
+    } else if (f.thread_intro > 2 && f.dorm_state == "rkdrm") { 
         d+="\n{Dormitory (Chess)|rkdrm}";
     } else {     
         d+="\n{Dormitory|dorm}";
