@@ -1799,7 +1799,7 @@ case "guidance_convo":
             
         "_gcv2_grandmaster":
             {l: "Grandmaster", d: function() {
-                d+="\"Interesting... Guards,\" he says. One of the guards nods and exits the room. The lights strobe faster and the sound of Cicadas reaches a crescendo. The smell of burnt toast wafts through the air. ";
+                d+="\"Interesting. Residual traces... Guards,\" he says. One of the guards nods and exits the room. The lights strobe faster and the sound of Cicadas reaches a crescendo. The smell of burnt toast wafts through the air. ";
                 f.topic = "fin";
        f.counseling_booth = "x"; 
                 
