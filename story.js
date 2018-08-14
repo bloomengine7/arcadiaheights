@@ -558,7 +558,7 @@ case "start": //aka caf
     clear_timeouts_intervals();
     //
     d+="Your name is Susan Newbourne. Student number C-37182.";
-  
+ 
 
 ///////////////////////////////////////
     //2 requirements: had guidance counselor tell you you need boyfriend and seen first gang battle and met rook
@@ -706,6 +706,14 @@ case "start": //aka caf
         }
 
         d+="\n\n<div style='font-size:.75em; line-height:1.5em;'>" + progress_state + " of " + (progress_meter.length-1) + " fragments reconstructed.</div>";
+
+        if (progress_state == progress_meter.length-1) {
+           if (typeof ga !== "undefined") { 
+                ga('send', 'pageview', "/arcadiaheights/" + "finished-memories");
+            }
+
+            d+="\n<em>You have exhausted your memories.</em> \n<div style='font-size:.75em; line-height:1.5em;'>Thank you for playing. This game will continuously evolve and grow. <a href=\"https://feedburner.google.com/fb/a/mailverify?uri=bloomengine&amp;loc=en_US\" target='_blank' onClick='ga_subscribe_email();'>Stay updated</a> and receive early access to new/extra content or check out some {other games|meta_other_games}.</div>"
+        }
     })(); 
 
 
@@ -715,11 +723,7 @@ case "start": //aka caf
 
     //as more and more added, remove older state variables and only keep the newest ones. If ppl play for a while they will have already seen the old stuff
     if (f.thread_intro > 2 && f.thread_chess_club > 0 && f.seen_ghosts) {
-        if (typeof ga !== "undefined") { 
-            ga('send', 'pageview', "/arcadiaheights/" + "finished-memories");
-        }
-
-        d+="\n<em>You have exhausted your memories.</em> \n<div style='font-size:.75em; line-height:1.5em;'>Thank you for playing. This game will continuously evolve and grow. <a href=\"https://feedburner.google.com/fb/a/mailverify?uri=bloomengine&amp;loc=en_US\" target='_blank' onClick='ga_subscribe_email();'>Stay updated</a> and receive early access to new/extra content or check out some {other games|meta_other_games}.</div>";
+ ;
     }
 
 /*
@@ -1647,6 +1651,8 @@ case "guidance_convo":
         f.gc_fix_dating_problem=0;
         f.gc_informer = 0;
         f.gc_kasparov = 0;
+        f.gc_increased_school_security = 0;
+        f.gc_cheat_exam = 0;
         f.gc_sinatra = 0;
         f.topic = 0; 
         f.gc_nothing_to_say = 0;
@@ -2163,6 +2169,8 @@ case "_detention_rook":
         d="\"Nice to meet you, Suzy. My name is Hook. Ryan Hook. But you can call me Rook. That's my friend Ethan,\" he says.  \n\nWolff stands up and strikes him on the cheek. \"Silence!\"";
         i.rook=1;
         f.dorm_state="rkdrm";
+        f.rook_boyfriend = 1;
+        
         f.caf = "x";
         f.end_memory = 1;
         f.seen_rook = 1;
@@ -2172,7 +2180,8 @@ case "_detention_rook":
    } else {
         d+="He leans back in his chair and smiles at you. ";
         f.end_memory = 1;
-        
+            f.dorm_state="rkdrm";
+        f.rook_boyfriend = 1; 
    }
 break;
 case "_detention_sorry_arm":
@@ -3030,7 +3039,6 @@ case "rkdrm":
     dorm_desc(f);
     wipe_memory('boyfriend');
 
-    f.rook_boyfriend = 1;
     if (!f._rkdrm_rook_agitated) {
         d+="\n\nYou and {Rook|rooks_dorm_rook} sit on the floor playing " + oneoff_link("chess|_rooks_dorm_chess") + ". ";
 
