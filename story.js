@@ -466,7 +466,7 @@ function nodes(node) { //Do not remove this line
 //
 //
 case "about":
-    d+="These are the memories of Susan Newbourne (as collected by Hadrian Lin and Simon M. from <a href='http://bloomengine.com' target='_blank'>bloomengine.com</a>) \n\nThe game will continuously evolve and grow. Stay <a href=\"https://feedburner.google.com/fb/a/mailverify?uri=bloomengine&amp;loc=en_US\" target='_blank' onClick='ga_subscribe_email();'>updated</a>, receive early access to new or extra content as we extract new memories from her brain. \n\nFeedback welcome. If you notice typos and bugs or if you are interested in beta-testing future games please send an email to bloomengine (aaaayat) gmail (dot com). Put \"beta test anthill\" in the subject line."; 
+    d+="These are the memories of Susan Newbourne (as collected by Hadrian and Simon from <a href='http://bloomengine.com' target='_blank'>bloomengine.com</a>) \n\nThe game will continuously evolve and grow. Stay <a href=\"https://feedburner.google.com/fb/a/mailverify?uri=bloomengine&amp;loc=en_US\" target='_blank' onClick='ga_subscribe_email();'>updated</a>, receive early access to new or extra content as we extract new memories from her brain. \n\nFeedback welcome. If you notice typos and bugs or if you are interested in beta-testing future games please send an email to bloomengine (aaaayat) gmail (dot com). Put \"beta test anthill\" in the subject line."; 
     
     
     //Please <a href=\"https://feedburner.google.com/fb/a/mailverify?uri=bloomengine&amp;loc=en_US\" target='_blank' onClick='ga_subscribe_email();'>add yourself here</a> too.";
