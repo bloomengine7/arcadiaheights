@@ -119,8 +119,8 @@ user_variables = [
     "seen_instinct",
     "classroom", //location
     "asm", //location
-    "seen_kas_excommunicated" //for progress meter
-
+    "seen_kas_excommunicated", //for progress meter
+    "library_start"
     
 ];//::uservariables
 
@@ -140,15 +140,13 @@ var progress_meter = [
     "seen_kas_excommunicated",
     "grandmaster_memory_wiped",
     "rook_boyfriend",
-    "grandmaster_memory_wiped",
-    "seen_ghosts",
     
 
     //timeless
     "seen_vandalism",
     "seen_pog_game",
     "showers_lockers_seen_chalk",
-    "seen_assembly",
+    "seen_assembly"
 
 
 ];
@@ -591,7 +589,7 @@ case "start": //aka caf
 
 
 
-///////////////////////
+///////////////////////gc
     if (f.counseling_booth) {//if player has already seen success and failure of holding back information. Learned the concept of how to conceal important information
         switch(f.counseling_booth) {
             case "x":
@@ -608,7 +606,7 @@ case "start": //aka caf
     }
 
 
-//////////////////////    
+//////////////////////    caf
     switch(f.caf) {
         case "x":
         break;
@@ -618,7 +616,9 @@ case "start": //aka caf
         break;
 
         default:
-            if (f.intro_gradual_reveal > 4) {
+            if (f.back == "gc_sudden_movements") {
+                d+="\n{Cafeteria (Interruption)|caf}";
+            } else if (f.intro_gradual_reveal > 3) {
                 d+="\n{Cafeteria|caf}";
             }
 
@@ -626,24 +626,31 @@ case "start": //aka caf
 
     }
  
-
     
 
 
     //d+="\n{Jump Test|story2.js|dorm}";
 
 
-//////////////////////
-    if (f.intro_gradual_reveal > 1) {
+
+
+
+//////////////////////library
+//
+    if (f.seen_counselor) {
+        f.library_start = 1;
+    }
+
+    if (f.library_start) {
 
         d+="\n{Library|library_start}";
     }
 
 
 
-/////////////////
+/////////////////under stairs
     //if (f.thread_intro > 2) {
-    if (f.intro_gradual_reveal > 4) {
+    if (f.intro_gradual_reveal > 1) {
         switch (f.under_stairs) {
             case "x":
             break;
@@ -653,20 +660,24 @@ case "start": //aka caf
     }
 
 
- ////////////////////
-    //
-    if(f.intro_gradual_reveal > 6) {
-        switch(f.asm) {
-            case "x":
-            break;
-            default:
+
+ ////////////////////assembly
+    if (f.seen_counselor) {
+        f.asm = 1;
+    }
+ 
+    switch(f.asm) {
+        case "x":
+        break;
+
+        case 1:
             d+="\n{Assembly|asm}";
-        }
+        break;
     }
 
 
 
-/////////////////// 
+///////////////////showers 
     switch (f.showers) {
 
         case "x":
@@ -675,8 +686,14 @@ case "start": //aka caf
         d+="\n{Public Showers|showers}"; 
     }
 
+
+
+
+
+
+//////////////hardcore
     if (f.hrdcr && f.hrdcr != "x") {
-        d+="\n{Hardcore (Afterimage wiped)|hrdcr}";
+        d+="\n{Hardcore (Afterimage wipe)|hrdcr}";
     }
 
 
@@ -705,9 +722,9 @@ case "start": //aka caf
             }
         }
 
-        d+="\n\n<div style='font-size:.75em; line-height:1.5em;'>" + progress_state + " of " + (progress_meter.length-1) + " fragments reconstructed.</div>";
+        d+="\n\n<div style='font-size:.75em; line-height:1.5em;'>" + progress_state + " of " + (progress_meter.length) + " fragments reconstructed.</div>";
 
-        if (progress_state == progress_meter.length-1) {
+        if (progress_state == progress_meter.length) {
            if (typeof ga !== "undefined") { 
                 ga('send', 'pageview', "/arcadiaheights/" + "finished-memories");
             }
@@ -1105,6 +1122,7 @@ case "classroom_read_note":
     i.informer = 1;
     f.seen_informer_note = 1;
     f.thread_intro = 1;
+    f.classroom = "x";
     f.end_memory = 1;
 break;
 case "classroom_desks":
@@ -1319,7 +1337,7 @@ case "washroom_informer_desc":
                 
             },v:1},
         "informer_guidance_counselor":
-            {l:"Guidance counseling", d:"\"They will pull everything from you. Sometimes the best lie is to tell the truth. Throw them some crumbs.\""},
+            {l:"Guidance counseling", d:"\"Don't mention Kasparov. They will pull everything from you. Sometimes the best lie is to tell the truth. Throw them some crumbs.\""},
      "washroom_informer_random_checks":
             {l:"Random security checks", d:"\"Carry your student ID with you. Have your transit documents in order. Or hire a good forger,\" she says. "},
  
@@ -1768,7 +1786,7 @@ case "guidance_convo":
             {l: "Activities", d: function() {
                 d+="\"Many students find it beneficial to spend time holding hands or kissing. Remember, child, dating is not only about the quantity, but the quality of the time spent together.\" ";
                     f._gcv2_fix_problem = 1; 
-                
+                    f._gcv2_he_just_care_chess = "x"; 
                 }, topic:"rook_boyfriend"
             },
         "_gcv2_fix_problem":
@@ -1778,19 +1796,21 @@ case "guidance_convo":
                 f.topic = "what_else";
             }, topic:"rook_boyfriend"},
 
-
+        /*
         "_gcv2_sinatra":
             {l: "Sinatra", d: function() {
                 d+="\"Ah, the Janitor.\" The scanner clicks off and the band of warmth fades. \"You have discovered he witnessed the incident in the library. We will need to fix that. Straighten your back and {look at me|gc_look_at_him}.\" \n\n";
+                f.topic = "fin";
                 f.gc_wipe_sinatra = 1;
-               back=0; 
+               back=0;
+               lockdown = 1;
                
             }, v:1, topic:"what_else"},
-            
+         */   
                 
         "_gcv2_kasparov":
             {l: "Kasparov excommunicated", d: function() {
-                d+="\"Place your hands above you head! Do not move.\" \n\nThe lights begin to flicker. Your body becomes limp. Guards burst into the room and catch you before you collapse. They force you upright and position your head to face the camera. \n\n\"How do you know this information?\" says the Counselor.";
+                d+="\"Place your hands above you head! Do not move.\" \n\nThe lights flicker in pattern. Your body becomes limp. Guards burst into the room and catch you before you collapse. They force you upright and position your head to face the camera. \n\n\"How do you know this information?\" says the Counselor.";
 
                 f.topic = "how_know";
 
@@ -1884,8 +1904,14 @@ break;
 case "gc_sudden_movements":
     d+="Your body becomes limp. The door to the booth bursts open. Two School Security guards step in and catch you before you slump to the floor. They force you back upright. \"We have some auxiliary questions for you, Suzy\" says the counselor.";
    root=1; 
-   f.counseling_booth = "x"; 
-    wipe_memory('kasparov','sinatra','vandalism_library','informer');
+   f.counseling_booth = "x";
+   i.kasparov = 0;
+   i.sinatra = 0;
+   i.vandalism_library = 0;
+   i.informer = 0;
+   //wipe_memory('kasparov','sinatra','vandalism_library','informer');
+   f.library_start = 1;
+   f.asm = 1;
     f.end_memory=1;
     
 break;
@@ -1911,6 +1937,8 @@ case "gc_look_at_him":
         wipe_memory('ss','sinatra','vandalism_library','informer');
 
     }
+       f.library_start = 1;
+       f.asm = 1;
     f.end_memory=1;
    f.counseling_booth = "x"; 
     
