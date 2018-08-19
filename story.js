@@ -1765,7 +1765,6 @@ case "guidance_convo":
             {l: "No face. Vandalism of library", d: function() {
                 d+="\"As I suspected.\" A click. The scanner shuts off and the band of warmth fades. \"The news would eventually spread. I won't fault you for knowing about what will become public. But you need to be open with us. And you should only get news from official sources. Now hold still, straighten your back and {look at me|gc_look_at_him}. That's it. Good posture is important, my child.\" From inside the panel, there is a screetch of dot-matrix printer. A paper comes out of the slot.\" \n\n";
                 f.topic = "fin";
-                talk=0;
                 f.gc_discovered_nothing_important = 1;
 
             }},
