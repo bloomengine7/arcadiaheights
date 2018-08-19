@@ -1315,7 +1315,7 @@ case "washroom_informer_desc":
     //
     f.counseling_booth = "v1";
 
-    var tmp = {
+    tmp = {
 
 
         "washroom_informer_kasparov":
@@ -1419,7 +1419,7 @@ break;
 case "convo_sub_branch":
     f.convo_sub_branch = 1;
     d+="starting words";
-    var tmp2 = {
+    tmp2 = {
 
         "1washroom_informer_kasparov":
             ["1Kasparov", "sddssdsd",1],
@@ -3146,7 +3146,7 @@ case "rooks_dorm_rook":
 
     }
 
-    var rkdrm_convo = {
+    rkdrm_convo = {
             "_rkdrm_chess":
            {l:"Chess", d:function() {
                     d="\"We all play, but nobody cares about strategy anymore. I'm starved for challenge.\"";
@@ -3290,7 +3290,7 @@ case "rkdrm_answers":
     
 break;
 case "_jump":
-    var tmp2 = {
+    tmp2 = {
         "_jump":
             {l:"zzBoyfriend", d:function() {
                 d+="\"Yes, the delicate matter of a boyfriend. Our records indicate you have not dated for two semesters.\"";
@@ -3496,7 +3496,7 @@ case "hrdcr_gm":
     }
 
 
-    var gm = {
+    gm = {
             "_gm_thanks":
            {l:"Thank you", d:function() {
                     d="\"I'm not most people. Why are you in the Chess Club, Suzy? You dress the dress. You fight the fights. But I've been around long enough to recognize chessfakery when I see it. What do you want here?";
@@ -3660,7 +3660,7 @@ default:
         case 'undefined': //no function found, doesn't exist, go to defaults
         default:
             nodeless = ['Your thoughts lead you elsewhere.', 'Your attention drifts to other matters. ', 'Your memory blurs. ', 'Your focus shifts elsewhere. '];
-            var parameters = [];
+            parameters = [];
             parameters.flag_name = "default_no_node";
             d += "<span class='error-missing-node'>" + randomizer(nodeless,parameters) + "</span>";
    }
