@@ -2104,7 +2104,7 @@ case "caf_bc_conflict_ss":
     f.caf_bridge_chess_conflict = "x";
 break;
 case "caf_bc_conflict_boy":
-    d+="A small boy with close-shaved hair, high-waisted {pants|caf_bc_conflict_boardmaster_pants} swaggers toward them. His jacket is turned inside out and he has a large chessboard strapped to his back. \n\nA brick wall of a {brute|caf_bc_conflict_large_boy}  walks several steps behind him. \n\nThe chessboard boy surveys each of them in turn. \n\nMonkey-boy meets his gaze. \"Got a problem?\" \n\n\"No problem. But why are you gentlemen giving us problems? We don't appreciate problems.\"  ";  
+    d+="A small boy with close-shaved hair and high-waisted {pants|caf_bc_conflict_boardmaster_pants} swaggers toward them. His jacket is turned inside out and he has a large chessboard strapped to his back. \n\nA brick wall of a {brute|caf_bc_conflict_large_boy}  walks several steps behind him. \n\nThe chessboard boy surveys each of them in turn. \n\nMonkey-boy meets his gaze. \"Got a problem?\" \n\n\"No problem. But why are you gentlemen giving us problems? We don't appreciate problems.\"  ";  
 
     back=0;
 break;
@@ -2197,7 +2197,6 @@ case "_detention_rook":
         d="\"Nice to meet you, Suzy. My name is Hook. Ryan Hook. But you can call me Rook. That's my friend Ethan,\" he says.  \n\nWolff stands up and strikes him on the cheek. \"Silence!\"";
         i.rook=1;
         f.dorm_state="rkdrm";
-        f.rook_boyfriend = 1;
         
         f.caf = "x";
         f.end_memory = 1;
@@ -2209,7 +2208,6 @@ case "_detention_rook":
         d+="He leans back in his chair and smiles at you. ";
         f.end_memory = 1;
             f.dorm_state="rkdrm";
-        f.rook_boyfriend = 1; 
    }
 break;
 case "_detention_sorry_arm":
@@ -2896,7 +2894,7 @@ case "showers_lockers":
     }
     scene_change("Contraband");
 
-    d+=oneoff_link("Lockers|showers_lockers_lockers") + ", benches and " + oneoff_link("students|showers_lockers_students") + " in various states of undress. On the far wall is a doorway covered with a transparent " + oneoff_link("curtain|showers_lockers_curtain") + ". Entry and exit {gates|showers_lockers_gates} stand near this end of the room. Towel {chutes|showers_lockers_chute} rise out of the floor at regular intervals. ";
+    d+=oneoff_link("Lockers|showers_lockers_lockers") + " and benches. " + oneoff_link("Students|showers_lockers_students") + " in various states of undress. On the far wall is a doorway covered with a transparent " + oneoff_link("curtain|showers_lockers_curtain") + ". {Gates|showers_lockers_gates} stand near this end of the room. Towel {chutes|showers_lockers_chute} rise out of the floor at regular intervals. ";
 
 
 
@@ -3010,7 +3008,7 @@ case "showers_lockers_students":
 break;
 case "showers_lockers_gates":
 
-    d+="A stream of students passing through turnstiles. An orchestra of beeps and clicks as they push through.  ";
+    d+="An orchestra of beeps and clicks as students push through the turnstiles.  ";
 
     if (f.showers_timer > 9) {
         root=1;
