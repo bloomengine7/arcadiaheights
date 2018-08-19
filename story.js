@@ -1296,7 +1296,6 @@ case "meeting_washroom_stall":
         
     } 
 
-    done_talking(tmp);
     break;
 
 case "informer_gone":
