@@ -1647,8 +1647,29 @@ case "guidance_counselor_the_words":
             break;
         case 6:
             d+="\"Please repeat.\" \n\n{Skies forever blue|guidance_convo}";
+
+
+            f.gc_blue = 1;
+            f.gc_quantum = 1;
+            f.gc_toilet_time = 1;
+            f.gc_nothing_to_say = 0;
+            f.gc_boyfriend = 0;
+            f.gc_dating = 0;
+            f.gc_fix_dating_problem=0;
+            f.gc_informer = 0;
+            f.gc_kasparov = 0;
+            f.gc_increased_school_security = 0;
+            f.gc_cheat_exam = 0;
+            f.gc_sinatra = 0;
+            f.topic = 0; 
+            f.gc_nothing_to_say = 0;
+            f.gc_who_are_you = 1;
+            
             break;
     }
+
+
+    
 break;
 
 case "outgoing":
@@ -1657,26 +1678,8 @@ break;
 case "guidance_convo":
     inv=0;
     root=1;
-    d+="The counselor waits for you to speak. ";
-    if (f.back=="guidance_counselor_the_words") {
-        d="\"Thank you. What would you like to confess today, Suzy?\" ";
-        f.gc_blue = 1;
-        f.gc_quantum = 1;
-        f.gc_toilet_time = 1;
-        f.gc_nothing_to_say = 0;
-        f.gc_boyfriend = 0;
-        f.gc_dating = 0;
-        f.gc_fix_dating_problem=0;
-        f.gc_informer = 0;
-        f.gc_kasparov = 0;
-        f.gc_increased_school_security = 0;
-        f.gc_cheat_exam = 0;
-        f.gc_sinatra = 0;
-        f.topic = 0; 
-        f.gc_nothing_to_say = 0;
-        f.gc_who_are_you = 1;
+    d="\"Thank you. What would you like to confess today, Suzy?\" ";
        
-    }
 
     if(f.gc_fix_dating_problem) {
         f.gc_semester="x";
