@@ -259,7 +259,7 @@ function location_message(message) {
 function talk(obj) {
     replies(obj);
     topics(obj);
-
+    return "";
 }
 
 function replies(obj) {

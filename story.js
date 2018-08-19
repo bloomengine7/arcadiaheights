@@ -605,7 +605,6 @@ case "start": //aka caf
         
     }
 
-
 //////////////////////    caf
     switch(f.caf) {
         case "x":
@@ -1685,7 +1684,7 @@ case "guidance_convo":
         f.gc_semester="x";
     }
 
-    var tmp = {
+    tmp = {
         "gc_who_are_you":
             {l: "Who are you", d: "\"I am Faculty. I am your counselor and mediator. That is all you need to know. You will not remember me.\"",v:1},
 
