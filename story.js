@@ -120,7 +120,9 @@ user_variables = [
     "classroom", //location
     "asm", //location
     "seen_kas_excommunicated", //for progress meter
-    "library_start"
+    "library_start",
+    "quik", // do not erase
+    "showers_lockers_revealed_chalk"
     
 ];//::uservariables
 
@@ -458,7 +460,23 @@ function nodes(node) { //Do not remove this line
 	switch(node) { //Do not remove this line
    
 	
-	
+
+
+
+case "quickjump":
+    root = 1;
+    d+="testzzz " + quik("quik_var","text", function() {
+        d+="test quickjump output text";
+    });
+
+    d+="tes 2 " + quik("quik_var_2","text2", function() {
+        d+="test quickjump output text 22222";
+    });
+
+    d+= "\noneoff quik" + oneoff_quik("oneoff_quick", "oneoff quick", "blahblah");
+    
+    f.blue++;
+break;
 
 ////
 //
@@ -775,7 +793,7 @@ f.seen_showdown_intro=1;
     switch (f.showdown_intro_c) {
         case 1:
             lockdown=1;
-            d+="\"I know you are here to kill me. Do it, cowards. You are only going to kill a man. You cannot stop the revolution.\" \n\nHe wears a {fox mask|showdown_intro_mask} and a student uniform. His back presses against a railing. Behind it a {trench|showdown_intro_trench} drops into darkness. \n\n{Emoticons|showdown_intro_emoticons} hover in the shadows of the bookshelves and cast him in a sickly yellow hue.  ";
+            d+="\"I know you are here to kill me. Do it, cowards. You are only going to kill a man. You cannot stop the revolution.\" \n\nHe wears a {fox mask|showdown_intro_mask} and a student uniform. His back presses against a railing. Behind it a trench drops into darkness. \n\n{Emoticons|showdown_intro_emoticons} hover in the shadows of the bookshelves and cast him in a sickly yellow hue.  ";
             
         break;
         case 2: 
@@ -784,7 +802,7 @@ f.seen_showdown_intro=1;
         break;
 
         case 3:
-            d+="The guards burst forward. He leaps backward over the railing and falls into the shadows. A faint splash in the moat below. The guards lean over the railing, sweeping the water with light. \n\n\"Drain it. Post men at every exit, including the pumping stations. {Find him|start}.\"";
+            d+="The guards burst forward. He leaps backward over the railing and falls into the shadows. A faint splash below. The guards lean over the railing, sweeping the water with light. \n\n\"Drain it. Post men at every exit, including the pumping stations. {Find him|start}.\"";
             lockdown=1;
             break;
 
@@ -1019,7 +1037,18 @@ case "stand_on_toilet":
         break;
 */
         case "open_dorm_door":
-                    d+=sq("open_dorm_door", ["You pull on the handle, the door catches on a latch. A chime sounds. Words form on the glass: \"Currently it is quietstudytime, student Susan Newborne. Do not attempt to leave your dormitory.\"", "You tug on the handle. Words form on the glass wall: \"Currently it is  quietstudytime, Susan Newborne. This incident will be noted.\"", "The door catches on a latch and refuses to open. "]);
+            if (f.root = "rkdrm") {
+                d+="You pull on the handle, the door catches on a latch. A chime and words form on the glass: \"Do not leave friends and dormitory unattended during friendlyplaytime, student Susan Newborne.\" ";
+            
+                if (!f.rook_angry) {
+
+                    d+=sq("rkdrm_try_leave", ["\n\n\"Stop fooling around,\" says Rook.","\n\nRook glares at you. ", ""]);
+                }
+
+    
+            } else {
+                d+=sq("open_dorm_door", ["You pull on the handle, the door catches on a latch. A chime sounds. Words form on the glass: \"Currently it is quietstudytime, student Susan Newborne. Do not attempt to leave your dormitory.\"", "You tug on the handle. Words form on the glass wall: \"Currently it is  quietstudytime, Susan Newborne. This incident will be noted.\"", "The door catches on a latch and refuses to open. "]);
+            }
         break;
 
         case "dorm_outside":
@@ -1062,7 +1091,7 @@ break;
 case "panopticon_tower":
     d += "White and red, like a lighthouse. Near the top is a ring of {spotlights|spotlights} and loudspeakers. Above them, a {orb|panopticon_dome} of ink-black glass. A trench, moat and {drawbridge|panopticon_drawbridge} surrounds it. ";
     if (f.root=="asm") {
-        d+="\n\nThree flagpoles antennae out from the tower and giant school flags hang from them. ";
+        d+="\n\nThree flagpoles antennae out from the tower and school flags hang from them. ";
     }
     
 break;
@@ -1613,7 +1642,7 @@ case "counseling_booth":
         break;
         case 6:
             
-            d="A chime. \"Operator connected,\" says a voice. The buzz of the speaker resolves to high-fidelity silence.\n\n\"Welcome, my child. Prepare to recite the words. Please hold still for the scan.\" A band of warmth passes over your face. \"Arcadia,\" he says. \n\n{Minds free|guidance_counselor_the_words}";
+            d="A chime. \"Operator connected. Pulling up account,\" says a voice. The buzz of the speaker resolves to high-fidelity silence.\n\n\"Welcome, my child. Prepare to recite the words. Please hold still for the scan.\" A band of warmth passes over your face. \"Arcadia,\" he says. \n\n{Minds free|guidance_counselor_the_words}";
             back=0;
             f.guidance_counselor_the_words_count=0;
         break;
@@ -1718,7 +1747,7 @@ case "guidance_convo":
                 }
             }},
         "gc_semester":
-            {l:"Semester", d:"\"It does not belong to you to know how long a semester is.\""},
+            {l:"Semester", d:"\"It's not your concern to know how long a semester is.\""},
         "gc_dating":
             {l:"Dating", d: function() {
                 d+="\"It is natural for a girl your age to date. We want to foster an environment in which students can find love. And learn. How can we help you find love, my child?\"";
@@ -2518,7 +2547,7 @@ case "under_stairs":
             f.under_stairs_arcadia_youth_timer++;
             break;
         case 10:
-            d+="\n\nTwo {School Security|under_stairs_after_pog_ss} officers stand by the corridor. One of them has his arms crossed. The other lazily taps a {nightstick|under_stairs_nightstick} on his shoulder. ";
+            d+="\n\nTwo {School Security|under_stairs_after_pog_ss} officers stand by the corridor. One of them casually taps a {nightstick|under_stairs_nightstick} on his shoulder. ";
             f.under_stairs_arcadia_youth_timer++;
         break;
 
@@ -2696,7 +2725,7 @@ case "asm_reprogramming":
 break;
 
 case "asm_electronic_throat":
-    d+="They all had their idiosyncracies, even the Headmaster. ";
+    d+="They all have their idiosyncracies, even the Headmaster. ";
 break;
 case "asm_school_paper":
     d+="They didn't officially name any group. The Chess Club took the blame. <em>Was it them?</em>";
@@ -2779,7 +2808,8 @@ case "showers":
         f.showers_lockers_students=0;
         f.showers_lockers_curtain=0;
         f.showers_lockers_chute=0;
-        f.showers_lockers_seen_chalk=0;
+       
+        f.showers_lockers_revealed_chalk=0;
         f.showers_towel_in_cubbyhole=0;
         f.showers_lockers_find_yours=0;
         
@@ -2837,7 +2867,7 @@ case "showers_your_hair":
 
 break;
 case "showers_delivery_boy":
-    d+="He drifts through the mist as if sleepwalking until he arrives at the cubbyholes. <em>Is it him?</em> \n\nYou tilt your head to rinse your hair and scan your other neighbor. The girl struggles with a strand of hair caught in her scrub brush. "; 
+    d+="He drifts along as if sleepwalking until he arrives at the cubbyholes. <em>Is it him?</em> \n\nYou tilt your head to rinse your hair and scan your other neighbor. The girl struggles with a strand of hair caught in her scrub brush. "; 
     
 break;
 
@@ -2889,7 +2919,7 @@ break;
 case "showers_lockers":
     root=1;
 
-    if (f.showers_lockers_seen_chalk) {
+    if (f.showers_lockers_revealed_chalk) {
         f.showers_timer++;
     }
     scene_change("Contraband");
@@ -2898,10 +2928,10 @@ case "showers_lockers":
 
 
 
-    if (f.showers_lockers_seen_chalk && f.showers_timer < 9) {
+    if (f.showers_lockers_revealed_chalk && f.showers_timer < 9) {
         d+="\n\nYou stand by your open locker and dry yourself with the towel belonging to the blonde boy. ";
 
-    } else if (!f.showers_lockers_seen_chalk) {
+    } else if (!f.showers_lockers_revealed_chalk) {
         d+="\n\nWater drips from your hair.  You cradle the rolled up {towel|showers_lockers_towel} belonging to the blonde boy. ";
     }
 
@@ -2993,7 +3023,9 @@ case "showers_lockers_lockers":
 break;
 case "showers_lockers_find_yours":
     lockdown=1;
+    f.showers_lockers_revealed_chalk=1;
     f.showers_lockers_seen_chalk=1;
+    
     d+="You find the locker matching the number on your key and open it. Your school uniform lies folded neatly inside. \n\nYou huddle close to the locker and unroll the towel. Hidden inside is a ziplock bag with a few pieces of {chalk|showers_lockers_chalk}. You place the bag in your locker."; 
 
 break;
@@ -3376,6 +3408,7 @@ case "cafv2_lunge":
 break;
 case "cafv2_guard_swings":
     d+="You catch his arm, wrap your leg around it and twist. Sparks fly as the arm pops off. Gears and screws spill to the ground. ";
+        f.caf = "x";
         f.scene_change = 0;
         lockdown = 1;
         f.seen_instinct = 1;
@@ -3433,7 +3466,7 @@ case "hrdcr":
     }
     switch(f.hrdcr_timer) {
         case 3:
-            d="\"Suzy, Rook and Boardmaster Ethan. The three of you caused quite a disturbance in the Cafeteria,\" says the " + oneoff_link("Grandmaster|_hrdcr_grandmaster") + ". \"It was bold, what you did. The Bridge kids never knew what hit them.\" \n\nThe other members of the Hardcore smile. The grandmaster holds an icy expression.";
+            d="\"Suzy, Rook and Boardmaster Ethan. The three of you caused quite a disturbance in the Cafeteria,\" says the " + oneoff_link("Grandmaster|_hrdcr_grandmaster") + ". \"It was bold, what you did. The Bridge kids never knew what hit them.\" \n\nThe other members of the Hardcore smile. The grandmaster wears an icy expression.";
            root = 0; 
         break;
 
@@ -3462,7 +3495,7 @@ case "_hrdcr_grandmaster":
     d+="A tall, pale girl with white hair and dainty {hands|hrdcr_grandmaster_fingers}. Her eyes cut sharper than the {knife|hrdcr_knife} she carries. ";
 break;
 case "hrdcr_grandmaster_fingers":
-    d+="Perfect for playing chess. One hand has black sharpened fingernails, the other has white.";
+    d+="Perfect for playing chess. One hand has black fingernails, the other has white.";
 break;
 case "hrdcr_bookshelves":
     d+="Few would attempt to come to this spot in the library without the express permission of the Chess Hardcore. ";
@@ -3488,7 +3521,7 @@ case "hrdcr_gm":
 
     if(!f._gm_starter) {
         f._gm_starter = 1;
-        d="Everyone disperses into the aisles and bookshelves. You remain kneeling in front of the Grandmaster watching her peel her apple. \n\n\"It's come to the attention of the Hardcore that you have a lot of fight in you,\" she says. She takes a bite of the apple. \"Three students and a security guard put into the Nurse's office. Most people would call that respectable.\"";
+        d="Everyone disperses into the aisles and bookshelves. You remain kneeling in front of the Grandmaster watching her peel her apple. \n\n\"It's come to the attention of the Hardcore that you have a lot of fight in you,\" she says. She bites into the apple with a crunch. \"Three students and a security guard put into the Nurse's office. Most people would call that respectable.\"";
     }
 
 
@@ -3559,7 +3592,7 @@ case "hrdcr_gm":
                     d="\"We're the Chess club. Is that name supposed to mean something?\" ";
                     f.topic = "gimme";
                 } else {
-                    d="Her eyes narrow. She stops eating and lowers the apple. \"You're not going to find him here.\"";
+                    d="Her eyes narrow. She lowers the apple. \"You're not going to find him here.\"";
                     f.topic = "kas";
                 }
                    f._gm_nothing="x"; 
@@ -3575,7 +3608,7 @@ case "hrdcr_gm":
 
         "_gm_kas_excommunicated":
             {l:"Excommunicated", d: function() {
-                d+="She rests the apple on the ground and sticks the knife into it. \"He was one of us once. He had no use for the Club and we had no use for him. You don't need to know any more.\"";
+                d+="She stabs the knife into the apple and rests it on the ground. \"He was one of us once. He had no use for the Club and we had no use for him. You don't need to know any more.\"";
             }, topic: "kas"},
           
             
@@ -3594,7 +3627,7 @@ case "hrdcr_gm":
                 } else {
                     d+="A flicker of movement. Before you can react she has her {fingers|hrdcr_gm_choke} locked around your throat. ";
                 
-                    d+="\"You forget who you're speaking to,\" she hisses. \"And you don't understand the game you're playing. I've had enough of your questions.\" ";
+                    d+="\"You forget who you're talking to,\" she hisses. \"And you don't understand the game you're playing. I've had enough of your questions.\" ";
                     f.topic = "fin"; 
                     lockdown = 1;
 

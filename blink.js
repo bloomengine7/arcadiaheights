@@ -114,7 +114,12 @@ function process(node,giver,receiver,params) {
     }
 
     if (typeof ga !== "undefined") { 
-        ga('send', 'pageview', '/' + config.ga_id + '/' + node);
+        //the !f.talk means it is in conversation mode
+        if (f.talk) {
+            ga('send', 'pageview', '/' + config.ga_id + '/' + f.talk);
+        } else {
+            ga('send', 'pageview', '/' + config.ga_id + '/' + node);
+        }
 
     }
 
@@ -466,6 +471,12 @@ function process(node,giver,receiver,params) {
         localStorage.setItem('save_i',JSON.stringify(i));
 
     }
+
+
+    //this is for reverting all flag variables before changes created by node function.  
+    pre_node_f = jQuery.extend(true,{},f);
+
+
 	/////////////////inventory handler
     //
     if (node) {
@@ -514,7 +525,7 @@ function process(node,giver,receiver,params) {
 		}
 		return items;
 	})();	 
-	debug();
+    //	debug();
 	
 	
 	
@@ -632,6 +643,27 @@ function process(node,giver,receiver,params) {
     //
 
 
+
+    //blink_functions.js 180821-2245
+    if(f.quik) {
+        f=jQuery.extend(true,{},pre_node_f);
+
+        if(typeof quik_responses[f.quik] == 'function') {
+            d = "";
+            quik_responses[f.quik]();
+            
+        } else {
+            d = quik_responses[f.quik];
+            
+        }
+
+        f.quik = 0;
+        root = 0; 
+    }
+
+    //console.log("heee" + f.blue);
+
+
     if (back == 1 && !root && links && !lockdown) {
         if (f.topic) {
             d+='<p class="back"><a onclick="f.topic=0; debug(); process(\'' + f.back + '\'); return false;">' + "Return" + "</a></li>";
@@ -682,7 +714,7 @@ function process(node,giver,receiver,params) {
 
 	
 	//deadE= e;
-	
+ 
 	d = createLinks(d); //modify the buffer so it has parsed links
 
 
@@ -721,6 +753,10 @@ function process(node,giver,receiver,params) {
         //$("#wrap").css( 'overflow-y', 'hidden');
         //
         //
+
+
+
+        debug();
 
         /////////////////////////////////////////////////////::output 
         /////////////////////////////////////////////////////::output 

@@ -64,6 +64,9 @@ var iNameSorted=[];
 var node_function=[];
 var file_node_jumped;
 var timeouts = [];
+var d_ow = ""; //d buffer overwrite for quik jumps
+var pre_node_f = []; //for recording the flag variables state before entering story nodes and the changes that they produce. Used for quik jumps 
+var quik_responses = {}; 
 i.z='sdssd';
 f.node='start';
 f.back='start';

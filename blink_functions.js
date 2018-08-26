@@ -256,10 +256,37 @@ function location_message(message) {
 }
 
 
+function quik(variable,text,output) {
+    //blink.js 180821-2245
+    //d_ow = output;
+    //
+    quik_responses[variable] = output;
+    
+    if(!f.quik) {
+        return '<a onclick="f.quik=\'' +  variable +'\';  debug(); process(\'' +  f.node + '\'); return false;">' + text + "</a>";
+    }
+}
+
+
+function oneoff_quik(variable,text,output) {
+    
+    quik_responses[variable] = output;
+    
+    if(!f.quik && f[variable] != "x") {
+        return '<a onclick="f.quik=\'' +  variable + '\';  debug(); process(\'' +  f.node + '\'); f.' + variable + '=\'x\'; return false;">' + text + "</a>";
+    } else {
+    console.log('heeeeee');
+        return "sdds";
+    }
+
+}
+
+
+
 function talk(obj) {
     replies(obj);
     topics(obj);
-    return "";
+
 }
 
 function replies(obj) {
@@ -275,8 +302,12 @@ function replies(obj) {
     var output="";
     var choices="";
     var visible = 0;
-    if (f["talk"]) { //if click item
-    
+    if (f.talk) { //if click item
+  
+
+
+
+
         d="";
 //consoleconsole.log("in talk function");
         f[f["talk"]] = "x";
