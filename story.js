@@ -2125,7 +2125,7 @@ case "caf_bc_fight_focus":
 break;
 case "caf_bc_fight_chessboard":
     f.caf_bridge_chess_conflict++;
-    d+="The small boy has wields his chessboard above his head, clubbing people with it. "; 
+    d+="The small boy wields his chessboard above his head, clubbing people with it. "; 
 break;
 case "caf_bc_conflict_ss":
     lockdown=1;
