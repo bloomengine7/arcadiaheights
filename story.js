@@ -734,7 +734,7 @@ case "start": //aka caf
         var progress_state = 0;
         for (var i = 0; i < progress_meter.length; i++) {
             if (f[progress_meter[i]]) {
-            console.log(progress_meter[i] + f[progress_meter[i]]);
+            //console.log(progress_meter[i] + f[progress_meter[i]]);
                 progress_state++;
             }
         }
@@ -786,7 +786,7 @@ break;
 case "showdown_intro":
     root=1;
     f.root = "showdown_intro";
-    console.log("f.root" + f.root);
+    //console.log("f.root" + f.root);
 f.showdown_intro_c++;
 scene_change("Bloodhounds");
 f.seen_showdown_intro=1;
@@ -1037,7 +1037,7 @@ case "stand_on_toilet":
         break;
 */
         case "open_dorm_door":
-            if (f.root = "rkdrm") {
+            if (f.root == "rkdrm") {
                 d+="You pull on the handle, the door catches on a latch. A chime and words form on the glass: \"Do not leave friends and dormitory unattended during friendlyplaytime, student Susan Newborne.\" ";
             
                 if (!f.rook_angry) {
@@ -3648,7 +3648,7 @@ case "hrdcr_gm":
 
     if (done_talking(gm,"kas")) {  
         f.topic = "gimme";
-       console.log("kas topic done");
+       //console.log("kas topic done");
     }
     topics(gm); 
     
