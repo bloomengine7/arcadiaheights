@@ -165,8 +165,10 @@ var preload_images = [
     "https://bloomengine.com/boy-electronic/adopt/i/collage_sm.jpg",
     "https://bloomengine.com/boy-electronic/i/atticus_boy_e_start.gif",
     "https://bloomengine.com/boy-electronic/i/atticus_boy_e_start.gif",
-    
-    "i/arcadia_arrival_03_wordless.png"
+    "i/arcadia_arrival_03_wordless.png",
+    "i/chess_club.png",    
+    "i/faculty.png",    
+    "i/fstop.png"    
 ];
 
 inventoryTypes = [
