@@ -164,7 +164,9 @@ Easter eggs
 var preload_images = [
     "https://bloomengine.com/boy-electronic/adopt/i/collage_sm.jpg",
     "https://bloomengine.com/boy-electronic/i/atticus_boy_e_start.gif",
-    "https://bloomengine.com/boy-electronic/i/atticus_boy_e_start.gif"
+    "https://bloomengine.com/boy-electronic/i/atticus_boy_e_start.gif",
+    
+    "i/arcadia_arrival_03_wordless.png"
 ];
 
 inventoryTypes = [
@@ -197,7 +199,7 @@ config.gameTitle = "Arcadia Heights";
 config.gameAuthor = "Susan Newbourne | Bloomengine";
 
 //goes at menu at top
-config.metaContent = "{About|about} <a href='https://bloomengine.com/arcadiaheights/promo/arrival/' target='_blank'>Comic</a> <a href='https://bloomengine.com' target='_blank'>bloomengine.com</a>"; 
+config.metaContent = "{About|about} {Feelies|feelies}</a> <a href='https://bloomengine.com' target='_blank'>bloomengine.com</a>"; 
 
 //If you don't need an inventory system, write inventorySystem = 0;
 config.inventorySystem = 1; 
@@ -503,6 +505,30 @@ break;
 
 case "stay_updated":
     d+="Click <a href=\"https://feedburner.google.com/fb/a/mailverify?uri=bloomengine&amp;loc=en_US\" target='_blank' onClick='ga_subscribe_email();'>here</a> to receive early access to new or exclusive content.";
+break;
+
+
+/////
+case "feelies":
+    d+="<h1>Unlocked feelies:</h1>\n";
+
+    /*
+    d+=oneoff_text("arrival_comic", "<img src='https://bloomengine.com/arcadiaheights/i/arcadia_arrival_03_wordless.png' class='feelies' />");
+*/
+
+    if (f.seen_kas_excommunicated) {
+        d+="<img src='https://bloomengine.com/arcadiaheights/i/chess_club.png' class='feelies' />";
+    }
+
+    if (f.showers_lockers_seen_chalk) {
+        d+="<hr><img src='https://bloomengine.com/arcadiaheights/i/faculty.png' class='feelies' />";
+    }
+
+    d+="<img src='https://bloomengine.com/arcadiaheights/i/arcadia_arrival_03_wordless.png' class='feelies' />";
+  
+
+
+    //d+="<img src='https://bloomengine.com/arcadiaheights/i/fstop.png' class='feelies' />";
 break;
 /////
 case "start": //aka caf
