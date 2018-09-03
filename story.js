@@ -614,7 +614,7 @@ case "start": //aka caf
             break;
 
             case "v2":
-                d+="\n{Guidance Counselor (Matters of the Mind)|counseling_booth}"; 
+                d+="\n{Guidance Counselor (Matters of the Heart)|counseling_booth}"; 
             break;
             default:
                 d+="\n{Guidance Counselor|counseling_booth}"; 
@@ -710,7 +710,7 @@ case "start": //aka caf
 
 //////////////hardcore
     if (f.hrdcr && f.hrdcr != "x") {
-        d+="\n{Hardcore (Afterimage wipe)|hrdcr}";
+        d+="\n{Hardcore (Residuals wipe)|hrdcr}";
     }
 
 
@@ -1609,7 +1609,7 @@ case "counseling_booth":
     switch(f.counseling_booth) {
         case "v2":
             f.rook_boyfriend = 1; 
-            scene_change("Matters of the Heart");
+            scene_change("Memory Assassination");
         break;
         default:
             scene_change("The Truth");
@@ -1623,6 +1623,18 @@ case "counseling_booth":
 
         
     }
+
+    if (f.counseling_booth=="v2" && !f._counseling_booth_head_throb) {
+        d+="\n\nYou head throbs. There is a faint buzz. The ";
+        d+=quik("_counseling_booth_head_throb","lights",
+           "It feels like a spike driving into your temples. You shield and avert your eyes. ");
+        
+        d+=" above pulse brighter than usual. \n\n<em>It's time to get the job done.</em>";
+        f._counseling_booth_head_throb = 1;
+        
+
+    }
+    
     //start_timer("guidance_counselor");
     if (!exist(f["guidance_counselor_timer"] || f.back=="start")) {
         f.guidance_counselor_timer=0;
@@ -1651,6 +1663,7 @@ case "counseling_booth":
 
 
 break;
+
 
 
 case "guidance_counselor_the_words":
@@ -2003,7 +2016,15 @@ if (f.counseling_booth_paper=="x") {
 
 } else {
     d+="You pick up one of the papers. It reads: ";
-    d+=sq("counseling_booth_paper", ["\"Misdemeanor: disrespecting school authority. Penitence: 3 sessions of detention\"", "\"Misdemeanor: academic negligence. Penitence: 1 session of detention.", "Misdemeanor: travel without proper transit documents. Penitence: 3 sessions of detention.", "Misdemeanor: possession of contraband. Penitence: 5 sessions of detention."]);
+
+    if (f.counseling_booth=="v2") {
+        d+=sq("_counseling_booth_paper_v2", ["\"Misdemeanor: instigating food fight. Penitence: 2 sessions of detention\"", "\"Misdemeanor: dress code violation. Penitence: full uniform compliance for 5 days. No deviances or extracurricular club flourishes allowed during specified period.", "Misdemeanor: curfew violation. Penitence: 1 session of detention. Return to dorm 1 hour earlier for 3 nights.", "Misdemeanor: resisting full body search. Penitence: 4 sessions of detention. Medical examination booked for the next day."]);
+
+
+    } else {
+        d+=sq("_counseling_booth_paper", ["\"Misdemeanor: disrespecting school authority. Penitence: 3 sessions of detention\"", "\"Misdemeanor: academic negligence. Penitence: 1 session of detention.", "Misdemeanor: travel without proper transit documents. Penitence: 3 sessions of detention.", "Misdemeanor: possession of contraband. Penitence: 5 sessions of detention."]);
+
+    }
     d+=" Underneath is a bar code. ";
 }
 
@@ -3620,7 +3641,7 @@ case "hrdcr_gm":
         "_gm_give_me_answers":
             {l:"Give me answers", d: function() {
                 if (f.grandmaster_memory_wiped) {
-                    d+="Her eyes scan your face. She shakes her head and places the apple core on top of the pile of peelings. \"I can see I'm wasting my time. For the sake of the Hardcore I'll let you play with your little delusions. You won't find anything here.\" "; 
+                    d+="She spends a moment reading your eyes. She shakes her head and places the apple core on top of the pile of peelings. \"I can see I'm wasting my time. For the sake of the Hardcore I'll let you chase your little delusions. You won't find anything here.\" "; 
                     f.hrdcr = "x";
                     f.seen_ghosts = 1;
                     f.end_memory = 1;
