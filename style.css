@@ -664,10 +664,10 @@ box-shadow: -3px 3px 3px #f6f6f6;
 
 	a#debugShowHide{
 		position:absolute;
-		right:-10px;
+		right:-15px;
 		top:0;
 		z-index: 100;
-		width:10px;
+		width:15px;
 		height:100px;
 		background-color: gray;
 		text-indent: -9999px;
@@ -677,7 +677,7 @@ box-shadow: -3px 3px 3px #f6f6f6;
 		background-image:url("arrow-left.gif");
 		background-repeat:no-repeat;
 		background-position: 50% 50%;
-	
+
 	}
 	a#debugShowHide:hover {
 		background-color: #5a5a5a;
@@ -691,12 +691,12 @@ box-shadow: -3px 3px 3px #f6f6f6;
 	
 	#debugForm #inv {
 	margin-top: 5px;
-	background-color: yellow;
+	background-color: #efefef;
 	
 	}
 	
 	#debugForm input  {
-		width:60px;
+		width:200px;
 		border:1px solid #EEEEEE;
 	}
 	
@@ -707,6 +707,7 @@ box-shadow: -3px 3px 3px #f6f6f6;
 	#debugForm .form_block {
 		clear:both;
 		margin-bottom:4px;
+        height:15px;
 		border-top:1px dotted silver;
 	}
 	#debugForm label {
@@ -898,7 +899,32 @@ padding-bottom:20px;
     background-color:#fff !important;
 }
 
-
+.form_block {
+}
 #owrap {
     display:none;
+}
+#debugContent {
+}
+#debug label {
+    width:70px;
+}
+#debug input {
+width:60px;
+}
+.debug_hover  {
+margin-right:10px;
+}
+body .debug_hover label a {
+float:right !important;
+}
+.debug_hover label, .debug_hover input {
+    width:200px !important;
+}
+.debug_hover {
+    width:430px !important;
+}
+
+body.debug {
+    margin-left:180px;
 }
