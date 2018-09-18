@@ -122,7 +122,9 @@ user_variables = [
     "seen_kas_excommunicated", //for progress meter
     "library_start",
     "quik", // do not erase
-    "showers_lockers_revealed_chalk"
+    "showers_lockers_revealed_chalk",
+    "_wc_s_timer",
+    "_caf_explore"
     
 ];//::uservariables
 
@@ -445,6 +447,35 @@ function daemon() {
 
 //runs after every node processed
 function daemon_after() {
+
+
+    ///////////////stuff for google analytics
+    if (!exist(config.ga_id) || !config.ga_id) {
+        config.ga_id = "/";
+    } 
+
+    if (getParameterByName("source")) {
+        config.ga_id = getParameterByName("source");
+    }
+
+    if (typeof ga !== "undefined") { 
+        if (f.node=="start" && f.progress_state == progress_meter.length) {
+            ga('send', 'pageview', '/' + config.ga_id + "finished-memories");
+        } else if (f.talk) { //if conversation mode
+            ga('send', 'pageview', '/' + config.ga_id + '/' + f.talk);
+        } else {
+            ga('send', 'pageview', '/' + config.ga_id + '/' + f.node);
+        }
+
+    }
+    ///////end google analytics
+
+
+
+
+
+
+
     if (root && f.node != "start") {
         if (links && !lockdown && config.waitSystem && wait !=0) {
 
@@ -599,7 +630,9 @@ case "start": //aka caf
     //d+="content triggered manually";
         //initNode('dorm');
         //
-    clear_timeouts_intervals();
+    if (f.back=="showdown_intro") {
+        clear_timeouts_intervals();
+    }
     //
     d+="Your name is Susan Newbourne. Student number C-37182.";
  
@@ -744,7 +777,14 @@ case "start": //aka caf
 
 
 
+//////
+//
+/*
+    d+="\n\n{Sinatra|wc_s}";
+    d+="\n\n{timer test|timer_test}";
+    d+="\n\n{nonexist|sdsd}";
 
+    */
 //::start
 
 
@@ -759,22 +799,23 @@ case "start": //aka caf
 
 //::progress_meter
     (function() {
-        var progress_state = 0;
+        f.progress_state = 0;
         for (var i = 0; i < progress_meter.length; i++) {
             if (f[progress_meter[i]]) {
             //console.log(progress_meter[i] + f[progress_meter[i]]);
-                progress_state++;
+                f.progress_state++;
             }
         }
 
-        d+="\n\n<div style='font-size:.75em; line-height:1.5em;'>" + progress_state + " of " + (progress_meter.length) + " fragments reconstructed.</div>";
+        d+="\n\n<div style='font-size:.75em; line-height:1.5em;'>" + f.progress_state + " of " + (progress_meter.length) + " fragments reconstructed.</div>";
 
-        if (progress_state == progress_meter.length) {
+        if (f.progress_state == progress_meter.length) {
            if (typeof ga !== "undefined") { 
                 ga('send', 'pageview', "/arcadiaheights/" + "finished-memories");
             }
 
-            d+="\n<em>You have exhausted your memories.</em> \n<div style='font-size:.75em; line-height:1.5em;'>Thank you for playing. This game will continuously evolve and grow. <a href=\"https://feedburner.google.com/fb/a/mailverify?uri=bloomengine&amp;loc=en_US\" target='_blank' onClick='ga_subscribe_email();'>Stay updated</a> and receive early access to new/extra content or check out some {other games|meta_other_games}.</div>"
+    
+            d+="\n<em>You have exhausted your memories.</em> \n<div style='font-size:.75em; line-height:1.5em;'>Thank you for playing. This game evolves and grows. Please save game and check back in one or two weeks for more content.\n\n<div style='margin-top:-1em;'><a href=\"https://feedburner.google.com/fb/a/mailverify?uri=bloomengine&amp;loc=en_US\" target='_blank' onClick='ga_subscribe_email();'>Click here</a> to stay updated and receive early access to new/extra content or check out some {other games|meta_other_games}.</div></div>"
         }
     })(); 
 
@@ -2077,6 +2118,10 @@ case "caf":
 
     root=1;
     d+=caf_desc();
+    if (f._caf_seen_bridge_club && f._caf_explore > 3 && f._caf_explore !="x") {
+        f.caf_bridge_chess_conflict=3;
+        f._caf_explore = "x";
+    }
     if (f.caf_bridge_chess_conflict != "x" && f.caf_bridge_chess_conflict < 3) {
         d+="\n\nThe  {group|caf_bridge_club} seated next to you is noisy. ";
     }
@@ -2107,6 +2152,10 @@ case "caf":
                 f.caf_bridge_chess_conflict = "x"
                 back=0;        
             break;
+    }
+
+    if (f._caf_explore != "x") {
+        f._caf_explore++;
     }
 
 break;
@@ -2196,7 +2245,7 @@ break;
 case "caf_bridge_club":
     d+="Bridge club members. Back slapping and laughter. One of them squats on the bench like a monkey, doing little hops and rocking the table. They wear red scarves. A {playing card|caf_bridge_playing_card} peeks from the breast pocket of their uniforms. The boys leave one side of their shirts untucked. The girls have the sides of their heads shaved. ";
                  
-                 
+        f._caf_seen_bridge_club = 1; 
         if (!f.caf_bridge_chess_conflict) {f.caf_bridge_chess_conflict++;}
     
 break;
@@ -3725,7 +3774,125 @@ break;
 
 
 
+///////////////
+case "wc_s":
+    root = 1;
+    scene_change("Witness"); 
+    if (f._wc_s_timer < 10) {
+        f._wc_s_timer++;
+    }
+    d+="You sit on the toilet with the seat lid lowered. ";
+    d+="Clenched in your hands is a wrinkled " + quik("wc_s_mask", "mask", "The head of a raven, black as your hair.") + ". ";
+    if (f.meeting_washroom_stall_graffiti != "x") { 
+        d+="{Graffiti|meeting_washroom_stall_graffiti} ";
+    } else {
+        d+="Graffiti ";
+    }
+    d+="covers the stall walls and door. "; 
 
+    switch(f._wc_s_timer) {
+        case 3:
+            d+="\n\nFootsteps clank and wheels clatter. {Voices|wc_s_voices} become louder. \n\nYou stand up and pull the mask over your head. ";
+
+        break;
+
+        case 4:
+            d+="\n\n\"Go back and put the sign at the entrance so students can see it,\" says a voice. ";
+        break;
+
+        case 5:
+            d+="\n\nA faucet creaks. Water begins drumming into a bucket. \"You do the mirrors and sinks\" he shouts. \"I'll do the stalls.\"";
+        break;
+
+        case 6:
+            d="The stall door opens and " + quik("wc_s_sinatra","Sinatra","His mouth changes from a horizontal line to a circular O. He looks behind. \"Junior,\" he says. \"Go fetch more disinfectant,\" he says. \"Don't argue. I don't care how much. Just get more!\" A high pitched mumbling and footsteps receding into the halls. \n\nA bead of cartoon sweat appears on his face. Body frozen and eyes locked with yours, he slowly closes the stall door. You catch the {door|wc_s_reopen_door} and open it again. ") + " stands in front of you. He fumbles and almost drops the toilet scrub in his hands when he sees you. ";
+
+        break;
+    }
+
+    
+   
+
+break;
+
+case "wc_s_voices":
+    d+="One a high pitched, electronic, youthful, the other lower and deeper. ";
+break
+
+case "wc_s_reopen_door":
+    d+="He edges backward as you move toward him and {step out|wc_s_main} of the stall. ";
+break;
+
+
+case "wc_s_main":
+    root = 1;
+    f._wc_s_timer++;
+    
+    d+="A janitor station is parked next to a row of sinks and {mirror|wc_s_mirror}. Light pours in from a {narrow window|washroom_window} near the ceiling. A doorway leads {outside|washroom_back_out}.";
+
+    if (f._wc_s_scrub_disarmed) {
+
+        d+="\n\n{Sinatra|wc_sinatra_talk} stand rigid in front of you, fists clenched, arms in an L-shape as if ready to drive the school zamboni. "; 
+    } else {
+
+        d+="\n\n{Sinatra|wc_sinatra_talk} clenches the " + quik("_wc_s_scrub_knocked_off", "scrub", function() {
+            d+="He stays frozen as you reach forward and unpry it from his fingers. It slips from his grip and clatters to the floor. ";
+            f._wc_s_scrub_disarmed = 1;
+        }) + " in front of him like a sword, elbows sticking out. ";
+    } 
+    switch(f._wc_s_timer) {
+        case 7:
+            d+="\n\n\"Who are you? What do you want?\" he says. "; 
+        break;
+
+    }
+
+break;
+
+case "wc_s_mirror":
+    d+="Another scene of a raven and a janitor. The raven-faced student feels alien. It is not you. ";
+break;
+case "wc_sinatra_talk":
+
+
+break;
+
+
+
+case "timer_test":
+    root = 1;
+    d+="Timer {test|timer_test} ";
+
+    events("_timer_name",[
+        "event 1 desc",
+        "event 2 desc",
+        3, 
+        function() {
+            d+="blah";
+        },
+        "blah 2",
+        3,
+        "blah 3"
+
+
+    ]);
+
+    d+=" ";
+
+    events("_timer_name_2",[
+        "event a desc",
+        "event b desc",
+        3, 
+        function() {
+            d+="blah";
+        },
+        "blah c",
+        3,
+        "blah d"
+
+
+    ])
+break;
 
 //::end
 ///////In case you link to a nonexistent node, then this error message will appear
@@ -3737,6 +3904,7 @@ default:
         break;
         case 'undefined': //no function found, doesn't exist, go to defaults
         default:
+            console.log('here');
             nodeless = ['Your thoughts lead you elsewhere.', 'Your attention drifts to other matters. ', 'Your memory blurs. ', 'Your focus shifts elsewhere. '];
             parameters = [];
             parameters.flag_name = "default_no_node";

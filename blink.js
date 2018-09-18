@@ -104,30 +104,10 @@ query = getParameterByName("f");
 function process(node,giver,receiver,params) {
 
 
-    //stuff for google analytics
-    if (!exist(config.ga_id) || !config.ga_id) {
-        config.ga_id = "/";
-    } 
-
-    if (getParameterByName("source")) {
-        config.ga_id = getParameterByName("source");
-    }
-
-    if (typeof ga !== "undefined") { 
-        //the !f.talk means it is in conversation mode
-        if (f.talk) {
-            ga('send', 'pageview', '/' + config.ga_id + '/' + f.talk);
-        } else {
-            ga('send', 'pageview', '/' + config.ga_id + '/' + node);
-        }
-
-    }
-
     if (f.moves > 0) {
         clearInterval(bg_int);
 
     }
-
 
     if(typeof daemon == 'function') {
         daemon();
@@ -201,11 +181,13 @@ function process(node,giver,receiver,params) {
 
 	
 	if(firstload) {
+		if (config.debugMode) {
+            $("body").addClass('debug'); 
+        }
 
         let x = check_if_duplicated(user_variables);
         if(x.length) {
             alert('There are duplicated items in user_variables: ' + x.join() + '\nPlease remove duplicates or else there will be bugs!');
-            //console.log(check_if_duplicated(user_variables));
         }
         
 		//append custom variables to variables array
@@ -461,7 +443,6 @@ function process(node,giver,receiver,params) {
 
            var stateObj = { foo: "bar" };
             history.pushState(stateObj, "",  "?" + save_link_compressed);
-            console.log(url);
 
         })(); 
         */ 
@@ -657,11 +638,8 @@ function process(node,giver,receiver,params) {
             
         }
 
-        f.quik = 0;
-        root = 0; 
     }
 
-    //console.log("heee" + f.blue);
 
 
     if (back == 1 && !root && links && !lockdown) {
@@ -675,7 +653,14 @@ function process(node,giver,receiver,params) {
         }
     } else if (back !=1 && back !=0 && !lockdown) {
         d+="<p class=\"back\">{Return|" + f.back + "}</p>";
-    } 
+    }
+
+    if (f.quik) {
+        f.quik = 0;
+        d+="<p class=\"back\">{Return|" + f.root + "}</p>";
+
+
+    }
     /*
 	if (back !=0 && back != 1 && root && links) {
         d+="<p class=\"back\">{Return|" + back + "}</p>";
@@ -763,8 +748,9 @@ function process(node,giver,receiver,params) {
         /////////////////////////////////////////////////////::output 
         /////////////////////////////////////////////////////::output 
         /////////////////////////////////////////////////////::output 
+        //
         $('#new').html(createLinks(shortcut_characters(d))).promise().done(function(){
-
+     
             $('#new a').on('click',function() {
                 $(this).addClass('clicked');
 
@@ -780,19 +766,15 @@ function process(node,giver,receiver,params) {
                 $("#wrap").animate({
                     scrollTop:  '-=100'
                 }, 100); 		
-    console.log($('#wrap').scrollTop() , $('#new').position().top);
     extra =  $('#new').position().top - $('#wrap').scrollTop();
-    console.log(extra);
     if (extra < 1500) {
                 $("#wrap").animate({
                     scrollTop:  '-=100'
                 }, 10); 		
-        console.log('extra');        
     }
      */     
 
 
-                //console.log($('#wrap').scrollTop() , $('#new').position().top);
 
                     
                 if (!firstload && !restored) { 
@@ -816,6 +798,8 @@ function process(node,giver,receiver,params) {
                 
             }
         });
+
+
 	//update so scrolls properly https://github.com/inuyaksa/jquery.nicescroll/wiki/Nicescroll-with-dynamic-content
 	//$('body').getNiceScroll().resize();
 	// window.setTimeout(function(){
@@ -1226,7 +1210,6 @@ function restore() {
         f = JSON.parse(localStorage.getItem('save_f'));
         i = JSON.parse(localStorage.getItem('save_i'));
         
-        //console.log('heeeeeee' + f.node);
 		process(f.node,f.giver,f.receiver);
 	
 	
@@ -1517,6 +1500,8 @@ function togglez(ids) {
 
 //story
 function debug() {
+    setTimeout(function() {
+    },100);
 
 	
 	//////////////////////////
@@ -1542,7 +1527,7 @@ function debug() {
 		for (c in fname) {
 			dt += '<div class="form_block"><label>';
 				
-            dt+="<a href=\"#\" title=\"" + fname[c] + "\"onclick=\"togglez('" + fname[c] +"'); return false;\">";
+            dt+="<a href=\"#\" title=\"" + fname[c] + " | " + f[fname[c]] + "\"onclick=\"togglez('" + fname[c] +"'); return false;\">";
 			dt += fname[c];
 			
             dt+=":</a>";
@@ -1617,23 +1602,47 @@ function debug() {
 	
 	
 	*/
-	
-	if (config.debugMode) {
-		document.getElementById('debugContent').innerHTML=dt;
 
+	if (config.debugMode) {
+		//document.getElementById('debugContent').innerHTML=dt;
+        debug_scroll_pos = $("#debugContent").scrollTop();
+
+        /*
+        $("#debugContent").html(dt).promise().done(function(){
+        
+            $("#debugContent").scrollTop(debug_scroll_pos);
+        });
+        */
+        
+        $("#debugContent").html(dt);
+        var a = setTimeout(function(){$("#debugContent").scrollTop(debug_scroll_pos);},1);
 
 	} 
 
+    
 	//////////////////////////////
 	///////////end debug tools////
 	/////////////////////////////	
 
 	resize();
 
-
+    activate_debug_hover();
 }
 
+function activate_debug_hover () {
+    $("#debugContent").hover(
+           function(){ $("#debug").addClass('debug_hover') },
+           function(){ $("#debug").removeClass('debug_hover') }
+    );
 
+
+   if (f.debugPane) {
+        $("#debugShowHide").hover(
+               function(){ $("#debug").addClass('debug_hover') },
+               function(){ $("#debug").removeClass('debug_hover') }
+        );
+    }
+}
 function buildDebugLink() {
 	var d = "";
     var i = "";
@@ -1667,17 +1676,28 @@ function buildDebugLink() {
 
 
 function debugShowHide() {
-
+    //var shift_left = -1 * ($("#debug").width() - 205);
+    shift_left = -430;
 	if (f.debugPane) {
-		$("#debug").css("left", -1 * $("#debug").width());
+
+        $("#debug").css("left", shift_left);
 		f.debugPane = 0;
 		$("#debugShowHide").text("Show debug");
 		$("#debugShowHide").css("background-image","url(arrow-right.gif)");
+
+        $("body").removeClass("debug");
+        $("#debugShowHide").unbind('mouseenter mouseleave')
+
+
 	} else {
+        $("body").addClass("debug");
 		$("#debug").css("left", "0");
 		f.debugPane = 1;
 			$("#debugShowHide").text("Hide debug");
 			$("#debugShowHide").css("background-image","url(arrow-left.gif)");
+            $("#debug").removeClass('debug_hover'); 
+            activate_debug_hover();
+            
 					
 	}
 }
