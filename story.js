@@ -460,7 +460,8 @@ function daemon_after() {
 
     if (typeof ga !== "undefined") { 
         if (f.node=="start" && f.progress_state == progress_meter.length) {
-            ga('send', 'pageview', '/' + config.ga_id + "finished-memories");
+            ga('send', 'pageview', "/arcadiaheights/" + "finished-memories");
+            //ga('send', 'pageview', '/' + config.ga_id + "finished-memories");
         } else if (f.talk) { //if conversation mode
             ga('send', 'pageview', '/' + config.ga_id + '/' + f.talk);
         } else {
@@ -810,10 +811,12 @@ case "start": //aka caf
         d+="\n\n<div style='font-size:.75em; line-height:1.5em;'>" + f.progress_state + " of " + (progress_meter.length) + " fragments reconstructed.</div>";
 
         if (f.progress_state == progress_meter.length) {
+
+            /*
            if (typeof ga !== "undefined") { 
                 ga('send', 'pageview', "/arcadiaheights/" + "finished-memories");
             }
-
+            */
     
             d+="\n<em>You have exhausted your memories.</em> \n<div style='font-size:.75em; line-height:1.5em;'>Thank you for playing. This game evolves and grows. Please save game and check back in one or two weeks for more content.\n\n<div style='margin-top:-1em;'><a href=\"https://feedburner.google.com/fb/a/mailverify?uri=bloomengine&amp;loc=en_US\" target='_blank' onClick='ga_subscribe_email();'>Click here</a> to stay updated and receive early access to new/extra content or check out some {other games|meta_other_games}.</div></div>"
         }
