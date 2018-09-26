@@ -816,7 +816,7 @@ case "start": //aka caf
                 ga('send', 'pageview', "/arcadiaheights/" + "finished-memories");
             }
     
-            d+="\n<em>You have exhausted your memories.</em> \n<div style='font-size:.75em; line-height:1.5em;'>Thank you for playing. This game evolves and grows. Please save game and check back in one or two weeks for more content.\n\n<div style='margin-top:-1em;'><a href=\"https://feedburner.google.com/fb/a/mailverify?uri=bloomengine&amp;loc=en_US\" target='_blank' onClick='ga_subscribe_email();'>Click here</a> to stay updated and receive early access to new/extra content or check out some {other games|meta_other_games}.</div></div>"
+            d+="\n<em>You have exhausted your memories.</em> \n<div style='font-size:.75em; line-height:1.5em;'>Thank you for playing. This game evolves and grows. Please save game and check back after October 6th for more content.\n\n<div style='margin-top:-1em;'><a href=\"https://feedburner.google.com/fb/a/mailverify?uri=bloomengine&amp;loc=en_US\" target='_blank' onClick='ga_subscribe_email();'>Click here</a> to stay updated and receive early access to new/extra content or check out some {other games|meta_other_games}.</div></div>"
         }
     })(); 
 
