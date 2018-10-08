@@ -194,7 +194,10 @@ var preload_images = [
     "i/arcadia_arrival_03_wordless.png",
     "i/chess_club.png",    
     "i/faculty.png",    
-    "i/fstop.png"    
+    "i/fstop.png",
+    "i/guidance_counselor.png",
+    "i/raven_mask.png"
+    
 ];
 
 inventoryTypes = [
@@ -667,7 +670,14 @@ break;
 /////
 case "feelies":
     d+="<h1>Unlocked feelies:</h1>\n";
+    if (f.after_wc_s_cornered) {
 
+        d+="<img src='https://bloomengine.com/arcadiaheights/i/raven_mask.png' class='feelies' />";
+    }
+    if (f.seen_counselor) {
+
+        d+="<img src='https://bloomengine.com/arcadiaheights/i/guidance_counselor.png' class='feelies' />";
+    }
     /*
     d+=oneoff_text("arrival_comic", "<img src='https://bloomengine.com/arcadiaheights/i/arcadia_arrival_03_wordless.png' class='feelies' />");
 */
@@ -3930,7 +3940,7 @@ case "wc_s":
         f._wc_s_timer++;
     }
     d+="You sit on the toilet with the seat lid lowered. ";
-    d+="You clench a " + quik("wc_s_mask", "mask", "A stylized head of a raven, black as your hair.") + " in your hands. ";
+    d+="You clench a " + quik("wc_s_mask", "mask", "A stylized face of a raven, black as your hair. It has a string to pull behind your head and covers the eyes.") + " in your hands. ";
     d+=oneoff_text("\n\n<em>Your head throbs and you hear the sound of cicadas</em>");
     if (f.meeting_washroom_stall_graffiti != "x") { 
         d+="{Graffiti|meeting_washroom_stall_graffiti} ";
@@ -3951,7 +3961,7 @@ case "wc_s":
         break;
 
         case 4:
-            d+="\n\n\"Don't forget the sign. Go back and put it at the entrance where people can see it,\" says the deeper voice. \n\nYou put on your " + oneoff_quik("_wc_s_mask_pull_over", "mask", "The raven head stretches and fits snugly over your head.") + ".";
+            d+="\n\n\"Don't forget the sign. Go back and put it at the entrance where people can see it,\" says the deeper voice. \n\nYou pull your raven  " + oneoff_quik("_wc_s_mask_pull_over", "mask", "It will get the job done. Enough to subvert facial recognition.") + " over your eyes.";
         break;
 
         case 5:
