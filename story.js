@@ -955,7 +955,7 @@ case "start": //aka caf
             }
         }
 
-        d+="\n\n<div style='font-size:.75em; line-height:1.5em;'>" + f.progress_state + " of " + (progress_meter.length) + " fragments reconstructed.</div>";
+        d+="\n\n<div style='font-size:.75em; line-height:1.5em;'>" + f.progress_state + " of " + (progress_meter.length) + " fragments reconstructed. \n\nLast content update: October 8</div>";
 
         if (f.progress_state == progress_meter.length) {
 
