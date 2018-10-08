@@ -643,14 +643,19 @@ function process(node,giver,receiver,params) {
 
 
     if (back == 1 && !root && links && !lockdown) {
+
+        d+="<p class=\"back\">{Return|" + f.root + "}</p>";
+   
+        /*
         if (f.topic) {
-            d+='<p class="back"><a onclick="f.topic=0; debug(); process(\'' + f.back + '\'); return false;">' + "Return" + "</a></li>";
+            d+='<p class="back"><a onclick="debug(); process(\'' + f.back + '\'); return false;">' + "Return" + "</a></li>";
 
             //d+="<p class=\"back\">{Return|" + f.back + "}</p>";
         } else {
         
             d+="<p class=\"back\">{Return|" + f.root + "}</p>";
         }
+        */
     } else if (back !=1 && back !=0 && !lockdown) {
         d+="<p class=\"back\">{Return|" + f.back + "}</p>";
     }

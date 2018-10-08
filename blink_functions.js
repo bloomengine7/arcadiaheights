@@ -1,4 +1,5 @@
 function events(event_name,events) {
+    console.log('in events sequence');
 //side effect, refers to f array, f[event_name], d
 	if (typeof f[event_name]=="undefined" || f[event_name]==0) {
         f[event_name]="0,0";
@@ -379,6 +380,8 @@ function topics(obj) {
         set_visibility();
         if (exist(obj[c].topic) && f.topic != obj[c].topic) {
             visible = 0;
+        console.log('heya');
+            
         }
 
         if (f.topic) {
@@ -952,29 +955,47 @@ var rand = function(min, max) {
     return Math.random() * (max - min) + min;
 };
 
-
-
-
+function any_topic_exists(obj) {
+    var topic_exists = false;
+    for (c in obj) {
+        if(exist(obj[c].topic)) { 
+            topic_exists = true; 
+        }
+    }
+    return topic_exists;
+}
 
 done_talking = function(obj,topic) {
     var topic = topic || f.topic;
     console.log('testing tpic' + topic);
     var c;
     var done_talking = 0;
-    for (c in obj) {
-        if(!exist(obj[c].topic || !obj[c].topic)) { //test only if it is a root topic
+
+    if (any_topic_exists(obj)) {
+        for (c in obj) {
+            if(!exist(obj[c].topic || !obj[c].topic)) { //test only if it is a root topic
+                if (f[c] != "x") {
+                    done_talking++;
+                }  
+            }
+
+            else if (obj[c].topic == topic) {
+                if (f[c] != "x") {
+                    done_talking++;
+                }
+            }
+            
+        }
+
+    } else {
+        for (c in obj) {
             if (f[c] != "x") {
                 done_talking++;
             }  
         }
-
-        else if (obj[c].topic == topic) {
-            if (f[c] != "x") {
-                done_talking++;
-            }
-        }
-        
     }
+
+
     if(done_talking > 0) {
         return false;
     } else {

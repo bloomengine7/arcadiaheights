@@ -124,7 +124,30 @@ user_variables = [
     "quik", // do not erase
     "showers_lockers_revealed_chalk",
     "_wc_s_timer",
-    "_caf_explore"
+    "_caf_explore",
+    "_wc_s_kasparov",
+    "_wc_s_kasparov_2",
+    "_wc_s_library",
+    "_wc_s_t_kasparov",
+    "_wc_s_t_library",
+    "_wc_s_junior",
+    "_wc_s_dome",
+    "_wc_s_intro",
+    "_wc_s_fight",
+    "_wc_s_fox_mask",
+    "_wc_s_others",
+    "_wc_s_moved",
+    "_wc_s_books",
+    "_wc_s_security",
+    "_wc_s_glitter",
+    "_wc_s_released",
+    "_wc_s_mirror_smashed",
+    "wc_s",
+    "_wc_s_scrub_disarmed",
+    "seen_sinatra_account",
+    "after_wc_s_cornered"
+
+    
     
 ];//::uservariables
 
@@ -135,6 +158,7 @@ var progress_meter = [
     "seen_informer_note",
     "seen_washroom_informer",
     "seen_counselor",
+    "after_wc_s_cornered",
 
 
     //chess thread 
@@ -493,6 +517,104 @@ function daemon_after() {
 ///////////////////////////////////////////////
 
 function nodes(node) { //Do not remove this line
+
+
+    wc_sinatra_talk = {
+        "_wc_s_kasparov":
+            {l:"Kasparov", d:function() {
+                d+="\"Kasparov? Who's Kasparov?\" he says.";
+                f._wc_s_kasparov_2 = 1;
+            },v:1,topic:"_wc_s_intro"},
+        "_wc_s_kasparov_2":
+            {l:"Kasparov", d:function() {
+                d+="\"Please believe me miss, I don't know anything. I swear by the Headmaster's socks!\"";
+            }, topic:"_wc_s_intro"},
+            
+        "_wc_s_library":
+            {l:"Library incident", d:function(){
+                d+="\"Don't know a thing about it!\" he says.";
+                },v:1,topic: "_wc_s_intro"
+            },
+        ///////////////////////////
+        "_wc_s_t_kasparov":
+            {l:"Kasparov", d:function(){
+                d+="\"He had the face of a fox. In a blink, he would appear and disappear, moving like a glitch. One moment he'd be here and the next he'd be there. Most of the time invisible.\"";
+                f._wc_s_fox_mask = 1; 
+                
+                },v:1,topic:"_wc_s_talk"
+            },
+        "_wc_s_t_library":
+            {l:"Library incident", d:function(){
+                d+="\"It was after hours. Everything was dark. I was sitting by the moat near the outer edges with Junior. We like to watch the colors at night. That's when the books started falling out of the shelves.\"";
+
+                f._wc_s_junior = 1;
+                f._wc_s_dome = 1;
+                f._wc_s_books = 1; 
+                },v:1,topic: "_wc_s_talk"
+            },
+        "_wc_s_junior":
+            {l:"Junior", d:function(){
+                d+="\"My son. One day when I'm gone he'll be mopping the floors.\"";
+
+                
+                },topic: "_wc_s_talk"
+            },
+
+        "_wc_s_dome":
+            {l:"Dome", d:function(){
+                d+="\"There's a nice view from the library at night. It's all blurry but the colors shimmer.\"";
+
+                
+                },topic: "_wc_s_talk"
+            },
+            
+        "_wc_s_fox_mask":
+            {l:"Fox", d:function(){
+                d+="\"I couldn't see his face. They had animal masks, like yours. You're not one of them, are you?\"";
+                f._wc_s_others = 1; 
+                },topic: "_wc_s_talk"
+            },
+
+        "_wc_s_others":
+            {l:"Others with Kasparov", d:function() {
+                d+="\"It was hard to see how many he had working with him. Maybe seven. They all moved the same way he did.\"";
+                f._wc_s_moved = 1;
+                }, topic: "_wc_s_talk"
+            },
+        "_wc_s_moved":
+            {l:"Movement", d:function() {
+                d+="\"Like a broken video signal. Appearing, stuttering then disappearing. Invisible most of the time.\"";
+                }, topic: "_wc_s_talk"
+            },
+
+        "_wc_s_books":
+            {l:"Books", d:function(){
+                d+="\"We watched from a distance as they flew off the shelves by themselves. Then arms and wrenches appeared. Just the arms, like they were floating in the air. They began unbolting the bottoms of the shelves. Ropes appeared and they were fastened to the tops of the shelves. I sent Junior to call security.\"";
+
+                f._wc_s_security = 1;        
+                },topic: "_wc_s_talk"
+            },
+        "_wc_s_security":
+            {l:"Security", d:function(){
+                d+="\"They arrived a second too late. Just as the biggest shelf fell over. I don't know what they were trying to do.\"";
+            },topic:"_wc_s_talk"},
+
+        "_wc_s_glitter":
+            {l:"Glitter", d:function(){
+                d+="\"It stuck to the rebels so you could see where they were. They ditched their cloaks and I saw seven of them wearing animal masks. After a big fight, they cornered Kasparov by the trench.\"";
+
+                lockdown = 1;
+                d+=bk("lbr_s_ft");
+            },v:1, topic:"_wc_s_fight"}
+            
+
+
+    };
+
+
+
+
+
 	switch(node) { //Do not remove this line
    
 	
@@ -566,10 +688,29 @@ case "feelies":
 break;
 /////
 case "start": //aka caf
- 
+
+    //::start
+    //
+   
+    //activate sinatra washroom 
+    (function(array){
+        f.wc_s = 1;
+
+        for (var c=0; c++; c > array.length) {
+
+            if(!f[array[c]]) {
+               f.wc_s = 0; 
+            }
+        }
+    })(["seen_behind_poster",
+    "seen_informer_note",
+    "seen_washroom_informer",
+    "seen_counselor"]);
+
+
      
     reset_inventory();
-    i.zzz=1;
+    f.topic = 0;
     f.end_memory=0;
 	root=1;
     if (f.moves > 3) {
@@ -780,12 +921,18 @@ case "start": //aka caf
 
 //////
 //
-/*
-    d+="\n\n{Sinatra|wc_s}";
+//
+//
+
+    if (f.wc_s && f.wc != "x") {
+        d+="\n{Sinatra|wc_s}";
+    }
+
+    /*
     d+="\n\n{timer test|timer_test}";
     d+="\n\n{nonexist|sdsd}";
-
     */
+
 //::start
 
 
@@ -816,7 +963,7 @@ case "start": //aka caf
                 ga('send', 'pageview', "/arcadiaheights/" + "finished-memories");
             }
     
-            d+="\n<em>You have exhausted your memories.</em> \n<div style='font-size:.75em; line-height:1.5em;'>Thank you for playing. This game evolves and grows. Please save game and check back after October 6th for more content.\n\n<div style='margin-top:-1em;'><a href=\"https://feedburner.google.com/fb/a/mailverify?uri=bloomengine&amp;loc=en_US\" target='_blank' onClick='ga_subscribe_email();'>Click here</a> to stay updated and receive early access to new/extra content or check out some {other games|meta_other_games}.</div></div>"
+            d+="\n<em>You have exhausted your memories.</em> \n<div style='font-size:.75em; line-height:1.5em;'>Thank you for playing. This game evolves and grows. Please save game and check back after October 13th for more content.\n\n<div style='margin-top:-1em;'><a href=\"https://feedburner.google.com/fb/a/mailverify?uri=bloomengine&amp;loc=en_US\" target='_blank' onClick='ga_subscribe_email();'>Click here</a> to stay updated and receive early access to new/extra content or check out some {other games|meta_other_games}.</div></div>"
         }
     })(); 
 
@@ -1679,7 +1826,7 @@ case "counseling_booth":
     switch(f.counseling_booth) {
         case "v2":
             f.rook_boyfriend = 1; 
-            scene_change("Memory Assassination");
+            scene_change("Memory hit");
         break;
         default:
             scene_change("The Truth");
@@ -2553,11 +2700,11 @@ case "library_dome_trench":
     d+="Railings line the edge of it. ";
 break;
 case "library_shelves_knocked_over":
-    d+="The starting smallest shelf is slightly higher than you are. The next few shelves become successively larger. The largest one at the end of the sequence is at least three dormitories high and leans against the edge of the {dome|library_shelf_impact}. ";
+    d+="The starting smallest shelf is about double your height. The next few shelves become successively larger. The largest one at the end of the sequence is at least three dormitories high and leans against the edge of the {dome|library_shelf_impact}. ";
 
 break;
 case "library_ss":
-   d+="They examine everything with oversized magnifying glasses. Others carry metal rods with a flat disc at the end, listening carefully to the crackle of their scanning equipment. \n\n"; 
+   d+="They examine everything with oversized magnifying glasses. Some carry brooms and sweep a glittering silver dust from the floor. Others carry metal rods with a flat disc at the end, listening carefully to the crackle of their scanning equipment. \n\n"; 
    
    if (i.wolff) {
        d+="Officer Wolff stands apart from the rest. ";
@@ -3506,7 +3653,7 @@ case "cafv2_lunge":
     f.cafv2_timer="guards"; 
 break;
 case "cafv2_guard_swings":
-    d+="You catch his arm, wrap your leg around it and twist. Sparks fly as the arm pops off. Gears and screws spill to the ground. ";
+    d+="You catch his arm and flip him onto the floor. You wrap your leg around his arm and twist. Sparks fly as the arm pops off. Gears and screws spill to the ground. ";
         f.caf = "x";
         f.scene_change = 0;
         lockdown = 1;
@@ -3783,7 +3930,8 @@ case "wc_s":
         f._wc_s_timer++;
     }
     d+="You sit on the toilet with the seat lid lowered. ";
-    d+="Clenched in your hands is a wrinkled " + quik("wc_s_mask", "mask", "The head of a raven, black as your hair.") + ". ";
+    d+="You clench a " + quik("wc_s_mask", "mask", "A stylized head of a raven, black as your hair.") + " in your hands. ";
+    d+=oneoff_text("\n\n<em>Your head throbs and you hear the sound of cicadas</em>");
     if (f.meeting_washroom_stall_graffiti != "x") { 
         d+="{Graffiti|meeting_washroom_stall_graffiti} ";
     } else {
@@ -3792,22 +3940,29 @@ case "wc_s":
     d+="covers the stall walls and door. "; 
 
     switch(f._wc_s_timer) {
+        case 0:
+        case 1:
+        case 2:
+        break;
+
         case 3:
-            d+="\n\nFootsteps clank and wheels clatter. {Voices|wc_s_voices} become louder. \n\nYou stand up and pull the mask over your head. ";
+            d+="\n\nFootsteps and clattering wheels. {Voices|wc_s_voices} become louder. \n\nYou stand up. ";
 
         break;
 
         case 4:
-            d+="\n\n\"Go back and put the sign at the entrance so students can see it,\" says a voice. ";
+            d+="\n\n\"Don't forget the sign. Go back and put it at the entrance where people can see it,\" says the deeper voice. \n\nYou put on your " + oneoff_quik("_wc_s_mask_pull_over", "mask", "The raven head stretches and fits snugly over your head.") + ".";
         break;
 
         case 5:
-            d+="\n\nA faucet creaks. Water begins drumming into a bucket. \"You do the mirrors and sinks\" he shouts. \"I'll do the stalls.\"";
+            d="A faucet squeaks. Water begins drumming into a bucket. \"You do the mirrors and sinks\" he shouts. \"I'll do the stalls.\" \n\n";
+
+            d+="The stall door opens and {Sinatra|wc_s_surprise} stands blinking in front of you. He fumbles and almost drops the toilet scrub in his hands. ";
+
         break;
 
-        case 6:
-            d="The stall door opens and " + quik("wc_s_sinatra","Sinatra","His mouth changes from a horizontal line to a circular O. He looks behind. \"Junior,\" he says. \"Go fetch more disinfectant,\" he says. \"Don't argue. I don't care how much. Just get more!\" A high pitched mumbling and footsteps receding into the halls. \n\nA bead of cartoon sweat appears on his face. Body frozen and eyes locked with yours, he slowly closes the stall door. You catch the {door|wc_s_reopen_door} and open it again. ") + " stands in front of you. He fumbles and almost drops the toilet scrub in his hands when he sees you. ";
-
+        default:    
+            d+="\n\n{Sinatra|wc_s_reopen_door} trembles in front of you. ";
         break;
     }
 
@@ -3816,48 +3971,232 @@ case "wc_s":
 
 break;
 
+
+case "wc_s_surprise":
+
+    d+="Coveralls, gangly and stained metal arms. Oversized rubber gloves. \n\nHis mouth changes from a horizontal line to a circular O as he stares at you. He looks behind. \"Junior,\" he says. \"Go fetch more disinfectant. We don't have enough. Don't argue. Just get more!\" A mumbling and footsteps recede into the halls. \n\nA bead of cartoon sweat slides down Sinatra's face.  He reaches forward and slowly closes the stall door. You put your hand on the door and {open it|wc_s_reopen_door} again.";
+    lockdown = 1;
+                
+break;
+
+
 case "wc_s_voices":
     d+="One a high pitched, electronic, youthful, the other lower and deeper. ";
 break
 
 case "wc_s_reopen_door":
     d+="He edges backward as you move toward him and {step out|wc_s_main} of the stall. ";
+    lockdown = 1;
 break;
 
+case "lbr_s_ft":
+    scene_change("Rules of Engagement");
+    root = 1;
+    events("_libr_s_ft",[
+        function() {
+            lockdown = 1;
+            d+="The Headmaster's voice {thunders|lbr_s_ft_rumble} from the P.A. system above: \"Stand down, Kasparov. We already have the others. You're surrounded.\" \n\nWolff and a crowd of security officers stand in the shadows, framed by bookshelves. They surround him, shock weapons raised. \n\nKasparov's stands in a pool of {light|lbr_s_ft_spotlights} back pressing against a railing. Behind it a trench drops into darkness. ";
+            
+            
+            
+            
+            
+        },
+        
+        function() {
+            lockdown = 1;
+            d+="\"Wolff!\" says Kasparov. \"I challenge you to a gentleman's fistfight, bare-knuckle Chess rules. To the death!\"\n\n\"We do not kill our students, Wolff,\" says Blue.\n\n\"I accept,\" says Wolff. He tosses his " + quik("lbr_sn_ft_stick", "nightstick", "It rests on the floor at Kasparov's feet. Sparks dance along its shaft.") + " on the floor. \n\nThe Headmaster sighs. The others step back as Wolff and Kasparov begin circling each other.";
+            
+            
+            /*\"You've come to kill me under the cover of night? Do it, cowards. You can't extinguish the light. Not with a thousand weapons. Not with a thousand men.\"";
+            */
+            /*
+            d+="\"I know you are here to kill me. Do it, cowards. You are only going to kill a man. You cannot stop the revolution.\" \n\nHe wears a {fox mask|showdown_intro_mask} and a student uniform. His back presses against a railing. Behind it a trench drops into darkness. \n\n{Emoticons|showdown_intro_emoticons} hover in the shadows of the bookshelves and cast him in a sickly yellow hue.  ";
+                */
+
+            /*
+            d+="Kasparov wears a {fox mask|showdown_intro_mask} and a student uniform. His back presses against a railing. Behind it a trench drops into darkness. \n\nWolff and other Security Guards inch closer to him. ";
+            d+="\"The Headmaster's voice crackles from the P.A. system above: \"Stand down, Kasparov. You're outnumbered and surrounded.\" \n\n\"You've come to kill me in the darkness? You cannot kill the light and you cannot stop the revolution. Not with a thousand weapons. Not with a thousand men.\"";
+           */ 
+        },
+        /*
+        function() {
+            lockdown = 1;
+            d+="The Headmaster's voice crackes fro the P.A. system {above|showdown_intro_heavens}: \"We don't kill our students, Kasparov. Come quietly. We already have the others.\"\n\nWolff and other security guards inch closer to him. Their {nightsticks|showdown_intro_nightsticks} bristle with electricity. ";
+
+        },
+        function() {
+            lockdown = 1;
+            d+="Wolff throws his {nightstick|lbr_ft_sn_nightstick} to the ground. \"Let's finish this, Kasparov. Bare-knuckle fistfight. Chess club rules. To the death.\" \n\n\"We do not kill our students, Wolff,\" says Blue.\n\nWolff and Kasparov begin circling each other. \n\nThe headmaster sighs.";
+
+        },
+        */
+        function() {
+            d+="Wolff and Kasparov keep their backs arched, fists raised and arms curled in classical Chess Club fashion. They " + quik("lbr_ft_sn_dance", "dance", "A rhythmic, hypnotic bouncing. Front to back, then side to side. Broken by feints. ") + " back and forth on their toes. \n\nKasparov gives a right hook and Wolff leans backward and dodges his fist. He counters with a jab to Kasparov's side. Kasparov stumbles backward.";
+        },
+        function() {
+            d+="Kasparov takes several wild swings, striking air as Wolff sidesteps each one. Wolff's feet blur into a rapid shuffle, as if running without leaving the spot. He sends a volley of punches and jabs into Kasparov's torso, throwing him off balance. Wolff winds his arm and releases. His fist hits Kasparov's face and sends him flying into the air. Kasparov lands on his back with a thud and Wolff jumps on him, " + quik("lbr_sn_ft_pummel", "pummeling", "Metal fists rise and fall like pistons.") + " him with both hands.";
+        },
+        function() {
+            d+="Kasparov's body ragdolls as Wolff continues punching.  A portion of Kasparov's mask tears off, revealing a bruised cheek. \"Wolff, enough!\" says the Headmaster. \"Protocol! He will face trial.\" \n\n Wolff jerks his head to stare upward. \"Do you know how many we've lost to him? This ends today!\" \n\nKasparov's hand creeps toward the {nightstick|lbr_s_ft} on the floor.";
+            
+        }, 
+            
+        function() {
+            d+="A flicker of movement. Kasparov flips Wolff on his back. He raises the nighstick above his head and drives it down into Wolff's face. Sparks shower everywhere. Wolff {flails|lbr_s_ft_flails}  wildly.";
+        },
+
+        function() {
+            d+="Wolff's body becomes still, nightstick impaled into the eye of his emoticon. A spiderweb of cracks extend out of it and his screen flickers.   \n\n\"You have no honor,\" says Blue.  \n\nKasparov stands up and backs away from Wolff. He stares upward. \"I will have my answers! I will have the truth, Blue!\" \n\nThe guards {charge|lbr_s_ft} at him. ";
+        },
+        function() {
+            d+="Kasparov leaps backward over the railing and falls into the darkness. A faint splash below. The guards lean over the railing, sweeping the water with light. \n\n\"Drain it. Post men at every exit, including the pumping stations. Find him.\"";
+            lockdown = 1;
+            f.seen_sinatra_account = 1;
+
+            d+=bk("wc_s_fin");
+        },
+
+
+
+    ]);
+
+   
+    //d+= "in {library|lbr_s_ft}";
+break;
+
+case "lbr_s_ft_flails":
+    d+="Kasparov keeps him pinned down while sparks and smoke spill out. ";
+break;
+
+case "lbr_s_ft_rumble":
+    d+="A voice from heaven. Thunder and static mingled together. ";
+break;
+
+case "lbr_s_ft_spotlights":
+    d+="He stands in a pool of converging beams of light. Spotlights above are trained on him. Silver dust glitters in the air. "; 
+break;
+
+case "lbr_ft_sn_nightstick":
+    d+="It lies on the ground near Kasparov's feet. It bristles with electricity. ";
+break;
 
 case "wc_s_main":
     root = 1;
     f._wc_s_timer++;
     
-    d+="A janitor station is parked next to a row of sinks and {mirror|wc_s_mirror}. Light pours in from a {narrow window|washroom_window} near the ceiling. A doorway leads {outside|washroom_back_out}.";
+    d+="A {janitor station|wc_s_janitor_station} is parked next to a row of sinks and {mirror|wc_s_mirror}. Light pours in from a {narrow window|washroom_window} near the ceiling. "
+   
+   
+    d+="A doorway leads outside.";
 
-    if (f._wc_s_scrub_disarmed) {
+    
+    
+    if (f._wc_s_mirror_smashed) {
+        d+="\n\nYou hold his neck and have {Sinatra|wc_sinatra_talk}  pinned against the broken mirror. ";
+         
+    } else if (f._wc_s_scrub_disarmed) {
 
-        d+="\n\n{Sinatra|wc_sinatra_talk} stand rigid in front of you, fists clenched, arms in an L-shape as if ready to drive the school zamboni. "; 
+        d+="\n\n{Sinatra|wc_sinatra_talk} stands in front of you, trembling. "; 
+        if(f._wc_s_scrub_disarmed) {
+            d+="A toilet scrub lies by his feet. ";
+        }
+        
     } else {
+        f.topic="_wc_s_intro";
 
-        d+="\n\n{Sinatra|wc_sinatra_talk} clenches the " + quik("_wc_s_scrub_knocked_off", "scrub", function() {
-            d+="He stays frozen as you reach forward and unpry it from his fingers. It slips from his grip and clatters to the floor. ";
+        d+="\n\n{Sinatra|wc_sinatra_talk} stands in front of you wielding the " + quik("_wc_s_scrub_knocked_off", "toilet scrub", function() {
+            d+="You reach forward and unpry it from his fingers. It slips from his grip and clatters to the floor. ";
             f._wc_s_scrub_disarmed = 1;
-        }) + " in front of him like a sword, elbows sticking out. ";
+        }) + " like a weapon. ";
     } 
-    switch(f._wc_s_timer) {
-        case 7:
-            d+="\n\n\"Who are you? What do you want?\" he says. "; 
-        break;
-
-    }
-
 break;
 
+case "wc_s_janitor_station":
+    d+="A compartmentalized wheeled cart, overflowing with brooms, mops, buckets and other cleaning equipment. "; 
+break;
 case "wc_s_mirror":
-    d+="Another scene of a raven and a janitor. The raven-faced student feels alien. It is not you. ";
+    if (f._wc_s_mirror_smashed) {
+        d+="The head of a raven stares back at you through the broken shards. ";
+    } else {
+
+        d+="A scene of a raven confronting a janitor. It feels alien. ";
+    }
 break;
 case "wc_sinatra_talk":
 
+    d+="\"What do you want from me?\" he says. ";
+    replies(wc_sinatra_talk);
+
+
+
+    if (done_talking(wc_sinatra_talk,"_wc_s_talk") && !f._wc_s_released) {
+        d+="\n\nYou release your grip on Sinatra. \n\n\"Security dropped down. They launched grenades that exploded and covered the air with a glittering powder. That's when I could see them.\" he says.";
+        f._wc_s_glitter = 1;
+        f.topic = "_wc_s_fight";
+        f._wc_s_released = 1;
+        
+
+    } else if (done_talking(wc_sinatra_talk,"_wc_s_intro") && !f._wc_s_mirror_smashed) {
+        d+="\n\nYou grab him by the collar and shove him into the mirror. <em>The glass smashes and shards spill over the counter and floor</em>.\n\n\"Let me think. Maybe I did see something,\" he says. ";
+        f._wc_s_mirror_smashed = 1;
+        f.topic = "_wc_s_talk";
+
+    } /* else if (f._wc_s_mirror_smashed)r{
+        d+="You have Sinatra pinned against the mirror. "; 
+    } else {
+        d+="Sinatra stands in front of you. His face displays a bewildered emoticon. ";
+        
+    }
+    */
+
+    topics(wc_sinatra_talk);
+
+
 
 break;
 
+
+case "wc_s_fin":
+    scene_change("Bait");
+    lockdown = 1;
+    d="\"That's all I saw! I swear on the graves of my ancestors!\" says Sinatra. \n\nYou let go of him. He scrambles away from you, stumbling and tripping several times before he runs out of the washroom. ";
+    d+=bk("wc_s_fin_2");
+
+break;
+
+
+case "wc_s_fin_2":
+    root = 1;
+    d+="A {janitor station|wc_s_janitor_station} is parked next to a row of sinks and {mirror|wc_s_mirror_2}. Light pours in from a {narrow window|washroom_window} near the ceiling. "
+   
+   
+    d+="A doorway leads {outside|wc_s_exit}.";
+
+break;
+case "wc_s_mirror_2":
+    d+="A stranger in a raven mask stares at you through the broken shards. ";
+break;
+
+
+case "wc_s_exit":
+    lockdown=1;
+    d+="You step past a yellow folding floor sign. It has an hourglass icon and the words: \"Do not enter. Cleaning in progress\". You exit into the {hallway|after_s_hallway}. ";
+
+
+break;
+
+
+
+case "after_s_hallway":
+    root = 1;
+    d+="A crowd of officers stand outside. \"Put your hands behind your head!\" One of them holds a bullhorn. You raise your fists. There is a high-pitched whine as their nighsticks charge. ";
+
+    f.after_wc_s_cornered = 1;
+    f.wc_s="x";
+    f.end_memory=1;
+    
+break;
 
 
 case "timer_test":
@@ -3894,6 +4233,7 @@ case "timer_test":
 
     ])
 break;
+
 
 //::end
 ///////In case you link to a nonexistent node, then this error message will appear
@@ -3942,7 +4282,10 @@ add("Headmaster Blue", "headmaster", function() {
 
 add("Sinatra", "sinatra", function() {
     d+="<em>";
-    if (i.vandalism_library) {
+    if (f.seen_sinatra_account) {
+        d+="A witness to the library vandalism. You've already pulled whatever information from him that you can. ";
+    }
+    else if (i.vandalism_library) {
         d+="A witness to the library vandalism. A janitor working in the east wing. ";
     } else {
         d+="Someone... who? A janitor. He saw Kasparov.";
@@ -4047,7 +4390,13 @@ add("Rook", "rook", function() {
 });
 
 add("Wolff", "wolff", function() {
-    d+="<em>Chief of Security. His eye. You feel a wave of nausea.</em>";
+    d+="<em>Chief of Security. ";
+    if (f.seen_sinatra_account) {
+        d+="Kasparov put a nighstick through his eye. You can feel the crunch of glass and smell of a fried, flickering monitor. ";
+    } else {
+        d+="His eye. You feel a wave of nausea.";
+    }
+    d+="</em>";
     thought=1;
 });
 
