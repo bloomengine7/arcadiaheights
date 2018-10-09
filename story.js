@@ -701,23 +701,22 @@ case "start": //aka caf
 
     //::start
     //
-   
-    //activate sinatra washroom 
-    (function(array){
-        f.wc_s = 1;
+    if (f.wc_s != "x") {
+        //activate sinatra washroom 
+        (function(array){
+            f.wc_s = 1;
 
-        for (var c=0; c++; c > array.length) {
+            for (var c=0; c++; c > array.length) {
 
-            if(!f[array[c]]) {
-               f.wc_s = 0; 
+                if(!f[array[c]]) {
+                   f.wc_s = 0; 
+                }
             }
-        }
-    })(["seen_behind_poster",
-    "seen_informer_note",
-    "seen_washroom_informer",
-    "seen_counselor"]);
-
-
+        })(["seen_behind_poster",
+        "seen_informer_note",
+        "seen_washroom_informer",
+        "seen_counselor"]);
+    }
      
     reset_inventory();
     f.topic = 0;
@@ -934,7 +933,7 @@ case "start": //aka caf
 //
 //
 
-    if (f.wc_s && f.wc != "x") {
+    if (f.wc_s && f.wc_s != "x") {
         d+="\n{Sinatra|wc_s}";
     }
 
@@ -965,7 +964,7 @@ case "start": //aka caf
             }
         }
 
-        d+="\n\n<div style='font-size:.75em; line-height:1.5em;'>" + f.progress_state + " of " + (progress_meter.length) + " fragments reconstructed. \n\nLast content update: October 8</div>";
+        d+="\n\n<div style='font-size:.75em; line-height:1.5em;'><strong>" + f.progress_state + " of " + (progress_meter.length) + " fragments reconstructed.</strong> <div style='margin-top:.25em;font-size:.75em;'>Last content update: October 8 2018</div></div>";
 
         if (f.progress_state == progress_meter.length) {
 
@@ -1756,7 +1755,7 @@ break;
 
 
     case "meeting_washroom_stall_graffiti":
-        d+=sq("meeting_washroom_stall_graffiti", ["Layer upon layer of fading graffiti. At least you have something to read to pass the time. ", "There are some comics. One is a five panel story about a dog lost in a forest. ", "There are some algebraic functions. ", "There's a heart with 'Karen + Horatio' inscribed in it.", "The back wall is tagged with the crown symbol of the Chess Club."]);
+        d+=sq("meeting_washroom_stall_graffiti", ["Layer upon layer of fading ink. At least you have something to read to pass the time. ", "There are some comics. One is a five panel story about a dog lost in a forest. ", "There are some algebraic functions. ", "There's a heart with 'Karen + Horatio' inscribed in it.", "The back wall is tagged with the crown symbol of the Chess Club."]);
     break;
 	///                                    
 	case "counter":                        
@@ -3302,6 +3301,7 @@ case "showers_lockers_gates":
         root=1;
         wait =  0;
         d="You walk to the gates and put your thumb on the scanner. Words display on the screen next to it: \"Privacy time spent: 16:02:49. Time deducted from your daily quota. Thank you for not loitering.\" The turnstile clicks and beeps as it unlocks. "; 
+                
                 f.end_memory=1;
                 f.showers = "x";
     }
@@ -3940,15 +3940,18 @@ case "wc_s":
         f._wc_s_timer++;
     }
     d+="You sit on the toilet with the seat lid lowered. ";
-    d+="You clench a " + quik("wc_s_mask", "mask", "A stylized face of a raven, black as your hair. It has a string to pull behind your head and covers the eyes.") + " in your hands. ";
-    d+=oneoff_text("\n\n<em>Your head throbs and you hear the sound of cicadas</em>");
+    d+="You clench a " + quik("wc_s_mask", "mask", "A stylized face of a raven, black as your hair. It covers the eyes and has a string to pull behind the head. ") + "in your hands. "; 
     if (f.meeting_washroom_stall_graffiti != "x") { 
         d+="{Graffiti|meeting_washroom_stall_graffiti} ";
     } else {
         d+="Graffiti ";
     }
+
+ 
     d+="covers the stall walls and door. "; 
 
+    d+=oneoff_text("wc_s_throbs","\n\n<em>Your head throbs and you hear the sound of cicadas</em>");
+    
     switch(f._wc_s_timer) {
         case 0:
         case 1:
@@ -3956,7 +3959,7 @@ case "wc_s":
         break;
 
         case 3:
-            d+="\n\nFootsteps and clattering wheels. {Voices|wc_s_voices} become louder. \n\nYou stand up. ";
+            d+="\n\nFootsteps and clattering wheels. {Voices|wc_s_voices} become louder. You stand up. ";
 
         break;
 

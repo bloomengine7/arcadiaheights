@@ -137,7 +137,10 @@ function exit_memory() {
         if (f.end_memory) {
             return "<p class='back exit_memory highlight_exit'>{&#10003;  &nbsp; Complete memory|start}</p>";
         } else {
-            return "<p class='back exit_memory'>{Exit  memory  |start}</p>";
+            return "<p class='back exit_memory'><a id='exit_memory' href='javascript:confirm_exit_memory();'>Exit memory</a></p>";
+            
+            
+            //{Exit memory|start}</p>";
         }
 
     } else { 
@@ -153,7 +156,11 @@ function exit_memory() {
 
 }
 
+function confirm_exit_memory() {
+       $("#exit_memory").parent().addClass('confirm');
 
+       $("#exit_memory").parent().html(createLinks('{Press again to confirm exit|start}'));
+}
 function informer_interactions() {
 
     interact(function(){
