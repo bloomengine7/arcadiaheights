@@ -701,13 +701,22 @@ case "start": //aka caf
 
     //::start
     //
-    if (f.wc_s != "x") {
-        //activate sinatra washroom 
+    //activate sinatra washroom 
+    //
+    //
+    
+    if (f.seen_behind_poster && f.seen_informer_note && f.seen_washroom_informer && seen_counselor && f.wc_s != "x") {
+        f.wc_s = 1;
+    }
+
+
+        /*
         (function(array){
-            f.wc_s = 1;
+            //f.wc_s = 1;
 
             for (var c=0; c++; c > array.length) {
-
+            con
+                console.log(f[array[c]]);
                 if(!f[array[c]]) {
                    f.wc_s = 0; 
                 }
@@ -716,7 +725,7 @@ case "start": //aka caf
         "seen_informer_note",
         "seen_washroom_informer",
         "seen_counselor"]);
-    }
+        */
      
     reset_inventory();
     f.topic = 0;
