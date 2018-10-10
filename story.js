@@ -487,7 +487,7 @@ function daemon_after() {
 
     if (typeof ga !== "undefined") { 
         if (f.node=="start" && f.progress_state == progress_meter.length) {
-            ga('send', 'pageview', "/arcadiaheights/" + "finished-memories-oct");
+            ga('send', 'pageview', "/arcadiaheights/" + "finished-memories");
             //ga('send', 'pageview', '/' + config.ga_id + "finished-memories");
         } else if (f.talk) { //if conversation mode
             ga('send', 'pageview', '/' + config.ga_id + '/' + f.talk);
