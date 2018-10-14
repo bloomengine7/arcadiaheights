@@ -1,10 +1,30 @@
+//////////////////////
+::timed events
 
+//////////////////////
+::quik jumps - avoid making a new case node, just have an easy jump to new text all in one place. put the variable name in uservariables array to have it persist across saves
+    
+    d+=quik("quik_variable_name","text2",
+       "test quickjump output text straight text");
+    });
+
+
+    d+=quik("quik_var","text", function() {
+        d+="test quickjump output text within function";
+    });
+
+    //After clicking once, link deactivated. 
+    d+= oneoff_quik("oneoff_quick", "oneoff quick", "blahblah");
+
+
+
+//make it show the "complete memory" button.
         f.end_memory=1;
 
 
 
-
-//Scene change
+////////////////
+::Scene change
 // this 
     scene_change("whatever"); // this will only display message once unless. (tracked with f.scene_change) If hit Start node, f.scene_change will be set to 0 again.
 
@@ -71,7 +91,7 @@ turn off back button:
     d+=vr("randomizer", ["dft", "option 1", "option 2", "option 3","a dangerous game you play", "foooooo"], 3, 1,"stop");
 
 
-    d+=v("open_dorm_door", ["You pull on the handle, the door catches on a latch, refusing to open.",  "A chime sounds. Words form on the glass: \"Currently it is  quietstudytime, student Susan Newborne. Do not attempt to leave your dormitory.\"", "You tug on the handle. Words form on the glass wall: \"Currently it is  quietstudytime, Susan Newborne. This incident will be noted.\""], "stop");
+    d+=v("open_dorm_door", ["You pull on the handle, the door catches on a latch, refusing to open.",  "A chime sounds. Words form on the glass: \"Currently it is quietstudytime, student Susan Newborne. Do not attempt to leave your dormitory.\"", "You tug on the handle. Words form on the glass wall: \"Currently it is  quietstudytime, Susan Newborne. This incident will be noted.\""], "stop");
 
 
      
@@ -109,11 +129,19 @@ oneoffs Show something once
 
 
 
+    d+= oneoff_quik("oneoff_quick", "oneoff quick", "blahblah");
+
+
 
 
 ///////////////////////////////////////////////
 //#conversation system
 
+
+        "_rkdrm_kasparov":
+           {l:"Kasparov", d:function() {
+                    d="\"Why do you keep asking about that name? It doesn't mean anything to me.\"";
+           },v:1},
 
 
     var tmp = {
@@ -131,6 +159,30 @@ oneoffs Show something once
     };
      
    talk(tmp);
+
+
+
+    tmp2 = {
+
+        "1washroom_informer_kasparov":
+            ["1Kasparov", "sddssdsd",1],
+      
+        "1washroom_informer_sinatra":
+            ["1Sinatra", "dsdsdsddfsdf",1],
+     "1washroom_informer_random_checks":
+            ["1random security checks", "\"orger.\" "],
+ 
+        "1washroom_informer_ss":
+            ["1school security",function(){
+                f.washroom_informer_kasparov = 1;
+                f.washroom_informer_random_checks = 1; 
+                d="ssddssdsd";
+                //back=0;
+            },1]
+    };
+     
+    talk(tmp2);
+   
     
    
    #conversation sub-branch: //doesn't work so good if going to another topic tmp2
@@ -144,19 +196,23 @@ oneoffs Show something once
 
 
 //test if finished discussing all talkables
-    if (done_talking(tmp)) {
-        f.informer_in_washroom = "x"; 
 
-    } 
+        //test topic
+        if (done_talking(lbr_rk_talk,"intro")) {  
+            f.topic = "playing";
+        }
+
+        talk(lbr_rk_talk);
+
+        //test all conversation nodes
+        if (done_talking(lbr_rk_talk)) {
+            d+="<hr>Ethan arrives<hr>";
+            jump("lbr_rk");
+        }    
 
 
 
-//test if finished discussing all talkables
-    if (done_talking_topic(tmp)) {
-    //requires f.topic
-        f.informer_in_washroom = "x"; 
 
-    }
 //conversation by topic
 //
     var tmp = {
@@ -238,10 +294,7 @@ oneoffs Show something once
 
 
     replies(rkdrm_convo);
-    if(!f._rkdrm_rook_agitated) {
-
-        topics(rkdrm_convo); 
-    }
+    topics(rkdrm_convo); 
 
 
 //persistent conversation item (assumes counter starts at 0, shows three times)

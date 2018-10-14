@@ -1635,9 +1635,15 @@ function debug() {
 }
 
 function activate_debug_hover () {
+
     $("#debugContent").hover(
-           function(){ $("#debug").addClass('debug_hover') },
-           function(){ $("#debug").removeClass('debug_hover') }
+           function(){ 
+                $("#debug").addClass('debug_hover'); 
+           
+           
+           },
+           function(){ $("#debug").removeClass('debug_hover');}
+           
     );
 
 

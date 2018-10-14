@@ -159,7 +159,7 @@ function exit_memory() {
 function confirm_exit_memory() {
        $("#exit_memory").parent().addClass('confirm');
 
-       $("#exit_memory").parent().html(createLinks('{Press again to confirm exit|start}'));
+       $("#exit_memory").parent().html(createLinks('{Confirm exit memory|start}'));
 }
 function informer_interactions() {
 

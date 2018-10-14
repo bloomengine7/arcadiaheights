@@ -1,3 +1,8 @@
+
+function jump(node) {
+    f.node = node;
+    nodes(node);
+}
 function events(event_name,events) {
     console.log('in events sequence');
 //side effect, refers to f array, f[event_name], d
@@ -342,7 +347,7 @@ function replies(obj) {
            d+=output_if_clicked;
         }
 
-//        f["talk"]=0;
+        f["talk"]=0;
 //
 //       
 //
@@ -971,7 +976,7 @@ done_talking = function(obj,topic) {
     var c;
     var done_talking = 0;
 
-    if (any_topic_exists(obj)) {
+    if (any_topic_exists(obj) && topic) {
         for (c in obj) {
             if(!exist(obj[c].topic || !obj[c].topic)) { //test only if it is a root topic
                 if (f[c] != "x") {
@@ -1022,3 +1027,5 @@ function interact(funct) {
     }
 
 }
+
+

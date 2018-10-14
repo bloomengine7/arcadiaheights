@@ -8,7 +8,6 @@ If you read the comments in this source code, you will understand the basic idea
 
 If you are not already familiar with basic javascript and html, it may be helpful to google up some tutorials on the subject.
 
-Have fun making your game!
 
 
 
@@ -145,7 +144,46 @@ user_variables = [
     "wc_s",
     "_wc_s_scrub_disarmed",
     "seen_sinatra_account",
-    "after_wc_s_cornered"
+    "after_wc_s_cornered",
+    "_lbr_rk_librarian",
+    "_lbr_rk_posters",
+    "lbr_rk_walk_off",
+    "_lbr_rk_librarian_gone",
+    "lbr_rk",
+    
+    "_lbr_rk_events",
+    "_lbr_rk_game",
+    "_lbr_rk_rook_arrived",
+    "_lbr_rk_late",
+    "_libr_rk_dating",
+    "_lbr_rk_danish_gambit",
+    "_lbr_rk_talk_paper",
+    "_lbr_rk_talk_paper_3",
+    "_lbr_rk_poster",
+    "_lbr_rk_kasparov",
+    "_lbr_rk_chess_code",
+    "_lbr_rk_excommunicated",
+    "_lbr_rk_grandmaster",
+    "_lbr_rk_hardcore",
+    "_lbr_rk_white_hair",
+    "_lbr_rk_vandalism", 
+    "_lbr_rk_fight",
+    "_lbr_rk_fight_yes",
+    "_lbr_rk_fight_no",
+    "_lbr_rk_bridge_club",
+    "lbr_rk_fin",
+    "ac",
+    "_ac_events",
+    "_ac_embarassing",
+    "_ac_family",
+    "_ac_girlfriend",
+    "_ac_yes",
+    "_ac_no",
+    "_ac_harcore",
+    "ac_promise_talk_rook",
+    "ac_fin",
+    
+    
 
     
     
@@ -159,6 +197,7 @@ var progress_meter = [
     "seen_washroom_informer",
     "seen_counselor",
     "after_wc_s_cornered",
+    "lbr_rk_fin", //library conversation with rook. Suspicious note
 
 
     //chess thread 
@@ -168,6 +207,7 @@ var progress_meter = [
     "seen_kas_excommunicated",
     "grandmaster_memory_wiped",
     "rook_boyfriend",
+    "ac_fin",//art class. Rook playing chess with other club members
     
 
     //timeless
@@ -309,6 +349,21 @@ function timers() {
     });
 
 }
+
+
+//::functions story related
+//
+//
+
+
+function ac_jenner_daughter() {
+    if(!(f._ac_jenner && f._ac_daughter)) {
+        d+="\n\n" + oneoff_link("Mrs. Jenner|_ac_jenner") + " marches through the classroom and her " + oneoff_link("daughter|_ac_daughter") + " trails behind her.";
+    }
+}
+
+
+
 function daemon() {
 //refers to global f array and global variable reward
 //runs of every process()
@@ -535,7 +590,7 @@ function nodes(node) { //Do not remove this line
             
         "_wc_s_library":
             {l:"Library incident", d:function(){
-                d+="\"Don't know a thing about it!\" he says.";
+                d+="\"I was nowhere near the library!\" he says.";
                 },v:1,topic: "_wc_s_intro"
             },
         ///////////////////////////
@@ -548,7 +603,7 @@ function nodes(node) { //Do not remove this line
             },
         "_wc_s_t_library":
             {l:"Library incident", d:function(){
-                d+="\"It was after hours. Everything was dark. I was sitting by the moat near the outer edges with Junior. We like to watch the colors at night. That's when the books started falling out of the shelves.\"";
+                d+="He hesitates. You press him harder against the broken mirror. \n\n\"It was after hours. Everything was dark. I was sitting by the moat near the outer edges with Junior. We like to watch the colors at night. That's when the books started falling out of the shelves.\"";
 
                 f._wc_s_junior = 1;
                 f._wc_s_dome = 1;
@@ -586,25 +641,25 @@ function nodes(node) { //Do not remove this line
             },
         "_wc_s_moved":
             {l:"Movement", d:function() {
-                d+="\"Like a broken video signal. Appearing, stuttering then disappearing. Invisible most of the time.\"";
+                d+="\"When they were visible they were like a broken video signal. Appearing, stuttering then disappearing.\"";
                 }, topic: "_wc_s_talk"
             },
 
         "_wc_s_books":
             {l:"Books", d:function(){
-                d+="\"We watched from a distance as they flew off the shelves by themselves. Then arms and wrenches appeared. Just the arms, like they were floating in the air. They began unbolting the bottoms of the shelves. Ropes appeared and they were fastened to the tops of the shelves. I sent Junior to call security.\"";
+                d+="\"We watched from a distance as they flew off the shelves by themselves. Then arms and big metal wrenches appeared out of thin air, floating. They began unbolting the shelf supports.   Ropes appeared and they were fastened to the tops of the shelves. I sent Junior to call security.\"";
 
                 f._wc_s_security = 1;        
                 },topic: "_wc_s_talk"
             },
         "_wc_s_security":
             {l:"Security", d:function(){
-                d+="\"They arrived a second too late. Just as the biggest shelf fell over. I don't know what they were trying to do.\"";
+                d+="\"They arrived a second too late. Just as the biggest shelf fell over.\"";
             },topic:"_wc_s_talk"},
 
         "_wc_s_glitter":
             {l:"Glitter", d:function(){
-                d+="\"It stuck to the rebels so you could see where they were. They ditched their cloaks and I saw seven of them wearing animal masks. After a big fight, they cornered Kasparov by the trench.\"";
+                d+="\"It stuck to them so you could see where the rebel students were. They had flickering green cloaks. They threw off their cloaks and I saw seven of them, all with animal masks. After a big fight, they cornered Kasparov by the trench.\"";
 
                 lockdown = 1;
                 d+=bk("lbr_s_ft");
@@ -699,13 +754,35 @@ break;
 /////
 case "start": //aka caf
 
+
+    //::update variables
+    //
+    if(f.seen_kas_excommunicated) {
+       f.dorm_state = "x"; //make dorm default
+    }
+
+    if (f.seen_vandalism) {
+        f.library_start = "x";
+    }
+
+    if (f.seen_pog_game) {
+        f.under_stairs = "x";
+    }
+
+    if (f.showers_lockers_seen_chalk) {
+        f.showers = "x";
+    }
+
+    if (f.seen_assembly) {
+        f.asm = "x";
+    }
     //::start
     //
     //activate sinatra washroom 
     //
     //
     
-    if (f.seen_behind_poster && f.seen_informer_note && f.seen_washroom_informer && seen_counselor && f.wc_s != "x") {
+    if (f.seen_behind_poster && f.seen_informer_note && f.seen_washroom_informer && f.seen_counselor && f.wc_s != "x") {
         f.wc_s = 1;
     }
 
@@ -875,11 +952,11 @@ case "start": //aka caf
 
 //////////////////////library
 //
-    if (f.seen_counselor) {
+    if (f.seen_counselor && f.library_start != "x") {
         f.library_start = 1;
     }
 
-    if (f.library_start) {
+    if (f.library_start && f.library_start !="x") {
 
         d+="\n{Library|library_start}";
     }
@@ -900,7 +977,7 @@ case "start": //aka caf
 
 
  ////////////////////assembly
-    if (f.seen_counselor) {
+    if (f.seen_counselor && f.asm != "x") {
         f.asm = 1;
     }
  
@@ -946,6 +1023,18 @@ case "start": //aka caf
         d+="\n{Sinatra|wc_s}";
     }
 
+    if (f.lbr_rk && f.lbr_rk != "x") {
+        d+="\n{Library (Hunted)|lbr_rk}";
+    }
+    
+
+    if (f.ac && f.ac != "x") {
+        d+="\n{Art class|ac} ";
+    }
+
+    if (f.ac2 && f.ac2 != "x") {
+        //d+="\n{Art class (Ethan
+    }
     /*
     d+="\n\n{timer test|timer_test}";
     d+="\n\n{nonexist|sdsd}";
@@ -973,7 +1062,7 @@ case "start": //aka caf
             }
         }
 
-        d+="\n\n<div style='font-size:.75em; line-height:1.5em;'><strong>" + f.progress_state + " of " + (progress_meter.length) + " fragments reconstructed.</strong> <div style='margin-top:.25em;font-size:.75em;'>Last content update: October 8 2018</div></div>";
+        d+="\n\n<div style='font-size:.75em; line-height:1.5em;'><strong>" + f.progress_state + " of " + (progress_meter.length) + " fragments reconstructed.</strong> <div style='margin-top:.25em;font-size:.75em;'>Last content update: October 14 2018</div></div>";
 
         if (f.progress_state == progress_meter.length) {
 
@@ -981,7 +1070,7 @@ case "start": //aka caf
                 ga('send', 'pageview', "/arcadiaheights/" + "finished-memories");
             }
     
-            d+="\n<em>You have exhausted your memories.</em> \n<div style='font-size:.75em; line-height:1.5em;'>Thank you for playing. This game evolves and grows. Please save game and check back after October 13th for more content.\n\n<div style='margin-top:-1em;'><a href=\"https://feedburner.google.com/fb/a/mailverify?uri=bloomengine&amp;loc=en_US\" target='_blank' onClick='ga_subscribe_email();'>Click here</a> to stay updated and receive early access to new/extra content or check out some {other games|meta_other_games}.</div></div>"
+            d+="\n<em>You have exhausted your memories.</em> \n<div style='font-size:.75em; line-height:1.5em;'>Thank you for playing. This game evolves and grows with time. Please save game and check back in November for more content.\n\n<div style='margin-top:-1em;'><a href=\"https://feedburner.google.com/fb/a/mailverify?uri=bloomengine&amp;loc=en_US\" target='_blank' onClick='ga_subscribe_email();'>Click here</a> to stay updated and receive early access to new/extra content, enjoy the {feelies|feelies} or check out some {other games|meta_other_games}. \n\n</div></div>"
         }
     })(); 
 
@@ -1181,10 +1270,14 @@ case "poster_corner":
             d+="Written in smaller {letters|dorm_chalk_writing} underneath are the words: ";
 
         }
-        if (f.know_kas_excommunicated) {
+        if (f.seen_kas_excommunicated || f.after_wc_s_cornered) {
             d+="<li>He was excommunicated from Chess club</li>";
         }
-        if (f.poster_sinatra) {
+
+
+        if (f.after_wc_s_cornered) {
+            d+="<li>Don't trust Sinatra's lies.</li>";
+        } else if (f.poster_sinatra) {
             d+="<li>Find Sinatra (Janitor in east wing)</li>";
             i.sinatra = 1;
             f.seen_poster_bonus = 1;
@@ -2055,7 +2148,7 @@ case "guidance_convo":
                 f._gcv2_he_just_care_chess = 1;
             },v:1, topic: "rook_boyfriend"},
         "_gcv2_he_just_care_chess":
-            {l: "He likes chess", d: function() {
+            {l: "We like chess", d: function() {
 
                 d+="\"Indeed. But romantic life should not be a one note melody.\" ";
             },topic: "rook_boyfriend"},
@@ -2231,7 +2324,7 @@ case "counseling_booth_stool":
 break;
 
 case "counseling_booth_speaker":
-    d+="A pattern of tiny holes radiating outwards to form a circle. Fibonacci spirals. You had to plot this pattern in Math class. ";
+    d+="A pattern of tiny holes radiating outwards to form a circle. ";
     if (!f.guidance_counselor_arrived) {
         d+="It emits a buzz. ";
 
@@ -2741,6 +2834,7 @@ case "library_wolff_binoculars":
     } 
     d+="His one-eyed stare bores into you. \n\n Another officer approaches and salutes him. They exchange words and he returns to examining the shelf. ";
     f.end_memory = 1;
+       f.library_start = "x";
 
 break;
 
@@ -3389,6 +3483,8 @@ case "rkdrm":
                     f.caf = "cafv2";
                     f.seen_rook_chess_game = 1;
                     f.end_memory = 1;
+                    f.dorm_state="x";
+                    
             break;
         }
         
@@ -3879,7 +3975,7 @@ case "hrdcr_gm":
             
         "_gm_kas_howfind":
             {l:"How can I find him", d: function() {
-                d+="\"You think I have his dorm number? You think I can tell you what classes he's attending? If it was that easy the Faculty would already have him. He is dangerous. Too extreme, even for the Chess Club.\"";
+                d+="\"You think I have his dorm number? You think I can tell you what classes he's attending? If it was that easy the Faculty would have him. He is dangerous. Too extreme, even for the Chess Club.\"";
             }, topic: "kas", v:1},
           
         "_gm_give_me_answers":
@@ -3949,7 +4045,7 @@ case "wc_s":
         f._wc_s_timer++;
     }
     d+="You sit on the toilet with the seat lid lowered. ";
-    d+="You clench a " + quik("wc_s_mask", "mask", "A stylized face of a raven, black as your hair. It covers the eyes and has a string to pull behind the head. ") + "in your hands. "; 
+    d+="You clench a " + quik("wc_s_mask", "mask", "A stylized face of a raven, black as your hair. It covers the eyes and has a string to pull behind the head. ") + " in your hands. "; 
     if (f.meeting_washroom_stall_graffiti != "x") { 
         d+="{Graffiti|meeting_washroom_stall_graffiti} ";
     } else {
@@ -3973,13 +4069,13 @@ case "wc_s":
         break;
 
         case 4:
-            d+="\n\n\"Don't forget the sign. Go back and put it at the entrance where people can see it,\" says the deeper voice. \n\nYou pull your raven  " + oneoff_quik("_wc_s_mask_pull_over", "mask", "It will get the job done. Enough to subvert facial recognition.") + " over your eyes.";
+            d+="\n\n\"Don't forget the sign. Go back and put it at the entrance where people can see it,\" says the deeper voice. \n\nYou pull your raven  " + oneoff_quik("_wc_s_mask_pull_over", "mask", "Enough to subvert human and Faculty facial recognition.") + " over your eyes.";
         break;
 
         case 5:
-            d="A faucet squeaks. Water begins drumming into a bucket. \"You do the mirrors and sinks\" he shouts. \"I'll do the stalls.\" \n\n";
+            d="A faucet squeaks. Water begins drumming into a bucket. \"I'll do the stalls. You do the mirrors and sinks\" he shouts. ";
 
-            d+="The stall door opens and {Sinatra|wc_s_surprise} stands blinking in front of you. He fumbles and almost drops the toilet scrub in his hands. ";
+            d+="\n\nThe stall door opens and {Sinatra|wc_s_surprise} stands blinking in front of you. He fumbles and almost drops the toilet scrub in his hands. ";
 
         break;
 
@@ -3996,7 +4092,7 @@ break;
 
 case "wc_s_surprise":
 
-    d+="Coveralls, gangly and stained metal arms. Oversized rubber gloves. \n\nHis mouth changes from a horizontal line to a circular O as he stares at you. He looks behind. \"Junior,\" he says. \"Go fetch more disinfectant. We don't have enough. Don't argue. Just get more!\" A mumbling and footsteps recede into the halls. \n\nA bead of cartoon sweat slides down Sinatra's face.  He reaches forward and slowly closes the stall door. You put your hand on the door and {open it|wc_s_reopen_door} again.";
+    d+="Coveralls, gangly and stained metal arms. Oversized rubber gloves. \n\nHis mouth changes from a horizontal line to a circular O as he stares at you. He looks behind. \"Junior,\" he says. \"Go fetch more disinfectant. We don't have enough. Don't argue. Just get more!\" A mumbling and footsteps recede into the halls. \n\nA bead of cartoon sweat slides down Sinatra's face.  He reaches forward and slowly closes the stall door. You put your hand on the door and force it {open|wc_s_reopen_door} again.";
     lockdown = 1;
                 
 break;
@@ -4017,7 +4113,7 @@ case "lbr_s_ft":
     events("_libr_s_ft",[
         function() {
             lockdown = 1;
-            d+="The Headmaster's voice {thunders|lbr_s_ft_rumble} from the P.A. system above: \"Stand down, Kasparov. We already have the others. You're surrounded.\" \n\nWolff and a crowd of security officers stand in the shadows, framed by bookshelves. They surround him, shock weapons raised. \n\nKasparov's stands in a pool of {light|lbr_s_ft_spotlights} back pressing against a railing. Behind it a trench drops into darkness. ";
+            d+="The Headmaster's voice {thunders|lbr_s_ft_rumble} from the P.A. system above: \"Stand down, Kasparov. We already have the others. You're surrounded.\" \n\n{Wolff|lbr_rk_wolff} and a crowd of security officers stand in the shadows, framed by bookshelves. They form a half-circle around {Kasparov|lbr_s_ft_kas}, shock weapons raised and  {lights|lbr_s_ft_spotlights} shining on Kasparov. His back presses against a railing. Behind it a trench drops into darkness. ";
             
             
             
@@ -4027,7 +4123,7 @@ case "lbr_s_ft":
         
         function() {
             lockdown = 1;
-            d+="\"Wolff!\" says Kasparov. \"I challenge you to a gentleman's fistfight, bare-knuckle Chess rules. To the death!\"\n\n\"We do not kill our students, Wolff,\" says Blue.\n\n\"I accept,\" says Wolff. He tosses his " + quik("lbr_sn_ft_stick", "nightstick", "It rests on the floor at Kasparov's feet. Sparks dance along its shaft.") + " on the floor. \n\nThe Headmaster sighs. The others step back as Wolff and Kasparov begin circling each other.";
+            d+="\"Wolff!\" says Kasparov. \"I challenge you to a gentleman's fistfight, bare-knuckle Chess rules. To the death!\"\n\nThe loudspeakers above crackle. \"We do not kill our students, Wolff,\" says Blue.\n\n\"I accept,\" says Wolff. He tosses his " + quik("lbr_sn_ft_stick", "nightstick", "It rests on the floor at Kasparov's feet. Sparks dance along its shaft.") + " on the floor. \n\nThe Headmaster sighs. The others step back as Wolff and Kasparov begin circling each other.";
             
             
             /*\"You've come to kill me under the cover of night? Do it, cowards. You can't extinguish the light. Not with a thousand weapons. Not with a thousand men.\"";
@@ -4054,10 +4150,10 @@ case "lbr_s_ft":
         },
         */
         function() {
-            d+="Wolff and Kasparov keep their backs arched, fists raised and arms curled in classical Chess Club fashion. They " + quik("lbr_ft_sn_dance", "dance", "A rhythmic, hypnotic bouncing. Front to back, then side to side. Broken by feints. ") + " back and forth on their toes. \n\nKasparov gives a right hook and Wolff leans backward and dodges his fist. He counters with a jab to Kasparov's side. Kasparov stumbles backward.";
+            d+="Wolff and Kasparov keep their backs arched, fists raised and arms curled in classical Chess Club combat stance. They circle each other, " + quik("lbr_ft_sn_dance", "dancing", "A rhythmic, hypnotic bouncing. Front to back, then side to side. Broken by feints and jabs. ") + " back and forth on their toes. \n\nKasparov gives a right hook and Wolff leans backward and dodges his fist. He counters with a jab to Kasparov's side. Kasparov stumbles backward.";
         },
         function() {
-            d+="Kasparov takes several wild swings, striking air as Wolff sidesteps each one. Wolff's feet blur into a rapid shuffle, as if running without leaving the spot. He sends a volley of punches and jabs into Kasparov's torso, throwing him off balance. Wolff winds his arm and releases. His fist hits Kasparov's face and sends him flying into the air. Kasparov lands on his back with a thud and Wolff jumps on him, " + quik("lbr_sn_ft_pummel", "pummeling", "Metal fists rise and fall like pistons.") + " him with both hands.";
+            d+="Kasparov takes several wild swings, striking air as Wolff sidesteps each one. Wolff's feet blur into a rapid shuffle, as if running without leaving the spot. He sends a volley of punches and jabs into Kasparov's torso, throwing him off balance. Wolff winds his arm and releases. His fist meets Kasparov's face and sends him flying into the air. Kasparov thuds to the floor and Wolff jumps on him, " + quik("lbr_sn_ft_pummel", "pummeling", "Metal fists rise and fall like pistons.") + " him with both hands.";
         },
         function() {
             d+="Kasparov's body ragdolls as Wolff continues punching.  A portion of Kasparov's mask tears off, revealing a bruised cheek. \"Wolff, enough!\" says the Headmaster. \"Protocol! He will face trial.\" \n\n Wolff jerks his head to stare upward. \"Do you know how many we've lost to him? This ends today!\" \n\nKasparov's hand creeps toward the {nightstick|lbr_s_ft} on the floor.";
@@ -4065,7 +4161,7 @@ case "lbr_s_ft":
         }, 
             
         function() {
-            d+="A flicker of movement. Kasparov flips Wolff on his back. He raises the nighstick above his head and drives it down into Wolff's face. Sparks shower everywhere. Wolff {flails|lbr_s_ft_flails}  wildly.";
+            d+="Kasparov flips Wolff on his back. He raises the nighstick above his head and drives it down into Wolff's face. Sparks shower everywhere. Wolff {flails|lbr_s_ft_flails}.";
         },
 
         function() {
@@ -4087,6 +4183,13 @@ case "lbr_s_ft":
     //d+= "in {library|lbr_s_ft}";
 break;
 
+case "lbr_s_ft_kas":
+    d+="The lights cast deep pockets of shadows on his fox mask. ";
+
+case "lbr_rk_wolff":
+    d+="He stands tall in front of the other officers. He wears an angryface emoticon, both eyes staring at Kasparov. ";
+
+break;
 case "lbr_s_ft_flails":
     d+="Kasparov keeps him pinned down while sparks and smoke spill out. ";
 break;
@@ -4096,7 +4199,7 @@ case "lbr_s_ft_rumble":
 break;
 
 case "lbr_s_ft_spotlights":
-    d+="He stands in a pool of converging beams of light. Spotlights above are trained on him. Silver dust glitters in the air. "; 
+    d+="He stands the flickering light of the emoticon screens. "; 
 break;
 
 case "lbr_ft_sn_nightstick":
@@ -4153,7 +4256,7 @@ case "wc_sinatra_talk":
 
 
     if (done_talking(wc_sinatra_talk,"_wc_s_talk") && !f._wc_s_released) {
-        d+="\n\nYou release your grip on Sinatra. \n\n\"Security dropped down. They launched grenades that exploded and covered the air with a glittering powder. That's when I could see them.\" he says.";
+        d+="\n\nYou release your grip on Sinatra. \n\n\"Security came down from above. They launched grenades that exploded and covered the air with a glittering powder. That's when I could see them.\" he says.";
         f._wc_s_glitter = 1;
         f.topic = "_wc_s_fight";
         f._wc_s_released = 1;
@@ -4180,9 +4283,9 @@ break;
 
 
 case "wc_s_fin":
-    scene_change("Bait");
+    scene_change("Poisoned Pawn");
     lockdown = 1;
-    d="\"That's all I saw! I swear on the graves of my ancestors!\" says Sinatra. \n\nYou let go of him. He scrambles away from you, stumbling and tripping several times before he runs out of the washroom. ";
+    d="\"That's all I saw! I swear on the graves of my ancestors!\" says Sinatra. \n\nYou let go of him. He backs away from you, stumbling and tripping as he scrambles out of the washroom. ";
     d+=bk("wc_s_fin_2");
 
 break;
@@ -4203,7 +4306,7 @@ break;
 
 case "wc_s_exit":
     lockdown=1;
-    d+="You step past a yellow folding floor sign. It has an hourglass icon and the words: \"Do not enter. Cleaning in progress\". You exit into the {hallway|after_s_hallway}. ";
+    d+="You step past a yellow floor sign. It has an hourglass icon and the words: \"Do not enter. Cleaning in progress\". You exit into the {hallway|after_s_hallway}. ";
 
 
 break;
@@ -4212,10 +4315,13 @@ break;
 
 case "after_s_hallway":
     root = 1;
-    d+="A crowd of officers stand outside. \"Put your hands behind your head!\" One of them holds a bullhorn. You raise your fists. There is a high-pitched whine as their nighsticks charge. ";
+    d+="A crowd of officers stand outside. One of them raises a bullhorn. \"Put your hands behind your head!\"  There is a high-pitched whine as their nighsticks charge. ";
 
     f.after_wc_s_cornered = 1;
     f.wc_s="x";
+    f.lbr_rk = 1;
+    f.ac = 1;
+    
     f.end_memory=1;
     
 break;
@@ -4256,6 +4362,396 @@ case "timer_test":
     ])
 break;
 
+
+
+case "lbr_rk":
+    root = 1;
+
+    if (f._lbr_rk_rook_arrived) {
+          d+="You sit at a study table opposite {Rook|lbr_rk_talk}. A chessboard lays between the two of you. ";
+    } else {
+          d+="You sit at a study table. A " + oneoff_link("chessboard|_lbr_rk_chessboard") + " lays in front of you. ";
+
+    }
+    d+="\n\nThe domed {ceiling|library_dome} arches overhead. Bookshelves form {undulating|library_hills} hills and valleys. \n\n{Streams|library_streams} of water zig-zag through them and cascade downwards in measured increments toward the edge of the dome. ";
+
+
+
+
+    if (!(f._lbr_rk_librarian && f._lbr_rk_posters && f._lbr_rk_daughter)) {
+        d+="\n\nA " + oneoff_link("librarian|_lbr_rk_librarian") + " shuffles along, taping " + oneoff_link("posters|_lbr_rk_posters") + " to the sides of the bookshelves. Her " + oneoff_link("daughter|_lbr_rk_daughter") + " trails behind her.";
+    } else {
+        d+=oneoff_text("_lbr_rk_librarian_gone", "\n\nThe librarian and her daughter disappear into the aisles.");
+    }
+
+    events("_lbr_rk_events",[
+        3,
+        function() {
+            f._lbr_rk_rook_arrived = 1;
+            d="Rook lumbers out from the aisles. He holds a small piece of paper in his giant hands like a butterfly. When your eyes meet he looks away and tucks the paper into his jacket pocket. The bench creaks as he sits down opposite to you. "; //displays on first move
+            d+="\"Sorry I'm late. Let's get this started,\" he says.";
+            
+            f.topic = "intro";
+            jump("lbr_rk_talk");
+        } 
+    ]);
+
+
+
+break;
+
+case "_lbr_rk_librarian":
+    d+="Her librarian robe drags on the floor. She has a smiling emoticon on her face. ";
+break;
+
+case "_lbr_rk_daughter":
+    d+="A smaller clone of her mother. Limbs more limber. Metal less scuffed. She carries a stack of posters and has a bored emoticon on her face. ";
+break;
+
+case "_lbr_rk_chessboard":
+        d+="The pieces are all in place. <em>This is the first time he's late.</em> ";
+break;
+
+
+case "_lbr_rk_posters":
+    d+="The posters have the words \"Report delinquency today!\" and a grainy photo of a student wearing a raven mask. Underneath is the caption: \"Attempted murder of Janitor thwarted by School Security. Murderer escaped. Have information? Report today.\"  \n\nThe daughter hands her mother a poster. She peels off the backing of an adhesive strip and sticks them to the shelves. "; 
+break;
+
+case "lbr_rk_talk":
+    root = 1;
+    lockdown = 1;
+    var lbr_rk_talk = {
+        "_lbr_rk_late":
+            {l:"Late", d:function() {
+                d+="\"I had to run some errands,\" he says.";
+            },v:1,topic:"intro"},
+        "_libr_rk_dating":
+            {l:"Dating", d:function() {
+                d+="\"My Guidance Counselor mentioned it too. We probably should hold hands or kiss for good measure after the game. Not for real if you don't want to though,\" he says. ";
+                f._lbr_rk_talk_paper_2 = 1;
+            },v:1,topic:"playing"},
+        "_lbr_rk_danish_gambit":
+            {l:"Danish gambit", d:function() {
+                d+="He taps on your captured pawns. \"That's what you're all about, Suzy. Sacrifice a few pawns for a rapid attack. Everything to gain and everything to lose.\" He stares through the board, eyes distant. \"We're so similar.\" ";
+            },topic:"playing"},
+        
+        "_lbr_rk_talk_paper":
+            {l:"Paper", d:function() {
+                d+="\"Nothing important,\" he says. ";
+                d+="\"Just some homework stuff. Let's get this game going before Ethan finds us.\"";
+                f._lbr_rk_talk_paper_3 = 1;
+            },v:1,topic:"intro"},
+
+            /*
+        "_lbr_rk_talk_paper_2":
+            {l:"Paper", d:function() {
+                d+="\"Just some homework stuff. Let's get this game going before Ethan finds us.\"";
+                f._lbr_rk_talk_paper_3 = 1;
+            },topic:"intro"},
+            */
+        "_lbr_rk_talk_paper_3":
+            {l:"Paper", d:function() {
+                d+="\"What is this, detention and Wolff's thirty questions? It's just Number Theory homework.\" He fidgets and straightens a few crooked pieces on the board. \"Let's play.\"";
+                f.topic = "playing";
+            },topic:"intro"},
+            
+        "_lbr_rk_poster":
+            {l:"Posters", d:function() {
+                d+="He glances at one of the posters on the shelves. \"There's always new troublemakers for Security to hunt down. I read about it in the school paper. A dark-haired rebel with a raven mask. Whoever she is, she should probably stop attacking janitors. It's a good way to end up in solitary detention and reprogramming.\" He smiles at you and pushes up his wireframe glasses.";
+            },v:1,topic:"playing"},
+        "_lbr_rk_kasparov":
+            {l:"Kasparov", d:function() {
+                d+="\"So this Kasparov person was excommunicated? Must have been a serious violation of Chess code.\" ";
+                f._lbr_rk_chess_code = 1;
+                f._lbr_rk_excommunicated = 1;
+            },v:1,topic:"playing"},
+        "_lbr_rk_chess_code":
+            {l:"Chess code", d:function() {
+                d+="\"You have to break a lot of club protocol to get to that point.\" ";
+                f._lbr_rk_excommunicated = 1;
+            },topic:"playing"},
+            
+        "_lbr_rk_excommunicated":
+            {l:"Excommunication", d:function() {
+                d+="\"What do you do with a black mark on your name like that. Join another club? Good luck.\"";
+            },topic:"playing"},
+            
+        "_lbr_rk_grandmaster":
+            {l:"Grandmaster", d:function() {
+                d+="\"She doesn't play checkers. Don't mess with her, Suzy,\"";
+            },v:1,topic:"playing"},
+            
+        "_lbr_rk_hardcore":
+            {l:"Hardcore", d:function() {
+                d+="\"They're supposed to be good at chess. I've yet to see them playing a game. What can you say against white hair, though?\"";
+                f._lbr_rk_white_hair = 1;
+            },v:1,topic:"playing"},
+            
+        "_lbr_rk_white_hair":
+            {l:"White hair", d:function() {
+                d+="\"I don't know why it happens. It's the same with all high-ranking members of clubs. One day your hair just turns white.\"";
+            },topic:"playing"},
+        "_lbr_rk_vandalism":
+            {l:"Library vandalism", d:function() {
+                d+="\"The Hardcore decided it was the Bridge club who did it. We're supposed to be angry about it but I don't care. I just fight when I'm supposed to fight.\" ";
+                f._lbr_rk_bridge_club = 1;
+                f._lbr_rk_fight = 1;
+            },v:1,topic:"playing"},
+       "_lbr_rk_fight":
+            {l:"Fight", d:function() {
+                d+="He leans back, takes off his wireframe glasses and begins wiping them with a cloth. \"Do you ever get tired of fighting?\" ";
+                f.topic = "tired_fighting";
+                
+            },topic:"playing"},
+       "_lbr_rk_fight_yes":
+            {l:"Yes", d:function() {
+                d+="He leans forward again and puts on his glasses. \"I know how you feel.Well, Ethan can start enough fights for the both of us.\"";
+                f._lbr_rk_fight_yes = "x";
+                f._lbr_rk_fight_no = "x";
+                f.topic = "playing"; 
+            },v:1,topic:"tired_fighting"},
+       "_lbr_rk_fight_no":
+            {l:"No", d:function() {
+                d+="He crosses his arms. \"That's because you're not fighting for the Chess club, are you?\" he smiles. \"I don't need to know any more. As long as you keep playing chess, I'm happy.\"";
+                f._lbr_rk_fight_yes = 0;
+                f._lbr_rk_fight_no = 0;
+                f.topic = "playing"; 
+            },v:1,topic:"tired_fighting"},
+            
+            
+       "_lbr_rk_bridge_club":
+            {l:"Bridge Club", d:function() {
+                d+="\"I don't know how long this bad blood has been going on for. Long as I can remember, which isn't that far back.\"";
+            },topic:"playing"},
+            
+
+    };
+   
+/*
+    if (done_talking(lbr_rk_talk)) {
+        d="Ethan arrives";
+        jump("lbr_rk");
+    } else {
+        if (done_talking(lbr_rk_talk,"intro")) {  
+            f.topic = "playing";
+        }
+        talk(lbr_rk_talk);
+    }
+*/
+    
+  
+
+
+
+
+        if (done_talking(lbr_rk_talk,"intro")) {  
+            f.topic = "playing";
+        }
+
+        replies(lbr_rk_talk);
+
+        if (done_talking(lbr_rk_talk,"intro")) {  
+            events("_lbr_rk_game",[
+                1,
+                function() {
+                    d+="\n\nYou move one your center pawns. He nudges his own pawn forward to mirror it. "; //displays on first move
+                    
+                },
+                function() {
+                    d+="\n\nYou move another pawn beside the first. He takes it with his own pawn. "; 
+                },
+                function() {
+                    d+="\n\nYou move another pawn one step ahead. He captures it again with the same pawn. \"You're just handing me pawns today,\" he says."; 
+                    
+                },
+                1,
+                function() {
+                    d+="\n\nYou move the bishop out and leave another pawn vulnerable. He laughs and takes it with his own pawn. \"I see Danish gambit is on the menu today.\" He moves his own bishop to the center of the board.  "; //displays on first move
+                    f._lbr_rk_danish_gambit = 1;
+                }, 
+                
+            ]);
+
+        }
+
+
+        topics(lbr_rk_talk);
+
+            if (done_talking(lbr_rk_talk)) {
+                d+="<hr>Ethan steps out from behind an aisle, out of breath and face flushed. \"Finally found you. I want my board,\" he says. \n\n\"We're in the middle of a game,\" says Rook. \n\nEthan sweeps the pieces off the board and they clatter over the table. The librarian's head peeks out from behind a self, finger on her pursed emoticon lips. The words \"Keep quiet\" flash on her screen. \n\nRook sighs. \"Do you need our help?\" \n\n\"No, I'm going solo on this one,\" whispers Ethan.  \"A Bridge kid looked at me wrong. I'm going to traxler him.\" Ethan flicks the board onto his back, tightens the straps and swaggers off. \n\n\"We better go with him,\" says Rook. \"Others are going to smell a fight and show up. He's going to get beat up without us.\"";
+                
+                f.end_memory=1;
+                lockdown = 0;
+                root = 1;
+                f.lbr_rk="x";
+                f.lbr_rk_fin = 1;           
+            }    
+
+
+            //d+=bk("lbr_rk"); 
+
+
+
+break;
+
+
+case "ac":
+    root = 1;
+    d+="Concentric rings of {students|ac_students} sit on stools in front of {easels|ac_easels}, painting. At the centre of the room is a table with a red tablecloth, on which is a {bowl of fruit|ac_bowl_fruit}. A large standing lamp looms next to the fruit. \n\n{Windows|ac_windows} covered by blinds line the far wall. A canopy of {drawings and paintings|ac_spiderweb}, supported on thin cables, hang overhead.  \n\n{Rook|ac_rook} and {Ethan|ac_ethan} stand on either side of you, painting. ";
+
+      /* 
+        if(!(f._ac_jenner && f._ac_daughter)) {
+            d+="\n\n" + oneoff_link("Mrs. Jenner|_ac_jenner") + " marches through the classroom and her " + oneoff_link("daughter|_ac_daughter") + " trails behind her.";
+        }
+        */
+    events("_ac_events",[
+        ac_jenner_daughter,
+        "\n\n\"Students,\" says " + oneoff_link("Mrs. Jenner|_ac_jenner") + ". \"You must become the bowl of fruit. Feel the light of the lamp on your skin.\" Her " + oneoff_link("daughter|_ac_daughter") + " mirrors her gestures as she speaks. ",
+        ac_jenner_daughter,
+        function() {
+            d="You find a pair of small {emoticon eyes|ac_daughter_eyes} staring at you. Mrs. Jenner's daughter stands beside you. You stare down at her as she gestures but a disembodied voice behind you speaks.  \"Excellent composition, Suzy,\" says Mrs. Jenner. ";
+        },
+
+        "\n\nMrs. Jenner and her daughter continue walking,",
+        function() {
+            d="A buzzer rings. Everyone stops painting and begin cleaning their brushes and {hanging|ac_hanging} up their work. \"See you all tomorrow,\" says Mrs. Jenner. \n\n\"Gimme a hand, Rook,\" says Ethan. ";
+            
+            
+            
+        },
+        function () {
+            d="Rook lifts and holds Ethan's tiny frame in the air and Ethan clips his painting above. \n\nA tall girl with a giraffe neck appears beside Rook. \"Are we still on?\" she says in a nasal voice. \n\n\"Sure,\" says Rook. He puts Ethan down and follows her out of the classroom. \n\nEthan shakes his head as rook leaves. \"Suzy, you have to talk to him. This is embarassing.\" ";
+            jump("ac_ethan_talk");
+        }
+            
+            
+    ]);    
+break;
+
+    case "ac_daughter_eyes":
+        d+="There's an innocence in those two dots. ";
+    break;
+    case "ac_hanging":
+        d+="Students stand on their stools and clip their work on the lines above. ";
+    break;
+
+
+    case "ac_easels":
+        d+="Giant clipboards with tripod legs. Each easel holds a large piece of Ephemera brand paper upon which students paint. ";
+    break;
+
+    case "ac_students":
+        d+="Everyone holds a brush and palatte and wears a red apron spattered with {Ephemera paint|ac_eph_paint}. ";
+    break;
+
+
+    case "ac_eph_paint":
+        d+="There are rumors that students once used real paint under close security supervision. Before the Ephemera came. "; 
+    break;
+
+
+    case "_ac_jenner":
+        d+="She wears multicolored polka-dot coveralls and clenches a clipboard in her metal hands. She displays an annoyed emoticon on her face and walks with her back rigid, stopping ocassionally to inspect her students' paintings. ";
+    break;
+
+    case "_ac_daughter":
+        d+="A smaller version of her mother imitating her mother's motions. She syncs the cadence of her steps to match her mothers.  ";
+
+    break;
+
+    case "ac_bowl_fruit":
+        d+="The lamp gives the fruit bowl dramatic chiaroscuro lighting. ";
+    break;
+
+    case "ac_windows":
+        d+="Softly pulsating light slips through the cracks of the blinds. ";
+    break;
+
+    case "ac_spiderweb":
+        d+="They flutter gently. Each slowly fading piece of art is clipped to the cable line with a bulldog clip. ";
+    break;
+
+
+    case "ac_rook":
+        d+="He squints through his paint-smudged glasses and delicately dabs at his {painting|ac_rook_painting}. The palatte and brush look minature in his hands. A tiny red apron hangs over his giant frame. "; 
+
+    break;
+        case "ac_rook_painting":
+            d+="He has added a checkered pattern to the tablecloth. He gives great attention to detail in the folds of the cloth. ";
+        break;
+
+    case "ac_ethan":
+        d+="A giant cartoon chess piece of a queen looms next to his photorealistic bowl of fruit. ";
+    break;
+
+
+    case "ac_ethan_talk":
+
+    
+        var ac_ethan_talk = {
+            "_ac_embarassing":
+                {l:"Embarassing", d:function() {
+                    d+="\"We're supposed to keep it in the family. He's making us look bad. Especially you, because you're his girlfriend.\" ";
+                    f._ac_girlfriend = 1;
+                    f._ac_family = 1;
+                },v:1},
+            "_ac_family":
+                {l: "Family", d:function() {
+                    d+="\"Only people in the Chess Club play chess. That's how it works!\" ";
+                }},
+            "_ac_girlfriend":
+                {l: "Girlfriend", d:function() {
+                    d+="\"It's your responsibility to talk to him. She's not the first one. I saw him playing Chess with a guy from the Badminton Club too. Promise me you'll talk to him.\" ";
+                    f.topic = "ac_yes_no";  
+                }},
+            "_ac_yes":
+                {l: "I promise", d:function() {
+                    d+="\"Good! The hardcore is just starting to respect us. We can't have weird stuff like this messing everything up,\" he says";
+                    f.topic = 0;
+                    f._ac_yes = "x";
+                    f._ac_no = "x";
+                    f._ac_hardcore = 1; 
+                    f.ac_promise_talk_rook = 1; 
+                },v:1,topic:"ac_yes_no"},
+            "_ac_no":
+                {l: "No promises", d:function() {
+                    d+="\"The hardcore is just starting to respect us. We can't have weird stuff like this messing everything up,\" he says. ";
+                    f._ac_yes = "x";
+                    f._ac_no = "x";
+                    f.ac_promise_talk_rook = 0; 
+
+                    f._ac_hardcore = 1; 
+                    f.topic = 0;
+                },v:1,topic:"ac_yes_no"},
+            "_ac_hardcore":
+                {l: "Hardcore", d:function() {
+                    d+="\"I'm not staying as a low-tier Chess nobody!\" ";
+            
+                }},
+
+
+        };
+
+        replies(ac_ethan_talk);
+        
+        if (done_talking(ac_ethan_talk)) {
+                d+="\n\nEtan struts toward the door. ";
+            if (f.ac_promise_talk_rook) {
+                d+="\"You promised. Go talk to him,\" he says. ";
+            } else {
+                d+="\n\n\"If you won't talk to him, I will!\" he says. \"I care about our future!\"";
+            }
+            f.end_memory = 1;
+            root = 1;
+            f.ac = "x";
+            f.ac_fin = 1;
+        } 
+        
+        topics(ac_ethan_talk);
+
+
+
+    break;
 
 //::end
 ///////In case you link to a nonexistent node, then this error message will appear
@@ -4407,14 +4903,21 @@ add("Boyfriend", "boyfriend", function() {
 
 add("Rook", "rook", function() {
     thought=1;
-    d+="<em>Ryan Hook. The chess-playing brute. Maybe he can help you. </em>";
 
+    if (f.ac_fin) {
+
+        d+="<em>Ryan Hook. Your boyfriend. Obsessed with Chess. Disregards Chess norms and plays with non-Chess Club members. </em>";
+    } else if (f.seen_rook_chess_game) {
+        d+="<em>Ryan Hook. Your Chess-playing boyfriend.</em> "; 
+    } else {
+        d+="<em>Ryan Hook. The chess-playing brute. Maybe he can help you. </em>";
+    }
 });
 
 add("Wolff", "wolff", function() {
     d+="<em>Chief of Security. ";
     if (f.seen_sinatra_account) {
-        d+="Kasparov put a nighstick through his eye. You can feel the crunch of glass and smell of a fried, flickering monitor. ";
+        d+="Kasparov put a nighstick through his eye. The crunch of glass and smell of a fried, flickering monitor. ";
     } else {
         d+="His eye. You feel a wave of nausea.";
     }
