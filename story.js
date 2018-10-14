@@ -2180,7 +2180,7 @@ case "guidance_convo":
                 
         "_gcv2_kasparov":
             {l: "Kasparov excommunicated", d: function() {
-                d+="\"Place your hands above you head! Do not move.\" \n\nThe lights flicker in pattern. Your body becomes limp. Guards burst into the room and catch you before you collapse. They force you upright and position your head to face the camera. \n\n\"How do you know this information?\" says the Counselor.";
+                d+="\"Place your hands above you head! Do not move.\" \n\nThe lights flicker. Your body becomes limp. Guards burst into the room and catch you before you collapse. They force you upright and position your head to face the camera. \n\n\"How do you know this information?\" says the Counselor.";
 
                 f.topic = "how_know";
 
@@ -2393,7 +2393,6 @@ case "caf":
                 f.caf_bridge_chess_conflict=4;
                 d="The group next to you fall silent. They death-stare at a {boy|caf_bc_conflict_boy} walking down the aisle toward them. ";
                 back=0;
-                f.caf_bridge_chess_conflict++;
             break;
 
             case 4:
@@ -2491,7 +2490,6 @@ case "caf_bc_conflict_ss":
 break;
 case "caf_bc_conflict_boy":
     d+="A small boy with close-shaved hair and high-waisted {pants|caf_bc_conflict_boardmaster_pants} swaggers toward them. His jacket is turned inside out and he has a large chessboard strapped to his back. \n\nA brick wall of a {brute|caf_bc_conflict_large_boy}  walks several steps behind him. \n\nThe chessboard boy surveys each of them in turn. \n\nMonkey-boy meets his gaze. \"Got a problem?\" \n\n\"No problem. But why are you gentlemen giving us problems? We don't appreciate problems.\"  ";  
-
     back=0;
 break;
 case "caf_bc_conflict_boardmaster_pants":
@@ -2499,7 +2497,6 @@ case "caf_bc_conflict_boardmaster_pants":
 break;
 case "caf_bc_conflict_large_boy":
     d+="Wireframe glasses and a bowtie. His jacket is turned inside out and his socks are pulled over his pant legs. He crosses his arms. "; 
-    f.caf_bridge_chess_conflict=4;
 break;
 case "caf_bridge_club":
     d+="Bridge club members. Back slapping and laughter. One of them squats on the bench like a monkey, doing little hops and rocking the table. They wear red scarves. A {playing card|caf_bridge_playing_card} peeks from the breast pocket of their uniforms. The boys leave one side of their shirts untucked. The girls have the sides of their heads shaved. ";
@@ -4156,7 +4153,7 @@ case "lbr_s_ft":
             d+="Kasparov takes several wild swings, striking air as Wolff sidesteps each one. Wolff's feet blur into a rapid shuffle, as if running without leaving the spot. He sends a volley of punches and jabs into Kasparov's torso, throwing him off balance. Wolff winds his arm and releases. His fist meets Kasparov's face and sends him flying into the air. Kasparov thuds to the floor and Wolff jumps on him, " + quik("lbr_sn_ft_pummel", "pummeling", "Metal fists rise and fall like pistons.") + " him with both hands.";
         },
         function() {
-            d+="Kasparov's body ragdolls as Wolff continues punching.  A portion of Kasparov's mask tears off, revealing a bruised cheek. \"Wolff, enough!\" says the Headmaster. \"Protocol! He will face trial.\" \n\n Wolff jerks his head to stare upward. \"Do you know how many we've lost to him? This ends today!\" \n\nKasparov's hand creeps toward the {nightstick|lbr_s_ft} on the floor.";
+            d+="Kasparov's body ragdolls as Wolff continues punching.  A portion of Kasparov's mask tears off, revealing a bruised cheek. \"Wolff, enough!\" says the Headmaster. \"He will face interogation and trial.\" \n\n Wolff jerks his head to stare upward. \"Do you know how many we've lost to him? This ends today!\" \n\nKasparov's hand creeps toward the {nightstick|lbr_s_ft} on the floor.";
             
         }, 
             
@@ -4186,6 +4183,7 @@ break;
 case "lbr_s_ft_kas":
     d+="The lights cast deep pockets of shadows on his fox mask. ";
 
+break;
 case "lbr_rk_wolff":
     d+="He stands tall in front of the other officers. He wears an angryface emoticon, both eyes staring at Kasparov. ";
 
@@ -4286,6 +4284,7 @@ case "wc_s_fin":
     scene_change("Poisoned Pawn");
     lockdown = 1;
     d="\"That's all I saw! I swear on the graves of my ancestors!\" says Sinatra. \n\nYou let go of him. He backs away from you, stumbling and tripping as he scrambles out of the washroom. ";
+    d+="\n\n<em>You feel weak in the knees and your head throbs.</em> ";
     d+=bk("wc_s_fin_2");
 
 break;
@@ -4315,7 +4314,7 @@ break;
 
 case "after_s_hallway":
     root = 1;
-    d+="A crowd of officers stand outside. One of them raises a bullhorn. \"Put your hands behind your head!\"  There is a high-pitched whine as their nighsticks charge. ";
+    d+="A crowd of officers stand outside. One of them raises a bullhorn. \"Put your hands behind your head! Get down on the floor!\"  There is a high-pitched whine as their nighsticks charge. \n\nYou raise your fists. ";
 
     f.after_wc_s_cornered = 1;
     f.wc_s="x";
@@ -4427,12 +4426,12 @@ case "lbr_rk_talk":
             },v:1,topic:"intro"},
         "_libr_rk_dating":
             {l:"Dating", d:function() {
-                d+="\"My Guidance Counselor mentioned it too. We probably should hold hands or kiss for good measure after the game. Not for real if you don't want to though,\" he says. ";
+                d+="\"We probably should hold hands or kiss for good measure after the game. Not for real if you don't want to though,\" he says. ";
                 f._lbr_rk_talk_paper_2 = 1;
             },v:1,topic:"playing"},
         "_lbr_rk_danish_gambit":
             {l:"Danish gambit", d:function() {
-                d+="He taps on your captured pawns. \"That's what you're all about, Suzy. Sacrifice a few pawns for a rapid attack. Everything to gain and everything to lose.\" He stares through the board, eyes distant. \"We're so similar.\" ";
+                d+="He taps on your captured pawns. \"That's what you're all about, Suzy. Sacrifice a few pawns for a rapid attack. Everything to gain and everything to lose.\" He stares through the board, eyes distant. \"We're very similar.\" ";
             },topic:"playing"},
         
         "_lbr_rk_talk_paper":

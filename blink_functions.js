@@ -347,7 +347,6 @@ function replies(obj) {
            d+=output_if_clicked;
         }
 
-        f["talk"]=0;
 //
 //       
 //

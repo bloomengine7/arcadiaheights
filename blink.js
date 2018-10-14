@@ -1047,7 +1047,7 @@ function process(node,giver,receiver,params) {
     //reset defaults
 	f.giver = 0;
 	f.receiver = 0;
-    f["talk"] = 0;
+    f.talk = 0;
     lockdown = 0;
 	back = 1;
 	links = 1;
