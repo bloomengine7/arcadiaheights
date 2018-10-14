@@ -1975,12 +1975,12 @@ case "counseling_booth":
             back=0;
         break;
 
-        case 4:
+        case 3:
             
             d+="\n\n\"Thank you for your patience. You are first in queue for the next available counselor.\" ";
 
         break;
-        case 6:
+        case 4:
             
             d="A chime. \"Operator connected. Pulling up account,\" says a voice. The buzz of the speaker resolves to high-fidelity silence.\n\n\"Welcome, my child. Prepare to recite the words. Please hold still for the scan.\" A band of warmth passes over your face. \"Arcadia,\" he says. \n\n{Minds free|guidance_counselor_the_words}";
             back=0;
@@ -4605,6 +4605,7 @@ case "ac":
         }
         */
     events("_ac_events",[
+        2,
         ac_jenner_daughter,
         "\n\n\"Students,\" says " + oneoff_link("Mrs. Jenner|_ac_jenner") + ". \"You must become the bowl of fruit. Feel the light of the lamp on your skin.\" Her " + oneoff_link("daughter|_ac_daughter") + " mirrors her gestures as she speaks. ",
         ac_jenner_daughter,
