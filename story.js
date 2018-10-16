@@ -4431,7 +4431,7 @@ case "lbr_rk_talk":
             },v:1,topic:"playing"},
         "_lbr_rk_danish_gambit":
             {l:"Danish gambit", d:function() {
-                d+="He taps on your captured pawns. \"That's what you're all about, Suzy. Sacrifice a few pawns for a rapid attack. Everything to gain and everything to lose.\" He stares through the board, eyes distant. \"We're very similar.\" ";
+                d+="He taps on your captured pawns. \"That's what you're all about, Suzy. Sacrifice a few pawns for a rapid attack. Everything to gain and everything to lose.\" He stares through the board, eyes distant. \"We're similar.\" ";
             },topic:"playing"},
         
         "_lbr_rk_talk_paper":
@@ -4577,7 +4577,7 @@ case "lbr_rk_talk":
         topics(lbr_rk_talk);
 
             if (done_talking(lbr_rk_talk)) {
-                d+="<hr>Ethan steps out from behind an aisle, out of breath and face flushed. \"Finally found you. I want my board,\" he says. \n\n\"We're in the middle of a game,\" says Rook. \n\nEthan sweeps the pieces off the board and they clatter over the table. The librarian's head peeks out from behind a self, finger on her pursed emoticon lips. The words \"Keep quiet\" flash on her screen. \n\nRook sighs. \"Do you need our help?\" \n\n\"No, I'm going solo on this one,\" whispers Ethan.  \"A Bridge kid looked at me wrong. I'm going to traxler him.\" Ethan flicks the board onto his back, tightens the straps and swaggers off. \n\n\"We better go with him,\" says Rook. \"Others are going to smell a fight and show up. He's going to get beat up without us.\"";
+                d+="<hr>Ethan steps out from behind an aisle, out of breath and face flushed. \"I want my board,\" he says. \n\n\"We're in the middle of a game,\" says Rook. \n\nEthan sweeps the pieces off the board and they clatter over the table. The librarian's head peeks out from behind a self, finger on her pursed emoticon lips. The words \"Keep quiet\" flash on her screen. \n\nRook sighs. \"Do you need our help?\" \n\n\"No, I'm going solo on this one,\" whispers Ethan.  \"A Bridge kid looked at me wrong. I'm going to traxler him.\" Ethan flicks the board onto his back, tightens the straps and swaggers off. \n\n\"We better go with him,\" says Rook. \"He's going to get beat up without us. Others always show up.\"";
                 
                 f.end_memory=1;
                 lockdown = 0;
@@ -4655,7 +4655,7 @@ break;
     break;
 
     case "_ac_daughter":
-        d+="A smaller version of her mother imitating her mother's motions. She syncs the cadence of her steps to match her mothers.  ";
+        d+="A smaller version of her mother imitating her mother's motions. She syncs the cadence of her steps to match her mother's.  ";
 
     break;
 
@@ -4706,7 +4706,7 @@ break;
                 }},
             "_ac_yes":
                 {l: "I promise", d:function() {
-                    d+="\"Good! The hardcore is just starting to respect us. We can't have weird stuff like this messing everything up,\" he says";
+                    d+="\"Good! The hardcore is just starting to respect us. We can't have stuff like this messing it up,\" he says";
                     f.topic = 0;
                     f._ac_yes = "x";
                     f._ac_no = "x";
@@ -4715,7 +4715,7 @@ break;
                 },v:1,topic:"ac_yes_no"},
             "_ac_no":
                 {l: "No promises", d:function() {
-                    d+="\"The hardcore is just starting to respect us. We can't have weird stuff like this messing everything up,\" he says. ";
+                    d+="\"The hardcore is just starting to respect us. We can't have stuff like this messing it up,\" he says. ";
                     f._ac_yes = "x";
                     f._ac_no = "x";
                     f.ac_promise_talk_rook = 0; 
@@ -4725,7 +4725,7 @@ break;
                 },v:1,topic:"ac_yes_no"},
             "_ac_hardcore":
                 {l: "Hardcore", d:function() {
-                    d+="\"I'm not staying as a low-tier Chess nobody!\" ";
+                    d+="\"I'm not staying as a low-tier nobody!\" ";
             
                 }},
 
@@ -4735,11 +4735,11 @@ break;
         replies(ac_ethan_talk);
         
         if (done_talking(ac_ethan_talk)) {
-                d+="\n\nEtan struts toward the door. ";
+                d+="\n\nHe stomps toward the door. ";
             if (f.ac_promise_talk_rook) {
                 d+="\"You promised. Go talk to him,\" he says. ";
             } else {
-                d+="\n\n\"If you won't talk to him, I will!\" he says. \"I care about our future!\"";
+                d+="\n\n\"If you won't talk to him, I will!\" he says. ";
             }
             f.end_memory = 1;
             root = 1;
