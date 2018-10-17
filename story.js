@@ -182,7 +182,7 @@ user_variables = [
     "_ac_harcore",
     "ac_promise_talk_rook",
     "ac_fin",
-    "_wc_taser_dropped" 
+    "_wc_s_taser_dropped" 
     
 
     
@@ -4260,7 +4260,7 @@ case "wc_sinatra_talk":
         
 
     } else if (done_talking(wc_sinatra_talk,"_wc_s_intro") && !f._wc_s_mirror_smashed) {
-        d+="\n\nHe reaches behind his back and a lunges at you with a taser. You knock it out of his hands and grab him by the collar and shove him into the mirror. <em>The glass smashes and shards spill over the counter and floor</em>. You keep him pressed against the glass.\n\n\"Let me think. Maybe I did see something,\" he says. ";
+        d+="\n\nHe reaches behind his back and a lunges at you with a shock dagger. You knock it out of his hands and grab him by the collar and shove him into the mirror. <em>The glass smashes and shards spill over the counter and floor</em>. You keep him pressed against the glass.\n\n\"Let me think. Maybe I did see something,\" he says. ";
         f._wc_s_mirror_smashed = 1;
         f._wc_s_taser_dropped = 1;
         f.topic = "_wc_s_talk";
@@ -4295,8 +4295,8 @@ case "wc_s_fin_2":
     d+="A {janitor station|wc_s_janitor_station} is parked next to a row of sinks and {mirror|wc_s_mirror_2}. Light pours in from a {narrow window|washroom_window} near the ceiling. "
    
   
-    if (f._wc_taser_dropped) {
-        d+="\n\nA " + quik("wc_s_taser","Dagger-like. A small cylinder with a rubber handle. ") + " lies on the floor. ";
+    if (f._wc_s_taser_dropped) {
+        d+="\n\nA " + quik("wc_s_taser","shock dagger", "A small cylinder with a rubber handle. Sparks dance along its shaft.") + " lies on the floor. ";
     }
     d+="A doorway leads {outside|wc_s_exit}.";
 
